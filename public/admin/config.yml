@@ -1,0 +1,403 @@
+# Sveltia CMS config for Notebook — served at https://mnmz81.github.io/notebook/admin/
+# Mirrors docs/contracts/content-format.md exactly. Setup guide: docs/cms-setup.md
+#
+# ── LAYOUT NOTE (read before changing) ────────────────────────────────────────────
+# The contract layout `content/<kind>/<slug>/{he,en}.md` CANNOT be produced by Sveltia's
+# i18n mode (checked against Sveltia CMS 0.230.0): i18n only puts the locale in a file
+# suffix (`<path>.<locale>.md`, e.g. `<slug>/index.he.md`) or in a folder ABOVE the slug
+# (`posts/he/<slug>.md`). `{{locale}}` is not allowed in the `path` option.
+# So each language is its own NON-i18n collection with `path: '{{slug}}/he'` or
+# `'{{slug}}/en'`, which writes exactly `content/posts/<slug>/he.md` / `en.md`.
+# Trade-off: no side-by-side translation view — a translation is a separate entry with
+# the SAME slug, and the shared facts (date, tags, series, cover) must be copied by
+# hand (the build fails if they differ). See docs/cms-setup.md for the i18n alternative.
+#
+# Other contract limits the CMS cannot check (the build does): updated ≥ date,
+# series order unique, same slug under posts/ and notes/, he/en shared facts equal.
+# `content/tags.yaml` (map of tag → {he, en}) is not editable here — see bottom of file.
+# ────────────────────────────────────────────────────────────────────────────────
+
+backend:
+  name: github
+  repo: mnmz81/notebook
+  branch: main
+  # No OAuth server on GitHub Pages: sign in with a fine-grained personal access token only.
+  auth_methods: [token]
+  commit_messages:
+    create: 'content({{collection}}): create {{slug}}'
+    update: 'content({{collection}}): update {{slug}}'
+    delete: 'content({{collection}}): delete {{slug}}'
+    uploadMedia: 'content(media): upload {{path}}'
+    deleteMedia: 'content(media): delete {{path}}'
+
+# Every save is a direct commit to main → the deploy workflow publishes it (no PR workflow).
+publish_mode: simple
+
+app_title: Notebook CMS
+site_url: https://mnmz81.github.io/notebook/
+display_url: https://mnmz81.github.io/notebook/
+
+# Global media library. Entry collections below narrow it to public/images/<slug>/.
+media_folder: public/images
+public_folder: /images
+
+# Never write empty optional keys (e.g. `updated: ''`, `cover: ''`) — frontmatter is strict.
+output:
+  omit_empty_optional_fields: true
+  yaml:
+    quote: none
+
+# Slugs are typed by hand (see each collection's `slug`); these settings are a safety net.
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: '-'
+  trim: true
+  lowercase: true
+
+collections:
+  # ═══════════════════════════════ Posts ═══════════════════════════════
+  - name: posts-he
+    label: פוסטים · עברית
+    label_singular: פוסט בעברית
+    description: 'content/posts/<slug>/he.md — Hebrew post. To translate, create the same slug under "Posts · English".'
+    folder: content/posts
+    path: '{{slug}}/he'
+    extension: md
+    format: yaml-frontmatter
+    create: true
+    delete: true
+    media_folder: '{{media_folder}}/{{slug}}'
+    public_folder: '{{public_folder}}/{{slug}}'
+    slug: &slug_opts
+      editable: [create]
+      hint: 'Latin kebab-case, e.g. rust-borrowing. It is the URL and links he.md ↔ en.md (use the SAME slug for the translation). Cannot be changed after saving.'
+      pattern: ['^[a-z0-9]+(-[a-z0-9]+)*$', 'Lowercase Latin letters, digits and single hyphens only (kebab-case)']
+    identifier_field: title
+    summary: '{{date}} · {{title}}'
+    sortable_fields:
+      fields: [date, title]
+      default: { field: date, direction: descending }
+    view_filters:
+      - { label: Drafts, field: draft, pattern: true }
+      - { label: Published, field: draft, pattern: false }
+    fields:
+      - { name: title, label: 'כותרת · Title', widget: string, minlength: 1 }
+      - name: summary
+        label: 'תקציר · Summary'
+        widget: text
+        minlength: 1
+        maxlength: 200
+        hint: '1–200 characters.'
+      - name: date
+        label: 'תאריך · Date'
+        widget: datetime
+        type: date
+        format: YYYY-MM-DD
+        default: '{{now}}'
+        hint: 'Shared with the translation — keep identical in he.md and en.md.'
+      - name: updated
+        label: 'עודכן · Updated'
+        widget: datetime
+        type: date
+        format: YYYY-MM-DD
+        required: false
+        hint: 'Optional. Must be on or after Date.'
+      - name: tags
+        label: 'תגיות · Tags'
+        widget: list
+        min: 1
+        pattern: ['^[a-z0-9]+(-[a-z0-9]+)*(,[a-z0-9]+(-[a-z0-9]+)*)*$', 'Each tag: lowercase Latin kebab-case (e.g. rust, web-dev)']
+        hint: 'At least one, Latin kebab-case. Shared with the translation.'
+      - name: draft
+        label: 'טיוטה · Draft'
+        widget: boolean
+        default: false
+        required: false
+      - name: cover
+        label: 'תמונת שער · Cover'
+        widget: image
+        required: false
+        hint: 'Optional. Stored under public/images/<slug>/, saved as /images/<slug>/… Shared with the translation.'
+      - name: series
+        label: 'סדרה · Series'
+        widget: object
+        required: false
+        hint: 'Optional. Shared with the translation. Order must be unique within the series.'
+        fields:
+          - name: key
+            label: 'סדרה · Series'
+            widget: relation
+            collection: series
+            value_field: '{{slug}}'
+            display_fields: ['{{title.he}} · {{title.en}}']
+            search_fields: [title.he, title.en]
+          - name: order
+            label: 'מיקום · Order'
+            widget: number
+            value_type: int
+            min: 1
+            step: 1
+      - name: body
+        label: 'תוכן · Body'
+        widget: richtext
+        modes: [rich_text, raw]
+        buttons: [bold, italic, strikethrough, code, link, heading-two, heading-three, quote, bulleted-list, numbered-list]
+        editor_components: [code-block, image]
+        linked_images: false
+        hint: '## and ### headings build the table of contents. Raw HTML is not rendered.'
+
+  - name: posts-en
+    label: Posts · English
+    label_singular: English post
+    description: 'content/posts/<slug>/en.md — English post or translation. Reuse the Hebrew slug to translate.'
+    folder: content/posts
+    path: '{{slug}}/en'
+    extension: md
+    format: yaml-frontmatter
+    create: true
+    delete: true
+    media_folder: '{{media_folder}}/{{slug}}'
+    public_folder: '{{public_folder}}/{{slug}}'
+    slug: *slug_opts
+    identifier_field: title
+    summary: '{{date}} · {{title}}'
+    sortable_fields:
+      fields: [date, title]
+      default: { field: date, direction: descending }
+    view_filters:
+      - { label: Drafts, field: draft, pattern: true }
+      - { label: Published, field: draft, pattern: false }
+    fields:
+      - { name: title, label: Title, widget: string, minlength: 1 }
+      - name: summary
+        label: Summary
+        widget: text
+        minlength: 1
+        maxlength: 200
+        hint: '1–200 characters.'
+      - name: date
+        label: Date
+        widget: datetime
+        type: date
+        format: YYYY-MM-DD
+        default: '{{now}}'
+        hint: 'Shared with the translation — keep identical in he.md and en.md.'
+      - name: updated
+        label: Updated
+        widget: datetime
+        type: date
+        format: YYYY-MM-DD
+        required: false
+        hint: 'Optional. Must be on or after Date.'
+      - name: tags
+        label: Tags
+        widget: list
+        min: 1
+        pattern: ['^[a-z0-9]+(-[a-z0-9]+)*(,[a-z0-9]+(-[a-z0-9]+)*)*$', 'Each tag: lowercase Latin kebab-case (e.g. rust, web-dev)']
+        hint: 'At least one, Latin kebab-case. Shared with the translation.'
+      - name: draft
+        label: Draft
+        widget: boolean
+        default: false
+        required: false
+      - name: cover
+        label: Cover
+        widget: image
+        required: false
+        hint: 'Optional. Stored under public/images/<slug>/, saved as /images/<slug>/… Shared with the translation.'
+      - name: series
+        label: Series
+        widget: object
+        required: false
+        hint: 'Optional. Shared with the translation. Order must be unique within the series.'
+        fields:
+          - name: key
+            label: Series
+            widget: relation
+            collection: series
+            value_field: '{{slug}}'
+            display_fields: ['{{title.en}} · {{title.he}}']
+            search_fields: [title.he, title.en]
+          - name: order
+            label: Order
+            widget: number
+            value_type: int
+            min: 1
+            step: 1
+      - name: body
+        label: Body
+        widget: richtext
+        modes: [rich_text, raw]
+        buttons: [bold, italic, strikethrough, code, link, heading-two, heading-three, quote, bulleted-list, numbered-list]
+        editor_components: [code-block, image]
+        linked_images: false
+        hint: '## and ### headings build the table of contents. Raw HTML is not rendered.'
+
+  - divider: true
+
+  # ═══════════════════════════════ Notes ═══════════════════════════════
+  - name: notes-he
+    label: פתקים · עברית
+    label_singular: פתק בעברית
+    description: 'content/notes/<slug>/he.md — short note / TIL. A slug must not also exist under posts.'
+    folder: content/notes
+    path: '{{slug}}/he'
+    extension: md
+    format: yaml-frontmatter
+    create: true
+    delete: true
+    media_folder: '{{media_folder}}/{{slug}}'
+    public_folder: '{{public_folder}}/{{slug}}'
+    slug: *slug_opts
+    identifier_field: title
+    summary: '{{date}} · {{title}}'
+    sortable_fields:
+      fields: [date, title]
+      default: { field: date, direction: descending }
+    fields:
+      - { name: title, label: 'כותרת · Title', widget: string, minlength: 1 }
+      - name: date
+        label: 'תאריך · Date'
+        widget: datetime
+        type: date
+        format: YYYY-MM-DD
+        default: '{{now}}'
+        hint: 'Shared with the translation.'
+      - name: updated
+        label: 'עודכן · Updated'
+        widget: datetime
+        type: date
+        format: YYYY-MM-DD
+        required: false
+      - name: tags
+        label: 'תגיות · Tags'
+        widget: list
+        min: 1
+        pattern: ['^[a-z0-9]+(-[a-z0-9]+)*(,[a-z0-9]+(-[a-z0-9]+)*)*$', 'Each tag: lowercase Latin kebab-case (e.g. rust, web-dev)']
+        hint: 'At least one, Latin kebab-case. Shared with the translation.'
+      - name: draft
+        label: 'טיוטה · Draft'
+        widget: boolean
+        default: false
+        required: false
+      - name: body
+        label: 'תוכן · Body'
+        widget: richtext
+        modes: [rich_text, raw]
+        buttons: [bold, italic, strikethrough, code, link, heading-two, heading-three, quote, bulleted-list, numbered-list]
+        editor_components: [code-block, image]
+        linked_images: false
+
+  - name: notes-en
+    label: Notes · English
+    label_singular: English note
+    description: 'content/notes/<slug>/en.md — short note / TIL or translation. Reuse the Hebrew slug to translate.'
+    folder: content/notes
+    path: '{{slug}}/en'
+    extension: md
+    format: yaml-frontmatter
+    create: true
+    delete: true
+    media_folder: '{{media_folder}}/{{slug}}'
+    public_folder: '{{public_folder}}/{{slug}}'
+    slug: *slug_opts
+    identifier_field: title
+    summary: '{{date}} · {{title}}'
+    sortable_fields:
+      fields: [date, title]
+      default: { field: date, direction: descending }
+    fields:
+      - { name: title, label: Title, widget: string, minlength: 1 }
+      - name: date
+        label: Date
+        widget: datetime
+        type: date
+        format: YYYY-MM-DD
+        default: '{{now}}'
+        hint: 'Shared with the translation.'
+      - name: updated
+        label: Updated
+        widget: datetime
+        type: date
+        format: YYYY-MM-DD
+        required: false
+      - name: tags
+        label: Tags
+        widget: list
+        min: 1
+        pattern: ['^[a-z0-9]+(-[a-z0-9]+)*(,[a-z0-9]+(-[a-z0-9]+)*)*$', 'Each tag: lowercase Latin kebab-case (e.g. rust, web-dev)']
+        hint: 'At least one, Latin kebab-case. Shared with the translation.'
+      - name: draft
+        label: Draft
+        widget: boolean
+        default: false
+        required: false
+      - name: body
+        label: Body
+        widget: richtext
+        modes: [rich_text, raw]
+        buttons: [bold, italic, strikethrough, code, link, heading-two, heading-three, quote, bulleted-list, numbered-list]
+        editor_components: [code-block, image]
+        linked_images: false
+
+  - divider: true
+
+  # ═══════════════════════════════ Series ══════════════════════════════
+  - name: series
+    label: סדרות · Series
+    label_singular: סדרה · Series
+    description: 'content/series/<key>.yaml — the file name is the series key used by posts.'
+    folder: content/series
+    extension: yaml
+    format: yaml
+    create: true
+    delete: true
+    slug:
+      editable: [create]
+      hint: 'Series key: Latin kebab-case, e.g. learning-rust. Posts refer to it; cannot be changed after saving.'
+      pattern: ['^[a-z0-9]+(-[a-z0-9]+)*$', 'Lowercase Latin letters, digits and single hyphens only (kebab-case)']
+    identifier_field: title.he
+    summary: '{{title.he}} · {{title.en}}'
+    fields:
+      - name: title
+        label: 'כותרת · Title'
+        widget: object
+        fields:
+          - { name: he, label: 'עברית · Hebrew', widget: string, minlength: 1 }
+          - { name: en, label: English, widget: string, minlength: 1 }
+      - name: description
+        label: 'תיאור · Description'
+        widget: object
+        required: false
+        fields:
+          - { name: he, label: 'עברית · Hebrew', widget: text, required: false }
+          - { name: en, label: English, widget: text, required: false }
+
+  # ═══════════════════════════════ Tags ════════════════════════════════
+  # NOT ENABLED: the contract shape of content/tags.yaml is a top-level MAP of
+  #   <tag>: { he: ..., en: ... }
+  # Sveltia can only edit a top-level map whose values are plain strings (keyvalue, root: true)
+  # or a top-level LIST (list, root: true). Writing either would change the file's shape and
+  # break the build. Edit content/tags.yaml in GitHub's web editor instead (docs/cms-setup.md).
+  # If the contract ever switches to a list, e.g.
+  #   - { key: rust, he: ראסט, en: Rust }
+  # this collection would work as-is:
+  #
+  # - name: tags
+  #   label: תגיות · Tags
+  #   files:
+  #     - name: tags
+  #       label: Tag labels
+  #       file: content/tags.yaml
+  #       format: yaml
+  #       fields:
+  #         - name: tags
+  #           label: Tags
+  #           widget: list
+  #           root: true
+  #           summary: '{{key}} — {{he}} / {{en}}'
+  #           fields:
+  #             - { name: key, label: Key, widget: string, pattern: ['^[a-z0-9]+(-[a-z0-9]+)*$', 'kebab-case'] }
+  #             - { name: he, label: Hebrew, widget: string, required: false }
+  #             - { name: en, label: English, widget: string, required: false }
