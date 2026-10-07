@@ -54,3 +54,5 @@ Thumbs.db
 /playwright-report/
 /public/rss-*.xml
 /public/og/
+# agent worktrees
+/.claude/worktrees/
