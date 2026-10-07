@@ -1,0 +1,25 @@
+{
+  "type": "note",
+  "slug": "zsh-history-search",
+  "lang": "en",
+  "title": "Search zsh history with Ctrl+R",
+  "date": "2026-10-03",
+  "tags": [
+    "shell",
+    "zsh"
+  ],
+  "readingMinutes": 1,
+  "availableLangs": [
+    "en"
+  ],
+  "html": "<p>Search zsh history with Ctrl+R.</p>\n<h2 id=\"example\">Example</h2>\n<pre class=\"shiki shiki-themes github-light github-dark\" dir=\"ltr\" tabindex=\"0\"><code><span class=\"line\"><span>let x = 1;</span></span></code></pre>\n",
+  "toc": [
+    {
+      "id": "example",
+      "text": "Example",
+      "depth": 2
+    }
+  ],
+  "related": [],
+  "seriesNav": null
+}

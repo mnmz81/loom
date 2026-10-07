@@ -1,0 +1,27 @@
+{
+  "type": "post",
+  "slug": "angular-signals-basics",
+  "lang": "en",
+  "title": "Angular signals — the basics",
+  "summary": "signal, computed and effect in short.",
+  "date": "2026-09-20",
+  "tags": [
+    "angular",
+    "signals"
+  ],
+  "readingMinutes": 1,
+  "availableLangs": [
+    "he",
+    "en"
+  ],
+  "html": "<p>Angular signals — the basics.</p>\n<h2 id=\"example\">Example</h2>\n<pre class=\"shiki shiki-themes github-light github-dark\" dir=\"ltr\" tabindex=\"0\"><code><span class=\"line\"><span>let x = 1;</span></span></code></pre>\n",
+  "toc": [
+    {
+      "id": "example",
+      "text": "Example",
+      "depth": 2
+    }
+  ],
+  "related": [],
+  "seriesNav": null
+}

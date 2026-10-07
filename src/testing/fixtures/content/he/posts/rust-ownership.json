@@ -1,0 +1,48 @@
+{
+  "type": "post",
+  "slug": "rust-ownership",
+  "lang": "he",
+  "title": "ראסט: בעלות (Ownership)",
+  "summary": "שלושת חוקי הבעלות בראסט, עם דוגמאות.",
+  "date": "2026-10-01",
+  "tags": [
+    "rust"
+  ],
+  "readingMinutes": 1,
+  "series": {
+    "key": "learning-rust",
+    "order": 1
+  },
+  "availableLangs": [
+    "he"
+  ],
+  "html": "<p>ראסט: בעלות (Ownership).</p>\n<h2 id=\"example\">Example</h2>\n<pre class=\"shiki shiki-themes github-light github-dark\" dir=\"ltr\" tabindex=\"0\"><code><span class=\"line\"><span>let x = 1;</span></span></code></pre>\n",
+  "toc": [
+    {
+      "id": "example",
+      "text": "Example",
+      "depth": 2
+    }
+  ],
+  "related": [
+    {
+      "type": "post",
+      "slug": "rust-borrowing",
+      "lang": "he",
+      "title": "ראסט: השאלה (Borrowing)"
+    }
+  ],
+  "seriesNav": {
+    "key": "learning-rust",
+    "title": "לומדים ראסט",
+    "index": 1,
+    "total": 2,
+    "prev": null,
+    "next": {
+      "type": "post",
+      "slug": "rust-borrowing",
+      "lang": "he",
+      "title": "ראסט: השאלה (Borrowing)"
+    }
+  }
+}

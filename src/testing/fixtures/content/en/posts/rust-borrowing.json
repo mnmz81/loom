@@ -1,0 +1,49 @@
+{
+  "type": "post",
+  "slug": "rust-borrowing",
+  "lang": "en",
+  "title": "Rust: borrowing",
+  "summary": "How & and &mut work and why the compiler complains.",
+  "date": "2026-10-05",
+  "tags": [
+    "rust"
+  ],
+  "readingMinutes": 1,
+  "series": {
+    "key": "learning-rust",
+    "order": 2
+  },
+  "availableLangs": [
+    "he",
+    "en"
+  ],
+  "html": "<p>Rust: borrowing.</p>\n<h2 id=\"example\">Example</h2>\n<pre class=\"shiki shiki-themes github-light github-dark\" dir=\"ltr\" tabindex=\"0\"><code><span class=\"line\"><span>let x = 1;</span></span></code></pre>\n",
+  "toc": [
+    {
+      "id": "example",
+      "text": "Example",
+      "depth": 2
+    }
+  ],
+  "related": [
+    {
+      "type": "post",
+      "slug": "rust-ownership",
+      "lang": "he",
+      "title": "ראסט: בעלות (Ownership)"
+    }
+  ],
+  "seriesNav": {
+    "key": "learning-rust",
+    "title": "Learning Rust",
+    "index": 2,
+    "total": 2,
+    "prev": {
+      "type": "post",
+      "slug": "rust-ownership",
+      "lang": "he",
+      "title": "ראסט: בעלות (Ownership)"
+    },
+    "next": null
+  }
+}

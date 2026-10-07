@@ -1,0 +1,27 @@
+{
+  "type": "post",
+  "slug": "angular-signals-basics",
+  "lang": "he",
+  "title": "סיגנלים באנגולר — היסודות",
+  "summary": "signal, computed ו-effect בקצרה.",
+  "date": "2026-09-20",
+  "tags": [
+    "angular",
+    "signals"
+  ],
+  "readingMinutes": 1,
+  "availableLangs": [
+    "he",
+    "en"
+  ],
+  "html": "<p>סיגנלים באנגולר — היסודות.</p>\n<h2 id=\"example\">Example</h2>\n<pre class=\"shiki shiki-themes github-light github-dark\" dir=\"ltr\" tabindex=\"0\"><code><span class=\"line\"><span>let x = 1;</span></span></code></pre>\n",
+  "toc": [
+    {
+      "id": "example",
+      "text": "Example",
+      "depth": 2
+    }
+  ],
+  "related": [],
+  "seriesNav": null
+}

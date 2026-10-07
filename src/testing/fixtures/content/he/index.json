@@ -1,0 +1,125 @@
+{
+  "lang": "he",
+  "generatedAt": "2026-10-07T00:00:00.000Z",
+  "entries": [
+    {
+      "type": "post",
+      "slug": "rust-borrowing",
+      "lang": "he",
+      "title": "ראסט: השאלה (Borrowing)",
+      "summary": "איך & ו-&mut עובדים ולמה הקומפיילר מתלונן.",
+      "date": "2026-10-05",
+      "tags": [
+        "rust"
+      ],
+      "readingMinutes": 1,
+      "series": {
+        "key": "learning-rust",
+        "order": 2
+      },
+      "availableLangs": [
+        "he",
+        "en"
+      ]
+    },
+    {
+      "type": "note",
+      "slug": "zsh-history-search",
+      "lang": "en",
+      "title": "Search zsh history with Ctrl+R",
+      "date": "2026-10-03",
+      "tags": [
+        "shell",
+        "zsh"
+      ],
+      "readingMinutes": 1,
+      "availableLangs": [
+        "en"
+      ]
+    },
+    {
+      "type": "post",
+      "slug": "rust-ownership",
+      "lang": "he",
+      "title": "ראסט: בעלות (Ownership)",
+      "summary": "שלושת חוקי הבעלות בראסט, עם דוגמאות.",
+      "date": "2026-10-01",
+      "tags": [
+        "rust"
+      ],
+      "readingMinutes": 1,
+      "series": {
+        "key": "learning-rust",
+        "order": 1
+      },
+      "availableLangs": [
+        "he"
+      ]
+    },
+    {
+      "type": "note",
+      "slug": "git-undo-last-commit",
+      "lang": "he",
+      "title": "ביטול הקומיט האחרון ב-git",
+      "date": "2026-09-28",
+      "updated": "2026-10-02",
+      "tags": [
+        "git"
+      ],
+      "readingMinutes": 1,
+      "availableLangs": [
+        "he",
+        "en"
+      ]
+    },
+    {
+      "type": "post",
+      "slug": "angular-signals-basics",
+      "lang": "he",
+      "title": "סיגנלים באנגולר — היסודות",
+      "summary": "signal, computed ו-effect בקצרה.",
+      "date": "2026-09-20",
+      "tags": [
+        "angular",
+        "signals"
+      ],
+      "readingMinutes": 1,
+      "availableLangs": [
+        "he",
+        "en"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "tag": "rust",
+      "label": "ראסט",
+      "count": 2
+    },
+    {
+      "tag": "angular",
+      "label": "אנגולר",
+      "count": 1
+    },
+    {
+      "tag": "git",
+      "label": "git",
+      "count": 1
+    },
+    {
+      "tag": "shell",
+      "label": "shell",
+      "count": 1
+    },
+    {
+      "tag": "signals",
+      "label": "signals",
+      "count": 1
+    },
+    {
+      "tag": "zsh",
+      "label": "zsh",
+      "count": 1
+    }
+  ]
+}
