@@ -1,0 +1,49 @@
+name: Notion sync
+
+# Manual: Actions → "Notion sync" → Run workflow. Pulls Published Notion pages into content/,
+# validates them with the content pipeline and opens (or updates) a PR. See docs/notion-setup.md.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: notion-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      - name: Pull published pages from Notion
+        run: npm run sync:notion
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATA_SOURCE_ID: ${{ secrets.NOTION_DATA_SOURCE_ID }}
+
+      - name: Validate content
+        run: npm run content
+
+      - name: Open pull request
+        # Third-party action with write access: pinned to a commit SHA (v7.0.11).
+        uses: peter-evans/create-pull-request@22a9089034f40e5a961c8808d113e2c98fb63676
+        with:
+          branch: notion-sync
+          delete-branch: true
+          commit-message: 'content: sync from Notion'
+          title: 'content: sync from Notion'
+          body: Automated sync of Published pages from Notion. Review the Markdown and images, then merge to deploy.
+          add-paths: |
+            content/**
+            public/images/**
