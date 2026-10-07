@@ -21,6 +21,8 @@ public/images/<slug>/...    # images, referenced as /images/<slug>/file.png
 
 ## Frontmatter (YAML, strict — unknown keys fail the build)
 
+Quote `title` and `summary` values (they often contain `: `). Unquoted `YYYY-MM-DD` dates are fine (the pipeline normalizes YAML dates).
+
 ### Post (`content/posts/<slug>/<lang>.md`)
 | Key | Type | Rules |
 |---|---|---|
@@ -69,8 +71,8 @@ CommonMark + GFM tables/linkify; raw HTML disabled. Fenced code with a language 
 ## Example
 ```markdown
 ---
-title: ראסט: השאלה (Borrowing)
-summary: איך & ו-&mut עובדים ולמה הקומפיילר מתלונן.
+title: "ראסט: השאלה (Borrowing)"
+summary: "איך & ו-&mut עובדים ולמה הקומפיילר מתלונן."
 date: 2026-10-05
 tags: [rust]
 series: { key: learning-rust, order: 2 }

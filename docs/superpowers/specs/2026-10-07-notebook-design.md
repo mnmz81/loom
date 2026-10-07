@@ -27,7 +27,7 @@ Evidence (`Mushilu-San-UI/projects/ui`): zero `dir`/`rtl`/`Directionality` handl
 ## Design (summary)
 - **Content:** `content/{posts,notes}/<slug>/{he,en}.md`, `content/series/<key>.yaml`, `content/tags.yaml`. Folder name = slug = translation key (Latin kebab).
 - **Frontmatter (strict zod):** post `title, summary≤200, date, updated?, tags[≥1], draft?, cover?, series?{key,order}`; note `title, date, updated?, tags[≥1], draft?`.
-- **Output** `public/content/`: `<lang>/index.json` (metas incl. `availableLangs`, `fallbackLang`), `<lang>/{posts,notes}/<slug>.json` (html, toc, related[3]), `series.json`; `rss-<lang>.xml`, `sitemap.xml` with hreflang.
+- **Output** `public/content/`: `<lang>/index.json` (metas incl. `availableLangs`; fallback = `entry.lang !== index.lang`), `<lang>/{posts,notes}/<slug>.json` (html, toc, related[3]), `series.json`; `rss-<lang>.xml`, `sitemap.xml` with hreflang.
 - **Routes (prerendered):** `/:lang`, `/:lang/{posts,notes}[/:slug]`, `/:lang/series[/:key]`, `/:lang/tags/:tag`, `/:lang/search`, `404`; `/` static redirect to `/he/`.
 - **i18n:** runtime typed dictionaries + `LocaleService` (route `:lang` → signal, sets `<html lang dir>` in SSR); logical CSS only; code always `dir=ltr`; memoized `Intl.DateTimeFormat`.
 - **Search:** Pagefind in postbuild, `data-pagefind-body`, filters `type`/`tag`, per-lang index by `<html lang>`.
