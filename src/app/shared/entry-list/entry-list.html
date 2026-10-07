@@ -1,0 +1,11 @@
+@if (entries().length) {
+  <ul class="entry-list">
+    @for (entry of entries(); track entry.type + '/' + entry.slug) {
+      <li>
+        <nb-entry-card [entry]="entry" [headingLevel]="headingLevel()" [tagLabels]="tagLabels()" />
+      </li>
+    }
+  </ul>
+} @else {
+  <p class="entry-list__empty">{{ emptyText() ?? locale.t('list.empty') }}</p>
+}

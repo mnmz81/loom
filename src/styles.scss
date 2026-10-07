@@ -1,2 +1,9 @@
-// PLACEHOLDER (Wave 0) — owned by the Wave 1 components agent (C): tokens, base, prose, motion.
-// Rule: logical properties only (margin-inline-start, inset-inline-end, text-align: start).
+// Global styles (owned by the components agent).
+// Rule: logical properties only (margin-inline-start, inset-inline-end, text-align: start) — the site is RTL by default.
+@use 'styles/tokens';
+@use 'styles/base';
+@use 'styles/typography';
+@use 'styles/utilities';
+@use 'styles/prose';
+@use 'styles/shiki';
+@use 'styles/motion';

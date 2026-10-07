@@ -1,0 +1,51 @@
+// Route transitions (router: withViewTransitions()).
+::view-transition-group(*) {
+  animation-duration: var(--nb-duration-base);
+  animation-timing-function: var(--nb-ease-out);
+}
+
+::view-transition-old(root) {
+  animation: nb-vt-fade-out var(--nb-duration-base) var(--nb-ease-out) both;
+}
+
+::view-transition-new(root) {
+  animation: nb-vt-fade-in var(--nb-duration-base) var(--nb-ease-out) both;
+}
+
+@keyframes nb-vt-fade-out {
+  to {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes nb-vt-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+// Global kill switch: every animation and transition on the site stops.
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

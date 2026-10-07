@@ -1,0 +1,7 @@
+// Prose, code-block and copy-button styles are global (src/styles/_prose.scss, _shiki.scss):
+// the [innerHTML] content and the browser-added buttons are outside view encapsulation.
+:host {
+  display: block;
+  // As a grid/flex item, never grow to the min-content width of a long code line (no horizontal page scroll).
+  min-inline-size: 0;
+}

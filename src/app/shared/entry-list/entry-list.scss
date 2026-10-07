@@ -1,0 +1,21 @@
+:host {
+  display: block;
+}
+
+.entry-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+  gap: var(--nb-space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.entry-list__empty {
+  margin: 0;
+  padding: var(--nb-space-6) var(--nb-space-5);
+  border: 1px dashed var(--nb-color-border);
+  border-radius: var(--nb-radius-lg);
+  color: var(--nb-color-muted);
+  text-align: center;
+}

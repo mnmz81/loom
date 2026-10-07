@@ -1,0 +1,26 @@
+:host {
+  display: contents;
+}
+
+// Off-screen until focused, then pinned to the start corner (top-right in RTL, top-left in LTR).
+.skip-link {
+  position: fixed;
+  inset-block-start: var(--nb-space-3);
+  inset-inline-start: var(--nb-space-3);
+  z-index: 100;
+  display: inline-flex;
+  align-items: center;
+  min-block-size: var(--nb-touch-target);
+  padding-inline: var(--nb-space-4);
+  border-radius: var(--nb-radius-sm);
+  background: var(--nb-color-surface);
+  color: var(--nb-color-text);
+  font-weight: 600;
+  box-shadow: var(--nb-shadow-md);
+  transform: translateY(calc(-100% - var(--nb-space-6)));
+  transition: transform var(--nb-duration-fast) var(--nb-ease-out);
+
+  &:focus {
+    transform: none;
+  }
+}

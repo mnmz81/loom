@@ -1,0 +1,16 @@
+:host {
+  display: inline-flex;
+}
+
+.lang-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem var(--nb-space-2);
+  border-radius: var(--nb-radius-full);
+  background: var(--nb-color-badge-bg);
+  color: var(--nb-color-badge-text);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: nowrap;
+}
