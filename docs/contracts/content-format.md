@@ -33,14 +33,14 @@ Quote `title` and `summary` values (they often contain `: `). Unquoted `YYYY-MM-
 | `tags` | string[] | required, ≥ 1, each kebab-case Latin |
 | `draft` | boolean | optional, default `false` |
 | `cover` | string | optional, starts with `/images/` |
-| `series` | `{ key: string, order: int ≥ 1 }` | optional; `key` must exist in `content/series/`; `order` unique within the series |
+| `series` | `{ key: string, order: int ≥ 1 }` | optional; `key` must exist in `content/series/`; `order` unique per series across entries (both translations of one entry share it) |
 
 ### Note (`content/notes/<slug>/<lang>.md`)
 | Key | Type | Rules |
 |---|---|---|
 | `title` | string | required |
 | `date` | `YYYY-MM-DD` | required |
-| `updated` | `YYYY-MM-DD` | optional |
+| `updated` | `YYYY-MM-DD` | optional, ≥ `date` |
 | `tags` | string[] | required, ≥ 1, kebab-case |
 | `draft` | boolean | optional |
 
