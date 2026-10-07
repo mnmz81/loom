@@ -1,0 +1,11 @@
+<p class="entry-meta">
+  <time class="entry-meta__date" [attr.datetime]="entry().date">{{ date() }}</time>
+  @if (updated(); as updated) {
+    <span class="entry-meta__sep" aria-hidden="true">·</span>
+    <time class="entry-meta__updated" [attr.datetime]="updated.iso">{{ updated.text }}</time>
+  }
+  @if (reading(); as reading) {
+    <span class="entry-meta__sep" aria-hidden="true">·</span>
+    <span class="entry-meta__reading">{{ reading }}</span>
+  }
+</p>

@@ -1,0 +1,11 @@
+@if (tags().length) {
+  <ul class="tag-list" [attr.aria-label]="locale.t('entry.tags')">
+    @for (tag of tags(); track tag) {
+      <li>
+        <a class="chip" [routerLink]="path(tag)"
+          ><span aria-hidden="true">#</span>{{ label(tag) }}</a
+        >
+      </li>
+    }
+  </ul>
+}

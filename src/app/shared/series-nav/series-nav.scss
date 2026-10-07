@@ -1,0 +1,94 @@
+:host {
+  display: block;
+}
+
+.series-nav {
+  padding: var(--nb-space-4) var(--nb-space-5);
+  border: 1px solid var(--nb-color-border);
+  border-inline-start: 4px solid var(--nb-color-accent);
+  border-radius: var(--nb-radius-md);
+  background: var(--nb-color-surface);
+}
+
+.series-nav__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--nb-space-1) var(--nb-space-3);
+  margin: 0;
+}
+
+.series-nav__title {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: var(--nb-touch-target);
+  color: var(--nb-color-text);
+  font-weight: 700;
+}
+
+.series-nav__part {
+  color: var(--nb-color-muted);
+  font-size: 0.875rem;
+}
+
+.series-nav__links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: var(--nb-space-3);
+  margin: var(--nb-space-3) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.series-nav__item--next {
+  grid-column: -2;
+  text-align: end;
+}
+
+.series-nav__link {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nb-space-1);
+  min-block-size: var(--nb-touch-target);
+  padding: var(--nb-space-2) var(--nb-space-3);
+  border-radius: var(--nb-radius-sm);
+  color: var(--nb-color-text);
+  text-decoration: none;
+  transition: background-color var(--nb-duration-fast) var(--nb-ease-out);
+
+  &:hover {
+    background: var(--nb-color-surface-2);
+  }
+}
+
+.series-nav__dir {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--nb-space-1);
+  color: var(--nb-color-muted);
+  font-size: 0.8125rem;
+}
+
+.series-nav__item--next .series-nav__dir {
+  justify-content: flex-end;
+}
+
+.series-nav__arrow {
+  flex: none;
+}
+
+// Arrows point "back"/"forward" along the reading direction.
+:host-context([dir='rtl']) .series-nav__arrow {
+  transform: scaleX(-1);
+}
+
+.series-nav__ref {
+  // Stay on the UI's edge even when dir differs (fallback-language title).
+  align-self: flex-start;
+  font-weight: 600;
+}
+
+.series-nav__item--next .series-nav__ref {
+  align-self: flex-end;
+}

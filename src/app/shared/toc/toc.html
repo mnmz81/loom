@@ -1,0 +1,13 @@
+@if (items().length > 1) {
+  <nav class="toc" [attr.aria-labelledby]="titleId">
+    <h2 class="toc__title" [id]="titleId">{{ locale.t('entry.toc') }}</h2>
+    <ol class="toc__list">
+      @for (item of items(); track item.id) {
+        <li [class.toc__item--sub]="item.depth === 3">
+          <!-- [routerLink]="[]" + fragment: href is the current page + #id, so <base href> can't break it. -->
+          <a class="toc__link" [routerLink]="[]" [fragment]="item.id">{{ item.text }}</a>
+        </li>
+      }
+    </ol>
+  </nav>
+}

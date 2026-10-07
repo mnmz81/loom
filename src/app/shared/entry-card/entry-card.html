@@ -1,0 +1,33 @@
+<article class="entry-card" [class.entry-card--note]="entry().type === 'note'">
+  <p class="entry-card__meta">
+    <span class="entry-card__type">{{ typeLabel() }}</span>
+    <span aria-hidden="true">·</span>
+    <time [attr.datetime]="entry().date">{{ date() }}</time>
+    @if (foreignLang(); as lang) {
+      <nb-lang-badge [lang]="lang" />
+    }
+  </p>
+
+  <ng-template #titleLink>
+    <a class="entry-card__link" [routerLink]="href()" [attr.hreflang]="foreignLang()">{{
+      entry().title
+    }}</a>
+  </ng-template>
+  @if (headingLevel() === 3) {
+    <h3 class="entry-card__title" [attr.lang]="foreignLang()" [attr.dir]="foreignDir()">
+      <ng-container [ngTemplateOutlet]="titleLink" />
+    </h3>
+  } @else {
+    <h2 class="entry-card__title" [attr.lang]="foreignLang()" [attr.dir]="foreignDir()">
+      <ng-container [ngTemplateOutlet]="titleLink" />
+    </h2>
+  }
+
+  @if (entry().summary; as summary) {
+    <p class="entry-card__summary" [attr.lang]="foreignLang()" [attr.dir]="foreignDir()">
+      {{ summary }}
+    </p>
+  }
+
+  <nb-tag-list class="entry-card__tags" [tags]="entry().tags" [labels]="tagLabels()" />
+</article>

@@ -1,0 +1,12 @@
+:host {
+  display: block;
+}
+
+.entry-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--nb-space-1) var(--nb-space-2);
+  margin: 0;
+  color: var(--nb-color-muted);
+  font-size: 0.9rem;
+}

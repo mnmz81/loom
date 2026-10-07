@@ -1,0 +1,83 @@
+// Design tokens. Light on :root, dark via [data-theme='dark'] (set by the theme service / inline script),
+// with prefers-color-scheme as the fallback when no theme attribute is set.
+@mixin light {
+  --nb-color-bg: #fafafa;
+  --nb-color-surface: #ffffff;
+  --nb-color-surface-2: #f1f5f9;
+  --nb-color-text: #0f172a;
+  --nb-color-muted: #475569;
+  --nb-color-border: #e2e8f0;
+  --nb-color-accent: #4f46e5;
+  --nb-color-accent-2: #0891b2;
+  --nb-color-accent-contrast: #ffffff;
+  --nb-color-badge-bg: #fef3c7;
+  --nb-color-badge-text: #92400e;
+  --nb-shadow-sm: 0 1px 2px rgb(15 23 42 / 0.06);
+  --nb-shadow-md: 0 12px 32px rgb(15 23 42 / 0.1);
+  color-scheme: light;
+}
+
+@mixin dark {
+  --nb-color-bg: #0b0f19;
+  --nb-color-surface: #111827;
+  --nb-color-surface-2: #1f2937;
+  --nb-color-text: #e5e7eb;
+  --nb-color-muted: #9ca3af;
+  --nb-color-border: #1f2937;
+  --nb-color-accent: #818cf8;
+  --nb-color-accent-2: #22d3ee;
+  --nb-color-accent-contrast: #0b0f19;
+  --nb-color-badge-bg: #422006;
+  --nb-color-badge-text: #fde68a;
+  --nb-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+  --nb-shadow-md: 0 12px 32px rgb(0 0 0 / 0.5);
+  color-scheme: dark;
+}
+
+:root {
+  @include light;
+  --nb-gradient-accent: linear-gradient(135deg, var(--nb-color-accent), var(--nb-color-accent-2));
+  // Inter has no Hebrew glyphs: Hebrew text falls through to the platform's Hebrew fonts.
+  --nb-font-sans:
+    'Inter Variable', system-ui, -apple-system, 'Segoe UI', 'Arial Hebrew', 'Noto Sans Hebrew',
+    'Noto Sans', Arial, sans-serif;
+  --nb-font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --nb-line-height: 1.65;
+  --nb-heading-tracking: -0.02em;
+  --nb-space-1: 0.25rem;
+  --nb-space-2: 0.5rem;
+  --nb-space-3: 0.75rem;
+  --nb-space-4: 1rem;
+  --nb-space-5: 1.5rem;
+  --nb-space-6: 2rem;
+  --nb-space-7: 3rem;
+  --nb-space-8: 4rem;
+  --nb-radius-sm: 6px;
+  --nb-radius-md: 12px;
+  --nb-radius-lg: 20px;
+  --nb-radius-full: 999px;
+  --nb-container-max: 72rem;
+  --nb-prose-max: 46rem;
+  --nb-header-height: 4rem;
+  --nb-touch-target: 44px;
+  --nb-duration-fast: 150ms;
+  --nb-duration-base: 300ms;
+  --nb-duration-slow: 600ms;
+  --nb-ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+// Hebrew: no negative tracking (it crowds the letterforms) and a little more leading.
+:root:lang(he) {
+  --nb-line-height: 1.75;
+  --nb-heading-tracking: 0;
+}
+
+:root[data-theme='dark'] {
+  @include dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    @include dark;
+  }
+}

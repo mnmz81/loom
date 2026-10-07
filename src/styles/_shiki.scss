@@ -1,0 +1,35 @@
+// Shiki dual themes. The content pipeline renders with `defaultColor: false`, so every token carries
+// --shiki-light / --shiki-dark (and <pre class="shiki"> carries --shiki-light-bg / --shiki-dark-bg).
+.shiki {
+  background-color: var(--shiki-light-bg, var(--nb-color-surface-2));
+}
+
+.shiki span {
+  color: var(--shiki-light);
+  font-style: var(--shiki-light-font-style, inherit);
+  font-weight: var(--shiki-light-font-weight, inherit);
+  text-decoration: var(--shiki-light-text-decoration, inherit);
+}
+
+@mixin shiki-dark {
+  .shiki {
+    background-color: var(--shiki-dark-bg, var(--nb-color-surface-2));
+  }
+
+  .shiki span {
+    color: var(--shiki-dark);
+    font-style: var(--shiki-dark-font-style, inherit);
+    font-weight: var(--shiki-dark-font-weight, inherit);
+    text-decoration: var(--shiki-dark-text-decoration, inherit);
+  }
+}
+
+:root[data-theme='dark'] {
+  @include shiki-dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    @include shiki-dark;
+  }
+}

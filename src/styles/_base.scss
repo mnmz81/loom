@@ -1,0 +1,53 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-block-start: calc(var(--nb-header-height) + var(--nb-space-4));
+}
+
+body {
+  margin: 0;
+  background: var(--nb-color-bg);
+  color: var(--nb-color-text);
+  font-family: var(--nb-font-sans);
+  line-height: var(--nb-line-height);
+  text-align: start;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+  transition:
+    background-color var(--nb-duration-base) var(--nb-ease-out),
+    color var(--nb-duration-base) var(--nb-ease-out);
+}
+
+img,
+svg {
+  display: block;
+  max-inline-size: 100%;
+  block-size: auto;
+}
+
+a {
+  color: var(--nb-color-accent);
+  text-underline-offset: 0.2em;
+}
+
+button {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--nb-color-accent);
+  outline-offset: 3px;
+  border-radius: var(--nb-radius-sm);
+}
+
+// Skip-link targets get tabindex="-1": no ring for that programmatic focus.
+[tabindex='-1']:focus:not(:focus-visible),
+main:focus {
+  outline: none;
+}

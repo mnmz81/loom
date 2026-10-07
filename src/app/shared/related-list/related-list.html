@@ -1,0 +1,22 @@
+@if (items().length) {
+  <section class="related" [attr.aria-labelledby]="titleId">
+    <h2 class="related__title" [id]="titleId">{{ locale.t('entry.related') }}</h2>
+    <ul class="related__list">
+      @for (item of items(); track item.type + '/' + item.slug) {
+        <li>
+          <a class="related__link" [routerLink]="path(item)" [attr.hreflang]="foreignLang(item)">
+            <span class="related__type">{{
+              locale.t(item.type === 'post' ? 'type.post' : 'type.note')
+            }}</span>
+            <span
+              class="related__ref"
+              [attr.lang]="foreignLang(item)"
+              [attr.dir]="foreignDir(item)"
+              >{{ item.title }}</span
+            >
+          </a>
+        </li>
+      }
+    </ul>
+  </section>
+}

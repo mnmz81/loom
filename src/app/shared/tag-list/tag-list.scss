@@ -1,0 +1,12 @@
+:host {
+  display: block;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--nb-space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

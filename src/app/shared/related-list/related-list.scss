@@ -1,0 +1,46 @@
+:host {
+  display: block;
+}
+
+.related__title {
+  margin-block-end: var(--nb-space-3);
+  font-size: 1.25rem;
+}
+
+.related__list {
+  display: grid;
+  gap: var(--nb-space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.related__link {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-block-size: var(--nb-touch-target);
+  padding: var(--nb-space-2) var(--nb-space-4);
+  border: 1px solid var(--nb-color-border);
+  border-radius: var(--nb-radius-md);
+  background: var(--nb-color-surface);
+  color: var(--nb-color-text);
+  text-decoration: none;
+  transition: border-color var(--nb-duration-fast) var(--nb-ease-out);
+
+  &:hover {
+    border-color: var(--nb-color-accent);
+  }
+}
+
+.related__type {
+  color: var(--nb-color-accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.related__ref {
+  // Stay on the UI's edge even when dir differs (fallback-language title).
+  align-self: flex-start;
+  font-weight: 600;
+}
