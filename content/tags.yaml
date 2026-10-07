@@ -1,0 +1,4 @@
+# Display labels per tag. Missing tag or language → the key is shown.
+rust: { he: ראסט, en: Rust }
+angular: { he: אנגולר, en: Angular }
+git: { he: git, en: git }
