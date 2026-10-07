@@ -1,0 +1,60 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+      - run: npm run test:scripts
+      - run: npm test
+
+      # Hebrew glyphs for the OG image (scripts/og/fonts.ts looks for DejaVu on Linux).
+      - name: Ensure Hebrew font
+        run: |
+          [ -f /usr/share/fonts/truetype/dejavu/DejaVuSans.ttf ] || {
+            sudo apt-get update && sudo apt-get install -y --no-install-recommends fonts-dejavu-core
+          }
+
+      # content → og → ng build → postbuild (404, Pagefind, output check)
+      - name: Build
+        run: npm run build
+        env:
+          OG_REQUIRE_HEBREW: '1'
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist/notebook/browser
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
