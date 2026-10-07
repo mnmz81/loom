@@ -11,6 +11,7 @@
     "test": "ng test --watch=false",
     "test:scripts": "vitest run --config vitest.scripts.config.ts",
     "e2e": "playwright test",
+    "serve:dist": "./scripts/serve-dist.sh",
     "sync:notion": "tsx scripts/sync-notion.ts"
   },
   "private": true,
