@@ -127,7 +127,7 @@ describe('SiteHeader', () => {
     const button = el.querySelector<HTMLButtonElement>('.site-header__menu-btn')!;
     expect(button.getAttribute('aria-controls')).toBe('nb-site-nav');
     expect(el.querySelector('#nb-site-nav')).not.toBeNull();
-    expect(button.getAttribute('aria-label')).toBe('Main navigation');
+    expect(button.getAttribute('aria-label')).toBe('Menu');
     expect(button.getAttribute('aria-expanded')).toBe('false');
 
     button.click();

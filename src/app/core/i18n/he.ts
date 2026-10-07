@@ -8,6 +8,7 @@ export const he: Dict = {
   'nav.series': 'סדרות',
   'nav.search': 'חיפוש',
   'nav.main': 'ניווט ראשי',
+  'nav.menu': 'תפריט',
   'lang.switch': 'החלף שפה',
   'lang.name.he': 'עברית',
   'lang.name.en': 'English',

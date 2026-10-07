@@ -8,6 +8,7 @@ export interface Dict {
   'nav.series': string;
   'nav.search': string;
   'nav.main': string;            // aria-label of the main <nav>
+  'nav.menu': string;            // aria-label of the mobile menu button
   'lang.switch': string;         // aria-label / title of the language switch link
   'lang.name.he': string;
   'lang.name.en': string;
