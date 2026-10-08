@@ -26,7 +26,7 @@ describe('SeriesListPage', () => {
     expect(link?.textContent?.trim()).toBe('לומדים ראסט');
     expect(el.querySelector('.series-cards__text')?.textContent?.trim()).toBe('הערות מהדרך ללמוד ראסט.');
     expect(el.querySelector('.series-cards__meta')?.textContent?.trim()).toBe('2 חלקים');
-    expect(TestBed.inject(Title).getTitle()).toBe('סדרות · המחברת');
+    expect(TestBed.inject(Title).getTitle()).toBe('סדרות · לום');
   });
 
   it('uses the English texts (en)', async () => {

@@ -8,12 +8,12 @@ test.describe('language switch', () => {
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('ראסט: השאלה (Borrowing)');
 
     await langSwitch(page, 'he').click();
-    await expect(page).toHaveURL(/\/notebook\/en\/posts\/rust-borrowing$/);
+    await expect(page).toHaveURL(/\/loom\/en\/posts\/rust-borrowing$/);
     await expectLang(page, 'en');
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Rust: borrowing');
 
     await langSwitch(page, 'en').click();
-    await expect(page).toHaveURL(/\/notebook\/he\/posts\/rust-borrowing$/);
+    await expect(page).toHaveURL(/\/loom\/he\/posts\/rust-borrowing$/);
     await expectLang(page, 'he');
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('ראסט: השאלה (Borrowing)');
   });
@@ -21,7 +21,7 @@ test.describe('language switch', () => {
   test('Hebrew-only post: switching to en lands on the English posts list with the "Hebrew only" badge', async ({ page }) => {
     await gotoReady(page, 'he/posts/rust-ownership');
     await langSwitch(page, 'he').click();
-    await expect(page).toHaveURL(/\/notebook\/en\/posts$/);
+    await expect(page).toHaveURL(/\/loom\/en\/posts$/);
     await expectLang(page, 'en');
 
     // The untranslated Hebrew post is still listed on the en list, flagged and rendered RTL.
@@ -41,7 +41,7 @@ test.describe('language switch', () => {
     await gotoReady(page, 'en/notes/zsh-history-search');
     await expectLang(page, 'en');
     await langSwitch(page, 'en').click();
-    await expect(page).toHaveURL(/\/notebook\/he\/notes$/);
+    await expect(page).toHaveURL(/\/loom\/he\/notes$/);
     await expectLang(page, 'he');
 
     const card = page.getByRole('article').filter({ hasText: 'Search zsh history with Ctrl+R' });

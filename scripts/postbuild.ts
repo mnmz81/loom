@@ -1,12 +1,12 @@
 // Runs automatically after `npm run build` (npm "postbuild"): writes 404.html, builds the Pagefind
 // search index, then verifies the static output. Exits 1 when anything required is missing.
-// Usage: npx tsx scripts/postbuild.ts [distDir]   (default dist/notebook/browser)
+// Usage: npx tsx scripts/postbuild.ts [distDir]   (default dist/loom/browser)
 import { existsSync } from 'node:fs';
 import { write404 } from './postbuild/not-found';
 import { buildSearchIndex } from './postbuild/search';
 import { missingFiles, readLangIndexes, requiredFiles } from './postbuild/verify';
 
-const DIST = process.argv[2] ?? 'dist/notebook/browser';
+const DIST = process.argv[2] ?? 'dist/loom/browser';
 
 async function main(): Promise<void> {
   if (!existsSync(DIST)) throw new Error(`${DIST} does not exist — run ng build first`);

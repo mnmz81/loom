@@ -87,7 +87,7 @@ test('language switch keeps working from the search page', async ({ page }) => {
   await expect(page.getByRole('link', { name: 'ראסט: בעלות (Ownership)' })).toBeVisible();
 
   await langSwitch(page, 'he').click();
-  await expect(page).toHaveURL(/\/notebook\/en\/search/);
+  await expect(page).toHaveURL(/\/loom\/en\/search/);
   await expectLang(page, 'en');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText(t('en', 'search.title'));
 
@@ -96,7 +96,7 @@ test('language switch keeps working from the search page', async ({ page }) => {
   await expect(page.getByRole('link', { name: 'Search zsh history with Ctrl+R' })).toBeVisible();
 
   await langSwitch(page, 'en').click();
-  await expect(page).toHaveURL(/\/notebook\/he\/search/);
+  await expect(page).toHaveURL(/\/loom\/he\/search/);
   await expectLang(page, 'he');
 });
 

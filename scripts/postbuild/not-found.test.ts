@@ -22,10 +22,10 @@ describe('write404', () => {
 
 describe('fallback404Html', () => {
   it('is Hebrew RTL by default and links to both homes under the base path', () => {
-    const html = fallback404Html('/notebook/');
+    const html = fallback404Html('/loom/');
     expect(html).toContain('<html lang="he" dir="rtl">');
-    expect(html).toContain('href="/notebook/he/"');
+    expect(html).toContain('href="/loom/he/"');
     expect(html).toContain('lang="en" dir="ltr"');
-    expect(html).toContain('href="/notebook/en/"');
+    expect(html).toContain('href="/loom/en/"');
   });
 });

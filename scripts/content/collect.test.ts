@@ -9,7 +9,7 @@ import { buildContent } from './collect';
 type Files = Record<string, string>;
 
 function makeContent(files: Files): { contentDir: string; outDir: string } {
-  const root = mkdtempSync(join(tmpdir(), 'notebook-content-'));
+  const root = mkdtempSync(join(tmpdir(), 'loom-content-'));
   const contentDir = join(root, 'content');
   mkdirSync(contentDir, { recursive: true });
   for (const [rel, body] of Object.entries(files)) {

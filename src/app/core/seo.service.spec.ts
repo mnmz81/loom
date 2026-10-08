@@ -3,7 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { PATHS } from './routes.const';
 import { SeoService, formatTitle } from './seo.service';
 
-const BASE = 'https://mnmz81.github.io/notebook';
+const BASE = 'https://mnmz81.github.io/loom';
 
 const meta = (attr: 'name' | 'property', key: string) =>
   document.head.querySelector(`meta[${attr}="${key}"]`)?.getAttribute('content') ?? undefined;
@@ -19,13 +19,13 @@ const hreflangs = () =>
 
 describe('formatTitle', () => {
   it('keeps the site title unchanged', () => {
-    expect(formatTitle('המחברת', 'he')).toBe('המחברת');
-    expect(formatTitle('Notebook', 'en')).toBe('Notebook');
+    expect(formatTitle('לום', 'he')).toBe('לום');
+    expect(formatTitle('Loom', 'en')).toBe('Loom');
   });
 
   it('suffixes page titles with the site title of the language', () => {
-    expect(formatTitle('פוסטים', 'he')).toBe('פוסטים · המחברת');
-    expect(formatTitle('Posts', 'en')).toBe('Posts · Notebook');
+    expect(formatTitle('פוסטים', 'he')).toBe('פוסטים · לום');
+    expect(formatTitle('Posts', 'en')).toBe('Posts · Loom');
   });
 });
 
@@ -40,7 +40,7 @@ describe('SeoService', () => {
 
   it('sets title, description and canonical with a trailing slash under the base path', () => {
     seo.set({ lang: 'en', title: 'Posts', description: 'All posts', path: PATHS.posts('en') });
-    expect(TestBed.inject(Title).getTitle()).toBe('Posts · Notebook');
+    expect(TestBed.inject(Title).getTitle()).toBe('Posts · Loom');
     expect(meta('name', 'description')).toBe('All posts');
     const canonicals = document.head.querySelectorAll('link[rel="canonical"]');
     expect(canonicals).toHaveLength(1);
@@ -56,16 +56,16 @@ describe('SeoService', () => {
   });
 
   it('sets Open Graph and Twitter tags with an absolute default image', () => {
-    seo.set({ lang: 'he', title: 'המחברת', description: 'תיאור', path: '/he' });
-    expect(meta('property', 'og:title')).toBe('המחברת');
+    seo.set({ lang: 'he', title: 'לום', description: 'תיאור', path: '/he' });
+    expect(meta('property', 'og:title')).toBe('לום');
     expect(meta('property', 'og:description')).toBe('תיאור');
     expect(meta('property', 'og:url')).toBe(`${BASE}/he/`);
     expect(meta('property', 'og:type')).toBe('website');
     expect(meta('property', 'og:image')).toBe(`${BASE}/og/default.png`);
-    expect(meta('property', 'og:site_name')).toBe('המחברת');
+    expect(meta('property', 'og:site_name')).toBe('לום');
     expect(meta('property', 'og:locale')).toBe('he_IL');
     expect(meta('name', 'twitter:card')).toBe('summary_large_image');
-    expect(meta('name', 'twitter:title')).toBe('המחברת');
+    expect(meta('name', 'twitter:title')).toBe('לום');
     expect(meta('name', 'twitter:description')).toBe('תיאור');
     expect(meta('name', 'twitter:image')).toBe(`${BASE}/og/default.png`);
   });
@@ -112,7 +112,7 @@ describe('SeoService', () => {
     const feeds = document.head.querySelectorAll('link[rel="alternate"][type="application/rss+xml"]');
     expect(feeds).toHaveLength(1);
     expect(feeds[0].getAttribute('href')).toBe(`${BASE}/rss-en.xml`);
-    expect(feeds[0].getAttribute('title')).toBe('Notebook');
+    expect(feeds[0].getAttribute('title')).toBe('Loom');
     expect(feeds[0].hasAttribute('hreflang')).toBe(false);
   });
 

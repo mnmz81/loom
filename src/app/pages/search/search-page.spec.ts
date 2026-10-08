@@ -76,7 +76,7 @@ describe('SearchPage', () => {
     await flush(0);
     expect(el.querySelector('h1')?.textContent?.trim()).toBe('חיפוש');
     expect(el.querySelector('label[for="search-type"]')?.textContent?.trim()).toBe('סוג');
-    expect(TestBed.inject(Title).getTitle()).toBe('חיפוש · המחברת');
+    expect(TestBed.inject(Title).getTitle()).toBe('חיפוש · לום');
   });
 
   it('debounces typing, searches once, and shows the result count and hits', async () => {

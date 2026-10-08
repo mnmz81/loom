@@ -88,12 +88,12 @@ describe('EntryPage', () => {
   it('sets title, canonical, hreflang for each available language, OG article data', async () => {
     const { open } = await setup();
     await open('/en/posts/rust-borrowing');
-    expect(TestBed.inject(Title).getTitle()).toBe('Rust: borrowing · Notebook');
+    expect(TestBed.inject(Title).getTitle()).toBe('Rust: borrowing · Loom');
     expect(meta('description')).toBe('How & and &mut work and why the compiler complains.');
     expect(meta('og:type')).toBe('article');
     expect(meta('article:published_time')).toBe('2026-10-05');
     expect(document.head.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(
-      'https://mnmz81.github.io/notebook/en/posts/rust-borrowing/',
+      'https://mnmz81.github.io/loom/en/posts/rust-borrowing/',
     );
     const alt = Object.fromEntries(
       [...document.head.querySelectorAll('link[rel="alternate"][hreflang]')].map((l) => [
@@ -101,8 +101,8 @@ describe('EntryPage', () => {
         l.getAttribute('href'),
       ]),
     );
-    expect(alt['he']).toBe('https://mnmz81.github.io/notebook/he/posts/rust-borrowing/');
-    expect(alt['en']).toBe('https://mnmz81.github.io/notebook/en/posts/rust-borrowing/');
+    expect(alt['he']).toBe('https://mnmz81.github.io/loom/he/posts/rust-borrowing/');
+    expect(alt['en']).toBe('https://mnmz81.github.io/loom/en/posts/rust-borrowing/');
   });
 
   it('only advertises the languages an entry exists in, and derives a description for notes', async () => {

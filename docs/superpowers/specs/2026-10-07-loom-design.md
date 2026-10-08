@@ -1,4 +1,4 @@
-# Notebook — bilingual learning blog (design + parallel-agent build plan)
+# Loom — bilingual learning blog (design + parallel-agent build plan)
 
 ## Context
 Personal learning blog / knowledge base: long posts + short notes (TIL), public, searchable so I can find things again later. Build is split so **several subagents work in parallel with no dependencies on each other** — they depend only on a contracts commit made first.
@@ -6,13 +6,13 @@ Personal learning blog / knowledge base: long posts + short notes (TIL), public,
 | Decision | Choice |
 |---|---|
 | Audience | Public + me |
-| Location | New separate repo `~/Desktop/code project/notebook` |
+| Location | New separate repo `~/Desktop/code project/loom` |
 | Stack | Angular 22 SSG, reusing tested pipeline from `my cv web` |
 | Authoring | Markdown in repo → Notion sync → web CMS (Sveltia) |
 | MVP | Full-text search, posts + notes, series, he/en |
 | i18n | Fully bilingual `/he/...` + `/en/...`, default he (`/` → `/he/`) |
 | Translations | Optional per entry; missing lang → "עברית בלבד / English only" badge |
-| Hosting | GitHub Pages → `https://mnmz81.github.io/notebook/` (name is a placeholder) |
+| Hosting | GitHub Pages → `https://mnmz81.github.io/loom/` (name is a placeholder) |
 | Extras | tags, TOC, code copy, related posts, dark mode, per-lang RSS, updated date |
 
 ## Mushilu-San-UI RTL check — result: NOT supported
@@ -31,7 +31,7 @@ Evidence (`Mushilu-San-UI/projects/ui`): zero `dir`/`rtl`/`Directionality` handl
 - **Routes (prerendered):** `/:lang`, `/:lang/{posts,notes}[/:slug]`, `/:lang/series[/:key]`, `/:lang/tags/:tag`, `/:lang/search`, `404`; `/` static redirect to `/he/`.
 - **i18n:** runtime typed dictionaries + `LocaleService` (route `:lang` → signal, sets `<html lang dir>` in SSR); logical CSS only; code always `dir=ltr`; memoized `Intl.DateTimeFormat`.
 - **Search:** Pagefind in postbuild, `data-pagefind-body`, filters `type`/`tag`, per-lang index by `<html lang>`.
-- **Base href** `/notebook/`; `SITE.url` single source for canonical/RSS/OG.
+- **Base href** `/loom/`; `SITE.url` single source for canonical/RSS/OG.
 
 ## Build plan — waves
 
@@ -39,7 +39,7 @@ Every agent runs with `isolation: "worktree"` on its own branch and **owns a dis
 
 ### Wave 0 — Contracts (me, sequential, ~small) — the only shared dependency
 1. Open the Mushilu RTL issue (Step 0 above).
-2. `git init` notebook, Angular 22 SSG scaffold, Node 24, vitest configs, base href, `SITE` config. Copy this design to `docs/superpowers/specs/2026-10-07-notebook-design.md`.
+2. `git init` loom, Angular 22 SSG scaffold, Node 24, vitest configs, base href, `SITE` config. Copy this design to `docs/superpowers/specs/2026-10-07-loom-design.md`.
 3. Contracts, committed before any agent starts:
    - `src/app/core/content.models.ts` — all JSON types (EntryMeta, Entry, Series, Lang, ContentIndex…)
    - `docs/contracts/content-format.md` — folder layout + frontmatter spec (consumed by pipeline, Notion, CMS, seed)
@@ -70,7 +70,7 @@ Full build, Playwright e2e + axe (below), fix-ups, then confirm with user before
 ## Verification
 - `npm run test:scripts` (A, F) and `npm test` (B, C, pages) green; ≥80% coverage on services/components.
 - Contract check: pipeline output for seed content validates against `content.models.ts` types and fixture shape (test in A).
-- `npm run build`, serve under `/notebook/`, Playwright:
+- `npm run build`, serve under `/loom/`, Playwright:
   - `/` → `/he/`; `<html dir=rtl lang=he>` on he, `ltr` on en; code blocks LTR
   - lang switch on translated post → translation; he-only post → en list with "Hebrew only" badge
   - series order + prev/next; tag page; related posts
@@ -83,4 +83,4 @@ Full build, Playwright e2e + axe (below), fix-ups, then confirm with user before
 - [x] Wave 1 — A pipeline, B services, C components, D tooling, E seed+docs, F Notion, G CMS (merged on `main`; 121 unit + 167 script tests green)
 - [x] Wave 2 — pages, routes, prerender params, layout shell, search page
 - [x] Wave 3 — full build, Playwright e2e + axe, mobile RTL check
-- [ ] Publish — create `mnmz81/notebook` repo, enable Pages (needs user confirmation)
+- [ ] Publish — create `mnmz81/loom` repo, enable Pages (needs user confirmation)

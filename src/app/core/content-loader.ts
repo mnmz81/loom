@@ -9,6 +9,6 @@ export const CONTENT_LOADER = new InjectionToken<ContentLoader>('CONTENT_LOADER'
 
 export function browserContentLoader(): ContentLoader {
   const http = inject(HttpClient);
-  // Relative URL: resolved against <base href> ('/notebook/' in production).
+  // Relative URL: resolved against <base href> ('/loom/' in production).
   return (path) => firstValueFrom(http.get<unknown>(`content/${path}`));
 }

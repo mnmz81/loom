@@ -66,8 +66,8 @@ describe('buildSearchIndex (runs pagefind)', () => {
     const dist = makeDist({
       'he/index.html': page('he', 'מחברת'),
       'he/posts/a/index.html': page('he', 'סיגנלים'),
-      'en/index.html': page('en', 'notebook'),
-      'index.html': '<html><head><meta http-equiv="refresh" content="0; url=/notebook/he"></head></html>',
+      'en/index.html': page('en', 'loom'),
+      'index.html': '<html><head><meta http-equiv="refresh" content="0; url=/loom/he"></head></html>',
     });
     const result = await buildSearchIndex(dist);
     expect(result.counts).toEqual({ he: 2, en: 1 });

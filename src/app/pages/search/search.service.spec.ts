@@ -40,17 +40,17 @@ describe('parseExcerpt', () => {
 describe('toRouterPath', () => {
   it('turns a pagefind URL into a router path', () => {
     expect(toRouterPath('/he/posts/x/', '/')).toBe('/he/posts/x');
-    expect(toRouterPath('/en/notes/y', '/notebook/')).toBe('/en/notes/y');
+    expect(toRouterPath('/en/notes/y', '/loom/')).toBe('/en/notes/y');
   });
 
   it('strips the base path when pagefind already prefixed it, plus query and hash', () => {
-    expect(toRouterPath('/notebook/he/posts/x/?pagefind-highlight=a#anchor', '/notebook/')).toBe('/he/posts/x');
-    expect(toRouterPath('/notebook/', '/notebook/')).toBe('/');
-    expect(toRouterPath('https://example.test/notebook/en/', '/notebook/')).toBe('/en');
+    expect(toRouterPath('/loom/he/posts/x/?pagefind-highlight=a#anchor', '/loom/')).toBe('/he/posts/x');
+    expect(toRouterPath('/loom/', '/loom/')).toBe('/');
+    expect(toRouterPath('https://example.test/loom/en/', '/loom/')).toBe('/en');
   });
 
   it('does not strip a base-like prefix of another segment', () => {
-    expect(toRouterPath('/notebooks/x/', '/notebook/')).toBe('/notebooks/x');
+    expect(toRouterPath('/looms/x/', '/loom/')).toBe('/looms/x');
   });
 
   it('adds a leading slash to relative URLs', () => {

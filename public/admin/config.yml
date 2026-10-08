@@ -1,4 +1,4 @@
-# Sveltia CMS config for Notebook — served at https://mnmz81.github.io/notebook/admin/
+# Sveltia CMS config for Loom — served at https://mnmz81.github.io/loom/admin/
 # Mirrors docs/contracts/content-format.md exactly. Setup guide: docs/cms-setup.md
 #
 # ── LAYOUT NOTE (read before changing) ────────────────────────────────────────────
@@ -19,7 +19,7 @@
 
 backend:
   name: github
-  repo: mnmz81/notebook
+  repo: mnmz81/loom
   branch: main
   # No OAuth server on GitHub Pages: sign in with a fine-grained personal access token only.
   auth_methods: [token]
@@ -33,9 +33,9 @@ backend:
 # Every save is a direct commit to main → the deploy workflow publishes it (no PR workflow).
 publish_mode: simple
 
-app_title: Notebook CMS
-site_url: https://mnmz81.github.io/notebook/
-display_url: https://mnmz81.github.io/notebook/
+app_title: Loom CMS
+site_url: https://mnmz81.github.io/loom/
+display_url: https://mnmz81.github.io/loom/
 
 # Global media library. Entry collections below narrow it to public/images/<slug>/.
 media_folder: public/images

@@ -31,7 +31,7 @@ describe('SiteHeader', () => {
   it('renders the Hebrew title and nav links (he)', async () => {
     const { el } = await render('he');
     expect(el.querySelector('.site-header__brand')?.getAttribute('href')).toBe('/he');
-    expect(el.querySelector('.site-header__name')?.textContent?.trim()).toBe('המחברת');
+    expect(el.querySelector('.site-header__name')?.textContent?.trim()).toBe('לום');
     expect(navHrefs(el)).toEqual(['/he', '/he/posts', '/he/notes', '/he/series', '/he/search']);
     expect(el.querySelector('nav')?.getAttribute('aria-label')).toBe('ניווט ראשי');
     expect(el.querySelector('nav a')?.textContent?.trim()).toBe('בית');
@@ -39,7 +39,7 @@ describe('SiteHeader', () => {
 
   it('renders the English title and nav links (en)', async () => {
     const { el } = await render('en');
-    expect(el.querySelector('.site-header__name')?.textContent?.trim()).toBe('Notebook');
+    expect(el.querySelector('.site-header__name')?.textContent?.trim()).toBe('Loom');
     expect(navHrefs(el)).toEqual(['/en', '/en/posts', '/en/notes', '/en/series', '/en/search']);
     expect(el.querySelector('nav')?.getAttribute('aria-label')).toBe('Main navigation');
     expect([...el.querySelectorAll('nav a')].map((a) => a.textContent?.trim())).toEqual([

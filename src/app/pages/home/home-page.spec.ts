@@ -26,7 +26,7 @@ const hrefs = (el: ParentNode, selector: string) =>
 describe('HomePage', () => {
   it('shows the Hebrew site title, description and latest posts/notes (he)', async () => {
     const el = await open('/he');
-    expect(el.querySelector('h1')?.textContent?.trim()).toBe('המחברת');
+    expect(el.querySelector('h1')?.textContent?.trim()).toBe('לום');
     expect(el.querySelector('.page__lead')?.textContent).toContain('פוסטים והערות קצרות');
     const sections = [...el.querySelectorAll('section h2')].map((h) => h.textContent?.trim());
     expect(sections).toEqual(['פוסטים אחרונים', 'הערות אחרונות', 'סדרות']);
@@ -37,7 +37,7 @@ describe('HomePage', () => {
 
   it('links an untranslated entry to its own language and badges it (en)', async () => {
     const el = await open('/en');
-    expect(el.querySelector('h1')?.textContent?.trim()).toBe('Notebook');
+    expect(el.querySelector('h1')?.textContent?.trim()).toBe('Loom');
     // rust-ownership exists only in Hebrew: it is listed in /en but links to /he/...
     const ownership = el.querySelector('a[href="/he/posts/rust-ownership"]');
     expect(ownership?.getAttribute('hreflang')).toBe('he');
@@ -55,9 +55,9 @@ describe('HomePage', () => {
 
   it('sets title, description, canonical and hreflang alternates', async () => {
     await open('/en');
-    expect(TestBed.inject(Title).getTitle()).toBe('Notebook');
+    expect(TestBed.inject(Title).getTitle()).toBe('Loom');
     expect(document.head.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(
-      'https://mnmz81.github.io/notebook/en/',
+      'https://mnmz81.github.io/loom/en/',
     );
     const alt = [...document.head.querySelectorAll('link[rel="alternate"][hreflang]')].map((l) => l.getAttribute('hreflang'));
     expect(alt).toEqual(['he', 'en', 'x-default']);

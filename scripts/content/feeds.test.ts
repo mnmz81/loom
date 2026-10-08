@@ -5,7 +5,7 @@ import { buildRss, buildSitemap, sitemapPages } from './feeds';
 
 const site = {
   url: 'https://example.dev/nb',
-  title: { he: 'המחברת & co', en: 'Notebook & Co' },
+  title: { he: 'המחברת & co', en: 'Loom & Co' },
   description: { he: 'תיאור', en: 'Desc' },
 };
 
@@ -42,7 +42,7 @@ describe('buildRss', () => {
     const xml = buildRss(enIndex, site);
     expect(xml.startsWith('<?xml version="1.0" encoding="UTF-8"?>')).toBe(true);
     expect(xml).toContain('<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">');
-    expect(xml).toContain('<title>Notebook &amp; Co</title>');
+    expect(xml).toContain('<title>Loom &amp; Co</title>');
     expect(xml).toContain('<link>https://example.dev/nb/en/</link>');
     expect(xml).toContain('<description>Desc</description>');
     expect(xml).toContain('<language>en</language>');

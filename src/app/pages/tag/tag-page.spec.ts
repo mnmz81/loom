@@ -29,7 +29,7 @@ describe('TagPage', () => {
       '/he/posts/rust-borrowing',
       '/he/posts/rust-ownership',
     ]);
-    expect(TestBed.inject(Title).getTitle()).toBe('תגית: ראסט · המחברת');
+    expect(TestBed.inject(Title).getTitle()).toBe('תגית: ראסט · לום');
   });
 
   it('uses the singular count and English label (en)', async () => {
@@ -47,10 +47,10 @@ describe('TagPage', () => {
   it('sets canonical and both hreflang alternates', async () => {
     await open('/en/tags/rust');
     expect(document.head.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(
-      'https://mnmz81.github.io/notebook/en/tags/rust/',
+      'https://mnmz81.github.io/loom/en/tags/rust/',
     );
     expect(document.head.querySelector('link[hreflang="he"]')?.getAttribute('href')).toBe(
-      'https://mnmz81.github.io/notebook/he/tags/rust/',
+      'https://mnmz81.github.io/loom/he/tags/rust/',
     );
   });
 });

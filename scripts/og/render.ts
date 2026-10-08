@@ -14,7 +14,7 @@ export interface OgText {
 export interface DefaultOgInput {
   he: OgText | null;   // null → no Hebrew font available, render English only
   en: OgText;
-  footer: string;      // e.g. 'mnmz81.github.io/notebook · Moris Maor Zakay'
+  footer: string;      // e.g. 'mnmz81.github.io/loom · Moris Maor Zakay'
 }
 
 type Node = { type: string; props: Record<string, unknown> & { children?: unknown } };

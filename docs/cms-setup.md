@@ -1,8 +1,8 @@
 # Web CMS (Sveltia CMS)
 
-A browser editor for the content in `content/`, at **https://mnmz81.github.io/notebook/admin/**.
+A browser editor for the content in `content/`, at **https://mnmz81.github.io/loom/admin/**.
 It works on a phone, needs no server, and saves by committing Markdown straight to `main` in
-`mnmz81/notebook`. Files: `public/admin/index.html` (loads Sveltia CMS from a CDN) and
+`mnmz81/loom`. Files: `public/admin/index.html` (loads Sveltia CMS from a CDN) and
 `public/admin/config.yml` (collections that mirror `docs/contracts/content-format.md`).
 
 ## 1. Create a GitHub token (once, then whenever it expires)
@@ -11,8 +11,8 @@ Sign-in uses a **fine-grained personal access token** (there is no OAuth server 
 so the "Sign in with GitHub" button is turned off).
 
 1. Open https://github.com/settings/personal-access-tokens/new
-2. **Token name:** `notebook-cms` · **Expiration:** 90 days (or less) · **Resource owner:** `mnmz81`
-3. **Repository access:** *Only select repositories* → `mnmz81/notebook`
+2. **Token name:** `loom-cms` · **Expiration:** 90 days (or less) · **Resource owner:** `mnmz81`
+3. **Repository access:** *Only select repositories* → `mnmz81/loom`
 4. **Repository permissions:** **Contents → Read and write**. *Metadata → Read* is added
    automatically. Nothing else — no Pull requests, no Workflows, no Administration.
 5. **Generate token** and copy it (it is shown once).
@@ -22,7 +22,7 @@ narrow it to the one repository and Contents read/write before generating.
 
 ## 2. Sign in
 
-1. Open https://mnmz81.github.io/notebook/admin/ (on a phone: *Share → Add to Home Screen*).
+1. Open https://mnmz81.github.io/loom/admin/ (on a phone: *Share → Add to Home Screen*).
 2. **Sign In Using Access Token** → paste the token.
 
 The CMS UI language follows your browser (Sveltia has no Hebrew UI yet, so it shows English);
@@ -74,7 +74,7 @@ Upload from the Hebrew post and reuse the same path in the translation.
 ### Tag labels (`content/tags.yaml`)
 Not editable in the CMS (its map-of-objects shape can't be modelled — see *Open decisions*).
 Edit it in GitHub's web editor, which also works on a phone:
-https://github.com/mnmz81/notebook/edit/main/content/tags.yaml
+https://github.com/mnmz81/loom/edit/main/content/tags.yaml
 
 ### Drafts
 Toggle **Draft** to keep an entry out of the production site. A draft translation counts as

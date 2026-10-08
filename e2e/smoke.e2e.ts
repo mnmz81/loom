@@ -1,11 +1,11 @@
 import { expect, test } from '@playwright/test';
 import { expectNoSeriousA11yViolations } from './axe';
 
-// Paths are relative to baseURL (http://localhost:4321/notebook/).
+// Paths are relative to baseURL (http://localhost:4321/loom/).
 
 test('root redirects to the Hebrew home', async ({ page }) => {
   await page.goto('');
-  await expect(page).toHaveURL(/\/notebook\/he\/?$/);
+  await expect(page).toHaveURL(/\/loom\/he\/?$/);
 });
 
 const LANGS = [

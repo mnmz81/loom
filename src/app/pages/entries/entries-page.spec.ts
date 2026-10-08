@@ -31,7 +31,7 @@ describe('EntriesPage', () => {
       '/he/posts/rust-ownership',
       '/he/posts/angular-signals-basics',
     ]);
-    expect(TestBed.inject(Title).getTitle()).toBe('פוסטים · המחברת');
+    expect(TestBed.inject(Title).getTitle()).toBe('פוסטים · לום');
   });
 
   it('lists only notes on /notes, including an untranslated one linking to its language (he)', async () => {
@@ -45,7 +45,7 @@ describe('EntriesPage', () => {
     const el = await open('/en/posts');
     expect(titles(el)).toContain('/he/posts/rust-ownership');
     expect(el.textContent).toContain('Hebrew only');
-    expect(TestBed.inject(Title).getTitle()).toBe('Posts · Notebook');
+    expect(TestBed.inject(Title).getTitle()).toBe('Posts · Loom');
   });
 
   it('offers tag links with localized labels', async () => {

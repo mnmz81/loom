@@ -14,6 +14,6 @@ export class SiteFooter {
   protected readonly year = new Date().getFullYear();
   protected readonly author = SITE.author;
   protected readonly repo = SITE.repo;
-  /** Static file: relative href so <base href="/notebook/"> applies (not a router link). */
+  /** Static file: relative href so <base href="/loom/"> applies (not a router link). */
   protected readonly rssHref = computed(() => assetPath(PATHS.rss(this.locale.lang())));
 }

@@ -5,7 +5,7 @@ Markdown in `content/` is the source of truth (format: `docs/contracts/content-f
 ## One-time setup
 
 1. **Create an integration:** https://www.notion.so/profile/integrations → New integration (internal) → copy the secret (`ntn_...`).
-2. **Create a database** (full page), e.g. "Notebook", with these properties (names are case-sensitive):
+2. **Create a database** (full page), e.g. "Loom", with these properties (names are case-sensitive):
 
    | Property     | Type         | Required                    | Becomes                              | Notes                                                                                                                                                                                    |
    | ------------ | ------------ | --------------------------- | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

@@ -84,7 +84,7 @@ export function parseExcerpt(html: string): ExcerptPart[] {
 
 /**
  * Pagefind result URL ('/he/posts/x/', possibly already prefixed with the base path) → router path
- * ('/he/posts/x'). `baseHref` is the pathname of <base href>, e.g. '/notebook/'.
+ * ('/he/posts/x'). `baseHref` is the pathname of <base href>, e.g. '/loom/'.
  */
 export function toRouterPath(url: string, baseHref: string): string {
   let path = url.replace(/[?#].*$/, '');

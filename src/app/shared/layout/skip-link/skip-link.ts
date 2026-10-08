@@ -15,7 +15,7 @@ export class SkipLink {
   private readonly document = inject(DOCUMENT);
 
   /**
-   * A bare "#main" href resolves against <base href="/notebook/"> and would leave the page, so the click
+   * A bare "#main" href resolves against <base href="/loom/"> and would leave the page, so the click
    * moves focus itself. tabindex="-1" makes non-interactive targets focusable.
    */
   protected skip(event: Event): void {

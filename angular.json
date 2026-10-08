@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "notebook": {
+    "loom": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -66,7 +66,7 @@
                 "fonts": true
               },
               "outputHashing": "all",
-              "baseHref": "/notebook/"
+              "baseHref": "/loom/"
             },
             "development": {
               "optimization": false,
@@ -80,10 +80,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "notebook:build:production"
+              "buildTarget": "loom:build:production"
             },
             "development": {
-              "buildTarget": "notebook:build:development"
+              "buildTarget": "loom:build:development"
             }
           },
           "defaultConfiguration": "development"

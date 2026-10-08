@@ -29,7 +29,7 @@ describe('SeriesPage', () => {
       '/he/posts/rust-ownership',
       '/he/posts/rust-borrowing',
     ]);
-    expect(TestBed.inject(Title).getTitle()).toBe('לומדים ראסט · המחברת');
+    expect(TestBed.inject(Title).getTitle()).toBe('לומדים ראסט · לום');
   });
 
   it('shows the untranslated part as a fallback card in /en', async () => {

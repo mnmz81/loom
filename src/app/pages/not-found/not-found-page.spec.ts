@@ -32,7 +32,7 @@ describe('NotFoundPage', () => {
     expect(other?.getAttribute('dir')).toBe('ltr');
     expect(other?.querySelector('a')?.getAttribute('href')).toBe('/en');
     expect(other?.textContent).toContain('Page not found');
-    expect(TestBed.inject(Title).getTitle()).toBe('הדף לא נמצא · המחברת');
+    expect(TestBed.inject(Title).getTitle()).toBe('הדף לא נמצא · לום');
   });
 
   it('uses the language of the unknown path and offers Hebrew (en)', async () => {

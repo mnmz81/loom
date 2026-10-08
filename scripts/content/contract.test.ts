@@ -32,7 +32,7 @@ const readJson = (file: string): unknown => JSON.parse(readFileSync(file, 'utf8'
 
 let outDir: string;
 beforeAll(async () => {
-  outDir = join(mkdtempSync(join(tmpdir(), 'notebook-contract-')), 'content');
+  outDir = join(mkdtempSync(join(tmpdir(), 'loom-contract-')), 'content');
   await buildContent({ contentDir: FIXTURE_MD, outDir, includeDrafts: false });
 });
 

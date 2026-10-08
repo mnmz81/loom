@@ -1,11 +1,11 @@
-# Notebook
+# Loom
 
 A personal, bilingual learning blog / knowledge base — long **posts** and short **notes** (TIL) about things I learn, written so I can find them again later.
 
 - Hebrew by default (RTL, `/he/...`), English optional (`/en/...`). Untranslated entries show an "only in X" badge.
 - Full-text search (Pagefind), tags, series, table of contents, related posts, code copy, dark mode, RSS per language.
 - Angular 22, prerendered to static HTML (SSG, zoneless, signals).
-- Live at <https://mnmz81.github.io/notebook/>.
+- Live at <https://mnmz81.github.io/loom/>.
 
 ## Prerequisites
 
@@ -148,7 +148,7 @@ Add `draft: true`. Drafts show up in `npm start` but are excluded from `npm run 
 
 ### Images
 
-Put files in `public/images/<slug>/` and reference them from the site root (no `/notebook/` prefix — it is added automatically):
+Put files in `public/images/<slug>/` and reference them from the site root (no `/loom/` prefix — it is added automatically):
 
 ```markdown
 ![Borrow checker error](/images/rust-borrowing/error.png)
@@ -156,12 +156,12 @@ Put files in `public/images/<slug>/` and reference them from the site root (no `
 
 ## Deploy
 
-A GitHub Actions workflow (`.github/workflows/`) builds the site and deploys it to **GitHub Pages** (Settings → Pages → Source: GitHub Actions). The site is served under the base path **`/notebook/`** (`baseHref: /notebook/`); `/` redirects to `/he/`.
+A GitHub Actions workflow (`.github/workflows/`) builds the site and deploys it to **GitHub Pages** (Settings → Pages → Source: GitHub Actions). The site is served under the base path **`/loom/`** (`baseHref: /loom/`); `/` redirects to `/he/`.
 
 ## Authoring roadmap
 
 1. **Markdown in the repo** — now. Write files in `content/` as described above.
 2. **Notion sync** — write in a Notion database, run `npm run sync:notion` (or the scheduled workflow) to generate the same Markdown files. Setup: `docs/notion-setup.md`.
-3. **Web CMS** — edit in the browser at `/notebook/admin/` (Sveltia CMS, commits to the repo). Setup: `docs/cms-setup.md`.
+3. **Web CMS** — edit in the browser at `/loom/admin/` (Sveltia CMS, commits to the repo). Setup: `docs/cms-setup.md`.
 
 All three produce the same `content/` format, so they can be mixed.

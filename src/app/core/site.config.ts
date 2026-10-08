@@ -3,10 +3,10 @@ import type { Lang } from './content.models';
 
 export const SITE = {
   /** Absolute site URL including the GitHub Pages base path, no trailing slash. */
-  url: 'https://mnmz81.github.io/notebook',
+  url: 'https://mnmz81.github.io/loom',
   /** Must match angular.json production baseHref. */
-  basePath: '/notebook/',
-  title: { he: 'המחברת', en: 'Notebook' } satisfies Record<Lang, string>,
+  basePath: '/loom/',
+  title: { he: 'לום', en: 'Loom' } satisfies Record<Lang, string>,
   description: {
     he: 'פוסטים והערות קצרות על מה שאני לומד — כדי לזכור ולמצוא שוב.',
     en: 'Posts and short notes on what I learn — to remember and find again.',
@@ -14,7 +14,7 @@ export const SITE = {
   author: 'Moris Maor Zakay',
   ogLocale: { he: 'he_IL', en: 'en_US' } satisfies Record<Lang, string>,
   defaultOgImage: '/og/default.png',
-  repo: 'https://github.com/mnmz81/notebook',
+  repo: 'https://github.com/mnmz81/loom',
 } as const;
 
 /**

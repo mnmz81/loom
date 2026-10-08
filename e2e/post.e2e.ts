@@ -39,10 +39,10 @@ test.describe('series navigation', () => {
   test('he: part 2 of 2 has a previous link to part 1 and no next', async ({ page }) => {
     await gotoReady(page, 'he/posts/rust-borrowing');
     const nav = page.getByRole('navigation', { name: new RegExp(SERIES_TITLE.he) });
-    await expect(nav.getByRole('link', { name: SERIES_TITLE.he })).toHaveAttribute('href', /\/notebook\/he\/series\/learning-rust$/);
+    await expect(nav.getByRole('link', { name: SERIES_TITLE.he })).toHaveAttribute('href', /\/loom\/he\/series\/learning-rust$/);
     await expect(nav.getByText(part('he', 2))).toBeVisible();
     const prev = nav.getByRole('link', { name: new RegExp(t('he', 'series.prev')) });
-    await expect(prev).toHaveAttribute('href', /\/notebook\/he\/posts\/rust-ownership$/);
+    await expect(prev).toHaveAttribute('href', /\/loom\/he\/posts\/rust-ownership$/);
     await expect(nav.getByRole('link', { name: new RegExp(t('he', 'series.next')) })).toHaveCount(0);
 
     await prev.click();
@@ -56,7 +56,7 @@ test.describe('series navigation', () => {
     await expect(nav.getByText(part('he', 1))).toBeVisible();
     await expect(nav.getByRole('link', { name: new RegExp(t('he', 'series.prev')) })).toHaveCount(0);
     const next = nav.getByRole('link', { name: new RegExp(t('he', 'series.next')) });
-    await expect(next).toHaveAttribute('href', /\/notebook\/he\/posts\/rust-borrowing$/);
+    await expect(next).toHaveAttribute('href', /\/loom\/he\/posts\/rust-borrowing$/);
     await next.click();
     await expect(page).toHaveURL(/\/he\/posts\/rust-borrowing$/);
   });
@@ -66,7 +66,7 @@ test.describe('series navigation', () => {
     const nav = page.getByRole('navigation', { name: new RegExp(SERIES_TITLE.en) });
     await expect(nav.getByText(part('en', 2))).toBeVisible();
     const prev = nav.getByRole('link', { name: new RegExp(t('en', 'series.prev')) });
-    await expect(prev).toHaveAttribute('href', /\/notebook\/he\/posts\/rust-ownership$/);
+    await expect(prev).toHaveAttribute('href', /\/loom\/he\/posts\/rust-ownership$/);
     await expect(prev).toHaveAttribute('hreflang', 'he');
     await expect(prev.locator('[lang="he"][dir="rtl"]')).toHaveText('ראסט: בעלות (Ownership)');
   });

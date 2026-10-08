@@ -1,7 +1,7 @@
-# Notebook — bilingual (he/en) learning blog
+# Loom — bilingual (he/en) learning blog
 
-Angular 22 SSG (prerendered static HTML, zoneless, signals) deployed to GitHub Pages at `https://mnmz81.github.io/notebook/` (`baseHref: /notebook/`).
-Design + build plan: `docs/superpowers/specs/2026-10-07-notebook-design.md`.
+Angular 22 SSG (prerendered static HTML, zoneless, signals) deployed to GitHub Pages at `https://mnmz81.github.io/loom/` (`baseHref: /loom/`).
+Design + build plan: `docs/superpowers/specs/2026-10-07-loom-design.md`.
 
 ## Run anything with Node 24
 Always prefix commands with `./scripts/with-node.sh` (system Node is 20):
