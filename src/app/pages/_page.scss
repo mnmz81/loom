@@ -1,0 +1,51 @@
+// Shared page chrome: every page component wraps its content in `<div class="container page">`.
+@mixin base {
+  :host {
+    display: block;
+  }
+
+  .page {
+    padding-block: var(--nb-space-7) var(--nb-space-8);
+  }
+
+  .page__header {
+    margin-block-end: var(--nb-space-6);
+  }
+
+  .page__title {
+    margin-block-end: var(--nb-space-2);
+  }
+
+  .page__lead {
+    max-inline-size: var(--nb-prose-max);
+    margin: 0;
+    color: var(--nb-color-muted);
+    font-size: 1.125rem;
+  }
+
+  .page__section {
+    margin-block-start: var(--nb-space-7);
+  }
+
+  .page__section-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--nb-space-3);
+    margin-block-end: var(--nb-space-4);
+
+    > h2 {
+      margin: 0;
+    }
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--nb-space-2);
+    margin: var(--nb-space-4) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+}

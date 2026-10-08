@@ -1,0 +1,23 @@
+<div class="container page">
+  <header class="page__header">
+    <h1 class="page__title">{{ locale.t('series.title') }}</h1>
+  </header>
+
+  @if (cards().length) {
+    <ul class="series-cards">
+      @for (card of cards(); track card.key) {
+        <li class="series-cards__item">
+          <h2 class="series-cards__title">
+            <a [routerLink]="card.path">{{ card.title }}</a>
+          </h2>
+          @if (card.description) {
+            <p class="series-cards__text">{{ card.description }}</p>
+          }
+          <p class="series-cards__meta">{{ card.parts }}</p>
+        </li>
+      }
+    </ul>
+  } @else {
+    <p class="series-cards__empty">{{ locale.t('series.empty') }}</p>
+  }
+</div>

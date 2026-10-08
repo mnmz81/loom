@@ -1,0 +1,44 @@
+<div class="container page">
+  <header class="page__header">
+    <h1 class="page__title">{{ title() }}</h1>
+    <p class="page__lead">{{ description() }}</p>
+  </header>
+
+  <section class="page__section" aria-labelledby="home-posts">
+    <div class="page__section-head">
+      <h2 id="home-posts">{{ locale.t('list.latestPosts') }}</h2>
+      <a [routerLink]="paths.posts(locale.lang())">{{ locale.t('list.all') }}</a>
+    </div>
+    <nb-entry-list [entries]="posts()" [headingLevel]="3" [tagLabels]="tagLabels()" />
+  </section>
+
+  <section class="page__section" aria-labelledby="home-notes">
+    <div class="page__section-head">
+      <h2 id="home-notes">{{ locale.t('list.latestNotes') }}</h2>
+      <a [routerLink]="paths.notes(locale.lang())">{{ locale.t('list.all') }}</a>
+    </div>
+    <nb-entry-list [entries]="notes()" [headingLevel]="3" [tagLabels]="tagLabels()" />
+  </section>
+
+  @if (seriesCards().length) {
+    <section class="page__section" aria-labelledby="home-series">
+      <div class="page__section-head">
+        <h2 id="home-series">{{ locale.t('series.title') }}</h2>
+        <a [routerLink]="paths.seriesList(locale.lang())">{{ locale.t('list.all') }}</a>
+      </div>
+      <ul class="series-teaser">
+        @for (card of seriesCards(); track card.key) {
+          <li class="series-teaser__item">
+            <h3 class="series-teaser__title">
+              <a [routerLink]="paths.series(locale.lang(), card.key)">{{ card.title }}</a>
+            </h3>
+            @if (card.description) {
+              <p class="series-teaser__text">{{ card.description }}</p>
+            }
+            <p class="series-teaser__meta">{{ card.parts }}</p>
+          </li>
+        }
+      </ul>
+    </section>
+  }
+</div>

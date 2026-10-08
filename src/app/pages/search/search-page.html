@@ -1,0 +1,83 @@
+<div class="container page">
+  <header class="page__header">
+    <h1 class="page__title">{{ locale.t('search.title') }}</h1>
+  </header>
+
+  <form class="search__form" role="search" (submit)="$event.preventDefault()">
+    <label class="visually-hidden" for="search-input">{{ text('search.label') }}</label>
+    <input
+      id="search-input"
+      class="search__input"
+      type="search"
+      autocomplete="off"
+      enterkeyhint="search"
+      [value]="query()"
+      [placeholder]="locale.t('search.placeholder')"
+      (input)="onInput($event)"
+    />
+
+    <div class="search__filters">
+      <div class="search__filter">
+        <label for="search-type">{{ text('search.type') }}</label>
+        <select id="search-type" [value]="type()" (change)="onType($event)">
+          <option value="">{{ text('search.typeAll') }}</option>
+          @for (option of typeOptions(); track option.value) {
+            <option [value]="option.value" [selected]="type() === option.value">{{ option.label }}</option>
+          }
+        </select>
+      </div>
+      <div class="search__filter">
+        <label for="search-tag">{{ text('search.tag') }}</label>
+        <select id="search-tag" [value]="tag()" (change)="onTag($event)">
+          <option value="">{{ text('search.tagAll') }}</option>
+          @for (t of index().tags; track t.tag) {
+            <option [value]="t.tag" [selected]="tag() === t.tag">{{ t.label }}</option>
+          }
+        </select>
+      </div>
+    </div>
+  </form>
+
+  <p class="search__status" role="status" aria-live="polite" [class.search__status--error]="status() === 'error'">
+    {{ liveMessage() }}
+  </p>
+
+  @if (status() === 'idle') {
+    <p class="search__hint">{{ hint() }}</p>
+  }
+
+  @if (hits().length) {
+    <ol class="results" [attr.aria-busy]="status() === 'loading'">
+      @for (hit of hits(); track hit.path) {
+        <li class="result">
+          <p class="result__meta">
+            @if (hit.type) {
+              <span class="result__type">{{ typeLabel(hit.type) }}</span>
+            }
+          </p>
+          <h2 class="result__title">
+            <a [routerLink]="hit.path">{{ hit.title }}</a>
+          </h2>
+          @if (hit.excerpt.length) {
+            <p class="result__excerpt">
+              @for (part of hit.excerpt; track $index) {
+                @if (part.mark) {
+                  <mark>{{ part.text }}</mark>
+                } @else {
+                  {{ part.text }}
+                }
+              }
+            </p>
+          }
+          @if (hit.tags.length) {
+            <ul class="result__tags" [attr.aria-label]="locale.t('entry.tags')">
+              @for (tagKey of hit.tags; track tagKey) {
+                <li>{{ tagLabels()[tagKey] ?? tagKey }}</li>
+              }
+            </ul>
+          }
+        </li>
+      }
+    </ol>
+  }
+</div>

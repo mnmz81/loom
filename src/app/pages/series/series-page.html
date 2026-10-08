@@ -1,0 +1,22 @@
+<div class="container page">
+  <header class="page__header">
+    <h1 class="page__title">{{ title() }}</h1>
+    @if (description()) {
+      <p class="page__lead">{{ description() }}</p>
+    }
+    <p class="series__count">{{ count() }}</p>
+  </header>
+
+  @if (parts().length) {
+    <ol class="series__parts">
+      @for (part of parts(); track part.entry.slug) {
+        <li class="series__part">
+          <span class="series__part-label">{{ part.label }}</span>
+          <nb-entry-card [entry]="part.entry" [headingLevel]="2" [tagLabels]="tagLabels()" />
+        </li>
+      }
+    </ol>
+  } @else {
+    <p class="series__empty">{{ locale.t('list.empty') }}</p>
+  }
+</div>

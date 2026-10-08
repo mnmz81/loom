@@ -1,0 +1,71 @@
+:host {
+  display: block;
+}
+
+.entry {
+  display: block;
+  padding-block: var(--nb-space-7) var(--nb-space-8);
+}
+
+.entry__header {
+  max-inline-size: var(--nb-prose-max);
+  margin-block-end: var(--nb-space-6);
+}
+
+.entry__type {
+  margin-block-end: var(--nb-space-2);
+  color: var(--nb-color-accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.entry__title {
+  margin-block-end: var(--nb-space-3);
+}
+
+.entry__summary {
+  color: var(--nb-color-muted);
+  font-size: 1.15rem;
+}
+
+.entry__series {
+  display: block;
+  max-inline-size: var(--nb-prose-max);
+  margin-block-end: var(--nb-space-6);
+}
+
+.entry__layout {
+  display: grid;
+  gap: var(--nb-space-5) var(--nb-space-7);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.entry__main {
+  min-inline-size: 0;
+  max-inline-size: var(--nb-prose-max);
+}
+
+// Wide screens: body on the reading side, sticky table of contents beside it.
+@media (min-width: 64rem) {
+  .entry__layout {
+    grid-template-columns: minmax(0, var(--nb-prose-max)) 15rem;
+  }
+
+  .entry__aside {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .entry__aside > * {
+    position: sticky;
+    inset-block-start: calc(var(--nb-header-height) + var(--nb-space-4));
+  }
+}
+
+.entry__related {
+  display: block;
+  max-inline-size: var(--nb-prose-max);
+  margin-block-start: var(--nb-space-7);
+}

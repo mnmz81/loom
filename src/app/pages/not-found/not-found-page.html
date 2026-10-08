@@ -1,0 +1,10 @@
+<div class="container not-found">
+  <p class="not-found__code" aria-hidden="true">404</p>
+  <h1>{{ locale.t('notFound.title') }}</h1>
+  <p>{{ locale.t('notFound.body') }}</p>
+  <a class="not-found__home" [routerLink]="paths.home(locale.lang())">{{ locale.t('notFound.home') }}</a>
+
+  <p class="not-found__other" [attr.lang]="other().lang" [attr.dir]="other().lang === 'he' ? 'rtl' : 'ltr'">
+    <a [routerLink]="other().path" [attr.hreflang]="other().lang">{{ other().title }} — {{ other().home }}</a>
+  </p>
+</div>

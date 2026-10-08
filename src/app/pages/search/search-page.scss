@@ -1,0 +1,116 @@
+@use '../page';
+
+@include page.base;
+
+.search__form {
+  display: grid;
+  gap: var(--nb-space-4);
+  max-inline-size: var(--nb-prose-max);
+}
+
+.search__input,
+.search__filter select {
+  inline-size: 100%;
+  min-block-size: var(--nb-touch-target);
+  padding-inline: var(--nb-space-4);
+  border: 1px solid var(--nb-color-border);
+  border-radius: var(--nb-radius-md);
+  background: var(--nb-color-surface);
+  color: var(--nb-color-text);
+  font: inherit;
+}
+
+.search__input {
+  font-size: 1.125rem;
+}
+
+.search__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--nb-space-4);
+}
+
+.search__filter {
+  display: grid;
+  flex: 1 1 10rem;
+  gap: var(--nb-space-1);
+
+  label {
+    color: var(--nb-color-muted);
+    font-size: 0.875rem;
+  }
+}
+
+.search__status {
+  min-block-size: 1.5em;
+  margin-block: var(--nb-space-4);
+  color: var(--nb-color-muted);
+
+  &--error {
+    color: #b91c1c;
+  }
+}
+
+:host-context([data-theme='dark']) .search__status--error {
+  color: #fca5a5;
+}
+
+.search__hint {
+  color: var(--nb-color-muted);
+}
+
+.results {
+  display: grid;
+  gap: var(--nb-space-5);
+  max-inline-size: var(--nb-prose-max);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.result {
+  padding: var(--nb-space-4) var(--nb-space-5);
+  border: 1px solid var(--nb-color-border);
+  border-radius: var(--nb-radius-lg);
+  background: var(--nb-color-surface);
+}
+
+.result__meta {
+  margin-block-end: var(--nb-space-1);
+  color: var(--nb-color-muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+
+  &:empty {
+    display: none;
+  }
+}
+
+.result__title {
+  margin-block-end: var(--nb-space-2);
+  font-size: 1.25rem;
+}
+
+.result__excerpt {
+  margin-block-end: var(--nb-space-2);
+}
+
+.result__excerpt mark {
+  padding-inline: 0.15em;
+  border-radius: 3px;
+  background: var(--nb-color-badge-bg);
+  color: var(--nb-color-badge-text);
+}
+
+.result__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--nb-space-2);
+  margin: 0;
+  padding: 0;
+  color: var(--nb-color-muted);
+  font-size: 0.85rem;
+  list-style: none;
+}

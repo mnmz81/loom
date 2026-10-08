@@ -1,0 +1,16 @@
+<div class="container page">
+  <header class="page__header">
+    <h1 class="page__title">{{ title() }}</h1>
+    @if (index().tags.length) {
+      <ul class="chips" [attr.aria-label]="locale.t('entry.tags')">
+        @for (tag of index().tags; track tag.tag) {
+          <li>
+            <a class="chip" [routerLink]="tagPath(tag.tag)">{{ tag.label }}</a>
+          </li>
+        }
+      </ul>
+    }
+  </header>
+
+  <nb-entry-list [entries]="entries()" [tagLabels]="tagLabels()" />
+</div>
