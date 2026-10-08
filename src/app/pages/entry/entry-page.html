@@ -1,0 +1,32 @@
+<article class="container entry">
+  <header class="entry__header">
+    <p class="entry__type">{{ typeLabel() }}</p>
+    <h1 class="entry__title" data-pagefind-meta="title">{{ entry().title }}</h1>
+    @if (entry().summary; as summary) {
+      <p class="entry__summary">{{ summary }}</p>
+    }
+    <nb-entry-meta [entry]="entry()" />
+    <nb-tag-list [tags]="entry().tags" [labels]="tagLabels()" />
+    <!-- Pagefind filters/meta (search page filters by type and tag). -->
+    <span hidden data-pagefind-filter="type[data-value]" [attr.data-value]="entry().type"></span>
+    @for (tag of entry().tags; track tag) {
+      <span hidden data-pagefind-filter="tag[data-value]" [attr.data-value]="tag"></span>
+    }
+    <span hidden data-pagefind-meta="date[data-value]" [attr.data-value]="entry().date"></span>
+  </header>
+
+  @if (entry().seriesNav; as seriesNav) {
+    <nb-series-nav class="entry__series" [nav]="seriesNav" />
+  }
+
+  <div class="entry__layout">
+    <aside class="entry__aside">
+      <nb-toc [items]="entry().toc" />
+    </aside>
+    <div class="entry__main">
+      <nb-article-body [html]="entry().html" />
+    </div>
+  </div>
+
+  <nb-related-list class="entry__related" [items]="entry().related" />
+</article>

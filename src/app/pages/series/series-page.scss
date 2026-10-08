@@ -1,0 +1,40 @@
+@use '../page';
+
+@include page.base;
+
+.series__count {
+  margin: var(--nb-space-2) 0 0;
+  color: var(--nb-color-muted);
+  font-size: 0.875rem;
+}
+
+.series__parts {
+  display: grid;
+  gap: var(--nb-space-5);
+  max-inline-size: var(--nb-prose-max);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.series__part {
+  display: grid;
+  gap: var(--nb-space-2);
+}
+
+.series__part-label {
+  color: var(--nb-color-muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.series__empty {
+  margin: 0;
+  padding: var(--nb-space-6) var(--nb-space-5);
+  border: 1px dashed var(--nb-color-border);
+  border-radius: var(--nb-radius-lg);
+  color: var(--nb-color-muted);
+  text-align: center;
+}

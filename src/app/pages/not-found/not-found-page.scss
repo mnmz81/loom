@@ -1,0 +1,36 @@
+:host {
+  display: block;
+}
+
+.not-found {
+  padding-block: var(--nb-space-8);
+  text-align: center;
+}
+
+.not-found__code {
+  margin-block-end: var(--nb-space-2);
+  background: var(--nb-gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: clamp(4rem, 12vw, 8rem);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.not-found__home {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: var(--nb-touch-target);
+  padding-inline: var(--nb-space-5);
+  border-radius: var(--nb-radius-full);
+  background: var(--nb-color-accent);
+  color: var(--nb-color-accent-contrast);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.not-found__other {
+  margin-block-start: var(--nb-space-6);
+  font-size: 0.95rem;
+}

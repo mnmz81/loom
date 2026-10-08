@@ -1,0 +1,8 @@
+<div class="container page">
+  <header class="page__header">
+    <h1 class="page__title">{{ title() }}</h1>
+    <p class="page__lead">{{ count() }}</p>
+  </header>
+
+  <nb-entry-list [entries]="entries()" [tagLabels]="tagLabels()" />
+</div>
