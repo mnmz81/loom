@@ -77,3 +77,10 @@ Full build, Playwright e2e + axe (below), fix-ups, then confirm with user before
   - search finds seed note text in he and en indexes
   - axe clean on home/post/search both langs; dark mode toggle
 - Built-in browser check at mobile width: RTL layout, no horizontal scroll.
+
+## Progress (updated 2026-10-08)
+- [x] Wave 0 — contracts, scaffold, Mushilu RTL issue (#584)
+- [x] Wave 1 — A pipeline, B services, C components, D tooling, E seed+docs, F Notion, G CMS (merged on `main`; 121 unit + 167 script tests green)
+- [ ] Wave 2 — pages, routes, prerender params, layout shell, search page
+- [ ] Wave 3 — full build, Playwright e2e + axe, mobile RTL check
+- [ ] Publish — create `mnmz81/notebook` repo, enable Pages (needs user confirmation)
