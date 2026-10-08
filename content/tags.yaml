@@ -2,3 +2,6 @@
 rust: { he: ראסט, en: Rust }
 angular: { he: אנגולר, en: Angular }
 git: { he: git, en: git }
+claude-code: { he: Claude Code, en: Claude Code }
+cli: { he: שורת פקודה, en: CLI }
+cheatsheet: { he: דף עזר, en: Cheat sheet }
