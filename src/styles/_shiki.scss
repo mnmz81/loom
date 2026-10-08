@@ -1,6 +1,8 @@
 // Shiki dual themes. The content pipeline renders with `defaultColor: false`, so every token carries
 // --shiki-light / --shiki-dark (and <pre class="shiki"> carries --shiki-light-bg / --shiki-dark-bg).
-.shiki {
+// Doubled class: must beat the prose `pre` background (.prose pre), otherwise Shiki's light token colors
+// are drawn on --nb-color-surface-2 and fail WCAG AA contrast (e.g. #D73A49 on #f1f5f9 = 4.17).
+.shiki.shiki {
   background-color: var(--shiki-light-bg, var(--nb-color-surface-2));
 }
 
@@ -12,7 +14,7 @@
 }
 
 @mixin shiki-dark {
-  .shiki {
+  .shiki.shiki {
     background-color: var(--shiki-dark-bg, var(--nb-color-surface-2));
   }
 
@@ -21,6 +23,11 @@
     font-style: var(--shiki-dark-font-style, inherit);
     font-weight: var(--shiki-dark-font-weight, inherit);
     text-decoration: var(--shiki-dark-text-decoration, inherit);
+  }
+
+  // github-dark comments (#6A737D) are 3.04:1 on #24292e; lift them to >= 4.5:1.
+  .shiki span[style*='--shiki-dark:#6A737D'] {
+    color: #959da5;
   }
 }
 
