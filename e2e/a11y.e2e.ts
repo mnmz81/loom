@@ -6,6 +6,7 @@ import { gotoReady, LANGS, type Lang } from './helpers';
 const PAGES: [string, string][] = [
   ['home', ''],
   ['post', 'posts/rust-borrowing'],
+  ['long post (commands)', 'posts/claude-code-commands'],
   ['note', 'notes/git-undo-last-commit'],
   ['series', 'series/learning-rust'],
   ['tag', 'tags/rust'],
