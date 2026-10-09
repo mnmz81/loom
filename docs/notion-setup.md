@@ -24,7 +24,9 @@ Markdown in `content/` is the source of truth (format: `docs/contracts/content-f
 
    There is no `draft` property: anything not `Published` simply isn't synced.
 
-3. **Connect the integration:** open the database → `•••` → Connections → add your integration.
+3. **Connect the integration to the database only:** open the database → `•••` → Connections → add your integration. Do not connect it to a parent page or to the whole workspace. A Notion integration can only read what it is connected to, and the sync reads only this one data source, so nothing else in your workspace can ever reach the site.
+
+   In this project the database ("פוסטים לסנכרון") lives inside the "בבלוג (פורסם)" page. The Status property has to use the option names `Draft` and `Published` (Notion creates it with default names, so rename them once in the Notion UI).
 4. **Copy the data source ID:** database `•••` → Manage data sources → copy the data source ID.
 5. **Local:** `cp .env.example .env` and fill both values (`.env` is git-ignored).
 6. **GitHub:** repo → Settings → Secrets and variables → Actions → add `NOTION_TOKEN` and `NOTION_DATA_SOURCE_ID`. Then Settings → Actions → General → enable "Allow GitHub Actions to create and approve pull requests".
