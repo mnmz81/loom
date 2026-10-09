@@ -56,3 +56,6 @@ Thumbs.db
 /public/og/
 # agent worktrees
 /.claude/worktrees/
+
+# Merged content used by build:e2e
+/.e2e-content

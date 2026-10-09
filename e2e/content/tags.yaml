@@ -1,0 +1,3 @@
+# Labels for the tags used only by the e2e sample entries.
+rust: { he: ראסט, en: Rust }
+angular: { he: אנגולר, en: Angular }

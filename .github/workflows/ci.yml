@@ -48,6 +48,13 @@ jobs:
       - name: Install Playwright browser
         run: npx playwright install --with-deps chromium
 
+      # e2e runs against the blog content plus the sample entries in e2e/content (translations,
+      # a series, an English-only note...), so every UI path has something to test.
+      - name: Build with e2e sample content
+        run: npm run build:e2e
+        env:
+          OG_REQUIRE_HEBREW: '1'
+
       - name: E2E
         run: npm run e2e
         env:

@@ -26,7 +26,8 @@ Prefix each with `./scripts/with-node.sh`.
 | `npm run build` | Content → OG images → `ng build` → postbuild (Pagefind, 404) into `dist/` |
 | `npm test` | Angular unit tests (vitest) |
 | `npm run test:scripts` | Node script tests (`scripts/**/*.test.ts`) |
-| `npm run e2e` | Playwright + axe end-to-end tests — run `npm run build` first |
+| `npm run build:e2e` | Build with the sample entries from `e2e/content` added (test data, never published) |
+| `npm run e2e` | Playwright + axe end-to-end tests — run `npm run build:e2e` first |
 | `npm run sync:notion` | Pull pages from Notion into `content/` (see `docs/notion-setup.md`) |
 
 ## Writing guide

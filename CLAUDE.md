@@ -9,7 +9,11 @@ Always prefix commands with `./scripts/with-node.sh` (system Node is 20):
 ./scripts/with-node.sh npm test              # Angular unit tests (vitest)
 ./scripts/with-node.sh npm run test:scripts  # Node script tests (scripts/**/*.test.ts)
 ./scripts/with-node.sh npm run build         # content → OG → ng build → postbuild
+./scripts/with-node.sh npm run build:e2e     # same, plus the sample entries in e2e/content (needed before npm run e2e)
+./scripts/with-node.sh npm run e2e           # Playwright against dist/ (run build:e2e first)
 ```
+
+`content/` holds only real blog posts. Test-only sample entries (a series, an English-only note, a Hebrew-only post) live in `e2e/content/` and are merged in by `build:e2e`; never publish them.
 
 ## Contracts (do not change without updating every consumer)
 - `src/app/core/content.models.ts` — JSON shape between pipeline and app

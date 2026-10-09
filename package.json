@@ -10,6 +10,7 @@
     "postbuild": "tsx scripts/postbuild.ts",
     "test": "ng test --watch=false",
     "test:scripts": "vitest run --config vitest.scripts.config.ts",
+    "build:e2e": "./scripts/build-e2e.sh",
     "e2e": "playwright test",
     "serve:dist": "./scripts/serve-dist.sh",
     "sync:notion": "tsx scripts/sync-notion.ts"

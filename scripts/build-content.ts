@@ -1,6 +1,7 @@
 // Builds public/content/**, public/rss-he.xml, public/rss-en.xml and public/sitemap.xml from content/**.
 // Usage: npm run content                    (published only)
 //        INCLUDE_DRAFTS=1 npm run content   (drafts included, for local preview)
+//        CONTENT_DIR=other npm run content  (read Markdown from another folder; used by build:e2e)
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { LANGS } from '../src/app/core/content.models';
 import { PATHS } from '../src/app/core/routes.const';
@@ -10,7 +11,8 @@ import { buildRss, buildSitemap, sitemapPages } from './content/feeds';
 
 async function main(): Promise<void> {
   const includeDrafts = process.env['INCLUDE_DRAFTS'] === '1';
-  const { indexes, entries, series } = await buildContent({ contentDir: 'content', outDir: 'public/content', includeDrafts });
+  const contentDir = process.env['CONTENT_DIR'] ?? 'content';
+  const { indexes, entries, series } = await buildContent({ contentDir, outDir: 'public/content', includeDrafts });
 
   mkdirSync('public', { recursive: true });
   for (const lang of LANGS) writeFileSync(`public${PATHS.rss(lang)}`, buildRss(indexes[lang], SITE));
