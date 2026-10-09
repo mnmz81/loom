@@ -14,9 +14,9 @@ tags: [git, cli, cheatsheet]
 - `git config --global user.name "Name"` קובעת שם, ו-`git config --global user.email "you@example.com"` קובעת אימייל.
 - `git config --global init.defaultBranch main` גורמת לריפו חדש להתחיל על `main`.
 - `git config --global push.autoSetupRemote true` גורמת ל-`git push` הראשון של ענף חדש להגדיר את ה-upstream לבד.
-- `git config --global pull.rebase true` גורמת ל-`git pull` לעשות rebase במקום ליצור commit של מיזוג. `pull.ff = only` מחמירה יותר: היא מסרבת לכל מה שאינו fast-forward.
+- `git config --global pull.rebase true` גורמת ל-`git pull` לעשות rebase במקום ליצור commit של מיזוג. המדריך הרשמי עצמו מכנה את זה פעולה שעלולה להיות מסוכנת, כי rebase משכתב את ה-commits המקומיים. `git config --global pull.ff only` מחמירה יותר: היא מסרבת לכל מה שאינו fast-forward.
 - `git config --global core.editor "code --wait"` בוחרת את העורך להודעות commit.
-- `git config --list` מציגה את כל ההגדרות, ו-`git config --global alias.co checkout` יוצרת קיצור (`git co`).
+- `git config --list` מציגה את כל ההגדרות, ו-`git config --global alias.co checkout` יוצרת קיצור (`git co`). מאז Git 2.46 המדריך הרשמי מעדיף את הצורות `git config list`, `git config get <שם>` ו-`git config set <שם> <ערך>`; הצורות הישנות שלמעלה עדיין עובדות.
 - `git help <פקודה>` פותחת את המדריך של הפקודה.
 
 ## התחלה ושכפול

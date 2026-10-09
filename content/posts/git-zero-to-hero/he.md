@@ -39,6 +39,8 @@ git config --global push.autoSetupRemote true
 
 Git שומר הגדרות בשלוש רמות: `--system` לכל המחשב, `--global` למשתמש שלך (הקובץ `~/.gitconfig`), ו-`--local` לריפו אחד (`.git/config`). הרמה הספציפית ביותר מנצחת, ולכן אפשר להשתמש באימייל של העבודה בפרויקט אחד ובאימייל פרטי בכל השאר. `git config --list --show-origin` מדפיסה כל הגדרה ואת הקובץ שממנו היא באה.
 
+הערה על התחביר: מאז Git 2.46 המדריך הרשמי מעדיף תתי-פקודות (`git config set --global user.name "Dana Levi"`, `git config get user.name`, `git config list`) ומסמן את הצורות הישנות שבהן השתמשנו כמיושנות (deprecated). הצורות הישנות עדיין עובדות בכל מקום, והן אלה שרוב המדריכים והמחשבים הישנים משתמשים בהן.
+
 ## הריפו הראשון
 
 הדוגמה שלנו היא ספר מתכונים. ניצור תיקייה ונתחיל בה ריפו:
@@ -95,10 +97,16 @@ git status
 ```
 
 ```text
+On branch main
+
+No commits yet
+
 Changes to be committed:
-  (use "git restore --staged <file>..." to unstage)
+  (use "git rm --cached <file>..." to unstage)
 	new file:   pasta.md
 ```
+
+לפני שקיים ה-commit הראשון, Git מציעה `git rm --cached` להוצאה מה-staging. כשכבר יש היסטוריה היא מציעה `git restore --staged`, וזו הפקודה שנשתמש בה מעכשיו.
 
 ```bash
 git commit -m "Add pasta recipe"
@@ -118,6 +126,8 @@ git diff
 ```
 
 ```text
+diff --git a/pasta.md b/pasta.md
+index 9501cd5..54af23a 100644
 --- a/pasta.md
 +++ b/pasta.md
 @@ -1,2 +1,3 @@
@@ -151,6 +161,8 @@ Git מסווג כל קובץ בפרויקט לאחד מארבעה מצבים, ו
 פלט של `git diff` נראה מוזר פעם אחת, ואחר כך כבר לא:
 
 ```text
+diff --git a/pasta.md b/pasta.md
+index 54af23a..e1f3b27 100644
 --- a/pasta.md
 +++ b/pasta.md
 @@ -1,3 +1,3 @@
@@ -160,6 +172,7 @@ Git מסווג כל קובץ בפרויקט לאחד מארבעה מצבים, ו
  Add salt to the water.
 ```
 
+- `diff --git a/... b/...` נותנת שם לקובץ, ו-`index 54af23a..e1f3b27 100644` מכילה hash קצר של התוכן הישן והחדש ואת מצב הקובץ. אפשר להתעלם משורה זו.
 - `--- a/...` ו-`+++ b/...` הן הגרסה הישנה והחדשה של הקובץ.
 - `@@ -1,3 +1,3 @@` אומרת: הקטע הזה (*hunk*) מכסה שלוש שורות החל משורה 1 בקובץ הישן, ושלוש שורות החל משורה 1 בחדש.
 - שורות שמתחילות ב-`-` הוסרו, שורות שמתחילות ב-`+` נוספו, ושורות שמתחילות ברווח הן הקשר שלא השתנה.
@@ -253,7 +266,7 @@ Add salt to pasta
 
 כך ש-`git diff HEAD~2 HEAD` משווה בין עכשיו לבין לפני שני commits, ו-`git show main~1` מציגה את ה-commit שלפני הקצה של `main`.
 
-**Detached HEAD.** בדרך כלל HEAD מצביע על *ענף*, והענף מצביע על commit. אם עוברים ישירות ל-commit, למשל עם `git switch --detach 3f2a1b9`, HEAD מצביע ישר על ה-commit. Git מזהיר שאנחנו במצב "detached HEAD". זה מקום מצוין להסתכל סביב, אבל commits שנעשים שם לא שייכים לאף ענף וקל לאבד אותם. כדי לשמור אותם, שמים עליהם ענף עם `git switch -c keep-this`. כדי לצאת, `git switch main`.
+**Detached HEAD.** בדרך כלל HEAD מצביע על *ענף*, והענף מצביע על commit. אם עוברים ישירות ל-commit, למשל עם `git switch --detach 3f2a1b9`, HEAD מצביע ישר על ה-commit. Git עונה `HEAD is now at 3f2a1b9 ...`, ובפקודה הישנה `git checkout <commit>` הוא מוסיף הודעה ארוכה על מצב "detached HEAD". זה מקום מצוין להסתכל סביב, אבל commits שנעשים שם לא שייכים לאף ענף וקל לאבד אותם. כדי לשמור אותם, שמים עליהם ענף עם `git switch -c keep-this`. כדי לצאת, `git switch main`.
 
 ## ביטול טעויות
 
@@ -461,12 +474,12 @@ git rebase main
 git rebase -i HEAD~3
 ```
 
-Git פותחת בעורך רשימה, מהישן לחדש:
+Git פותחת בעורך רשימה, מהישן לחדש. (בגרסאות ישנות ההודעה מופיעה בלי ה-`#`, ושתי הצורות עובדות.)
 
 ```text
-pick 3f2a1b9 Add pasta recipe
-pick 9c1d4e2 Add salt to pasta
-pick b7e3f10 Fix typo in salt step
+pick 3f2a1b9 # Add pasta recipe
+pick 9c1d4e2 # Add salt to pasta
+pick b7e3f10 # Fix typo in salt step
 ```
 
 משנים את המילה בתחילת שורה כדי להגיד מה לעשות עם אותו commit, ואז שומרים וסוגרים:
@@ -480,7 +493,7 @@ pick b7e3f10 Fix typo in salt step
 | `drop` | מוחקת את ה-commit |
 | `edit` | עוצרת כדי שנוכל לשנות את תוכן ה-commit |
 
-כאן, שינוי השורה האחרונה ל-`fixup b7e3f10 Fix typo in salt step` ממזג את תיקון הכתיב לתוך "Add salt to pasta", ונשארים שני commits נקיים. אפשר גם לסדר מחדש commits על ידי הזזת שורות. אם משהו משתבש, `git rebase --abort` מחזירה הכול למצב שהיה. ונזכור את הכלל: עושים את זה רק ל-commits שאף אחד אחר עוד לא משך.
+כאן, שינוי `pick` ל-`fixup` בשורה האחרונה ממזג את תיקון הכתיב לתוך "Add salt to pasta", ונשארים שני commits נקיים. אפשר גם לסדר מחדש commits על ידי הזזת שורות. אם משהו משתבש, `git rebase --abort` מחזירה הכול למצב שהיה. ונזכור את הכלל: עושים את זה רק ל-commits שאף אחד אחר עוד לא משך.
 
 ## עבודה עם GitHub
 

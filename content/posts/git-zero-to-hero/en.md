@@ -39,6 +39,8 @@ The last two make new repos start on `main` and make your first `git push` of a 
 
 Git keeps settings on three levels: `--system` for the whole machine, `--global` for your user (the file `~/.gitconfig`), and `--local` for a single repository (`.git/config`). The most specific one wins, so you can use a work email in one project and a personal one everywhere else. `git config --list --show-origin` prints every setting and the file it came from.
 
+A note on syntax: since Git 2.46 the manual prefers subcommands (`git config set --global user.name "Dana Levi"`, `git config get user.name`, `git config list`) and marks the older forms used above as deprecated. The older forms still work everywhere, and they're what most tutorials and older machines use.
+
 ## Your first repository
 
 Our running example is a recipe book. Create a folder and start a repository in it:
@@ -95,10 +97,16 @@ git status
 ```
 
 ```text
+On branch main
+
+No commits yet
+
 Changes to be committed:
-  (use "git restore --staged <file>..." to unstage)
+  (use "git rm --cached <file>..." to unstage)
 	new file:   pasta.md
 ```
+
+Before the very first commit exists, Git suggests `git rm --cached` for unstaging. Once there is history, it suggests `git restore --staged`, which is the one you'll use from now on.
 
 ```bash
 git commit -m "Add pasta recipe"
@@ -118,6 +126,8 @@ git diff
 ```
 
 ```text
+diff --git a/pasta.md b/pasta.md
+index 9501cd5..54af23a 100644
 --- a/pasta.md
 +++ b/pasta.md
 @@ -1,2 +1,3 @@
@@ -151,6 +161,8 @@ Git sorts every file in your project into one of four states, and `git status` i
 `git diff` output looks cryptic once, and then never again:
 
 ```text
+diff --git a/pasta.md b/pasta.md
+index 54af23a..e1f3b27 100644
 --- a/pasta.md
 +++ b/pasta.md
 @@ -1,3 +1,3 @@
@@ -160,6 +172,7 @@ Git sorts every file in your project into one of four states, and `git status` i
  Add salt to the water.
 ```
 
+- `diff --git a/... b/...` names the file, and `index 54af23a..e1f3b27 100644` holds short hashes of its old and new content plus the file mode. You can ignore that line.
 - `--- a/...` and `+++ b/...` are the old and new version of the file.
 - `@@ -1,3 +1,3 @@` says: this chunk (a *hunk*) covers three lines starting at line 1 in the old file, and three lines starting at line 1 in the new one.
 - Lines starting with `-` were removed, lines starting with `+` were added, and lines starting with a space are context that didn't change.
@@ -253,7 +266,7 @@ Anywhere Git wants a commit, you can give it any of these:
 
 So `git diff HEAD~2 HEAD` compares now with two commits ago, and `git show main~1` shows the commit before the tip of `main`.
 
-**Detached HEAD.** Normally HEAD points at a *branch*, and the branch points at a commit. If you check out a commit directly, say with `git switch --detach 3f2a1b9`, HEAD points straight at the commit. Git warns you that you're in a "detached HEAD" state. It's a fine place to look around, but commits you make there belong to no branch and are easy to lose. To keep them, put a branch on them with `git switch -c keep-this`. To leave, `git switch main`.
+**Detached HEAD.** Normally HEAD points at a *branch*, and the branch points at a commit. If you check out a commit directly, say with `git switch --detach 3f2a1b9`, HEAD points straight at the commit. Git answers `HEAD is now at 3f2a1b9 ...`, and with the older `git checkout <commit>` it adds a long note about the "detached HEAD" state. It's a fine place to look around, but commits you make there belong to no branch and are easy to lose. To keep them, put a branch on them with `git switch -c keep-this`. To leave, `git switch main`.
 
 ## Undoing mistakes
 
@@ -461,12 +474,12 @@ Before sharing a branch, you can tidy its private history with `git rebase -i`. 
 git rebase -i HEAD~3
 ```
 
-Git opens a list in your editor, oldest first:
+Git opens a list in your editor, oldest first. (Older versions print the message without the `#`, and both work.)
 
 ```text
-pick 3f2a1b9 Add pasta recipe
-pick 9c1d4e2 Add salt to pasta
-pick b7e3f10 Fix typo in salt step
+pick 3f2a1b9 # Add pasta recipe
+pick 9c1d4e2 # Add salt to pasta
+pick b7e3f10 # Fix typo in salt step
 ```
 
 Change the word at the start of a line to say what should happen to that commit, then save and close:
@@ -480,7 +493,7 @@ Change the word at the start of a line to say what should happen to that commit,
 | `drop` | delete the commit |
 | `edit` | stop so you can change the commit's content |
 
-Here, changing the last line to `fixup b7e3f10 Fix typo in salt step` merges the typo fix into "Add salt to pasta", leaving two clean commits. You can also reorder commits by moving lines. If it goes wrong, `git rebase --abort` returns everything to how it was. And remember the rule: only do this to commits that nobody else has pulled yet.
+Here, changing `pick` to `fixup` on the last line merges the typo fix into "Add salt to pasta", leaving two clean commits. You can also reorder commits by moving lines. If it goes wrong, `git rebase --abort` returns everything to how it was. And remember the rule: only do this to commits that nobody else has pulled yet.
 
 ## Working with GitHub
 

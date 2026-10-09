@@ -14,9 +14,9 @@ If you're new to Git, start with [Git from zero to hero](en/posts/git-zero-to-he
 - `git config --global user.name "Name"` sets your name, and `git config --global user.email "you@example.com"` sets your email.
 - `git config --global init.defaultBranch main` makes new repos start on `main`.
 - `git config --global push.autoSetupRemote true` makes the first `git push` of a new branch set the upstream for you.
-- `git config --global pull.rebase true` makes `git pull` rebase instead of creating merge commits. `pull.ff = only` is the stricter choice: it refuses anything that isn't a fast-forward.
+- `git config --global pull.rebase true` makes `git pull` rebase instead of creating merge commits. The manual itself calls this possibly dangerous, since rebasing rewrites your local commits. `git config --global pull.ff only` is the stricter choice: it refuses anything that isn't a fast-forward.
 - `git config --global core.editor "code --wait"` picks the editor for commit messages.
-- `git config --list` shows everything, and `git config --global alias.co checkout` makes a shortcut (`git co`).
+- `git config --list` shows everything, and `git config --global alias.co checkout` makes a shortcut (`git co`). Since Git 2.46 the manual prefers the subcommand forms `git config list`, `git config get <name>` and `git config set <name> <value>`; the older forms above still work.
 - `git help <command>` opens the manual for a command.
 
 ## Starting and cloning
