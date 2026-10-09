@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="300" viewBox="0 0 760 300" role="img" aria-labelledby="t d">
+<title id="t">The GitHub flow</title>
+<desc id="d">Six steps: create a branch from main, commit and push, open a pull request, review and discuss, merge into main, delete the branch. While reviewing, you push more commits to the same branch and the pull request updates.</desc>
+<defs><marker id="ah-f8fafc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#f8fafc"/></marker><marker id="ah-cbd5e1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#cbd5e1"/></marker><marker id="ah-0f172a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ah-64748b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ah-2563eb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#2563eb"/></marker><marker id="ah-db2777" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ah-16a34a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#16a34a"/></marker><marker id="ah-dc2626" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#dc2626"/></marker><marker id="ah-d97706" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#d97706"/></marker><marker id="ah-94a3b8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#94a3b8"/></marker><marker id="ah-e2e8f0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#e2e8f0"/></marker></defs>
+<rect width="760" height="300" rx="14" fill="#f8fafc" stroke="#cbd5e1"/>
+<rect x="15" y="50" width="105" height="120" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+<circle cx="67.5" cy="78" r="13" fill="#2563eb"/>
+<text x="67.5" y="83" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#ffffff" font-weight="700" text-anchor="middle">1</text>
+<text x="67.5" y="116" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="14" fill="#0f172a" font-weight="700" text-anchor="middle">Create</text>
+<text x="67.5" y="134" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="14" fill="#0f172a" font-weight="700" text-anchor="middle">a branch</text>
+<text x="67.5" y="156" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="11.5" fill="#64748b" font-weight="400" text-anchor="middle">from main</text>
+<rect x="140" y="50" width="105" height="120" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+<circle cx="192.5" cy="78" r="13" fill="#2563eb"/>
+<text x="192.5" y="83" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#ffffff" font-weight="700" text-anchor="middle">2</text>
+<text x="192.5" y="116" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="14" fill="#0f172a" font-weight="700" text-anchor="middle">Commit</text>
+<text x="192.5" y="134" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="14" fill="#0f172a" font-weight="700" text-anchor="middle">and push</text>
+<text x="192.5" y="156" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="11.5" fill="#64748b" font-weight="400" text-anchor="middle">small commits</text>
+<line x1="121" y1="110" x2="136" y2="110" stroke="#94a3b8" stroke-width="2" marker-end="url(#ah-94a3b8)"/>
+<rect x="265" y="50" width="105" height="120" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+<circle cx="317.5" cy="78" r="13" fill="#2563eb"/>
+<text x="317.5" y="83" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#ffffff" font-weight="700" text-anchor="middle">3</text>
+<text x="317.5" y="116" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="14" fill="#0f172a" font-weight="700" text-anchor="middle">Open a</text>
+<text x="317.5" y="134" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="14" fill="#0f172a" font-weight="700" text-anchor="middle">pull request</text>
+<text x="317.5" y="156" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="11.5" fill="#64748b" font-weight="400" text-anchor="middle">draft if unsure</text>
+<line x1="246" y1="110" x2="261" y2="110" stroke="#94a3b8" stroke-width="2" marker-end="url(#ah-94a3b8)"/>
+<rect x="390" y="50" width="105" height="120" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+<circle cx="442.5" cy="78" r="13" fill="#2563eb"/>
+<text x="442.5" y="83" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#ffffff" font-weight="700" text-anchor="middle">4</text>
+<text x="442.5" y="116" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="14" fill="#0f172a" font-weight="700" text-anchor="middle">Review</text>
+<text x="442.5" y="134" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="14" fill="#0f172a" font-weight="700" text-anchor="middle">and discuss</text>
+<text x="442.5" y="156" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="11.5" fill="#64748b" font-weight="400" text-anchor="middle">CI + teammates</text>
+<line x1="371" y1="110" x2="386" y2="110" stroke="#94a3b8" stroke-width="2" marker-end="url(#ah-94a3b8)"/>
+<rect x="515" y="50" width="105" height="120" rx="10" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+<circle cx="567.5" cy="78" r="13" fill="#16a34a"/>
+<text x="567.5" y="83" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#ffffff" font-weight="700" text-anchor="middle">5</text>
+<text x="567.5" y="116" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="14" fill="#0f172a" font-weight="700" text-anchor="middle">Merge</text>
+<text x="567.5" y="134" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="14" fill="#0f172a" font-weight="700" text-anchor="middle">the PR</text>
+<text x="567.5" y="156" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="11.5" fill="#64748b" font-weight="400" text-anchor="middle">into main</text>
+<line x1="496" y1="110" x2="511" y2="110" stroke="#94a3b8" stroke-width="2" marker-end="url(#ah-94a3b8)"/>
+<rect x="640" y="50" width="105" height="120" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+<circle cx="692.5" cy="78" r="13" fill="#2563eb"/>
+<text x="692.5" y="83" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#ffffff" font-weight="700" text-anchor="middle">6</text>
+<text x="692.5" y="116" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="14" fill="#0f172a" font-weight="700" text-anchor="middle">Delete</text>
+<text x="692.5" y="134" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="14" fill="#0f172a" font-weight="700" text-anchor="middle">the branch</text>
+<text x="692.5" y="156" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="11.5" fill="#64748b" font-weight="400" text-anchor="middle">keep it tidy</text>
+<line x1="621" y1="110" x2="636" y2="110" stroke="#94a3b8" stroke-width="2" marker-end="url(#ah-94a3b8)"/>
+<path d="M442.5 172 L442.5 206 L192.5 206 L192.5 174" fill="none" stroke="#d97706" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ah-d97706)"/>
+<text x="317.5" y="226" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="12.5" fill="#d97706" font-weight="400" text-anchor="middle">changes requested? push more commits</text>
+<text x="380" y="272" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#64748b" font-weight="400" text-anchor="middle">main stays working the whole time, because unfinished work lives on a branch</text>
+</svg>
