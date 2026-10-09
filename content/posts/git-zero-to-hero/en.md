@@ -37,6 +37,8 @@ git config --global push.autoSetupRemote true
 
 The last two make new repos start on `main` and make your first `git push` of a branch set things up for you. You only do this once per computer.
 
+Git keeps settings on three levels: `--system` for the whole machine, `--global` for your user (the file `~/.gitconfig`), and `--local` for a single repository (`.git/config`). The most specific one wins, so you can use a work email in one project and a personal one everywhere else. `git config --list --show-origin` prints every setting and the file it came from.
+
 ## Your first repository
 
 Our running example is a recipe book. Create a folder and start a repository in it:
@@ -131,6 +133,62 @@ git commit -m "Add salt to pasta"
 
 Tip: `git add .` stages everything in the current folder, and `git commit -am "message"` stages files Git already knows and commits in one go. Use `git add -p` when you want to pick chunks.
 
+### The life of a file
+
+Git sorts every file in your project into one of four states, and `git status` is how you see them:
+
+![A cycle of four states. A new file is untracked. git add makes it staged. After git commit it is unmodified. Editing a file makes it modified, and git add stages it again.](/images/git-zero-to-hero/file-lifecycle.svg)
+
+- **Untracked:** a new file Git has never seen. It won't be in any commit until you add it.
+- **Unmodified:** identical to the last commit. `git status` doesn't mention these files at all.
+- **Modified:** you edited it, but haven't staged the edit.
+- **Staged:** the edit is queued for the next commit.
+
+`git status` shows them under the headings *Untracked files*, *Changes not staged for commit* (modified) and *Changes to be committed* (staged). A file can appear under two headings at once. If you stage a file and then edit it again, the version you staged is what goes into the commit, and the newer edit is waiting separately. Staging captures the file *at the moment you ran `git add`*.
+
+### Reading a diff
+
+`git diff` output looks cryptic once, and then never again:
+
+```text
+--- a/pasta.md
++++ b/pasta.md
+@@ -1,3 +1,3 @@
+ # Pasta
+-Boil water. Cook 9 minutes.
++Boil water. Cook 10 minutes.
+ Add salt to the water.
+```
+
+- `--- a/...` and `+++ b/...` are the old and new version of the file.
+- `@@ -1,3 +1,3 @@` says: this chunk (a *hunk*) covers three lines starting at line 1 in the old file, and three lines starting at line 1 in the new one.
+- Lines starting with `-` were removed, lines starting with `+` were added, and lines starting with a space are context that didn't change.
+
+Which two things are being compared depends on the flags:
+
+| Command | Compares |
+| --- | --- |
+| `git diff` | working directory against the staging area (what you haven't staged yet) |
+| `git diff --staged` | staging area against the last commit (what the next commit will contain) |
+| `git diff HEAD` | working directory against the last commit (everything, staged or not) |
+
+### Writing a good commit message
+
+Commit messages are the notes you leave for whoever reads the history later, and that is usually you in six months. A simple shape works well:
+
+```text
+Fix crash when the recipe list is empty
+
+The list view assumed at least one recipe and read the first item
+without checking. Show the empty-state message instead.
+```
+
+- A **short first line** (about 50 characters), in the imperative mood: "Fix", "Add", "Remove". Read it as "this commit will... fix the crash".
+- A **blank line**, then an optional body that explains *why*, not what. The diff already shows what changed.
+- One idea per commit, so the message can be short and true.
+
+Compare "Fix crash when the recipe list is empty" with "fixes", "stuff" or "wip". Six months from now only one of them helps you.
+
 ## Looking at history
 
 ```bash
@@ -157,6 +215,45 @@ git log --oneline --graph --all   # a picture of all branches
 git show 3f2a1b9                  # what one commit changed
 git diff 3f2a1b9 9c1d4e2          # compare two commits
 ```
+
+### What's inside a commit
+
+A commit is a small record. You can look at the real thing with `git cat-file -p HEAD`:
+
+```text
+tree 9f1e0c8d2b7a4c3e5d6f708192a3b4c5d6e7f809
+parent 3f2a1b94c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1
+author Dana Levi <dana@example.com> 1791540000 +0300
+committer Dana Levi <dana@example.com> 1791540000 +0300
+
+Add salt to pasta
+```
+
+- `tree` points at the snapshot of every file in that moment.
+- `parent` is the commit before it. This is the arrow in the diagrams. A merge commit has two `parent` lines.
+- `author` and `committer` are who wrote it and who recorded it, with a timestamp.
+- Then the message.
+
+The commit's **hash** (like `9c1d4e2`) is a fingerprint computed from exactly this content. Change anything (the files, the message, the parent, even the timestamp) and you get a different hash. That's why `git commit --amend` and `git rebase` create *new* commits instead of editing old ones: from Git's point of view, a changed commit is a different commit. Seven characters are almost always enough to name a commit, as long as they're unique in the repo.
+
+### Pointing at commits
+
+Anywhere Git wants a commit, you can give it any of these:
+
+| You write | It means |
+| --- | --- |
+| `9c1d4e2` | a commit by its (short) hash |
+| `main`, `pizza` | the commit a branch points at |
+| `v1.0` | the commit a tag points at |
+| `HEAD` | the commit you're on |
+| `HEAD~1` (or `HEAD^`) | one commit before HEAD, its parent |
+| `HEAD~3` | three commits back along the chain |
+| `HEAD^2` | the second parent of a merge commit |
+| `HEAD@{2}` | where HEAD was two moves ago (from the reflog) |
+
+So `git diff HEAD~2 HEAD` compares now with two commits ago, and `git show main~1` shows the commit before the tip of `main`.
+
+**Detached HEAD.** Normally HEAD points at a *branch*, and the branch points at a commit. If you check out a commit directly, say with `git switch --detach 3f2a1b9`, HEAD points straight at the commit. Git warns you that you're in a "detached HEAD" state. It's a fine place to look around, but commits you make there belong to no branch and are easy to lose. To keep them, put a branch on them with `git switch -c keep-this`. To leave, `git switch main`.
 
 ## Undoing mistakes
 
@@ -238,6 +335,26 @@ git switch pizza      # and it's back
 
 Your folder changes to match the branch. That's not magic: Git swaps the files for the ones in that snapshot.
 
+### What a branch really is
+
+A branch isn't a copy of your project. It's a tiny file with one commit hash in it. You can read it:
+
+```bash
+cat .git/refs/heads/main
+cat .git/HEAD
+```
+
+```text
+9c1d4e2a7b8c9d0e1f2a3b4c5d6e7f8091a2b3c4
+ref: refs/heads/pizza
+```
+
+The first file is the `main` branch: a hash, and nothing else. The second is HEAD, saying "I'm on `pizza`". That's the whole mechanism, and it's why branches are free and instant.
+
+- **Creating** a branch writes one small file.
+- **Switching** changes what HEAD says and updates your working files to match.
+- **Deleting** a branch removes the label. The commits stay in the repo, and `git reflog` can still find them for a while. Git cleans up unreachable commits only after a grace period.
+
 ## Merging
 
 The pizza is done. Bring it into `main`:
@@ -259,6 +376,24 @@ Then clean up:
 ```bash
 git branch -d pizza    # safe: refuses if it wasn't merged
 ```
+
+### How Git merges
+
+How does `git merge` know what to keep? It finds the **merge base**, the last commit both branches share, and compares each branch against it:
+
+![Commits A and B are shared history. main continues with C and feature continues with D. Both C and D point back to B, the merge base. The merge commit M points to both C and D.](/images/git-zero-to-hero/three-way-merge.svg)
+
+```bash
+git merge-base main pizza    # prints the hash of B
+```
+
+Git looks at what changed from B to C and from B to D, and combines them:
+
+- A line changed on **one side only** is taken as is.
+- A line changed on **both sides, to the same thing**, is taken once.
+- A line changed on **both sides, differently**, is a conflict. Git can't know which you meant.
+
+That's why merges usually just work: most of the time the two branches touch different places.
 
 ### Conflicts
 
@@ -293,6 +428,14 @@ git commit            # finishes the merge
 
 Changed your mind halfway? `git merge --abort` puts everything back as it was. A conflict is not an error, it's Git asking a question only you can answer.
 
+A few habits keep conflicts small and calm:
+
+- **Merge `main` into your branch often** (or rebase onto it), so the differences never pile up.
+- **Keep branches short-lived and focused.** The longer two branches live, the more they drift apart.
+- `git status` during a conflict lists *Unmerged paths*, which are the files still waiting for you. Once you `git add` a file, it's resolved.
+- To take one side of a file wholesale, use `git checkout --ours <file>` or `git checkout --theirs <file>`, then `git add` it. Careful: during a **rebase** the meaning flips. "ours" is the branch you're rebasing *onto* and "theirs" is your own commit being replayed.
+- Many editors (VS Code, JetBrains) show conflicts with one-click "accept current / incoming" buttons, and `git mergetool` opens a visual tool.
+
 ## Rebase: a tidier alternative
 
 Merging keeps the true history, including the branching. **Rebase** instead *replays* your branch's commits on top of the latest `main`, so history looks like one straight line:
@@ -309,6 +452,35 @@ Note the apostrophes: D′ and E′ are *new* commits with new IDs, copies of th
 > **Never rebase commits that other people already have.** It rewrites history, and everyone who pulled the old commits ends up with a mess. Rebase your own private branch freely; once it's shared, merge.
 
 A popular use is tidying your own commits before a pull request. `git rebase -i HEAD~4` opens a list of your last four commits where you can squash them into one, reword messages, or drop one.
+
+### Interactive rebase: cleaning up your commits
+
+Before sharing a branch, you can tidy its private history with `git rebase -i`. Say you made three commits and the last one is just a typo fix:
+
+```bash
+git rebase -i HEAD~3
+```
+
+Git opens a list in your editor, oldest first:
+
+```text
+pick 3f2a1b9 Add pasta recipe
+pick 9c1d4e2 Add salt to pasta
+pick b7e3f10 Fix typo in salt step
+```
+
+Change the word at the start of a line to say what should happen to that commit, then save and close:
+
+| Word | What it does |
+| --- | --- |
+| `pick` | keep the commit as it is |
+| `reword` | keep it, but stop and let you edit the message |
+| `squash` | fold it into the commit above it and combine the messages |
+| `fixup` | fold it into the commit above it and drop its message |
+| `drop` | delete the commit |
+| `edit` | stop so you can change the commit's content |
+
+Here, changing the last line to `fixup b7e3f10 Fix typo in salt step` merges the typo fix into "Add salt to pasta", leaving two clean commits. You can also reorder commits by moving lines. If it goes wrong, `git rebase --abort` returns everything to how it was. And remember the rule: only do this to commits that nobody else has pulled yet.
 
 ## Working with GitHub
 
@@ -338,6 +510,48 @@ Syncing is three commands, and it helps to know exactly what each does:
 - `git push` **uploads** your commits.
 
 If `git push` is rejected, someone pushed before you. Pull, resolve any conflicts, push again.
+
+### Remote-tracking branches, upstream and ahead/behind
+
+After `git clone` or `git fetch`, you'll see branches like `origin/main` in `git branch -a`. These are **remote-tracking branches**: your computer's last-known copy of where the branch was on the remote. You can't commit onto them, and only `git fetch`, `pull` and `push` move them.
+
+A local branch can be linked to one of them. That link is its **upstream**, and it's what lets `git status` and `git branch -vv` tell you where you stand:
+
+```bash
+git status
+```
+
+```text
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+```
+
+```bash
+git branch -vv
+```
+
+```text
+* main  9c1d4e2 [origin/main: ahead 1] Add salt to pasta
+  pizza b7e3f10 [origin/pizza] Add baking time
+```
+
+*Ahead* means you have commits the remote doesn't, so push. *Behind* means the remote has commits you don't, so pull. *Diverged* means both, and you'll need to merge or rebase. Run `git fetch` first so the numbers are fresh.
+
+### When a push is rejected
+
+```text
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'github.com:dana/recipes.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally.
+```
+
+This isn't an error to fear. It means someone pushed to `main` since you last synced, and Git won't let you overwrite their commits. The fix is the normal one: `git pull` (or `git pull --rebase`), resolve any conflict, then `git push` again.
+
+The tempting shortcut is `git push --force`, which overwrites the remote with your version and **deletes** their commits. Don't, on shared branches. If you rewrote your own branch with a rebase and genuinely need to force, use `git push --force-with-lease`: it refuses when the remote has commits you haven't seen.
+
+**Clone or fork?** To work on a repository you own or can write to, clone it. For one you can't push to (someone else's open-source project), *fork* it on GitHub first. That makes your own copy on your account. You clone the fork, push to it, and open a pull request back to the original. People usually add the original as a second remote named `upstream` to keep their fork up to date: `git remote add upstream <url>`.
 
 ### The everyday GitHub flow
 
@@ -392,6 +606,18 @@ dist/
 .env
 ```
 
+A few pattern rules cover almost everything:
+
+```text
+*.log          # any file ending in .log
+build/         # a folder, anywhere
+/todo.md       # only in the project root
+**/temp        # a "temp" at any depth
+!keep.log      # exception: track this one even though *.log is ignored
+```
+
+One catch: `.gitignore` only affects files Git isn't tracking yet. If a file was committed before you ignored it, run `git rm --cached <file>` once to stop tracking it (the file stays on disk), then commit.
+
 ## Habits that save you later
 
 - **Commit small and often.** One idea per commit. "Fix login redirect" beats "stuff".
@@ -400,6 +626,22 @@ dist/
 - **Pull before you start, and before you push.**
 - **Never commit secrets.** If a password or token reaches a commit, treat it as leaked even after you delete it: revoke and replace it first, clean the history second.
 - **Don't rewrite shared history.** No `--force` on branches others use. If you must, use `git push --force-with-lease`.
+
+## Which undo command?
+
+The same job can have several commands, and the old `git checkout` did most of them, which is why it confused everyone. Since Git 2.23, `git switch` handles moving between branches and `git restore` handles files. Here's how to pick:
+
+| I want to... | Use | What it changes |
+| --- | --- | --- |
+| Throw away my edits to a file | `git restore <file>` | the file in the working directory |
+| Take a file out of staging | `git restore --staged <file>` | the staging area only |
+| Get a file the way it was in an older commit | `git restore --source=<commit> <file>` | the file in the working directory |
+| Fix the last commit (message or content) | `git commit --amend` | replaces the last commit |
+| Move my branch back and forget some commits (not pushed yet) | `git reset` | the branch label, and maybe staging and files |
+| Cancel a commit that's already shared | `git revert <commit>` | adds a new commit, rewrites nothing |
+| Look at old code without changing anything | `git switch --detach <commit>` | HEAD only |
+
+A rule of thumb: if the commits exist only on your computer, you may rewrite them (`reset`, `amend`, `rebase`). If anyone else might have them, add to history (`revert`) instead of rewriting it.
 
 ## "I did X, now what?"
 
@@ -415,6 +657,27 @@ dist/
 | Need to switch branches with unfinished work | `git stash`, then `git stash pop` |
 | Lost commits after a reset or rebase | `git reflog`, then `git switch -c rescue <commit>` |
 | Deleted a branch by accident | `git reflog`, then `git switch -c <name> <commit>` |
+
+## Glossary
+
+- **Repository (repo):** a project plus its full history, stored in the `.git` folder.
+- **Commit:** a saved snapshot, with a message, an author and a parent.
+- **Hash:** the fingerprint that names a commit, like `9c1d4e2`.
+- **Branch:** a movable label pointing at a commit.
+- **HEAD:** a pointer to where you are now, usually a branch.
+- **Working directory:** your files as they are on disk.
+- **Staging area (index):** the changes picked for the next commit.
+- **Merge:** combining two branches. A *fast-forward* just moves a label; a *merge commit* has two parents.
+- **Rebase:** replaying commits on top of another commit, creating new copies.
+- **Conflict:** both sides changed the same lines and Git needs you to choose.
+- **Remote:** a copy of the repository elsewhere, usually called `origin`.
+- **Upstream:** the remote branch your local branch is linked to.
+- **Fetch / pull / push:** download, download-and-merge, and upload.
+- **Pull request (PR):** a request on GitHub to merge your branch, with review.
+- **Fork:** your own GitHub copy of someone else's repository.
+- **Stash:** a shelf for unfinished changes.
+- **Tag:** a permanent name for a commit, like a release.
+- **Detached HEAD:** HEAD pointing at a commit instead of a branch.
 
 ## Where to go next
 

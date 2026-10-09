@@ -314,4 +314,58 @@ svg(
   ],
 );
 
-console.log(`[diagrams] wrote 8 SVGs to ${OUT}`);
+
+// 9. The life of a file ---------------------------------------------------------
+const stateBox = (x: number, y: number, label: string, sub: string, color: string) => [
+  `<rect x="${x}" y="${y}" width="170" height="64" rx="10" fill="#ffffff" stroke="${color}" stroke-width="2"/>`,
+  text(x + 85, y + 28, label, { weight: 700, color }),
+  text(x + 85, y + 48, sub, { size: 12, color: C.muted }),
+];
+svg(
+  'file-lifecycle',
+  760,
+  330,
+  'The life of a file in Git',
+  'A new file starts as untracked. git add makes it staged. After git commit it is unmodified. Editing makes it modified, and git add stages it again. The cycle repeats.',
+  [
+    ...stateBox(515, 24, 'Untracked', 'a new file Git does not know', C.red),
+    arrow(600, 90, 600, 146, C.main),
+    text(612, 122, 'git add', { size: 12.5, mono: true, color: C.main, anchor: 'start' }),
+    ...stateBox(30, 150, 'Unmodified', 'same as the last commit', C.green),
+    ...stateBox(272, 150, 'Modified', 'edited, not staged yet', C.amber),
+    ...stateBox(515, 150, 'Staged', 'queued for the next commit', C.main),
+    arrow(202, 182, 270, 182, C.amber),
+    text(236, 172, 'edit', { size: 12.5, mono: true, color: C.amber }),
+    arrow(444, 182, 513, 182, C.main),
+    text(478, 172, 'git add', { size: 12.5, mono: true, color: C.main }),
+    `<path d="M600 216 L600 270 L115 270 L115 218" fill="none" stroke="${C.green}" stroke-width="2" marker-end="url(#ah-${C.green.slice(1)})"/>`,
+    text(358, 262, 'git commit', { size: 12.5, mono: true, color: C.green }),
+    text(380, 308, 'git status shows each file in one of these states', { size: 13, color: C.muted }),
+  ],
+);
+
+// 10. Three-way merge --------------------------------------------------------------
+svg(
+  'three-way-merge',
+  760,
+  300,
+  'How a merge works: three points of comparison',
+  'To merge main and feature, Git finds their common ancestor B, the merge base. It compares B to C and B to D, combines both sets of changes, and records the result as the merge commit M.',
+  [
+    ...chain([110, 250], 130, ['A', 'B'], C.main),
+    commit(430, 70, 'C', C.main),
+    commit(430, 190, 'D', C.feature),
+    arrow(413, 77, 267, 123, C.grey),
+    arrow(413, 183, 267, 137, C.grey),
+    commit(620, 130, 'M', C.green),
+    arrow(605, 117, 447, 74, C.green),
+    arrow(605, 143, 447, 186, C.green),
+    pill(430, 28, 'main', C.main),
+    pill(430, 236, 'feature', C.feature),
+    text(250, 208, 'merge base', { size: 12.5, mono: true, color: C.amber }),
+    arrow(250, 192, 250, 152, C.amber),
+    text(380, 280, 'Git compares B→C and B→D, then combines both sets of changes into M', { size: 13, color: C.muted }),
+  ],
+);
+
+console.log(`[diagrams] wrote 10 SVGs to ${OUT}`);
