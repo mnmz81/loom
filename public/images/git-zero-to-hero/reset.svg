@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="380" viewBox="0 0 760 380" role="img" aria-labelledby="t d">
+<title id="t">git reset: soft, mixed and hard</title>
+<desc id="d">git reset HEAD~1 moves the branch back by one commit. With --soft the undone changes stay staged, with --mixed they stay in the working directory but unstaged, and with --hard they are discarded.</desc>
+<defs><marker id="ah-f8fafc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#f8fafc"/></marker><marker id="ah-cbd5e1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#cbd5e1"/></marker><marker id="ah-0f172a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ah-64748b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ah-2563eb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#2563eb"/></marker><marker id="ah-db2777" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ah-16a34a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#16a34a"/></marker><marker id="ah-dc2626" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#dc2626"/></marker><marker id="ah-d97706" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#d97706"/></marker><marker id="ah-94a3b8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#94a3b8"/></marker><marker id="ah-e2e8f0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#e2e8f0"/></marker></defs>
+<rect width="760" height="380" rx="14" fill="#f8fafc" stroke="#cbd5e1"/>
+<circle cx="110" cy="60" r="17" fill="#2563eb" stroke="#2563eb" stroke-width="2"/><text x="110" y="65" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#ffffff" font-weight="700" text-anchor="middle">A</text>
+<line x1="251" y1="60" x2="131" y2="60" stroke="#94a3b8" stroke-width="2" marker-end="url(#ah-94a3b8)"/>
+<circle cx="270" cy="60" r="17" fill="#2563eb" stroke="#2563eb" stroke-width="2"/><text x="270" y="65" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#ffffff" font-weight="700" text-anchor="middle">B</text>
+<line x1="411" y1="60" x2="291" y2="60" stroke="#94a3b8" stroke-width="2" marker-end="url(#ah-94a3b8)"/>
+<circle cx="430" cy="60" r="17" fill="#2563eb" stroke="#2563eb" stroke-width="2"/><text x="430" y="65" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#ffffff" font-weight="700" text-anchor="middle">C</text>
+<rect x="402.6" y="8" width="54.8" height="24" rx="12" fill="#2563eb"/><text x="430" y="25" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#ffffff" font-weight="600" text-anchor="middle">main</text>
+<line x1="400" y1="20" x2="302" y2="20" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ah-dc2626)"/>
+<text x="560" y="66" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="14" fill="#0f172a" font-weight="700" text-anchor="start">git reset HEAD~1</text>
+<text x="60" y="135" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#0f172a" font-weight="400" text-anchor="middle"></text>
+<text x="300" y="128" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#0f172a" font-weight="700" text-anchor="middle">Repository</text>
+<text x="470" y="128" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#0f172a" font-weight="700" text-anchor="middle">Staging area</text>
+<text x="640" y="128" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#0f172a" font-weight="700" text-anchor="middle">Working directory</text>
+<text x="120" y="190" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="15" fill="#0f172a" font-weight="700" text-anchor="middle">--soft</text>
+<rect x="220" y="150" width="160" height="62" rx="8" fill="#2563eb"/>
+<text x="300" y="176" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13.5" fill="#ffffff" font-weight="700" text-anchor="middle">main → B</text>
+<text x="300" y="196" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="11.5" fill="#ffffff" font-weight="400" text-anchor="middle">C undone</text>
+<rect x="390" y="150" width="160" height="62" rx="8" fill="#16a34a"/>
+<text x="470" y="176" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13.5" fill="#ffffff" font-weight="700" text-anchor="middle">C’s changes</text>
+<text x="470" y="196" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="11.5" fill="#ffffff" font-weight="400" text-anchor="middle">still staged</text>
+<rect x="560" y="150" width="160" height="62" rx="8" fill="#16a34a"/>
+<text x="640" y="176" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13.5" fill="#ffffff" font-weight="700" text-anchor="middle">C’s changes</text>
+<text x="640" y="196" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="11.5" fill="#ffffff" font-weight="400" text-anchor="middle">still on disk</text>
+<text x="120" y="262" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="15" fill="#0f172a" font-weight="700" text-anchor="middle">--mixed</text>
+<text x="120" y="282" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#64748b" font-weight="400" text-anchor="middle">(the default)</text>
+<rect x="220" y="232" width="160" height="62" rx="8" fill="#2563eb"/>
+<text x="300" y="258" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13.5" fill="#ffffff" font-weight="700" text-anchor="middle">main → B</text>
+<text x="300" y="278" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="11.5" fill="#ffffff" font-weight="400" text-anchor="middle">C undone</text>
+<rect x="390" y="232" width="160" height="62" rx="8" fill="#94a3b8"/>
+<text x="470" y="258" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13.5" fill="#ffffff" font-weight="700" text-anchor="middle">emptied</text>
+<text x="470" y="278" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="11.5" fill="#ffffff" font-weight="400" text-anchor="middle">unstaged</text>
+<rect x="560" y="232" width="160" height="62" rx="8" fill="#16a34a"/>
+<text x="640" y="258" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13.5" fill="#ffffff" font-weight="700" text-anchor="middle">C’s changes</text>
+<text x="640" y="278" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="11.5" fill="#ffffff" font-weight="400" text-anchor="middle">still on disk</text>
+<text x="120" y="344" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="15" fill="#0f172a" font-weight="700" text-anchor="middle">--hard</text>
+<rect x="220" y="314" width="160" height="54" rx="8" fill="#2563eb"/>
+<text x="300" y="340" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13.5" fill="#ffffff" font-weight="700" text-anchor="middle">main → B</text>
+<text x="300" y="360" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="11.5" fill="#ffffff" font-weight="400" text-anchor="middle">C undone</text>
+<rect x="390" y="314" width="160" height="54" rx="8" fill="#94a3b8"/>
+<text x="470" y="340" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13.5" fill="#ffffff" font-weight="700" text-anchor="middle">emptied</text>
+<text x="470" y="360" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="11.5" fill="#ffffff" font-weight="400" text-anchor="middle"></text>
+<rect x="560" y="314" width="160" height="54" rx="8" fill="#dc2626"/>
+<text x="640" y="340" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13.5" fill="#ffffff" font-weight="700" text-anchor="middle">changes gone</text>
+<text x="640" y="360" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="11.5" fill="#ffffff" font-weight="400" text-anchor="middle"></text>
+</svg>

@@ -7,6 +7,8 @@ const PAGES: [string, string][] = [
   ['home', ''],
   ['post', 'posts/rust-borrowing'],
   ['long post (commands)', 'posts/claude-code-commands'],
+  ['git cheat sheet', 'posts/git-commands'],
+  ['git tutorial with diagrams', 'posts/git-zero-to-hero'],
   ['note', 'notes/git-undo-last-commit'],
   ['series', 'series/learning-rust'],
   ['tag', 'tags/rust'],

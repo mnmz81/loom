@@ -68,6 +68,9 @@ export async function createRenderer(): Promise<Renderer> {
   const defaultImage = md.renderer.rules['image']!;
   md.renderer.rules['image'] = (tokens, idx, options, env, self) => {
     tokens[idx].attrSet('loading', 'lazy');
+    // Site-root paths ('/images/x.png') become relative ('images/x.png') so <base href> adds the base path.
+    const src = tokens[idx].attrGet('src') ?? '';
+    if (src.startsWith('/') && !src.startsWith('//')) tokens[idx].attrSet('src', src.slice(1));
     return defaultImage(tokens, idx, options, env, self);
   };
 

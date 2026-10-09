@@ -99,6 +99,12 @@ describe('markdown renderer', () => {
     expect(html).toContain('<a href="https://angular.dev">');
   });
 
+  it('makes site-root image paths relative so <base href> applies', () => {
+    const html = render('![alt](/images/x/1.png) ![ext](https://example.com/a.png)\n').html;
+    expect(html).toContain('src="images/x/1.png"');
+    expect(html).toContain('src="https://example.com/a.png"');
+  });
+
   it('lazy-loads images', () => {
     expect(render('![alt](/images/x/1.png)\n').html).toContain('loading="lazy"');
   });
