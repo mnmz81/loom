@@ -7,3 +7,4 @@ tutorial: { he: מדריך, en: Tutorial }
 github: { he: GitHub, en: GitHub }
 docker: { he: Docker, en: Docker }
 containers: { he: קונטיינרים, en: Containers }
+python: { he: Python, en: Python }
