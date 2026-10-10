@@ -76,7 +76,7 @@ describe('SiteHeader', () => {
     expect(link?.textContent?.trim()).toBe('English');
     expect(link?.getAttribute('hreflang')).toBe('en');
     expect(link?.getAttribute('lang')).toBe('en');
-    expect(link?.getAttribute('title')).toBe('החלף שפה');
+    expect(link?.getAttribute('title')).toBe('החלפת שפה');
   });
 
   it('language switch follows navigation (en → he)', async () => {
@@ -104,7 +104,7 @@ describe('SiteHeader', () => {
   it('theme toggle is labelled with the action and emits themeToggle (he)', async () => {
     const { fixture, el } = await render('he', 'light');
     const button = el.querySelector<HTMLButtonElement>('.site-header__theme-btn')!;
-    expect(button.getAttribute('aria-label')).toBe('עבור למצב כהה');
+    expect(button.getAttribute('aria-label')).toBe('מעבר למצב כהה');
     let emitted = 0;
     fixture.componentInstance.themeToggle.subscribe(() => emitted++);
     button.click();
@@ -112,7 +112,7 @@ describe('SiteHeader', () => {
 
     fixture.componentRef.setInput('theme', 'dark');
     await fixture.whenStable();
-    expect(button.getAttribute('aria-label')).toBe('עבור למצב בהיר');
+    expect(button.getAttribute('aria-label')).toBe('מעבר למצב בהיר');
   });
 
   it('theme toggle label in English', async () => {

@@ -238,8 +238,8 @@ collections:
 
   # ═══════════════════════════════ Notes ═══════════════════════════════
   - name: notes-he
-    label: פתקים · עברית
-    label_singular: פתק בעברית
+    label: הערות · עברית
+    label_singular: הערה בעברית
     description: 'content/notes/<slug>/he.md — short note / TIL. A slug must not also exist under posts.'
     folder: content/notes
     path: '{{slug}}/he'

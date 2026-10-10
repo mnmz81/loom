@@ -47,7 +47,7 @@ describe('EntryList', () => {
   it('shows the default empty text in Hebrew (he)', async () => {
     const { el } = await render('he', []);
     expect(el.querySelector('ul')).toBeNull();
-    expect(el.querySelector('.entry-list__empty')?.textContent?.trim()).toBe('אין כאן כלום עדיין.');
+    expect(el.querySelector('.entry-list__empty')?.textContent?.trim()).toBe('עוד אין כאן כלום.');
   });
 
   it('shows the default empty text in English (en)', async () => {

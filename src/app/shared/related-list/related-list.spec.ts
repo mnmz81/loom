@@ -31,7 +31,7 @@ describe('RelatedList', () => {
     const el = await render('he', heRelated);
     const section = el.querySelector('section');
     const title = el.querySelector('h2');
-    expect(title?.textContent?.trim()).toBe('קשור');
+    expect(title?.textContent?.trim()).toBe('קשורים');
     expect(section?.getAttribute('aria-labelledby')).toBe(title?.id);
     const link = el.querySelector('.related__link');
     expect(link?.getAttribute('href')).toBe('/he/posts/rust-ownership');

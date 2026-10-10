@@ -34,7 +34,7 @@ tags: [git, cli, cheatsheet]
 - `git commit -m "הודעה"` עושה commit למה שב-staging, ו-`git commit -am "הודעה"` מכניסה קבצים במעקב ועושה commit בצעד אחד.
 - `git commit --amend` משכתבת את ה-commit האחרון (הודעה או תוכן). עם `--no-edit` ההודעה נשארת.
 - `git commit --fixup <commit>` רושמת תיקון ל-commit ישן יותר. אחר כך `git rebase -i --autosquash <בסיס>` משלבת אותו במקום הנכון לבד.
-- `git rm <קובץ>` מוחקת קובץ ומכניסה את המחיקה ל-staging. `git rm --cached <קובץ>` מפסיקה לעקוב אחריו אבל משאירה אותו בדיסק, וזה מה שעושים כשהוספת משהו ל-`.gitignore` מאוחר מדי.
+- `git rm <קובץ>` מוחקת קובץ ומכניסה את המחיקה ל-staging. `git rm --cached <קובץ>` מפסיקה לעקוב אחריו אבל משאירה אותו בדיסק, וזה מה שעושים כשמוסיפים משהו ל-`.gitignore` מאוחר מדי.
 - `git mv <ישן> <חדש>` משנה שם או מזיזה קובץ.
 
 ## ענפים
@@ -103,7 +103,7 @@ tags: [git, cli, cheatsheet]
 
 ## שחזור וחקירה
 
-- `git reflog` היא ההיסטוריה של המקומות ש-HEAD היה בהם. מציל החיים כשאיבדת commits אחרי reset או rebase לא מוצלחים.
+- `git reflog` היא ההיסטוריה של המקומות ש-HEAD היה בהם. מציל החיים כשהלכו commits אחרי reset או rebase לא מוצלחים.
 - `git cherry-pick <commit>` מעתיקה commit אחד לענף הנוכחי, ו-`-x` רושמת מאיפה הוא בא.
 - `git bisect start`, ואז `git bisect bad` ו-`git bisect good <commit>`, מוצאת את ה-commit שהכניס באג בחיפוש בינארי. `git bisect run <סקריפט>` מריצה את זה אוטומטית, ו-`git bisect reset` מסיימת.
 
@@ -118,17 +118,17 @@ Worktree הוא תיקייה שנייה שנשלפה מאותו ריפו, כך �
 - `git worktree remove <נתיב>` מסירה אחד (חייב להיות נקי), ו-`--force` מסירה גם עם שינויים ⚠️.
 - `git worktree move <נתיב> <נתיב-חדש>` מעבירה אחד למקום אחר.
 - `git worktree lock <נתיב>` ו-`unlock` מגינות עליו מניקוי, למשל על כונן נשלף.
-- `git worktree prune` מנקה הפניות לתיקיות שמחקת ידנית, ו-`-n` היא הרצה יבשה.
-- `git worktree repair` מתקנת את הקישורים אם הזזת תיקייה ידנית.
+- `git worktree prune` מנקה הפניות לתיקיות שנמחקו ידנית, ו-`-n` היא הרצה יבשה.
+- `git worktree repair` מתקנת את הקישורים אם תיקייה הוזזה ידנית.
 
-מקרה אופייני: באמצע פיצ'ר מגיעה בקשת תיקון דחוף. במקום stash, פותחים תיקייה שנייה:
+מקרה אופייני: באמצע פיצ׳ר מגיעה בקשת תיקון דחוף. במקום stash, פותחים תיקייה שנייה:
 
 ```bash
 git worktree add ../hotfix-login main     # main בתיקייה סמוכה
 cd ../hotfix-login
 git switch -c hotfix/login-bug            # מתקנים כאן
 # ... תיקון, commit, push ...
-cd ../my-project                          # העבודה על הפיצ'ר לא נגעה
+cd ../my-project                          # העבודה על הפיצ׳ר לא נגעה
 git worktree remove ../hotfix-login       # ניקוי
 ```
 

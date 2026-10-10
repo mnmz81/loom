@@ -17,7 +17,7 @@ export function t(lang: Lang, key: DictKey, params: Record<string, string | numb
 
 /** Search-page strings (src/app/pages/page-text.ts is not part of the Dict contract). */
 export const SEARCH_TEXT = {
-  he: { label: 'חיפוש באתר', type: 'סוג', tag: 'תגית', typeAll: 'הכל', resultsOne: 'תוצאה אחת', tagAll: 'כל התגיות', hint: 'הקלד כדי לחפש בפוסטים ובהערות.' },
+  he: { label: 'חיפוש באתר', type: 'סוג', tag: 'תגית', typeAll: 'הכל', resultsOne: 'תוצאה אחת', tagAll: 'כל התגיות', hint: 'הקלידו כדי לחפש בפוסטים ובהערות.' },
   en: { label: 'Search the site', type: 'Type', tag: 'Tag', typeAll: 'All', resultsOne: '1 result', tagAll: 'All tags', hint: 'Type to search posts and notes.' },
 } as const;
 

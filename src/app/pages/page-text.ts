@@ -9,7 +9,7 @@ const he = {
   'series.partsOther': '{n} חלקים',
   'series.partN': 'חלק {n}',
   'search.label': 'חיפוש באתר',
-  'search.hint': 'הקלד כדי לחפש בפוסטים ובהערות.',
+  'search.hint': 'הקלידו כדי לחפש בפוסטים ובהערות.',
   'search.type': 'סוג',
   'search.typeAll': 'הכל',
   'search.tag': 'תגית',
@@ -17,7 +17,7 @@ const he = {
   'search.loading': 'מחפש…',
   'search.resultsOne': 'תוצאה אחת',
   'search.resultsOther': '{n} תוצאות',
-  'search.error': 'החיפוש נכשל. נסה שוב.',
+  'search.error': 'החיפוש נכשל. נסו שוב.',
 } as const;
 
 export type PageTextKey = keyof typeof he;

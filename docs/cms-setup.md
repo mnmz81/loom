@@ -36,7 +36,7 @@ The sidebar has one collection **per language**, because each language is its ow
 |---|---|
 | פוסטים · עברית | `content/posts/<slug>/he.md` |
 | Posts · English | `content/posts/<slug>/en.md` |
-| פתקים · עברית | `content/notes/<slug>/he.md` |
+| הערות · עברית | `content/notes/<slug>/he.md` |
 | Notes · English | `content/notes/<slug>/en.md` |
 | סדרות · Series | `content/series/<key>.yaml` |
 
@@ -58,7 +58,7 @@ An **English-only** post is just an entry in *Posts · English* with no Hebrew t
 post likewise. The site shows the "Hebrew only / English only" badge automatically.
 
 ### Notes (TIL)
-Same flow in *פתקים · עברית* / *Notes · English* (no summary, cover or series). A slug must not
+Same flow in *הערות · עברית* / *Notes · English* (no summary, cover or series). A slug must not
 be used by both a post and a note.
 
 ### Series

@@ -62,7 +62,7 @@ describe('ArticleBody', () => {
     expect(wrappers.every((w) => w.firstElementChild?.tagName === 'PRE')).toBe(true);
     const [button] = buttons(el);
     expect(button.type).toBe('button');
-    expect(button.textContent).toBe('העתק');
+    expect(button.textContent).toBe('העתקה');
     expect(button.querySelector('span')?.getAttribute('aria-live')).toBe('polite');
   });
 

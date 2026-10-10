@@ -27,7 +27,7 @@ describe('SkipLink', () => {
 
   it('is labelled in Hebrew and targets #main by default (he)', async () => {
     const link = await render('he');
-    expect(link.textContent?.trim()).toBe('דלג לתוכן');
+    expect(link.textContent?.trim()).toBe('דלגו לתוכן');
     expect(link.getAttribute('href')).toBe('#main');
   });
 
