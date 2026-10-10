@@ -5,3 +5,5 @@ cli: { he: שורת פקודה, en: CLI }
 cheatsheet: { he: דף עזר, en: Cheat sheet }
 tutorial: { he: מדריך, en: Tutorial }
 github: { he: GitHub, en: GitHub }
+docker: { he: Docker, en: Docker }
+containers: { he: קונטיינרים, en: Containers }
