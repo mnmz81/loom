@@ -440,3 +440,5 @@ docker builder prune          # רק את ה-build cache
 עכשיו אנחנו מכירים את התמונה כולה: image נבנה מ-Dockerfile, container הוא image רץ, פורטים, volumes ורשתות מחברים אותו לעולם, ו-Compose מתאר אפליקציה שלמה בקובץ אחד. כדי לקבע את זה, מכניסים ל-container אפליקציה קיימת: כותבים Dockerfile, מוסיפים `.dockerignore`, ומריצים עם Compose לצד מסד הנתונים שלו.
 
 הצעד הטבעי הבא הוא לתת לרובוטים לעשות את זה: לבנות ולדחוף את ה-image אוטומטית בכל מיזוג עם workflow של GitHub Actions. את היסודות של Actions ראו ב-[GitHub מאפס לגיבור](he/posts/github-zero-to-hero/), ואת [Git מאפס לגיבור](he/posts/git-zero-to-hero/) אם בקרת גרסאות עדיין חדשה. ה-[Get started](https://docs.docker.com/get-started/) של Docker עצמו וה-[Dockerfile best practices](https://docs.docker.com/build/building/best-practices/) הם ההמשך הטוב ביותר.
+
+כדי להריץ containers בענן, מתחילים במפה ב-[AWS מאפס לגיבור](he/posts/aws-zero-to-hero/). ואם הפקודות שמקלידים בתוך container הן החלק הלא מוכר, ב[דף העזר לפקודות Linux](he/posts/linux-commands/) יש אותן.

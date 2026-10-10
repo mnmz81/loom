@@ -440,3 +440,5 @@ docker builder prune          # only the build cache
 You now know the whole picture: an image is built from a Dockerfile, a container is a running image, ports, volumes and networks connect it to the world, and Compose describes a whole app in one file. To make it stick, containerize something you already have: write a Dockerfile, add a `.dockerignore`, and run it with Compose next to its database.
 
 A natural next step is to let robots do it: build and push your image automatically on every merge with a GitHub Actions workflow. See [GitHub from zero to hero](en/posts/github-zero-to-hero/) for the Actions basics, and [Git from zero to hero](en/posts/git-zero-to-hero/) if version control is still new. Docker's own [Get started guide](https://docs.docker.com/get-started/) and the [Dockerfile best practices](https://docs.docker.com/build/building/best-practices/) are the best next reading.
+
+To run containers in the cloud, start with the map in [AWS from zero to hero](en/posts/aws-zero-to-hero/). And if the commands you type inside a container are the unfamiliar part, the [Linux commands cheat sheet](en/posts/linux-commands/) has them.
