@@ -266,4 +266,4 @@ sudo pacman -S curl                           # Arch
 
 ## לאן ממשיכים
 
-בוחרים שתיים או שלוש מאלה ומשתמשים בהן על מכונה אמיתית עד שהאצבעות מכירות אותן: `grep`, ‏`find`, ‏`tail -f`, ‏`ss`, ‏`journalctl` ו-`rsync` מכסות את רוב מה ששרת דורש. לתמונה המלאה של כל פקודה, `man` היא המקור: דפי המדריך נכתבים על ידי מי שכתבו את הכלים. ה-[GNU Coreutils manual](https://www.gnu.org/software/coreutils/manual/) ותיעוד ה-[systemd](https://systemd.io/) הם המקומות הטובים ביותר לפרטים שמאחורי הפקודות כאן, ו-shell חינמי של Linux נמצא במרחק `docker run --rm -it ubuntu bash` (ראו [Docker מאפס לגיבור](he/posts/docker-zero-to-hero/)).
+בוחרים שתיים או שלוש מאלה ומשתמשים בהן על מכונה אמיתית עד שהאצבעות מכירות אותן: `grep`, ‏`find`, ‏`tail -f`, ‏`ss`, ‏`journalctl` ו-`rsync` מכסות את רוב מה ששרת דורש. לתמונה המלאה של כל פקודה, `man` היא המקור: דפי המדריך מגיעים יחד עם הכלים עצמם. ה-[GNU Coreutils manual](https://www.gnu.org/software/coreutils/manual/) ותיעוד ה-[systemd](https://systemd.io/) הם המקומות הטובים ביותר לפרטים שמאחורי הפקודות כאן, ו-shell חינמי של Linux נמצא במרחק `docker run --rm -it ubuntu bash` (ראו [Docker מאפס לגיבור](he/posts/docker-zero-to-hero/)).
