@@ -1,12 +1,12 @@
 ---
 name: new-post
-description: Write a new Loom blog post (or note) in Hebrew and English, or substantially edit one, end to end — scaffold, research against official docs, write both languages, images, tags, cross-links, verify, commit. Use when asked to write, add or publish a post, continue a series (e.g. "the next Python post"), or when a GitHub issue labeled post-request asks for one.
+description: Write a new Loom blog post (or note) in Hebrew and English, or substantially edit one, end to end — scaffold, research against official docs, write both languages, images, tags, cross-links, verify, commit. Use when asked to write, add or publish a post, continue a series (e.g. "the next Python post").
 ---
 
 # New post
 
 The checklist that every post goes through. Do the steps in order; do not skip one because the post is short.
-Run every command with `./scripts/with-node.sh` (system Node is 20). In GitHub Actions Node is already right: run `npm run …` and `npx tsx scripts/diagrams/…` directly, without the wrapper.
+Run every command with `./scripts/with-node.sh` (system Node is 20).
 
 ## 1. Scaffold
 
@@ -60,10 +60,8 @@ Both must pass. Fix the content, never the validation, unless the user asks.
 ## 7. Commit
 
 - One commit per post (or per batch of series posts): `content: <series> post <n> - <topic> (en + he)`.
-- Locally: commit and push to `main` (deploys the site).
-- In GitHub Actions (a `post-request` issue): never push to `main`. Commit to the branch the action created; the action replies on the issue with a link to open the PR. In that reply, give the slug, both titles, and "Closes #<issue>" for the PR description.
+- Commit and push to `main` (deploys the site).
 
-## 8. Notion copy (manual, local only)
+## 8. Notion copy (manual)
 
 After the site is deployed (image URLs must point to the live site), create or update the page under **Loom — מרכז → בבלוג (פורסם)**: keep the "published" line, bump `updated` / "Last updated" when editing an existing post.
-In GitHub Actions there is no Notion access: skip this step and list it under "Still to do" in the PR description.

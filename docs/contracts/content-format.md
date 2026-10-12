@@ -1,6 +1,6 @@
 # Contract: content format (source Markdown)
 
-Consumed by: pipeline (`scripts/content`), seed content (`content/`), Notion sync (`scripts/notion`), CMS (`public/admin`).
+Consumed by: pipeline (`scripts/content`), seed content (`content/`), Notion sync (`scripts/notion`).
 Output JSON shape lives in `src/app/core/content.models.ts`; sample output in `src/testing/fixtures/content/`.
 
 ## Layout

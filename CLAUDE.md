@@ -26,7 +26,7 @@ Always prefix commands with `./scripts/with-node.sh` (system Node is 20):
 ## Writing a new post
 Use the project skill **`new-post`** (`.claude/skills/new-post/SKILL.md`) for every new post or substantial edit: scaffold (`npm run new-post`), check the official docs, both languages, images, tags, cross-links, verify, commit, Notion copy. The build rejects he/en pairs whose shared facts or body structure differ.
 
-Posts can also be requested from anywhere: the site's `/admin/request.html` page opens a `post-request` GitHub issue, and `.github/workflows/post-request.yml` runs Claude Code with the same skill and opens a PR (`docs/post-requests.md`).
+The site has no write path (no CMS, no request form): posts are written only on the author's computer, by asking Claude Code here.
 
 ## Conventions
 - Logical CSS only (`margin-inline-start`, `inset-inline-end`, `text-align: start`) — the site is RTL by default.

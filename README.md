@@ -164,7 +164,5 @@ A GitHub Actions workflow (`.github/workflows/`) builds the site and deploys it 
 
 1. **Markdown in the repo** — now. Write files in `content/` as described above.
 2. **Notion sync** — write in a Notion database, run `npm run sync:notion` (or the scheduled workflow) to generate the same Markdown files. Setup: `docs/notion-setup.md`.
-3. **Web CMS** — edit in the browser at `/loom/admin/` (Sveltia CMS, commits to the repo). Setup: `docs/cms-setup.md`.
-4. **Request from the site** — `/loom/admin/request.html` opens a `post-request` issue; Claude Code writes the post in GitHub Actions and replies with a PR link. Setup: `docs/post-requests.md`.
 
-All four produce the same `content/` format, so they can be mixed.
+Both produce the same `content/` format, so they can be mixed.
