@@ -29,7 +29,6 @@ Prefix each with `./scripts/with-node.sh`.
 | `npm run build:e2e` | Build with the sample entries from `e2e/content` added (test data, never published) |
 | `npm run e2e` | Playwright + axe end-to-end tests — run `npm run build:e2e` first |
 | `npm run new-post -- <slug> --tags a,b [--series key] [--note]` | Create `he.md` + `en.md` drafts with matching date/tags/series (next series order computed) |
-| `npm run sync:notion` | Pull pages from Notion into `content/` (see `docs/notion-setup.md`) |
 
 ## Writing guide
 
@@ -160,9 +159,6 @@ Put files in `public/images/<slug>/` and reference them from the site root (no `
 
 A GitHub Actions workflow (`.github/workflows/`) builds the site and deploys it to **GitHub Pages** (Settings → Pages → Source: GitHub Actions). The site is served under the base path **`/loom/`** (`baseHref: /loom/`); `/` redirects to `/he/`.
 
-## Authoring roadmap
+## Authoring
 
-1. **Markdown in the repo** — now. Write files in `content/` as described above.
-2. **Notion sync** — write in a Notion database, run `npm run sync:notion` (or the scheduled workflow) to generate the same Markdown files. Setup: `docs/notion-setup.md`.
-
-Both produce the same `content/` format, so they can be mixed.
+Posts are Markdown files in `content/`, written on the author's computer with Claude Code (`.claude/skills/new-post/SKILL.md`). Drafts can start in Notion and be published by asking Claude; see `docs/notion-setup.md`. Nothing writes to the repo automatically.
