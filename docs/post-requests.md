@@ -46,7 +46,11 @@ To rerun a request that failed, remove the `post-request` label from the issue a
   action itself refuses users without write access. Issues or comments from anyone else do nothing.
 - Claude never pushes to `main`; everything lands on a `claude/…` branch and reaches the site only when you merge.
 - Allowed tools are limited in the workflow (`--allowedTools`): file edits, web fetch/search for the docs,
-  `npm run …`, `./scripts/with-node.sh …`, `npx tsx …`, `python3 …`.
+  `npm run new-post|content|build|test:scripts`, `npx tsx scripts/diagrams/*`, `python3` (to run examples).
+- Remaining risk: `python3` runs any code, and Claude reads web pages while researching, so a hostile page
+  could attempt a prompt injection. That is why nothing reaches the site without your merge. Turn on branch
+  protection for `main` (Settings → Branches) so even the action's token cannot push there directly.
+- The action is pinned to a commit SHA, not a moving tag; bump it deliberately (see the workflow comment).
 
 ## Cost and limits
 

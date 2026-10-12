@@ -6,7 +6,7 @@ description: Write a new Loom blog post (or note) in Hebrew and English, or subs
 # New post
 
 The checklist that every post goes through. Do the steps in order; do not skip one because the post is short.
-Run every command with `./scripts/with-node.sh` (system Node is 20).
+Run every command with `./scripts/with-node.sh` (system Node is 20). In GitHub Actions Node is already right: run `npm run …` and `npx tsx scripts/diagrams/…` directly, without the wrapper.
 
 ## 1. Scaffold
 
