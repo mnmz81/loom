@@ -435,6 +435,16 @@ describe('buildContent — validation', () => {
     await expect(build(dirs)).resolves.toBeDefined();
   });
 
+  it('rejects translations whose bodies have a different structure, naming both files', async () => {
+    const base = { title: 'T', summary: 'S', date: '2026-01-01', tags: ['ai'] };
+    const message = await errorOf({
+      'posts/a/he.md': md(base, '## א\n\n```py\nx = 1\n```\n'),
+      'posts/a/en.md': md(base, '## A\n\n## B\n'),
+    });
+    expect(message).toMatch(/posts\/a\/he\.md and .*posts\/a\/en\.md: bodies must have the same structure.*## headings: he 1 vs en 2/);
+    expect(message).toMatch(/code blocks: he 1 vs en 0/);
+  });
+
   it('rejects translations with different shared facts even when one is a draft', async () => {
     expect(
       await errorOf({

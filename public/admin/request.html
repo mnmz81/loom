@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Loom · בקשת פוסט</title>
+    <!--
+      Opens a prefilled "Post request" GitHub issue (.github/ISSUE_TEMPLATE/post-request.yml).
+      Its post-request label starts .github/workflows/post-request.yml (Claude Code writes the post).
+      No token here: GitHub's own page submits the issue, signed in as you. See docs/post-requests.md.
+    -->
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #f8fafc;
+        --panel: #ffffff;
+        --text: #0f172a;
+        --muted: #64748b;
+        --border: #cbd5e1;
+        --accent: #2563eb;
+        --accent-text: #ffffff;
+        --focus: #1d4ed8;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0b1120;
+          --panel: #111827;
+          --text: #e2e8f0;
+          --muted: #94a3b8;
+          --border: #334155;
+          --accent: #3b82f6;
+          --accent-text: #ffffff;
+          --focus: #93c5fd;
+        }
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font: 16px/1.6 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      }
+      main { max-width: 36rem; margin-inline: auto; padding: 2rem 1rem 3rem; }
+      h1 { font-size: 1.5rem; margin: 0 0 0.25rem; }
+      p.lead { margin: 0 0 1.5rem; color: var(--muted); }
+      form {
+        display: grid;
+        gap: 1.1rem;
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.25rem;
+      }
+      label { display: grid; gap: 0.35rem; font-weight: 600; }
+      .hint { font-weight: 400; font-size: 0.875rem; color: var(--muted); }
+      input, select, textarea {
+        font: inherit;
+        color: inherit;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.6rem 0.75rem;
+        min-height: 44px;
+        width: 100%;
+      }
+      textarea { min-height: 8rem; resize: vertical; }
+      .ltr { direction: ltr; text-align: start; }
+      input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible {
+        outline: 2px solid var(--focus);
+        outline-offset: 2px;
+      }
+      button {
+        font: inherit;
+        font-weight: 600;
+        min-height: 48px;
+        border: 0;
+        border-radius: 8px;
+        background: var(--accent);
+        color: var(--accent-text);
+        cursor: pointer;
+      }
+      .steps { margin: 1.5rem 0 0; padding-inline-start: 1.25rem; color: var(--muted); font-size: 0.9rem; }
+      a { color: var(--accent); }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>בקשת פוסט חדש</h1>
+      <p class="lead">Claude יכתוב את הפוסט בעברית ובאנגלית, יבדוק מול התיעוד הרשמי ויפתח ענף לאישור שלך.</p>
+
+      <form id="request">
+        <label>
+          נושא
+          <span class="hint">על מה הפוסט, בעברית או באנגלית</span>
+          <input name="topic" required autocomplete="off" placeholder="למשל: רשימות ב-Python" />
+        </label>
+
+        <label>
+          סדרה
+          <span class="hint">ריק = פוסט עצמאי</span>
+          <select name="series">
+            <option value="">בלי סדרה</option>
+          </select>
+        </label>
+
+        <label>
+          תגיות
+          <span class="hint">לא חובה. באנגלית, מופרדות בפסיק. ריק = Claude בוחר</span>
+          <input name="tags" class="ltr" dir="ltr" autocomplete="off" placeholder="python, tutorial" />
+        </label>
+
+        <label>
+          פרטים
+          <span class="hint">לא חובה: מה לכסות, מה לדלג, דוגמאות, אורך</span>
+          <textarea name="details"></textarea>
+        </label>
+
+        <button type="submit">המשך ל-GitHub</button>
+      </form>
+
+      <ol class="steps">
+        <li>ב-GitHub לוחצים <bdi>Create</bdi> (צריך להיות מחוברים).</li>
+        <li>Claude עובד ומגיב ב-issue עם קישור לפתיחת PR.</li>
+        <li>בודקים את ה-PR. לתיקונים כותבים תגובה שמתחילה ב-<bdi>@claude</bdi>. מיזוג = פרסום.</li>
+      </ol>
+      <p class="steps"><a href="./">לעורך הידני</a></p>
+    </main>
+
+    <script>
+      const REPO = 'https://github.com/mnmz81/loom';
+      const form = document.getElementById('request');
+      const select = form.elements.namedItem('series');
+
+      // Series list from the built site (content/series.json); the form still works if it fails.
+      fetch('../content/series.json')
+        .then((r) => (r.ok ? r.json() : []))
+        .then((series) => {
+          for (const s of series) {
+            const option = new Option(`${s.title.he} (${s.slugs.length} פוסטים)`, s.key);
+            select.add(option);
+          }
+        })
+        .catch(() => {});
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const data = new FormData(form);
+        const value = (name) => String(data.get(name) ?? '').trim();
+        const params = new URLSearchParams({ template: 'post-request.yml', title: `Post: ${value('topic')}` });
+        for (const field of ['topic', 'series', 'tags', 'details']) if (value(field)) params.set(field, value(field));
+        location.href = `${REPO}/issues/new?${params}`;
+      });
+    </script>
+  </body>
+</html>

@@ -6,6 +6,7 @@
     "start": "INCLUDE_DRAFTS=1 npm run content && ng serve",
     "content": "tsx scripts/build-content.ts",
     "og": "tsx scripts/build-og.ts",
+    "new-post": "tsx scripts/new-post.ts",
     "build": "npm run content && npm run og && ng build",
     "postbuild": "tsx scripts/postbuild.ts",
     "test": "ng test --watch=false",

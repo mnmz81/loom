@@ -24,17 +24,9 @@ Always prefix commands with `./scripts/with-node.sh` (system Node is 20):
 - `src/testing/fixtures/content/` — sample pipeline output matching the models
 
 ## Writing a new post
-Before writing any new post (or substantially editing one), check the docs:
-- **Official docs of the topic** (e.g. docs.github.com, git-scm.com, the tool's own `--help`): verify every command, flag, setting path and claim; run commands locally when possible. Fetch the docs, don't rely on memory. Prices, plans and UI paths change, so hedge or link instead of stating them.
-- **This repo's docs:** `docs/contracts/content-format.md` (folder layout, frontmatter, tags) and `docs/notion-setup.md` (publishing flow, including the Notion copy).
+Use the project skill **`new-post`** (`.claude/skills/new-post/SKILL.md`) for every new post or substantial edit: scaffold (`npm run new-post`), check the official docs, both languages, images, tags, cross-links, verify, commit, Notion copy. The build rejects he/en pairs whose shared facts or body structure differ.
 
-Then update **every place** the post lives, in the same change, and never leave one behind:
-- Both languages: `content/posts/<slug>/en.md` and `he.md` (same facts, same structure, same images; `date`, `tags`, `series`, `cover` must match).
-- Images and their generator script: `public/images/<slug>/` and `scripts/diagrams/` (re-run the script, don't hand-edit SVGs).
-- `content/tags.yaml` for any new tag; `README.md` / `docs/` if the change affects them.
-- Cross-links in related posts (e.g. "see also" links, cheat sheets that should point to the new post).
-- The Notion copy under **Loom — מרכז → בבלוג (פורסם)**: create or update the page after the site is deployed (image URLs point to the live site), keep the "published" line, and bump `updated` / "Last updated" when editing an existing post.
-- Verify before finishing: `npm run build` and `npm run test:scripts` pass, then commit and push.
+Posts can also be requested from anywhere: the site's `/admin/request.html` page opens a `post-request` GitHub issue, and `.github/workflows/post-request.yml` runs Claude Code with the same skill and opens a PR (`docs/post-requests.md`).
 
 ## Conventions
 - Logical CSS only (`margin-inline-start`, `inset-inline-end`, `text-align: start`) — the site is RTL by default.

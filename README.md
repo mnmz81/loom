@@ -28,6 +28,7 @@ Prefix each with `./scripts/with-node.sh`.
 | `npm run test:scripts` | Node script tests (`scripts/**/*.test.ts`) |
 | `npm run build:e2e` | Build with the sample entries from `e2e/content` added (test data, never published) |
 | `npm run e2e` | Playwright + axe end-to-end tests — run `npm run build:e2e` first |
+| `npm run new-post -- <slug> --tags a,b [--series key] [--note]` | Create `he.md` + `en.md` drafts with matching date/tags/series (next series order computed) |
 | `npm run sync:notion` | Pull pages from Notion into `content/` (see `docs/notion-setup.md`) |
 
 ## Writing guide
@@ -164,5 +165,6 @@ A GitHub Actions workflow (`.github/workflows/`) builds the site and deploys it 
 1. **Markdown in the repo** — now. Write files in `content/` as described above.
 2. **Notion sync** — write in a Notion database, run `npm run sync:notion` (or the scheduled workflow) to generate the same Markdown files. Setup: `docs/notion-setup.md`.
 3. **Web CMS** — edit in the browser at `/loom/admin/` (Sveltia CMS, commits to the repo). Setup: `docs/cms-setup.md`.
+4. **Request from the site** — `/loom/admin/request.html` opens a `post-request` issue; Claude Code writes the post in GitHub Actions and replies with a PR link. Setup: `docs/post-requests.md`.
 
-All three produce the same `content/` format, so they can be mixed.
+All four produce the same `content/` format, so they can be mixed.

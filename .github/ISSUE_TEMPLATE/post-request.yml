@@ -1,0 +1,34 @@
+# Opened from the site's /admin/request.html (fields are prefilled by URL query: ?topic=…&series=…&details=…).
+# The post-request label starts .github/workflows/post-request.yml, which writes the post with Claude Code.
+name: Post request
+description: Ask Claude to write a new blog post (he + en). Owner only.
+title: 'Post: '
+labels: [post-request]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Claude writes the post with the `new-post` skill (`.claude/skills/new-post/SKILL.md`): official docs, both languages, images, build, then a branch for review.
+  - type: input
+    id: topic
+    attributes:
+      label: Topic
+      description: What the post is about (Hebrew or English).
+      placeholder: e.g. Python lists
+    validations:
+      required: true
+  - type: input
+    id: series
+    attributes:
+      label: Series key
+      description: Optional. Existing series key (content/series/<key>.yaml), e.g. python. Empty = standalone post.
+  - type: input
+    id: tags
+    attributes:
+      label: Tags
+      description: Optional. Comma-separated, Latin kebab-case. Empty = Claude picks from content/tags.yaml.
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: Optional. What to cover, what to skip, examples to include, length.

@@ -45,7 +45,7 @@ Quote `title` and `summary` values (they often contain `: `). Unquoted `YYYY-MM-
 | `draft` | boolean | optional |
 
 ### Translations
-`date`, `tags`, `series` and `cover` are shared facts: when both `he.md` and `en.md` exist they must be equal, otherwise the build fails naming both files. `title`, `summary`, `updated`, `draft` and the body are per language. A draft translation is treated as missing in production.
+`date`, `tags`, `series` and `cover` are shared facts: when both `he.md` and `en.md` exist they must be equal, otherwise the build fails naming both files. `title`, `summary`, `updated`, `draft` and the body text are per language, but the body's skeleton is shared: both bodies must have the same number of `##` and `###` headings, the same number of code blocks and the same images (`scripts/content/parity.ts`), otherwise the build fails naming both files and the difference. A draft translation is treated as missing in production.
 
 ## `content/series/<key>.yaml`
 ```yaml

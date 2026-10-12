@@ -20,6 +20,7 @@ import {
   TYPE_SEGMENT,
 } from '../../src/app/core/content.models';
 import { createRenderer, type RenderedMarkdown } from './markdown';
+import { bodyShape, shapeDiff } from './parity';
 import { formatZodError, isKebab, noteFrontmatter, postFrontmatter, type SeriesFile, seriesFile, type TagsFile, tagsFile } from './schema';
 
 export interface BuildOptions {
@@ -187,6 +188,9 @@ function validate(entries: RawEntry[], series: Map<string, SeriesFile>, contentD
         const a = JSON.stringify(he.fm[field]);
         const b = JSON.stringify(en.fm[field]);
         if (a !== b) errors.push(`${he.file} and ${en.file}: shared field "${field}" must be equal in both translations (${a ?? 'none'} vs ${b ?? 'none'})`);
+      }
+      for (const diff of shapeDiff(bodyShape(he.body), bodyShape(en.body))) {
+        errors.push(`${he.file} and ${en.file}: bodies must have the same structure in both translations (${diff})`);
       }
     }
     const sources = LANGS.flatMap((lang) => entry.sources[lang] ?? []);
