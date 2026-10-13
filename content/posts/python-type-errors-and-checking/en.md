@@ -204,4 +204,4 @@ print(double.__annotations__)
 
 ## What's next
 
-Next in the series: conditions (`if`, `elif`, `else`), which use all the values and checks from the last few posts.
+Next in the series: [conditions](en/posts/python-if-else/) (`if`, `elif`, `else`), which use all the values and checks from the last few posts.
