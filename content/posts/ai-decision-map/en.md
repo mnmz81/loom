@@ -61,4 +61,4 @@ A checklist that collects the production series:
 
 The field moves fast, and some details in this series (model names, prices, beta features) will change. The concepts change much more slowly: tokens and context, retrieval, the tool loop, workflows versus agents, evals. When something new comes out, ask the same questions as in the map: what does it change, what problem does it fix, and how will you measure that it helped?
 
-For the terms used across the series, see the AI glossary cheat sheet.
+For the terms used across the series, see the [AI glossary cheat sheet](en/posts/ai-glossary/).

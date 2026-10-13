@@ -14,7 +14,7 @@ The code follows the [official Anthropic quickstart](https://platform.claude.com
 
 An LLM is a very large function. It was trained on a huge amount of text, and it learned one task: given the text so far, estimate which piece of text is likely to come next.
 
-The pieces are called tokens. A token is usually a word or part of a word. The next post covers tokens and the context window in detail; for now, think of a token as a small chunk of text.
+The pieces are called tokens. A token is usually a word or part of a word. The [tokens and context window](en/posts/ai-tokens-context-window/) post covers them in detail; for now, think of a token as a small chunk of text.
 
 Everything else an LLM does, such as answering questions, translating, summarizing or writing code, comes from that one skill. Nobody wrote a rule for translation. The model picked it up because translated text was part of what it learned from.
 
