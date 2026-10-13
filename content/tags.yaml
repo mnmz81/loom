@@ -11,3 +11,9 @@ python: { he: Python, en: Python }
 aws: { he: AWS, en: AWS }
 cloud: { he: ענן, en: Cloud }
 linux: { he: Linux, en: Linux }
+ai: { he: בינה מלאכותית, en: AI }
+llm: { he: LLM, en: LLM }
+rag: { he: RAG, en: RAG }
+agents: { he: סוכנים, en: Agents }
+mcp: { he: MCP, en: MCP }
+fine-tuning: { he: Fine-tuning, en: Fine-tuning }

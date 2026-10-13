@@ -1,0 +1,6 @@
+title:
+  he: "בינה מלאכותית: יסודות"
+  en: "AI: the basics"
+description:
+  he: מה זה LLM, איך הוא נבנה, מה זה tokens ו-prompting, ומה אפשר לעשות איתו. כל דוגמת קוד מבוססת על התיעוד הרשמי, והפלט מסומן כפלט לדוגמה.
+  en: What an LLM is, how it is built, tokens, prompting and what you can do with one. Code is based on the official docs and output is marked as example output.

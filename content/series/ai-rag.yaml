@@ -1,0 +1,6 @@
+title:
+  he: "בינה מלאכותית: ידע ו-RAG"
+  en: "AI: knowledge and RAG"
+description:
+  he: איך נותנים למודל גישה לידע שלכם. embeddings, חיפוש סמנטי, RAG ואבחון כשל.
+  en: How to give a model access to your own knowledge. Embeddings, semantic search, RAG and diagnosing failures.
