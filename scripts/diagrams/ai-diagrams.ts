@@ -336,3 +336,42 @@ map(
     ...[46, 106, 166, 226, 286, 346].map((y) => arrow(230, y + 46, 230, y + 60, C.grey)),
   ],
 );
+
+// ai-webmcp: MCP server versus WebMCP tools in a page ---------------------------------------------------------------------
+const webmcp = svgWriter(outDir('ai-webmcp'));
+webmcp(
+  'mcp-vs-webmcp',
+  760,
+  330,
+  'MCP compared with WebMCP',
+  'With MCP, an agent host connects to a separate MCP server process, which calls your backend API with its own credentials. With WebMCP, the web page itself registers tools with document.modelContext.registerTool. An agent in the browser calls a tool, the tool runs as JavaScript inside the open page, using the page code and the user session, and the user watches the page update.',
+  [
+    text(190, 34, 'MCP: a separate server', { size: 14, weight: 700, color: C.main }),
+    box(30, 60, 140, 70, C.main),
+    text(100, 90, 'Agent host', { size: 13, weight: 700 }),
+    text(100, 110, 'IDE, chat app', { size: 12, color: C.muted }),
+    arrow(100, 132, 100, 168, C.muted),
+    text(110, 154, 'JSON-RPC', { size: 11.5, color: C.muted, anchor: 'start', mono: true }),
+    box(30, 170, 140, 70, C.green),
+    text(100, 200, 'MCP server', { size: 13, weight: 700, color: C.green }),
+    text(100, 220, 'its own process', { size: 12, color: C.muted }),
+    arrow(172, 205, 238, 205, C.muted),
+    box(240, 170, 120, 70, C.border),
+    text(300, 200, 'Your API', { size: 13, weight: 700 }),
+    text(300, 220, 'own credentials', { size: 12, color: C.muted }),
+    `<line x1="390" y1="20" x2="390" y2="290" stroke="${C.border}" stroke-width="1.5"/>`,
+    text(575, 34, 'WebMCP: tools inside the page', { size: 14, weight: 700, color: C.feature }),
+    box(410, 60, 330, 190, C.feature, C.panel),
+    text(575, 82, 'Browser tab (the user is here)', { size: 12.5, color: C.muted }),
+    box(425, 96, 300, 70, C.border),
+    text(575, 122, 'Web page', { size: 13, weight: 700 }),
+    text(575, 144, 'document.modelContext.registerTool()', { size: 11.5, mono: true, color: C.feature }),
+    box(425, 186, 140, 50, C.main),
+    text(495, 216, 'Browser agent', { size: 12.5, weight: 700, color: C.main }),
+    arrow(510, 184, 540, 168, C.main),
+    text(600, 200, 'calls a tool:', { size: 11.5, color: C.muted, anchor: 'start' }),
+    text(600, 216, 'JS runs in the page,', { size: 11.5, color: C.muted, anchor: 'start' }),
+    text(600, 232, 'with the user session', { size: 11.5, color: C.muted, anchor: 'start' }),
+    text(380, 316, 'Same idea (named tools with a JSON Schema), different place: a backend server vs. the open page.', { size: 12.5, color: C.muted }),
+  ],
+);

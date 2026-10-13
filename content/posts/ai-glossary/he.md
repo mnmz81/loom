@@ -63,6 +63,7 @@ tags: [ai, llm, cheatsheet]
 - **סוכן משנה / מרובה סוכנים**: סוכן מוביל מאציל עבודה ממוקדת לסוכנים עם הקשר משלהם. [מערכות מרובות סוכנים](he/posts/ai-multi-agent/)
 - **Computer use**: מודל שמפעיל שולחן עבודה דרך צילומי מסך, עכבר ומקלדת. [Computer use ו-Agent Skills](he/posts/ai-computer-use-skills/)
 - **Agent Skills**: תיקיות של הוראות וסקריפטים שנטענות רק כשצריך. [Computer use ו-Agent Skills](he/posts/ai-computer-use-skills/)
+- **WebMCP**: הצעה ל-API של הדפדפן שמאפשר לדף אינטרנט לרשום כלים לסוכנים עם `document.modelContext`. [WebMCP](he/posts/ai-webmcp/)
 
 ## התאמת מודלים
 

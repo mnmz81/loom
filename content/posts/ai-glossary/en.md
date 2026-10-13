@@ -63,6 +63,7 @@ Every term from the AI series in one place, with a one-line definition and a lin
 - **Subagent / multi-agent**: a lead agent delegates focused work to agents with their own context. [Multi-agent systems](en/posts/ai-multi-agent/)
 - **Computer use**: a model that operates a desktop through screenshots, mouse and keyboard. [Computer use and Agent Skills](en/posts/ai-computer-use-skills/)
 - **Agent Skills**: folders of instructions and scripts loaded only when needed. [Computer use and Agent Skills](en/posts/ai-computer-use-skills/)
+- **WebMCP**: a proposed browser API that lets a web page register tools for agents with `document.modelContext`. [WebMCP](en/posts/ai-webmcp/)
 
 ## Adapting models
 

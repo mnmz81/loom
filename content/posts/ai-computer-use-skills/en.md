@@ -88,4 +88,4 @@ Skills need an environment with a filesystem and code execution. The docs list t
 
 Treat skills like installing software. The docs say to use only skills you wrote or got from a trusted source, and to audit every file in an unknown one: a malicious skill can direct the agent to run code or leak data.
 
-This ends the agents series. The next series covers adapting a model itself: fine-tuning, distillation and running models locally.
+The last post in the series looks at WebMCP, a proposal that lets websites hand agents real tools instead of pixels to click.
