@@ -2,7 +2,7 @@
 title: "Memory and context management"
 summary: "How agents keep working when a task outgrows the context window: context engineering, compaction, clearing tool results, notes and the memory tool, with safe file handling."
 date: 2026-10-13
-tags: [ai, agents, tutorial]
+tags: [ai, agents]
 series: { key: ai-agents, order: 5 }
 ---
 

@@ -2,7 +2,7 @@
 title: "What is Python, and why use it?"
 summary: "What Python is, what it's good for, and how it differs from languages like C and Java: interpreted, dynamically typed, indentation-based and batteries included."
 date: 2026-10-10
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 1 }
 ---
 

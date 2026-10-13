@@ -2,11 +2,13 @@
 title: "What is an LLM"
 summary: "A large language model predicts the next token, over and over. What that means, what it gets you, and your first API call to one in Python."
 date: 2026-10-12
-tags: [ai, llm, tutorial]
+tags: [ai, llm]
 series: { key: ai-basics, order: 1 }
 ---
 
 An LLM (large language model) is a program that takes text in and produces text out. ChatGPT, Claude and Gemini are products built on top of LLMs. This post explains what happens inside the loop at the simplest level, and then makes a first call from Python.
+
+This is the first post of five AI series. The suggested reading order: [the basics](en/series/ai-basics/), then [knowledge and RAG](en/series/ai-rag/) and [tools and agents](en/series/ai-agents/) (in either order), then [production](en/series/ai-production/), and finally [adapting a model](en/series/ai-tuning/). The [decision map](en/posts/ai-decision-map/) shows which tool fits which problem, and the [glossary](en/posts/ai-glossary/) explains any unfamiliar term.
 
 The code follows the [official Anthropic quickstart](https://platform.claude.com/docs/en/get-started). It was not run for this post, so every output block below is **example output**: the structure matches the docs, but the text of a real answer will differ on every run.
 

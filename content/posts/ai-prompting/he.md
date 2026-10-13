@@ -2,7 +2,7 @@
 title: "Prompting: איך לבקש ממודל"
 summary: "ה-system prompt, הוראות ברורות עם סיבה, דוגמאות few-shot, תגיות XML ומסמכים ארוכים: טכניקות ה-prompting שהמדריך הרשמי ממליץ עליהן."
 date: 2026-10-13
-tags: [ai, llm, tutorial]
+tags: [ai, llm]
 series: { key: ai-basics, order: 5 }
 ---
 

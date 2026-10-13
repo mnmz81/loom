@@ -2,7 +2,7 @@
 title: "Fine-tuning: when it helps and how LoRA works"
 summary: "When fine-tuning beats prompting and RAG, and when it does not, what training data looks like, how LoRA and QLoRA train a model cheaply, and how to check the result."
 date: 2026-10-13
-tags: [ai, fine-tuning, tutorial]
+tags: [ai, fine-tuning]
 series: { key: ai-tuning, order: 1 }
 ---
 

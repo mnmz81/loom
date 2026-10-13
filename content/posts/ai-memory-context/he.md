@@ -2,7 +2,7 @@
 title: "זיכרון וניהול הקשר"
 summary: "איך סוכנים ממשיכים לעבוד כשמשימה גדלה מעבר לחלון ההקשר: context engineering, דחיסה (compaction), ניקוי תוצאות כלים, הערות וכלי הזיכרון, עם טיפול בטוח בקבצים."
 date: 2026-10-13
-tags: [ai, agents, tutorial]
+tags: [ai, agents]
 series: { key: ai-agents, order: 5 }
 ---
 

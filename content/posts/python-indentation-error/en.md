@@ -2,7 +2,7 @@
 title: "Indentation in Python and the IndentationError"
 summary: "How Python uses indentation to group code, the four IndentationError messages you'll meet, why tabs and spaces can trigger a TabError, and how to find and fix them."
 date: 2026-10-11
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 5 }
 ---
 

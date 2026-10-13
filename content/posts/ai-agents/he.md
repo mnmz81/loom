@@ -2,7 +2,7 @@
 title: "סוכנים: מודל עם כלים בלולאה"
 summary: "מה הופך מערכת לסוכן, במה הוא שונה מ-workflow, מתי סוכן שווה את זה ומתי לא, סוכן מינימלי ב-Python, ו-Claude Agent SDK."
 date: 2026-10-13
-tags: [ai, agents, tutorial]
+tags: [ai, agents]
 series: { key: ai-agents, order: 3 }
 ---
 

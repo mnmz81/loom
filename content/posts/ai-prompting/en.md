@@ -2,7 +2,7 @@
 title: "Prompting: how to ask a model"
 summary: "The system prompt, clear instructions with a reason, few-shot examples, XML tags and long documents: the prompting techniques the official guide recommends."
 date: 2026-10-13
-tags: [ai, llm, tutorial]
+tags: [ai, llm]
 series: { key: ai-basics, order: 5 }
 ---
 

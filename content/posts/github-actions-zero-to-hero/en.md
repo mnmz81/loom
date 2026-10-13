@@ -2,7 +2,8 @@
 title: "GitHub Actions from zero to hero"
 summary: "A hands-on guide to GitHub Actions with diagrams: workflows, events, jobs, expressions, outputs, matrix builds, caching, artifacts, secrets, environments, OIDC, Docker images and security."
 date: 2026-10-13
-tags: [github, ci-cd, tutorial]
+tags: [github, ci-cd]
+series: { key: devops, order: 4 }
 ---
 
 Every project has chores that should happen on every change: run the tests, check the formatting, build, publish a package, deploy. Doing them by hand works until the day someone forgets. **GitHub Actions** is GitHub's built-in automation: you describe the chores in a YAML file in the repository, and GitHub runs them on its own machines whenever something happens.

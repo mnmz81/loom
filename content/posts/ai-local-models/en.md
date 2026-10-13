@@ -2,7 +2,7 @@
 title: "Running models locally: Ollama and quantization"
 summary: "Why run an open-weight model on your own machine, how much memory it needs, what quantization does, and how to call a local model with Ollama, including from the Anthropic SDK."
 date: 2026-10-13
-tags: [ai, llm, tutorial]
+tags: [ai, llm]
 series: { key: ai-tuning, order: 3 }
 ---
 

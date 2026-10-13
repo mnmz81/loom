@@ -2,7 +2,7 @@
 title: "uv: מנהל חבילות ופרויקטים מהיר ל-Python"
 summary: "מה זה uv ואיך משתמשים בו: זרימת עבודה של פרויקט עם uv init, uv add ו-uv run, קובצי .venv, pyproject.toml ו-uv.lock, ו-uv venv ו-uv pip למי שרגיל ל-pip."
 date: 2026-10-11
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 7 }
 ---
 

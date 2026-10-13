@@ -2,7 +2,7 @@
 title: "Multimodal: images and PDFs"
 summary: "Sending images and PDFs to a model, how image tokens are counted, what vision is still bad at, and what to do with audio."
 date: 2026-10-13
-tags: [ai, llm, tutorial]
+tags: [ai, llm]
 series: { key: ai-basics, order: 8 }
 ---
 

@@ -2,7 +2,7 @@
 title: "Multi-agent systems and subagents"
 summary: "When several agents beat one: the orchestrator-subagent design, what Anthropic measured in its research system, the token cost, and subagents in the Claude Agent SDK."
 date: 2026-10-13
-tags: [ai, agents, tutorial]
+tags: [ai, agents]
 series: { key: ai-agents, order: 6 }
 ---
 

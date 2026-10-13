@@ -2,7 +2,7 @@
 title: "הרצת מודלים מקומית: Ollama וקוונטיזציה"
 summary: "למה להריץ מודל עם משקלות פתוחים על המחשב שלכם, כמה זיכרון הוא צריך, מה עושה קוונטיזציה, ואיך קוראים למודל מקומי עם Ollama, כולל מה-SDK של Anthropic."
 date: 2026-10-13
-tags: [ai, llm, tutorial]
+tags: [ai, llm]
 series: { key: ai-tuning, order: 3 }
 ---
 

@@ -2,7 +2,7 @@
 title: "Distillation: a small model that learns from a large one"
 summary: "What knowledge distillation is, why a teacher's soft probabilities teach more than the right answer, and how distillation of LLMs works in practice: teacher data, filtering, fine-tuning a student."
 date: 2026-10-13
-tags: [ai, fine-tuning, tutorial]
+tags: [ai, fine-tuning]
 series: { key: ai-tuning, order: 2 }
 ---
 

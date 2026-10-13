@@ -2,7 +2,7 @@
 title: "מה זה Python, ולמה כדאי להשתמש בו?"
 summary: "מה זה Python, למה הוא טוב, ובמה הוא שונה משפות כמו C ו-Java: מתורגמת בזמן ריצה, טיפוסים דינמיים, הזחה כחלק מהתחביר וספרייה סטנדרטית עשירה."
 date: 2026-10-10
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 1 }
 ---
 

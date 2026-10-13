@@ -2,7 +2,7 @@
 title: "איך בונים מודל שפה"
 summary: "Transformer, attention, אימון מקדים, fine-tuning ואימון לפי העדפות (RLHF, DPO): השלבים שהופכים ערימת טקסט לעוזר שיחה."
 date: 2026-10-13
-tags: [ai, llm, tutorial]
+tags: [ai, llm]
 series: { key: ai-basics, order: 2 }
 ---
 

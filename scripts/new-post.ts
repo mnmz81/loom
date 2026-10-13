@@ -1,5 +1,5 @@
 // Creates content/<posts|notes>/<slug>/{he,en}.md with matching shared facts, as drafts.
-// Usage: npm run new-post -- <slug> --tags python,tutorial [--series python] [--date 2026-10-12] [--note]
+// Usage: npm run new-post -- <slug> --tags python [--series python] [--date 2026-10-12] [--note]
 //   --series  joins the series with the next free order (posts only)
 //   --date    defaults to today (local time)
 //   --note    creates a note instead of a post

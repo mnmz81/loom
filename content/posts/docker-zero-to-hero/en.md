@@ -2,7 +2,8 @@
 title: "Docker from zero to hero"
 summary: "A hands-on guide to Docker with diagrams: images and containers, Dockerfiles, layers and caching, ports, volumes, networks, Docker Compose, cleanup and habits for small, safe images."
 date: 2026-10-10
-tags: [docker, containers, tutorial]
+tags: [docker, containers]
+series: { key: devops, order: 3 }
 ---
 
 "It works on my machine" is the oldest sentence in software. Docker is the tool that mostly retires it: you package your app together with everything it needs, and then it runs the same way on your laptop, on a teammate's laptop and on a server.

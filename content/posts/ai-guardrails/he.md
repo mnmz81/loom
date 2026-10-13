@@ -2,7 +2,7 @@
 title: "Guardrails: בדיקות סביב המודל"
 summary: "Guardrails בשכבות לאפליקציות LLM: סינון קלט עם מודל קטן, בדיקה והשחרה של הפלט, בדיקת פעולות, מגבלות, ומה להציג למשתמש כשבדיקה נכשלת."
 date: 2026-10-13
-tags: [ai, llm, tutorial]
+tags: [ai, llmops, security]
 series: { key: ai-production, order: 5 }
 ---
 

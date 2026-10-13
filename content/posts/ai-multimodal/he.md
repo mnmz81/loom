@@ -2,7 +2,7 @@
 title: "מולטימודלי: תמונות ו-PDF"
 summary: "איך שולחים למודל תמונות ו-PDF, איך סופרים טוקנים של תמונה, במה ראייה ממוחשבת עדיין חלשה, ומה עושים עם אודיו."
 date: 2026-10-13
-tags: [ai, llm, tutorial]
+tags: [ai, llm]
 series: { key: ai-basics, order: 8 }
 ---
 

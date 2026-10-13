@@ -2,7 +2,7 @@
 title: "if, elif, else: conditions in Python"
 summary: "How Python decides which code to run: if, else and elif, the comparison operators, truthy and falsy values, the conditional expression (x if C else y), and a first look at match."
 date: 2026-10-13
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 15 }
 ---
 

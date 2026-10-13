@@ -2,7 +2,7 @@
 title: "Embeddings וחיפוש סמנטי"
 summary: "מה זה embedding, איך cosine similarity מוצא טקסטים שאומרים את אותו הדבר, איך יוצרים embeddings עם Voyage AI, ואיפה שומרים אותם."
 date: 2026-10-13
-tags: [ai, rag, tutorial]
+tags: [ai, rag]
 series: { key: ai-rag, order: 1 }
 ---
 

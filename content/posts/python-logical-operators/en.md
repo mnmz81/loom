@@ -2,7 +2,7 @@
 title: "Logical operators in Python: and, or, not"
 summary: "How and, or and not combine conditions in Python: truth tables, short-circuit evaluation, why and/or return one of their operands, precedence, chained comparisons, and any() and all()."
 date: 2026-10-13
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 16 }
 ---
 

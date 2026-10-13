@@ -2,7 +2,7 @@
 title: "Type conversion in Python"
 summary: "How to convert between Python types with int(), float(), str(), bool(), list(), tuple() and set(): what each conversion does, truncation, bases, truthiness, and the errors when a conversion fails."
 date: 2026-10-11
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 12 }
 ---
 

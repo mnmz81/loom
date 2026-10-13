@@ -2,7 +2,7 @@
 title: "פעולות על מספרים ב-Python"
 summary: "אופרטורים חשבוניים ב-Python: + - * / // % ו-**, ההבדל בין חילוק אמיתי לחילוק עם עיגול למטה, מספרים שליליים, divmod, round והמודול math."
 date: 2026-10-11
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 11 }
 ---
 

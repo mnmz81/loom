@@ -2,7 +2,7 @@
 title: "שליפה טובה יותר: חיפוש היברידי, reranking ו-chunks עם הקשר"
 summary: "שלוש טכניקות שמתקנות את רוב כשלי השליפה ב-RAG: שילוב חיפוש מילות מפתח עם חיפוש וקטורי, דירוג מחדש של המועמדים, והוספת הקשר לכל chunk."
 date: 2026-10-13
-tags: [ai, rag, tutorial]
+tags: [ai, rag]
 series: { key: ai-rag, order: 3 }
 ---
 

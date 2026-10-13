@@ -2,7 +2,7 @@
 title: "Observability: לראות מה מערכת LLM עושה"
 summary: "מה לרשום בכל קריאה למודל ובכל צעד של סוכן, traces ו-spans, tracer קטן ב-Python, המדדים ששווה לעקוב אחריהם, פרטיות, והפיכת כשלים ב-production ל-evals."
 date: 2026-10-13
-tags: [ai, llm, tutorial]
+tags: [ai, llmops]
 series: { key: ai-production, order: 2 }
 ---
 

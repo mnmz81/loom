@@ -2,7 +2,7 @@
 title: "היקף משתנים ושמות טובים ב-Python"
 summary: "איפה אפשר לראות ולשנות משתנה ב-Python: היקף מקומי, גלובלי ו-nonlocal, המילים global ו-nonlocal, הסתרת שמות, ואיך בוחרים שמות ברורים לפי PEP 8."
 date: 2026-10-11
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 9 }
 ---
 

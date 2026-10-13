@@ -2,7 +2,7 @@
 title: "f-strings: עיצוב טקסט ב-Python"
 summary: "איך עובדים f-strings ב-Python: שמים ביטויים בסוגריים מסולסלים, מפרטי עיצוב לרוחב, יישור, דיוק, מפרידי אלפים ואחוזים, מציין ה-= לדיבוג, והמרות !r."
 date: 2026-10-11
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 13 }
 ---
 

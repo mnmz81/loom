@@ -2,7 +2,7 @@
 title: "The modulo operator % in Python"
 summary: "What % does in Python and where it's useful: even or odd, every Nth item, wrapping around a list or a clock, splitting seconds with divmod, digits, FizzBuzz, and how it treats negative numbers."
 date: 2026-10-13
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 18 }
 ---
 

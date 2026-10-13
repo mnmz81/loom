@@ -2,7 +2,7 @@
 title: "Tokens and the context window"
 summary: "What a token is, how to count tokens before you send a request, what fills the context window, and what happens when it runs out."
 date: 2026-10-13
-tags: [ai, llm, tutorial]
+tags: [ai, llm]
 series: { key: ai-basics, order: 3 }
 ---
 

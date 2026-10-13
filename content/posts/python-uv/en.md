@@ -2,7 +2,7 @@
 title: "uv: a fast Python package and project manager"
 summary: "What uv is and how to use it: the project workflow with uv init, uv add and uv run, the .venv, pyproject.toml and uv.lock, plus uv venv and uv pip for pip-style work."
 date: 2026-10-11
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 7 }
 ---
 

@@ -2,7 +2,8 @@
 title: "AWS from zero to hero"
 summary: "A beginner's map of Amazon Web Services with diagrams: Regions and zones, a safe account setup, IAM, the CLI, S3, EC2, VPC, RDS, Lambda, monitoring and how to avoid surprise bills."
 date: 2026-10-10
-tags: [aws, cloud, tutorial]
+tags: [aws, cloud]
+series: { key: devops, order: 6 }
 ---
 
 AWS has well over a hundred services, and the console menu looks like a wall. The good news is that a small core does most of the work: somewhere to store files, somewhere to run code, a network around them, a database, and a way to control who can touch what. Learn those, and the rest is variations.

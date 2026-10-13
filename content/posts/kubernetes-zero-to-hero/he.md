@@ -2,7 +2,8 @@
 title: "Kubernetes מאפס לגיבור"
 summary: "מדריך מעשי ל-Kubernetes עם דיאגרמות: קלאסטרים ומצב רצוי, Pods, ‏Deployments, ‏Services, ‏Gateway ו-Ingress, עדכונים מתגלגלים, הגדרות ו-Secrets, בדיקות בריאות, סקיילינג, דיבאג ו-Helm."
 date: 2026-10-13
-tags: [kubernetes, containers, tutorial]
+tags: [kubernetes, containers]
+series: { key: devops, order: 5 }
 ---
 
 Docker עונה על השאלה "איך מריצים את האפליקציה בקונטיינר?". השאלה הבאה מגיעה מהר: איך מריצים עשרה עותקים שלה על כמה שרתים, מפעילים מחדש את אלה שקורסים, מעדכנים אותם בלי זמן השבתה, ושולחים תעבורה רק לאלה שתקינים? זה התפקיד של **Kubernetes** (שנכתב הרבה פעמים **K8s**: ‏K, שמונה אותיות, s).

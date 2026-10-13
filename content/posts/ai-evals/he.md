@@ -2,7 +2,7 @@
 title: "Evals: למדוד מערכת LLM"
 summary: "למה כל מערכת LLM צריכה סט הערכה, איך בונים אחד, בדיקות בקוד, LLM-as-judge עם רובריקה, ואיך משתמשים ב-evals כדי להשוות prompts, מודלים והגדרות."
 date: 2026-10-13
-tags: [ai, llm, tutorial]
+tags: [ai, llmops]
 series: { key: ai-production, order: 1 }
 ---
 

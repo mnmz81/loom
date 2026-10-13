@@ -2,7 +2,7 @@
 title: "טוקנים וחלון ההקשר"
 summary: "מה זה טוקן, איך סופרים טוקנים לפני ששולחים בקשה, מה ממלא את חלון ההקשר, ומה קורה כשהוא נגמר."
 date: 2026-10-13
-tags: [ai, llm, tutorial]
+tags: [ai, llm]
 series: { key: ai-basics, order: 3 }
 ---
 

@@ -2,7 +2,8 @@
 title: "GitHub from zero to hero"
 summary: "A hands-on guide to GitHub with diagrams: repositories, SSH and the gh CLI, pull requests and reviews, issues, forks, Actions, Pages, branch protection and the habits that keep a team calm."
 date: 2026-10-09
-tags: [github, git, tutorial]
+tags: [github, git]
+series: { key: devops, order: 2 }
 ---
 
 Git saves your project's history on your computer. GitHub is where that history goes to be shared, reviewed, tested and published. This guide continues the recipe book from [Git from zero to hero](en/posts/git-zero-to-hero/): we put it online, change it through a pull request, let a robot test it, and finally publish it as a website.

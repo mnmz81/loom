@@ -2,7 +2,7 @@
 title: "input(): קבלת טקסט מהמשתמש"
 summary: "איך input() קורא שורה מהמשתמש ב-Python: ההנחיה, למה התוצאה תמיד str, המרה עם int() ו-float(), שגיאת ValueError על קלט לא תקין, ו-EOFError כשאין קלט בכלל."
 date: 2026-10-11
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 8 }
 ---
 

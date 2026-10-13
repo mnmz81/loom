@@ -2,7 +2,7 @@
 title: "Variable scope and good variable names in Python"
 summary: "Where a variable can be seen and changed in Python: local, global and nonlocal scope, the global and nonlocal keywords, shadowing, and how to choose clear names that follow PEP 8."
 date: 2026-10-11
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 9 }
 ---
 

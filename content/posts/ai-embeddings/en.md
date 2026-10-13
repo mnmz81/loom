@@ -2,7 +2,7 @@
 title: "Embeddings and semantic search"
 summary: "What an embedding is, how cosine similarity finds texts that mean the same thing, how to create embeddings with Voyage AI, and where to store them."
 date: 2026-10-13
-tags: [ai, rag, tutorial]
+tags: [ai, rag]
 series: { key: ai-rag, order: 1 }
 ---
 

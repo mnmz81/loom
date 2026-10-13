@@ -2,7 +2,7 @@
 title: "Five workflow patterns"
 summary: "Prompt chaining, routing, parallelization, orchestrator-workers and evaluator-optimizer: the patterns that solve most LLM tasks without a full agent, with short Python for each."
 date: 2026-10-13
-tags: [ai, agents, tutorial]
+tags: [ai, agents]
 series: { key: ai-agents, order: 4 }
 ---
 

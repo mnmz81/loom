@@ -2,7 +2,7 @@
 title: "Computer use ו-Agent Skills"
 summary: "סוכנים שמפעילים שולחן עבודה דרך צילומי מסך, עכבר ומקלדת, ו-skills: תיקיות של הוראות וסקריפטים שנותנות לסוכן מומחיות רק כשהוא צריך אותה."
 date: 2026-10-13
-tags: [ai, agents, tutorial]
+tags: [ai, agents]
 series: { key: ai-agents, order: 7 }
 ---
 

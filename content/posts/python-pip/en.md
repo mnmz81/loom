@@ -2,7 +2,7 @@
 title: "pip: installing packages in Python"
 summary: "How pip installs third-party packages from PyPI: install, pin versions, list, show, freeze into requirements.txt, uninstall, and why to use a virtual environment with python -m pip."
 date: 2026-10-11
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 6 }
 ---
 

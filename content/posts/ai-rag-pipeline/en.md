@@ -2,7 +2,7 @@
 title: "RAG: retrieval-augmented generation"
 summary: "The full RAG pipeline: when you need it, splitting documents into chunks, retrieving the closest ones, and building a prompt that answers only from them."
 date: 2026-10-13
-tags: [ai, rag, tutorial]
+tags: [ai, rag]
 series: { key: ai-rag, order: 2 }
 ---
 

@@ -2,7 +2,7 @@
 title: "Temperature, top-p והזיות"
 summary: "איך נבחר הטוקן הבא, מה עושים temperature ו-top-p, למה מודלי Claude הנוכחיים כבר לא מקבלים אותם, ולמה מודלים הוזים."
 date: 2026-10-13
-tags: [ai, llm, tutorial]
+tags: [ai, llm]
 series: { key: ai-basics, order: 4 }
 ---
 

@@ -2,7 +2,7 @@
 title: "Structured outputs and streaming"
 summary: "Get JSON that always matches your schema with structured outputs and Pydantic, and show the answer while it is being written with streaming."
 date: 2026-10-13
-tags: [ai, llm, tutorial]
+tags: [ai, llm]
 series: { key: ai-basics, order: 6 }
 ---
 

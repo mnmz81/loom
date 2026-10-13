@@ -12,13 +12,15 @@
     <nb-entry-list [entries]="posts()" [headingLevel]="3" [tagLabels]="tagLabels()" />
   </section>
 
-  <section class="page__section" aria-labelledby="home-notes">
-    <div class="page__section-head">
-      <h2 id="home-notes">{{ locale.t('list.latestNotes') }}</h2>
-      <a [routerLink]="paths.notes(locale.lang())">{{ locale.t('list.all') }}</a>
-    </div>
-    <nb-entry-list [entries]="notes()" [headingLevel]="3" [tagLabels]="tagLabels()" />
-  </section>
+  @if (notes().length) {
+    <section class="page__section" aria-labelledby="home-notes">
+      <div class="page__section-head">
+        <h2 id="home-notes">{{ locale.t('list.latestNotes') }}</h2>
+        <a [routerLink]="paths.notes(locale.lang())">{{ locale.t('list.all') }}</a>
+      </div>
+      <nb-entry-list [entries]="notes()" [headingLevel]="3" [tagLabels]="tagLabels()" />
+    </section>
+  }
 
   @if (seriesCards().length) {
     <section class="page__section" aria-labelledby="home-series">

@@ -2,7 +2,7 @@
 title: "f-strings: formatting text in Python"
 summary: "How f-strings work in Python: putting expressions in braces, format specs for width, alignment, precision, thousands separators and percentages, the = debug specifier, and !r conversions."
 date: 2026-10-11
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 13 }
 ---
 

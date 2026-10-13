@@ -2,7 +2,7 @@
 title: "Agentic RAG ו-GraphRAG"
 summary: "שני צעדים מעבר ל-pipeline קבוע של RAG: לתת למודל לחפש ככלי, כמה פעמים שצריך, ולבנות גרף ידע לשאלות שחוצות הרבה מסמכים."
 date: 2026-10-13
-tags: [ai, rag, tutorial]
+tags: [ai, rag]
 series: { key: ai-rag, order: 4 }
 ---
 

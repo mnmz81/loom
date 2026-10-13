@@ -2,7 +2,7 @@
 title: "Agentic RAG and GraphRAG"
 summary: "Two steps beyond a fixed RAG pipeline: letting the model search as a tool, as many times as it needs, and building a knowledge graph for questions that span many documents."
 date: 2026-10-13
-tags: [ai, rag, tutorial]
+tags: [ai, rag]
 series: { key: ai-rag, order: 4 }
 ---
 

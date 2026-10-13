@@ -2,7 +2,7 @@
 title: "pip: התקנת חבילות ב-Python"
 summary: "איך pip מתקין חבילות צד שלישי מ-PyPI: התקנה, נעיצת גרסאות, רשימה, הצגת פרטים, שמירה ל-requirements.txt, הסרה, ולמה כדאי להשתמש ב-python -m pip ובסביבה וירטואלית."
 date: 2026-10-11
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 6 }
 ---
 

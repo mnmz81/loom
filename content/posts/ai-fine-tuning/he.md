@@ -2,7 +2,7 @@
 title: "Fine-tuning: מתי זה עוזר ואיך LoRA עובד"
 summary: "מתי fine-tuning עדיף על prompting ו-RAG ומתי לא, איך נראים נתוני האימון, איך LoRA ו-QLoRA מאמנים מודל בזול, ואיך בודקים את התוצאה."
 date: 2026-10-13
-tags: [ai, fine-tuning, tutorial]
+tags: [ai, fine-tuning]
 series: { key: ai-tuning, order: 1 }
 ---
 

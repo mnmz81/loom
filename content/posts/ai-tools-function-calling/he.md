@@ -2,7 +2,7 @@
 title: "Tools ו-function calling"
 summary: "איך מודל קורא לפונקציות שלכם: הגדרת כלי, לולאת השימוש בכלים, תוצאות ושגיאות, ה-JSON הגולמי על הקו, ה-tool runner של ה-SDK, ואיך כותבים כלים טובים."
 date: 2026-10-13
-tags: [ai, agents, tutorial]
+tags: [ai, agents]
 series: { key: ai-agents, order: 1 }
 ---
 

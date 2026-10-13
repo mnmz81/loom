@@ -2,7 +2,7 @@
 title: "if, elif, else: תנאים ב-Python"
 summary: "איך Python מחליטה איזה קוד להריץ: if, else ו-elif, אופרטורי ההשוואה, ערכים אמיתיים ושקריים, הביטוי המותנה (x if C else y) והצצה ראשונה ל-match."
 date: 2026-10-13
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 15 }
 ---
 

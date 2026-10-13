@@ -2,7 +2,8 @@
 title: "Docker מאפס לגיבור"
 summary: "מדריך מעשי ל-Docker עם תרשימים: images ו-containers, כתיבת Dockerfile, שכבות ו-cache, פורטים, volumes, רשתות, Docker Compose, ניקוי וההרגלים ששומרים על images קטנים ובטוחים."
 date: 2026-10-10
-tags: [docker, containers, tutorial]
+tags: [docker, containers]
+series: { key: devops, order: 3 }
 ---
 
 "אצלי זה עובד" הוא המשפט הכי ישן בעולם התוכנה. Docker הוא הכלי שמפרק אותו ברוב המקרים: אורזים את האפליקציה יחד עם כל מה שהיא צריכה, ואז היא רצה אותו דבר על הלפטופ שלנו, על הלפטופ של חבר צוות ועל שרת.

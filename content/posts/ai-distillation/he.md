@@ -2,7 +2,7 @@
 title: "Distillation: מודל קטן שלומד ממודל גדול"
 summary: "מה זה knowledge distillation, למה ההסתברויות הרכות של מורה מלמדות יותר מהתשובה הנכונה, ואיך עושים distillation ל-LLM בפועל: נתונים מהמורה, סינון, ו-fine-tuning לתלמיד."
 date: 2026-10-13
-tags: [ai, fine-tuning, tutorial]
+tags: [ai, fine-tuning]
 series: { key: ai-tuning, order: 2 }
 ---
 

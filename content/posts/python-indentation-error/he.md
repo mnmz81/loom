@@ -2,7 +2,7 @@
 title: "הזחה ב-Python ושגיאת IndentationError"
 summary: "איך Python משתמש בהזחה כדי לקבץ קוד, ארבע הודעות IndentationError שתפגשו, למה ערבוב טאבים ורווחים גורם ל-TabError, ואיך מוצאים ומתקנים."
 date: 2026-10-11
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 5 }
 ---
 

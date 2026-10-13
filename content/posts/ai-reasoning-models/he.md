@@ -2,7 +2,7 @@
 title: "מודלי חשיבה: לחשוב לפני שעונים"
 summary: "מה זו חשיבה (thinking), איך adaptive thinking ופרמטר ה-effort שולטים בה, איך קוראים בלוקי חשיבה, וכמה זה עולה."
 date: 2026-10-13
-tags: [ai, llm, tutorial]
+tags: [ai, llm]
 series: { key: ai-basics, order: 7 }
 ---
 

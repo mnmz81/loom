@@ -2,7 +2,7 @@
 title: "Evals: measuring an LLM system"
 summary: "Why every LLM system needs an evaluation set, how to build one, code-based checks, LLM-as-judge with a rubric, and how to use evals to compare prompts, models and settings."
 date: 2026-10-13
-tags: [ai, llm, tutorial]
+tags: [ai, llmops]
 series: { key: ai-production, order: 1 }
 ---
 

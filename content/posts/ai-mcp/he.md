@@ -2,7 +2,7 @@
 title: "MCP: פרוטוקול ההקשר למודלים"
 summary: "מה זה MCP, למה הוא קיים, hosts, clients ו-servers, כלים, משאבים ו-prompts, שני ה-transports, ושרת MCP קטן ב-Python."
 date: 2026-10-13
-tags: [ai, agents, mcp, tutorial]
+tags: [ai, agents, mcp]
 series: { key: ai-agents, order: 2 }
 ---
 

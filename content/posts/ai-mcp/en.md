@@ -2,7 +2,7 @@
 title: "MCP: the Model Context Protocol"
 summary: "What MCP is, why it exists, hosts, clients and servers, tools, resources and prompts, the two transports, and a small MCP server in Python."
 date: 2026-10-13
-tags: [ai, agents, mcp, tutorial]
+tags: [ai, agents, mcp]
 series: { key: ai-agents, order: 2 }
 ---
 

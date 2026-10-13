@@ -2,7 +2,7 @@
 title: "משתנים וטיפוסים ב-Python"
 summary: "איך משתנים עובדים ב-Python: השמה, שמות, הטיפוסים הבסיסיים int, float, str, bool ו-None, type() ו-isinstance(), המרה בין טיפוסים ושגיאת NameError."
 date: 2026-10-11
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 3 }
 ---
 

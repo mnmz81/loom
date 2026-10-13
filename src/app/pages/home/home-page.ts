@@ -12,7 +12,7 @@ import { allLangPaths } from '../seo-helpers';
 const LATEST_POSTS = 4;
 const LATEST_NOTES = 5;
 
-/** `/:lang` — latest posts and notes, plus a teaser of the series. */
+/** `/:lang` — latest posts and notes (the notes section is hidden while there are none), plus a teaser of the series. */
 @Component({
   selector: 'nb-home-page',
   imports: [RouterLink, EntryList],

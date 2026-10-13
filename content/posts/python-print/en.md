@@ -2,7 +2,7 @@
 title: "print(): showing output in Python"
 summary: "How print() works in Python 3: printing several values, the sep and end arguments, printing to stderr, and the common mistake of printing None."
 date: 2026-10-11
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 2 }
 ---
 

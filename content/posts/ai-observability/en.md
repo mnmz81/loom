@@ -2,7 +2,7 @@
 title: "Observability: seeing what an LLM system does"
 summary: "What to log for every model call and agent step, traces and spans, a tiny tracer in Python, the metrics worth watching, privacy, and turning production failures into evals."
 date: 2026-10-13
-tags: [ai, llm, tutorial]
+tags: [ai, llmops]
 series: { key: ai-production, order: 2 }
 ---
 

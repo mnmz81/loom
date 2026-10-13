@@ -2,7 +2,7 @@
 title: "Strings in Python: slicing, methods and manipulation"
 summary: "Python strings: quotes and escapes, raw and triple-quoted strings, indexing and slicing, immutability, the common str methods for changing, splitting and searching text, and f-string formatting."
 date: 2026-10-11
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 4 }
 ---
 

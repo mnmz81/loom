@@ -2,7 +2,7 @@
 title: "Guardrails: checks around the model"
 summary: "Layered guardrails for LLM applications: screening input with a small model, validating and redacting output, checking actions, limits, and what to show the user when a check fails."
 date: 2026-10-13
-tags: [ai, llm, tutorial]
+tags: [ai, llmops, security]
 series: { key: ai-production, order: 5 }
 ---
 

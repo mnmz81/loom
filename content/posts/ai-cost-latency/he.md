@@ -2,7 +2,7 @@
 title: "עלות וזמני תגובה: prompt caching, batches ובחירת מודל"
 summary: "לאן הולכים הכסף והזמן במערכת LLM, והמנופים שמקצצים אותם: המודל וה-effort הנכונים, פלט קצר יותר, prompt caching, ה-Batch API ו-streaming."
 date: 2026-10-13
-tags: [ai, llm, tutorial]
+tags: [ai, llmops]
 series: { key: ai-production, order: 3 }
 ---
 

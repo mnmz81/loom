@@ -2,7 +2,7 @@
 title: "input(): reading text from the user"
 summary: "How input() reads a line from the user in Python: the prompt, why the result is always a str, converting it with int() and float(), the ValueError on bad input, and EOFError."
 date: 2026-10-11
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 8 }
 ---
 

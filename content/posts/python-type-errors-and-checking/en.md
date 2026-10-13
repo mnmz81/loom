@@ -2,7 +2,7 @@
 title: "TypeError and type checking in Python"
 summary: "The common TypeError messages in Python and what they mean, checking types with type() and isinstance(), why type hints are not enforced, and when to check types versus catching the error."
 date: 2026-10-11
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 14 }
 ---
 

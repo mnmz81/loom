@@ -2,7 +2,7 @@
 title: "WebMCP: דפי אינטרנט ככלים לסוכני AI"
 summary: "מה זה WebMCP ומה הקשר שלו ל-MCP: דף רושם כלים עם document.modelContext, טופס הופך לכלי עם שתי תכונות, annotations, ‏iframes, ניסוי ב-Chrome, והסיכונים באבטחה."
 date: 2026-10-13
-tags: [ai, agents, mcp, tutorial]
+tags: [ai, agents, mcp]
 series: { key: ai-agents, order: 8 }
 ---
 

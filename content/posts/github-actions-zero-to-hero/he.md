@@ -2,7 +2,8 @@
 title: "GitHub Actions מאפס לגיבור"
 summary: "מדריך מעשי ל-GitHub Actions עם דיאגרמות: workflows, אירועים, jobs ו-runners, ביטויים, פלטים, matrix, מטמון ו-artifacts, סודות, סביבות, OIDC, אימג'ים של Docker ואבטחה."
 date: 2026-10-13
-tags: [github, ci-cd, tutorial]
+tags: [github, ci-cd]
+series: { key: devops, order: 4 }
 ---
 
 לכל פרויקט יש מטלות שצריכות לקרות בכל שינוי: להריץ את הבדיקות, לבדוק עיצוב קוד, לבנות, לפרסם חבילה, לפרוס. לעשות את זה ידנית עובד עד היום שמישהו שוכח. ‏**GitHub Actions** הוא האוטומציה המובנית של GitHub: מתארים את המטלות בקובץ YAML בתוך הריפוזיטורי, ו-GitHub מריץ אותן על מכונות משלו בכל פעם שמשהו קורה.

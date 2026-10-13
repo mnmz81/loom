@@ -2,7 +2,7 @@
 title: "חמישה דפוסי workflow"
 summary: "Prompt chaining, routing, parallelization, orchestrator-workers ו-evaluator-optimizer: הדפוסים שפותרים את רוב משימות ה-LLM בלי סוכן מלא, עם Python קצר לכל אחד."
 date: 2026-10-13
-tags: [ai, agents, tutorial]
+tags: [ai, agents]
 series: { key: ai-agents, order: 4 }
 ---
 

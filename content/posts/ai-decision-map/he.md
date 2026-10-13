@@ -2,7 +2,7 @@
 title: "מפת החלטות: prompt, RAG, כלים, סוכן או fine-tune?"
 summary: "כל הסדרה במקום אחד: מפת החלטות לבחירת הטכניקה הנכונה, מה כל אחת משנה ועולה, דוגמה מלאה, ורשימת בדיקות לפני production."
 date: 2026-10-13
-tags: [ai, llm, tutorial]
+tags: [ai, llmops]
 series: { key: ai-production, order: 6 }
 ---
 

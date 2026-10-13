@@ -2,7 +2,7 @@
 title: "Better retrieval: hybrid search, reranking and contextual chunks"
 summary: "Three techniques that fix most RAG retrieval failures: combining keyword and vector search, reranking the candidates, and adding context to every chunk."
 date: 2026-10-13
-tags: [ai, rag, tutorial]
+tags: [ai, rag]
 series: { key: ai-rag, order: 3 }
 ---
 

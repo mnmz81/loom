@@ -2,7 +2,7 @@
 title: "Number operations in Python"
 summary: "The arithmetic operators in Python: + - * / // % and **, the difference between true and floor division, negative numbers, divmod, round, and the math module."
 date: 2026-10-11
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 11 }
 ---
 

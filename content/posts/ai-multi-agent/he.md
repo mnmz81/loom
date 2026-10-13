@@ -2,7 +2,7 @@
 title: "מערכות מרובות סוכנים וסוכני משנה"
 summary: "מתי כמה סוכנים עדיפים על אחד: מבנה ה-orchestrator וסוכני המשנה, מה Anthropic מדדו במערכת המחקר שלהם, עלות הטוקנים, וסוכני משנה ב-Claude Agent SDK."
 date: 2026-10-13
-tags: [ai, agents, tutorial]
+tags: [ai, agents]
 series: { key: ai-agents, order: 6 }
 ---
 

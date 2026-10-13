@@ -2,7 +2,7 @@
 title: "אופרטור השארית % ב-Python"
 summary: "מה % עושה ב-Python ואיפה הוא שימושי: זוגי או אי-זוגי, כל פריט N-י, חזרה להתחלה ברשימה או בשעון, פירוק שניות עם divmod, ספרות, FizzBuzz, ואיך הוא מתנהג עם מספרים שליליים."
 date: 2026-10-13
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 18 }
 ---
 

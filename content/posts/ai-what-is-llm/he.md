@@ -2,11 +2,13 @@
 title: "מה זה LLM"
 summary: "מודל שפה גדול מנבא את הטוקן הבא, שוב ושוב. מה זה אומר, מה זה נותן לכם, והקריאה הראשונה אליו מ-Python."
 date: 2026-10-12
-tags: [ai, llm, tutorial]
+tags: [ai, llm]
 series: { key: ai-basics, order: 1 }
 ---
 
 LLM (מודל שפה גדול) הוא תוכנה שמקבלת טקסט ומחזירה טקסט. ChatGPT, Claude ו-Gemini הם מוצרים שנבנו על גבי LLM. הפוסט הזה מסביר מה קורה בלולאה בפנים ברמה הפשוטה ביותר, ואז מבצע קריאה ראשונה מ-Python.
+
+זה הפוסט הראשון מתוך חמש סדרות על בינה מלאכותית. סדר הקריאה המומלץ: [יסודות](he/series/ai-basics/), אחר כך [ידע ו-RAG](he/series/ai-rag/) ו-[Tools ו-Agents](he/series/ai-agents/) (באיזה סדר שתרצו), אחר כך [ייצור](he/series/ai-production/), ולבסוף [התאמת מודל](he/series/ai-tuning/). [מפת ההחלטות](he/posts/ai-decision-map/) מראה איזה כלי מתאים לאיזו בעיה, ומונח לא מוכר אפשר למצוא [במילון](he/posts/ai-glossary/).
 
 הקוד מבוסס על [ה-quickstart הרשמי של Anthropic](https://platform.claude.com/docs/en/get-started). הוא לא הורץ בשביל הפוסט, ולכן כל בלוק פלט כאן הוא **פלט לדוגמה**: המבנה תואם לתיעוד, אבל הטקסט של תשובה אמיתית יהיה שונה בכל הרצה.
 

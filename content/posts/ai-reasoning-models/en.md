@@ -2,7 +2,7 @@
 title: "Reasoning models: thinking before answering"
 summary: "What thinking is, how adaptive thinking and the effort parameter control it, how to read thinking blocks, and what it costs."
 date: 2026-10-13
-tags: [ai, llm, tutorial]
+tags: [ai, llm]
 series: { key: ai-basics, order: 7 }
 ---
 

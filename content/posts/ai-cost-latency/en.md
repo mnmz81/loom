@@ -2,7 +2,7 @@
 title: "Cost and latency: prompt caching, batches and model choice"
 summary: "Where the money and time go in an LLM system, and the levers that cut them: the right model and effort, shorter outputs, prompt caching, the Batch API and streaming."
 date: 2026-10-13
-tags: [ai, llm, tutorial]
+tags: [ai, llmops]
 series: { key: ai-production, order: 3 }
 ---
 

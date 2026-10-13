@@ -3,7 +3,6 @@ git: { he: git, en: git }
 claude-code: { he: Claude Code, en: Claude Code }
 cli: { he: שורת פקודה, en: CLI }
 cheatsheet: { he: דף עזר, en: Cheat sheet }
-tutorial: { he: מדריך, en: Tutorial }
 github: { he: GitHub, en: GitHub }
 docker: { he: Docker, en: Docker }
 containers: { he: קונטיינרים, en: Containers }
@@ -19,3 +18,5 @@ mcp: { he: MCP, en: MCP }
 fine-tuning: { he: Fine-tuning, en: Fine-tuning }
 kubernetes: { he: Kubernetes, en: Kubernetes }
 ci-cd: { he: CI/CD, en: CI/CD }
+llmops: { he: LLMOps, en: LLMOps }
+security: { he: אבטחה, en: Security }

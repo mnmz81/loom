@@ -2,7 +2,7 @@
 title: "print(): הצגת פלט ב-Python"
 summary: "איך print() עובדת ב-Python 3: הדפסת כמה ערכים, הארגומנטים sep ו-end, הדפסה ל-stderr, והטעות הנפוצה של הדפסת None."
 date: 2026-10-11
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 2 }
 ---
 

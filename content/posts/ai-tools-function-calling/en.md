@@ -2,7 +2,7 @@
 title: "Tools and function calling"
 summary: "How a model calls your functions: defining a tool, the tool use loop, tool results and errors, the raw JSON on the wire, the SDK's tool runner, and how to write good tools."
 date: 2026-10-13
-tags: [ai, agents, tutorial]
+tags: [ai, agents]
 series: { key: ai-agents, order: 1 }
 ---
 

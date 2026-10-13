@@ -2,7 +2,7 @@
 title: "אבטחה: prompt injection ו-OWASP LLM Top 10"
 summary: "הסיכונים המרכזיים באפליקציות LLM: prompt injection ישיר ועקיף, דליפת מידע, סמכויות עודפות ועוד, וההגנות שעובדות: הפרדה בין נתונים להוראות, הרשאה מינימלית וסינון."
 date: 2026-10-13
-tags: [ai, llm, tutorial]
+tags: [ai, llmops, security]
 series: { key: ai-production, order: 4 }
 ---
 

@@ -2,7 +2,7 @@
 title: "TypeError ובדיקת טיפוסים ב-Python"
 summary: "הודעות TypeError נפוצות ב-Python ומה הן אומרות, בדיקת טיפוסים עם type() ו-isinstance(), למה רמזי טיפוסים לא נאכפים, ומתי לבדוק טיפוס ומתי לתפוס את השגיאה."
 date: 2026-10-11
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 14 }
 ---
 

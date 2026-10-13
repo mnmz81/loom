@@ -2,7 +2,7 @@
 title: "Agents: a model with tools in a loop"
 summary: "What makes a system an agent, how it differs from a workflow, when an agent is worth it and when it is not, a minimal agent in Python, and the Claude Agent SDK."
 date: 2026-10-13
-tags: [ai, agents, tutorial]
+tags: [ai, agents]
 series: { key: ai-agents, order: 3 }
 ---
 

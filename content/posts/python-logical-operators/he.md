@@ -2,7 +2,7 @@
 title: "אופרטורים לוגיים ב-Python: and, or, not"
 summary: "איך and, or ו-not מחברים תנאים ב-Python: טבלאות אמת, הערכה מקוצרת, למה and ו-or מחזירים את אחד האופרנדים, סדר קדימויות, שרשור השוואות, ו-any() ו-all()."
 date: 2026-10-13
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 16 }
 ---
 

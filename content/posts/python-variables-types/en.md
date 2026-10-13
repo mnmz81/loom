@@ -2,7 +2,7 @@
 title: "Variables and types in Python"
 summary: "How variables work in Python: assignment, names, the basic types int, float, str, bool and None, type() and isinstance(), converting between types, and the NameError."
 date: 2026-10-11
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 3 }
 ---
 

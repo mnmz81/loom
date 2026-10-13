@@ -3,15 +3,16 @@ import { Title } from '@angular/platform-browser';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { routes } from '../../app.routes';
-import { CONTENT_LOADER } from '../../core/content-loader';
+import { CONTENT_LOADER, type ContentLoader } from '../../core/content-loader';
+import type { LangIndex } from '../../core/content.models';
 import { fixtureContentLoader } from '../../core/testing/fixture-content-loader';
 import { HomePage } from './home-page';
 
-async function open(url: string) {
+async function open(url: string, loader: ContentLoader = fixtureContentLoader) {
   TestBed.configureTestingModule({
     providers: [
       provideRouter(routes, withComponentInputBinding()),
-      { provide: CONTENT_LOADER, useValue: fixtureContentLoader },
+      { provide: CONTENT_LOADER, useValue: loader },
     ],
   });
   const harness = await RouterTestingHarness.create();
@@ -51,6 +52,19 @@ describe('HomePage', () => {
     expect(hrefs(el, '.series-teaser a')).toEqual(['/en/series/learning-rust']);
     expect(el.querySelector('.series-teaser__title')?.textContent?.trim()).toBe('Learning Rust');
     expect(el.querySelector('.series-teaser__meta')?.textContent?.trim()).toBe('2 parts');
+  });
+
+  it('hides the notes section while there are no notes', async () => {
+    const withoutNotes: ContentLoader = async (path) => {
+      const data = await fixtureContentLoader(path);
+      if (!path.endsWith('index.json')) return data;
+      const index = data as LangIndex;
+      return { ...index, entries: index.entries.filter((e) => e.type !== 'note') };
+    };
+    const el = await open('/en', withoutNotes);
+    const sections = [...el.querySelectorAll('section h2')].map((h) => h.textContent?.trim());
+    expect(sections).toEqual(['Latest posts', 'Series']);
+    expect(hrefs(el, '.page__section-head a')).toEqual(['/en/posts', '/en/series']);
   });
 
   it('sets title, description, canonical and hreflang alternates', async () => {

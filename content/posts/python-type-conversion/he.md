@@ -2,7 +2,7 @@
 title: "המרת טיפוסים ב-Python"
 summary: "איך ממירים בין טיפוסים ב-Python עם int(), float(), str(), bool(), list(), tuple() ו-set(): מה כל המרה עושה, קיצוץ, בסיסים, אמת ושקר, ושגיאות כשההמרה נכשלת."
 date: 2026-10-11
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 12 }
 ---
 

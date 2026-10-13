@@ -2,7 +2,7 @@
 title: "פלט מובנה ו-streaming"
 summary: "איך מקבלים JSON שתמיד תואם לסכמה בעזרת structured outputs ו-Pydantic, ואיך מציגים את התשובה תוך כדי כתיבה בעזרת streaming."
 date: 2026-10-13
-tags: [ai, llm, tutorial]
+tags: [ai, llm]
 series: { key: ai-basics, order: 6 }
 ---
 

@@ -2,7 +2,7 @@
 title: "Decision map: prompt, RAG, tools, agent or fine-tune?"
 summary: "The whole series in one place: a decision map for choosing the right technique, what each one changes and costs, a worked example, and a checklist before going to production."
 date: 2026-10-13
-tags: [ai, llm, tutorial]
+tags: [ai, llmops]
 series: { key: ai-production, order: 6 }
 ---
 

@@ -2,7 +2,7 @@
 title: "How a language model is built"
 summary: "Transformers, attention, pretraining, fine-tuning and preference training (RLHF, DPO): the stages that turn a pile of text into a chat assistant."
 date: 2026-10-13
-tags: [ai, llm, tutorial]
+tags: [ai, llm]
 series: { key: ai-basics, order: 2 }
 ---
 

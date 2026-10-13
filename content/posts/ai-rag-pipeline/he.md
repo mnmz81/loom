@@ -2,7 +2,7 @@
 title: "RAG: שליפה שמעשירה את התשובה"
 summary: "ה-pipeline המלא של RAG: מתי צריך אותו, פיצול מסמכים ל-chunks, שליפת הקרובים ביותר, ובניית prompt שעונה רק מתוכם."
 date: 2026-10-13
-tags: [ai, rag, tutorial]
+tags: [ai, rag]
 series: { key: ai-rag, order: 2 }
 ---
 

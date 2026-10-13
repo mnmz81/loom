@@ -2,7 +2,8 @@
 title: "Git from zero to hero"
 summary: "A hands-on guide to Git with one running example and diagrams: commits, branches, merging, rebasing, undoing mistakes and working with GitHub."
 date: 2026-10-09
-tags: [git, cli, tutorial]
+tags: [git, cli]
+series: { key: devops, order: 1 }
 ---
 
 Git looks scary until you see what it's actually doing. This guide builds a tiny project from nothing, and each new idea shows up exactly when the project needs it. By the end you'll know how to save work, undo mistakes, work on several things at once and share it all through GitHub.

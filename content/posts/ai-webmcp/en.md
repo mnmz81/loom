@@ -2,7 +2,7 @@
 title: "WebMCP: web pages as tools for AI agents"
 summary: "What WebMCP is and how it relates to MCP: a page registers tools with document.modelContext, forms become tools with two attributes, annotations, iframes, testing in Chrome, and the security risks."
 date: 2026-10-13
-tags: [ai, agents, mcp, tutorial]
+tags: [ai, agents, mcp]
 series: { key: ai-agents, order: 8 }
 ---
 

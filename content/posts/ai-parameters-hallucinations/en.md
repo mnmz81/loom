@@ -2,7 +2,7 @@
 title: "Temperature, top-p and hallucinations"
 summary: "How the next token is picked, what temperature and top-p do, why current Claude models no longer accept them, and why models hallucinate."
 date: 2026-10-13
-tags: [ai, llm, tutorial]
+tags: [ai, llm]
 series: { key: ai-basics, order: 4 }
 ---
 

@@ -2,7 +2,7 @@
 title: "Computer use and Agent Skills"
 summary: "Agents that operate a desktop through screenshots, mouse and keyboard, and skills: folders of instructions and scripts that give an agent expertise only when it needs it."
 date: 2026-10-13
-tags: [ai, agents, tutorial]
+tags: [ai, agents]
 series: { key: ai-agents, order: 7 }
 ---
 

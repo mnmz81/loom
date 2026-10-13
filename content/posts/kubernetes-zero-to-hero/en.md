@@ -2,7 +2,8 @@
 title: "Kubernetes from zero to hero"
 summary: "A hands-on guide to Kubernetes with diagrams: clusters and desired state, Pods, Deployments, Services, Gateway and Ingress, rollouts, config and Secrets, probes, scaling, debugging and Helm."
 date: 2026-10-13
-tags: [kubernetes, containers, tutorial]
+tags: [kubernetes, containers]
+series: { key: devops, order: 5 }
 ---
 
 Docker answers "how do I run my app in a container?". The next question comes fast: how do I run ten copies of it across several servers, restart the ones that crash, update them without downtime, and send traffic only to the healthy ones? That's the job of **Kubernetes** (often written **K8s**: K, eight letters, s).

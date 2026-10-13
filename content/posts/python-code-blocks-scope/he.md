@@ -2,7 +2,7 @@
 title: "בלוקים של קוד ו-scope ב-Python"
 summary: "מה זה בלוק של קוד ב-Python, למה if, for, while ו-try לא יוצרים scope חדש, אילו בלוקים כן יוצרים (פונקציות, מחלקות, comprehensions), והבאגים שנובעים מבלבול ביניהם."
 date: 2026-10-13
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 17 }
 ---
 

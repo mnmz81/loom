@@ -2,7 +2,7 @@
 title: "Security: prompt injection and the OWASP LLM Top 10"
 summary: "The main risks of LLM apps, from prompt injection to excessive agency, and the defenses that work: keeping data apart from instructions, least privilege and screening."
 date: 2026-10-13
-tags: [ai, llm, tutorial]
+tags: [ai, llmops, security]
 series: { key: ai-production, order: 4 }
 ---
 

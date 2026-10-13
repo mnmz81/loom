@@ -2,7 +2,7 @@
 title: "טיפוס התאריך ב-Python"
 summary: "איך עובדים עם תאריכים ב-Python בעזרת datetime.date: יצירת תאריך, קריאת חלקים ממנו, עיצוב עם strftime ו-isoformat, חישובים עם timedelta, ותאריכים לא חוקיים."
 date: 2026-10-11
-tags: [python, tutorial]
+tags: [python]
 series: { key: python, order: 10 }
 ---
 

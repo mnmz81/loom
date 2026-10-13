@@ -2,7 +2,8 @@
 title: "GitHub מאפס לגיבור"
 summary: "מדריך מעשי ל-GitHub עם תרשימים: ריפוזיטורי, SSH וה-CLI בשם gh, pull requests וביקורת קוד, issues, forks, Actions, Pages, הגנה על main והרגלים ששומרים על צוות רגוע."
 date: 2026-10-09
-tags: [github, git, tutorial]
+tags: [github, git]
+series: { key: devops, order: 2 }
 ---
 
 Git שומר את ההיסטוריה של הפרויקט על המחשב שלנו. GitHub הוא המקום שבו ההיסטוריה הזאת משותפת, נבדקת, נבחנת ומתפרסמת. המדריך ממשיך את ספר המתכונים מהמדריך [Git מאפס לגיבור](he/posts/git-zero-to-hero/): נעלה אותו לרשת, נשנה אותו דרך pull request, נתן לרובוט לבדוק אותו, ובסוף נפרסם אותו כאתר.
