@@ -17,3 +17,5 @@ rag: { he: RAG, en: RAG }
 agents: { he: סוכנים, en: Agents }
 mcp: { he: MCP, en: MCP }
 fine-tuning: { he: Fine-tuning, en: Fine-tuning }
+kubernetes: { he: Kubernetes, en: Kubernetes }
+ci-cd: { he: CI/CD, en: CI/CD }

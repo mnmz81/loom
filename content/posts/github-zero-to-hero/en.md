@@ -284,6 +284,8 @@ Things worth knowing:
 - **Pin versions** of actions (`@v5`), so a workflow doesn't change under you.
 - Free usage has limits that depend on your plan and on whether the repository is public. Check the current pricing page before relying on heavy builds.
 
+For everything beyond the basics (matrix builds, caching, environments, OIDC deployments and workflow security), see [GitHub Actions from zero to hero](en/posts/github-actions-zero-to-hero/).
+
 ## Pages: publish a website from a repository
 
 **GitHub Pages** serves static files (HTML, CSS, JS) for free at `https://<user>.github.io/<repo>/`. This blog is published that way.
