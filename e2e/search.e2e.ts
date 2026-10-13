@@ -1,9 +1,10 @@
 import { expect, test } from '@playwright/test';
 import { expectLang, gotoReady, langSwitch, navLink, SEARCH_TEXT, t, type Lang } from './helpers';
 
-// Queries that exist only in seed content: [lang, query, expected result title]
+// Queries that match exactly one seed entry, even with the real blog content merged in by build:e2e:
+// [lang, query, expected result title]
 const CASES: [Lang, string, string][] = [
-  ['he', 'בעלות', 'ראסט: בעלות (Ownership)'],
+  ['he', 'Ownership', 'ראסט: בעלות (Ownership)'],
   ['en', 'zsh','Search zsh history with Ctrl+R'],
 ];
 
@@ -24,14 +25,18 @@ for (const [lang, query, title] of CASES) {
   });
 }
 
+// Pagefind falls back to partial matches (single letters) when a word is missing, so the other
+// language's index may return unrelated hits: check that the other language's entry is not among them.
 test('he search does not return English-index results (and vice versa)', async ({ page }) => {
   await gotoReady(page, 'he/search');
   await page.getByRole('searchbox').fill('zsh');
-  await expect(page.getByRole('status')).toHaveText(t('he', 'search.noResults', { query: 'zsh' }));
+  await expect(page.getByRole('status')).toHaveText(/תוצא|לא נמצאו/); // search finished
+  await expect(page.getByRole('link', { name: 'Search zsh history with Ctrl+R' })).toHaveCount(0);
 
   await gotoReady(page, 'en/search');
   await page.getByRole('searchbox').fill('בעלות');
-  await expect(page.getByRole('status')).toHaveText(t('en', 'search.noResults', { query: 'בעלות' }));
+  await expect(page.getByRole('status')).toHaveText(/result/i); // search finished
+  await expect(page.getByRole('link', { name: 'ראסט: בעלות (Ownership)' })).toHaveCount(0);
 });
 
 test('"?q=" prefills and runs the search', async ({ page }) => {
@@ -75,10 +80,12 @@ test.describe('filters', () => {
   });
 });
 
+// Latin nonsense like "qqqzzz" still partially matches single letters in the real posts; a script
+// that appears nowhere on the site (Cyrillic) has no partial matches at all.
 test('a query with no hits shows the empty message', async ({ page }) => {
   await gotoReady(page, 'en/search');
-  await page.getByRole('searchbox').fill('qqqzzzxxx');
-  await expect(page.getByRole('status')).toHaveText(t('en', 'search.noResults', { query: 'qqqzzzxxx' }));
+  await page.getByRole('searchbox').fill('жжж');
+  await expect(page.getByRole('status')).toHaveText(t('en', 'search.noResults', { query: 'жжж' }));
 });
 
 test('language switch keeps working from the search page', async ({ page }) => {
