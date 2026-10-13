@@ -134,3 +134,145 @@ rag(
     text(380, 236, 'The model answers from the retrieved text, not from memory.', { size: 12.5, color: C.muted }),
   ],
 );
+
+// ai-tools-function-calling: the tool use loop ----------------------------------------------------------------------------
+const tools = svgWriter(outDir('ai-tools-function-calling'));
+tools(
+  'tool-loop',
+  760,
+  270,
+  'The tool use loop',
+  'Your app sends the messages and the tool definitions to the model. If the model answers with stop_reason tool_use, your code runs the requested tool and sends the result back as a tool_result in a new user message. The loop repeats until the model answers with end_turn.',
+  [
+    box(30, 40, 200, 90, C.main),
+    text(130, 72, 'Your app', { size: 15, weight: 700, color: C.main }),
+    text(130, 96, 'messages + tools', { size: 12.5, mono: true }),
+    box(530, 40, 200, 90, C.green),
+    text(630, 72, 'Model', { size: 15, weight: 700, color: C.green }),
+    text(630, 96, 'decides: answer or call', { size: 12.5 }),
+    arrow(230, 70, 530, 70, C.main),
+    text(380, 60, 'request', { size: 12.5, color: C.muted }),
+    arrow(530, 105, 230, 105, C.green),
+    text(390, 150, 'stop_reason: "tool_use"  +  tool_use block', { size: 12, mono: true, color: C.green }),
+    box(30, 170, 200, 70, C.amber),
+    text(130, 198, 'Run the tool', { size: 14, weight: 700, color: C.amber }),
+    text(130, 220, 'your code, your rules', { size: 12, color: C.muted }),
+    arrow(130, 130, 130, 170, C.amber),
+    `<line x1="230" y1="205" x2="630" y2="205" stroke="${C.amber}" stroke-width="2" stroke-dasharray="6 4"/>`,
+    arrow(630, 205, 630, 130, C.amber, true),
+    text(430, 226, 'tool_result → next request', { size: 12, mono: true, color: C.amber }),
+    text(380, 258, 'Repeats until stop_reason: "end_turn"', { size: 12.5, mono: true, color: C.muted }),
+  ],
+);
+
+// ai-mcp: hosts, clients and servers ---------------------------------------------------------------------------------------
+const mcp = svgWriter(outDir('ai-mcp'));
+const servers = [
+  { y: 30, name: 'Files & Git', where: 'local · stdio' },
+  { y: 110, name: 'Database', where: 'local · stdio' },
+  { y: 190, name: 'External API', where: 'remote · Streamable HTTP' },
+];
+mcp(
+  'mcp-architecture',
+  760,
+  300,
+  'MCP architecture',
+  'A host application such as an IDE or chat app runs one MCP client per server. Each client talks to exactly one server over JSON-RPC, using stdio for local servers or Streamable HTTP for remote ones. Servers expose tools, resources and prompts.',
+  [
+    box(30, 30, 300, 230, C.main),
+    text(180, 58, 'Host (IDE, chat app, agent)', { size: 14, weight: 700, color: C.main }),
+    text(180, 80, 'holds the conversation and the model', { size: 12, color: C.muted }),
+    ...servers.flatMap((s, i) => [
+      box(190, 100 + i * 55, 120, 40, C.border),
+      text(250, 125 + i * 55, `Client ${i + 1}`, { size: 13, weight: 600 }),
+      arrow(310, 120 + i * 55, 470, s.y + 30, C.muted),
+      box(470, s.y, 260, 60, C.green),
+      text(600, s.y + 26, s.name, { size: 14, weight: 700, color: C.green }),
+      text(600, s.y + 46, s.where, { size: 12, color: C.muted }),
+    ]),
+    text(60, 130, 'one client', { size: 12, color: C.muted, anchor: 'start' }),
+    text(60, 148, 'per server', { size: 12, color: C.muted, anchor: 'start' }),
+    text(380, 288, 'Servers offer tools, resources and prompts over JSON-RPC.', { size: 12.5, color: C.muted }),
+  ],
+);
+
+// ai-agents: workflow vs agent ---------------------------------------------------------------------------------------------
+const agents = svgWriter(outDir('ai-agents'));
+const flow = ['Step 1', 'Step 2', 'Step 3'];
+agents(
+  'workflow-vs-agent',
+  760,
+  260,
+  'Workflow versus agent',
+  'In a workflow, your code fixes the path: step 1, step 2, step 3, each an LLM call. In an agent, the model chooses the next action in a loop: it acts with a tool, observes the result from the environment, and decides again until the task is done.',
+  [
+    text(190, 34, 'Workflow: your code decides the path', { size: 14, weight: 700, color: C.main }),
+    ...flow.flatMap((label, i) => [
+      box(30 + i * 115, 70, 95, 50, C.main),
+      text(77 + i * 115, 100, label, { size: 13, weight: 600 }),
+      ...(i < flow.length - 1 ? [arrow(125 + i * 115, 95, 145 + i * 115, 95, C.muted)] : []),
+    ]),
+    text(190, 160, 'Predictable, cheaper, easy to test.', { size: 12.5, color: C.muted }),
+    `<line x1="390" y1="20" x2="390" y2="240" stroke="${C.border}" stroke-width="1.5"/>`,
+    text(575, 34, 'Agent: the model decides the next step', { size: 14, weight: 700, color: C.green }),
+    box(500, 60, 150, 44, C.green),
+    text(575, 87, 'Model decides', { size: 13, weight: 600 }),
+    box(420, 150, 120, 44, C.amber),
+    text(480, 177, 'Act (tool)', { size: 13, weight: 600 }),
+    box(610, 150, 120, 44, C.feature),
+    text(670, 177, 'Observe result', { size: 13, weight: 600 }),
+    arrow(530, 104, 490, 150, C.muted),
+    arrow(540, 172, 610, 172, C.muted),
+    arrow(670, 150, 625, 104, C.muted),
+    text(575, 230, 'Flexible, costs more, needs limits.', { size: 12.5, color: C.muted }),
+  ],
+);
+
+// ai-workflow-patterns: five patterns ------------------------------------------------------------------------------------
+const pat = svgWriter(outDir('ai-workflow-patterns'));
+const node = (x: number, y: number, label: string, color: string, w = 64) => [
+  box(x - w / 2, y - 14, w, 28, color),
+  text(x, y + 5, label, { size: 12, weight: 600 }),
+];
+// A fan: one source node, three targets 36px apart, centered on y.
+const fan = (y: number, fromX: number, toX: number, labels: string[], color: string, w: number) =>
+  labels.flatMap((label, i) => {
+    const ty = y + (i - 1) * 36;
+    return [arrow(fromX, y, toX - w / 2, ty, C.muted), ...node(toX, ty, label, color, w)];
+  });
+const title = (y: number, label: string) => text(30, y + 5, label, { size: 13.5, weight: 700, color: C.main, anchor: 'start' });
+pat(
+  'patterns',
+  760,
+  560,
+  'Five workflow patterns',
+  'Prompt chaining: calls in sequence with a check between them. Routing: a classifier sends the input to one of several handlers. Parallelization: several calls run at once and the results are combined. Orchestrator-workers: a lead model splits the task and delegates to workers. Evaluator-optimizer: one model writes, another evaluates, in a loop.',
+  [
+    title(40, '1. Prompt chaining'),
+    ...node(260, 40, 'LLM', C.main), arrow(292, 40, 330, 40, C.muted), ...node(370, 40, 'check', C.amber),
+    arrow(402, 40, 440, 40, C.muted), ...node(480, 40, 'LLM', C.main), arrow(512, 40, 550, 40, C.muted), ...node(590, 40, 'LLM', C.main),
+
+    title(150, '2. Routing'),
+    ...node(260, 150, 'router', C.amber, 70),
+    ...fan(150, 295, 490, ['billing', 'tech', 'small model'], C.main, 104),
+
+    title(270, '3. Parallelization'),
+    ...node(260, 270, 'input', C.grey),
+    ...fan(270, 292, 460, ['LLM', 'LLM', 'LLM'], C.main, 60),
+    ...[-36, 0, 36].map((d) => arrow(490, 270 + d, 582, 270, C.muted)),
+    ...node(622, 270, 'combine', C.amber, 76),
+
+    title(390, '4. Orchestrator-workers'),
+    ...node(290, 390, 'orchestrator', C.green, 100),
+    ...fan(390, 340, 490, ['worker', 'worker', 'worker'], C.main, 76),
+    text(640, 394, 'tasks decided at run time', { size: 12, color: C.muted }),
+
+    title(500, '5. Evaluator-optimizer'),
+    ...node(290, 494, 'writer', C.main, 76),
+    arrow(328, 488, 438, 488, C.muted),
+    ...node(480, 494, 'evaluator', C.amber, 84),
+    arrow(438, 502, 328, 502, C.amber, true),
+    text(384, 524, 'feedback', { size: 11.5, color: C.amber }),
+    text(620, 498, 'until it passes', { size: 12, color: C.muted }),
+  ],
+);

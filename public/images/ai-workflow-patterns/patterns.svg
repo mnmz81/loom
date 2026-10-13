@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="560" viewBox="0 0 760 560" role="img" aria-labelledby="t d">
+<title id="t">Five workflow patterns</title>
+<desc id="d">Prompt chaining: calls in sequence with a check between them. Routing: a classifier sends the input to one of several handlers. Parallelization: several calls run at once and the results are combined. Orchestrator-workers: a lead model splits the task and delegates to workers. Evaluator-optimizer: one model writes, another evaluates, in a loop.</desc>
+<defs><marker id="ah-f8fafc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#f8fafc"/></marker><marker id="ah-cbd5e1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#cbd5e1"/></marker><marker id="ah-0f172a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ah-64748b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ah-2563eb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#2563eb"/></marker><marker id="ah-db2777" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ah-16a34a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#16a34a"/></marker><marker id="ah-dc2626" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#dc2626"/></marker><marker id="ah-d97706" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#d97706"/></marker><marker id="ah-94a3b8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#94a3b8"/></marker><marker id="ah-e2e8f0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#e2e8f0"/></marker></defs>
+<rect width="760" height="560" rx="14" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="30" y="45" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13.5" fill="#2563eb" font-weight="700" text-anchor="start">1. Prompt chaining</text>
+<rect x="228" y="26" width="64" height="28" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+<text x="260" y="45" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#0f172a" font-weight="600" text-anchor="middle">LLM</text>
+<line x1="292" y1="40" x2="328" y2="40" stroke="#64748b" stroke-width="2" marker-end="url(#ah-64748b)"/>
+<rect x="338" y="26" width="64" height="28" rx="10" fill="#ffffff" stroke="#d97706" stroke-width="1.5"/>
+<text x="370" y="45" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#0f172a" font-weight="600" text-anchor="middle">check</text>
+<line x1="402" y1="40" x2="438" y2="40" stroke="#64748b" stroke-width="2" marker-end="url(#ah-64748b)"/>
+<rect x="448" y="26" width="64" height="28" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+<text x="480" y="45" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#0f172a" font-weight="600" text-anchor="middle">LLM</text>
+<line x1="512" y1="40" x2="548" y2="40" stroke="#64748b" stroke-width="2" marker-end="url(#ah-64748b)"/>
+<rect x="558" y="26" width="64" height="28" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+<text x="590" y="45" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#0f172a" font-weight="600" text-anchor="middle">LLM</text>
+<text x="30" y="155" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13.5" fill="#2563eb" font-weight="700" text-anchor="start">2. Routing</text>
+<rect x="225" y="136" width="70" height="28" rx="10" fill="#ffffff" stroke="#d97706" stroke-width="1.5"/>
+<text x="260" y="155" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#0f172a" font-weight="600" text-anchor="middle">router</text>
+<line x1="295" y1="150" x2="436.0605154375709" y2="114.48826184788425" stroke="#64748b" stroke-width="2" marker-end="url(#ah-64748b)"/>
+<rect x="438" y="100" width="104" height="28" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+<text x="490" y="119" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#0f172a" font-weight="600" text-anchor="middle">billing</text>
+<line x1="295" y1="150" x2="436" y2="150" stroke="#64748b" stroke-width="2" marker-end="url(#ah-64748b)"/>
+<rect x="438" y="136" width="104" height="28" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+<text x="490" y="155" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#0f172a" font-weight="600" text-anchor="middle">tech</text>
+<line x1="295" y1="150" x2="436.0605154375709" y2="185.51173815211575" stroke="#64748b" stroke-width="2" marker-end="url(#ah-64748b)"/>
+<rect x="438" y="172" width="104" height="28" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+<text x="490" y="191" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#0f172a" font-weight="600" text-anchor="middle">small model</text>
+<text x="30" y="275" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13.5" fill="#2563eb" font-weight="700" text-anchor="start">3. Parallelization</text>
+<rect x="228" y="256" width="64" height="28" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="260" y="275" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#0f172a" font-weight="600" text-anchor="middle">input</text>
+<line x1="292" y1="270" x2="428.0647654552063" y2="234.504843794294" stroke="#64748b" stroke-width="2" marker-end="url(#ah-64748b)"/>
+<rect x="430" y="220" width="60" height="28" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+<text x="460" y="239" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#0f172a" font-weight="600" text-anchor="middle">LLM</text>
+<line x1="292" y1="270" x2="428" y2="270" stroke="#64748b" stroke-width="2" marker-end="url(#ah-64748b)"/>
+<rect x="430" y="256" width="60" height="28" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+<text x="460" y="275" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#0f172a" font-weight="600" text-anchor="middle">LLM</text>
+<line x1="292" y1="270" x2="428.0647654552063" y2="305.495156205706" stroke="#64748b" stroke-width="2" marker-end="url(#ah-64748b)"/>
+<rect x="430" y="292" width="60" height="28" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+<text x="460" y="311" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#0f172a" font-weight="600" text-anchor="middle">LLM</text>
+<line x1="490" y1="234" x2="580.1375144405885" y2="269.27120130283896" stroke="#64748b" stroke-width="2" marker-end="url(#ah-64748b)"/>
+<line x1="490" y1="270" x2="580" y2="270" stroke="#64748b" stroke-width="2" marker-end="url(#ah-64748b)"/>
+<line x1="490" y1="306" x2="580.1375144405885" y2="270.72879869716104" stroke="#64748b" stroke-width="2" marker-end="url(#ah-64748b)"/>
+<rect x="584" y="256" width="76" height="28" rx="10" fill="#ffffff" stroke="#d97706" stroke-width="1.5"/>
+<text x="622" y="275" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#0f172a" font-weight="600" text-anchor="middle">combine</text>
+<text x="30" y="395" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13.5" fill="#2563eb" font-weight="700" text-anchor="start">4. Orchestrator-workers</text>
+<rect x="240" y="376" width="100" height="28" rx="10" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+<text x="290" y="395" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#0f172a" font-weight="600" text-anchor="middle">orchestrator</text>
+<line x1="340" y1="390" x2="450.0959428774295" y2="354.61201836082626" stroke="#64748b" stroke-width="2" marker-end="url(#ah-64748b)"/>
+<rect x="452" y="340" width="76" height="28" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+<text x="490" y="359" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#0f172a" font-weight="600" text-anchor="middle">worker</text>
+<line x1="340" y1="390" x2="450" y2="390" stroke="#64748b" stroke-width="2" marker-end="url(#ah-64748b)"/>
+<rect x="452" y="376" width="76" height="28" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+<text x="490" y="395" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#0f172a" font-weight="600" text-anchor="middle">worker</text>
+<line x1="340" y1="390" x2="450.0959428774295" y2="425.38798163917374" stroke="#64748b" stroke-width="2" marker-end="url(#ah-64748b)"/>
+<rect x="452" y="412" width="76" height="28" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+<text x="490" y="431" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#0f172a" font-weight="600" text-anchor="middle">worker</text>
+<text x="640" y="394" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#64748b" font-weight="400" text-anchor="middle">tasks decided at run time</text>
+<text x="30" y="505" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13.5" fill="#2563eb" font-weight="700" text-anchor="start">5. Evaluator-optimizer</text>
+<rect x="252" y="480" width="76" height="28" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+<text x="290" y="499" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#0f172a" font-weight="600" text-anchor="middle">writer</text>
+<line x1="328" y1="488" x2="436" y2="488" stroke="#64748b" stroke-width="2" marker-end="url(#ah-64748b)"/>
+<rect x="438" y="480" width="84" height="28" rx="10" fill="#ffffff" stroke="#d97706" stroke-width="1.5"/>
+<text x="480" y="499" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#0f172a" font-weight="600" text-anchor="middle">evaluator</text>
+<line x1="438" y1="502" x2="330" y2="502" stroke="#d97706" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ah-d97706)"/>
+<text x="384" y="524" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="11.5" fill="#d97706" font-weight="400" text-anchor="middle">feedback</text>
+<text x="620" y="498" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#64748b" font-weight="400" text-anchor="middle">until it passes</text>
+</svg>
