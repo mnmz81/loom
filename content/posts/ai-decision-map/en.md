@@ -6,7 +6,7 @@ tags: [ai, llmops]
 series: { key: ai-production, order: 6 }
 ---
 
-This series covered a lot of techniques. In practice, the hard part is not how each one works but which one to reach for. This last post puts them side by side, with a map for choosing, and links each choice back to the post that explains it.
+This series covered a lot of techniques. In practice, the hard part is not how each one works but which one to reach for. This post puts them side by side, with a map for choosing, and links each choice back to the post that explains it.
 
 The map follows the advice that runs through the official sources quoted in the series, most of all Anthropic's [Building effective agents](https://www.anthropic.com/research/building-effective-agents): find the simplest solution that works, and add complexity only when measurements show it helps.
 
@@ -62,3 +62,5 @@ A checklist that collects the production series:
 The field moves fast, and some details in this series (model names, prices, beta features) will change. The concepts change much more slowly: tokens and context, retrieval, the tool loop, workflows versus agents, evals. When something new comes out, ask the same questions as in the map: what does it change, what problem does it fix, and how will you measure that it helped?
 
 For the terms used across the series, see the [AI glossary cheat sheet](en/posts/ai-glossary/).
+
+To see the map applied to one real app, step by step, read [Putting it together](en/posts/ai-end-to-end-app/).

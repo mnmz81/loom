@@ -375,3 +375,40 @@ webmcp(
     text(380, 316, 'Same idea (named tools with a JSON Schema), different place: a backend server vs. the open page.', { size: 12.5, color: C.muted }),
   ],
 );
+
+// ai-end-to-end-app: one request through the support assistant -----------------------------------------------------------
+const e2e = svgWriter(outDir('ai-end-to-end-app'));
+const steps: [string, string, string][] = [
+  ['Question', 'from the user', C.text],
+  ['Screen', 'small model', C.red],
+  ['Retrieve', 'top chunks', C.green],
+  ['Answer', 'model + tools', C.main],
+  ['Reply', 'with sources', C.text],
+];
+e2e(
+  'app-flow',
+  760,
+  260,
+  'One request through the support assistant',
+  'A question is first screened by a small, fast model. If it is on-topic and safe, the closest help-center chunks are retrieved, and the main model answers from them, calling the order-status tool when it needs live data. The reply cites its sources. Every request is logged with latency and token usage, and an eval set runs on every change to the prompt or the code.',
+  [
+    ...steps.flatMap(([label, sub, color], i) => {
+      const x = 30 + i * 146;
+      return [
+        box(x, 40, 124, 64, color),
+        text(x + 62, 66, label, { size: 14, weight: 700, color }),
+        text(x + 62, 88, sub, { size: 12, color: C.muted }),
+        ...(i < steps.length - 1 ? [arrow(x + 124, 72, x + 146, 72, C.muted)] : []),
+      ];
+    }),
+    arrow(238, 104, 238, 150, C.red, true),
+    text(238, 168, 'off-topic or harmful:', { size: 12, color: C.red }),
+    text(238, 184, 'polite refusal', { size: 12, color: C.red }),
+    box(476, 140, 124, 50, C.amber, '#ffffff', true),
+    text(538, 170, 'order status', { size: 12.5, weight: 600, color: C.amber }),
+    arrow(530, 104, 530, 140, C.amber),
+    arrow(546, 140, 546, 104, C.amber),
+    text(380, 226, 'Logged on every request: latency, tokens, cache reads, tool calls.', { size: 12.5, color: C.muted }),
+    text(380, 246, 'Evals run on every change to the prompt or the code.', { size: 12.5, color: C.muted }),
+  ],
+);
