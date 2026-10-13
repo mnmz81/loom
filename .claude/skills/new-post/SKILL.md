@@ -62,6 +62,10 @@ Both must pass. Fix the content, never the validation, unless the user asks.
 - One commit per post (or per batch of series posts): `content: <series> post <n> - <topic> (en + he)`.
 - Commit and push to `main` (deploys the site).
 
-## 8. Notion copy (manual)
+## 8. Notion copy (do it, don't hand it to the user)
 
-After the site is deployed (image URLs must point to the live site), create or update the page under **Loom — מרכז → בבלוג (פורסם)**: keep the "published" line, bump `updated` / "Last updated" when editing an existing post.
+After the site is deployed (`gh run list` shows the Deploy run green; image URLs must point to the live site), create or update the page under **Loom — מרכז → בבלוג (פורסם)** yourself through the Notion connector: keep the "published" line, bump `updated` / "Last updated" when editing an existing post.
+
+- Series post: add its line to the series index page (`python3 scripts/notion-series-index.py <series-key>` prints the lines).
+- Standalone post or guide: a full-content page (`python3 scripts/notion-post-body.py <slug>` prints it with live-site links and images).
+- Existing posts you changed (cross-links): update their Notion pages the same way.
