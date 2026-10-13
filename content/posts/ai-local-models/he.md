@@ -97,7 +97,7 @@ client = anthropic.Anthropic(
 message = client.messages.create(
     model="gemma4:e2b",
     max_tokens=200,
-    temperature=0.2,
+    extra_body={"temperature": 0.2},  # SDK v1.0+ has no temperature argument
     messages=[{"role": "user", "content": "In one sentence, what is quantization?"}],
 )
 print(message.content[0].text)
