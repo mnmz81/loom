@@ -23,6 +23,8 @@ Run every command with `./scripts/with-node.sh` (system Node is 20).
 
 - Fetch the **official docs** of the topic (docs.python.org, git-scm.com, docs.github.com, the tool's `--help`). Verify every command, flag, setting path and claim. Do not rely on memory.
 - Run every code example locally and paste real output. State the version used ("every example ran with Python 3.13").
+- Python posts: `PYTHON=python3.13 python3 scripts/check-python-examples.py content/posts/<slug>/en.md` runs every block and compares it with the output block after it (`--fill` writes the real output in).
+- Reordering or retagging: `npx tsx scripts/set-shared.ts` changes `tags` / `series` in both files at once (`--series-order <key> <slug>...` renumbers a series); then fix the "What's next" paragraphs that point at the old order.
 - Prices, plans and UI paths change: hedge or link instead of stating them.
 - Read the previous post in the series and match its structure, length and tone.
 - Repo docs: `docs/contracts/content-format.md` (layout, frontmatter, tags) and `docs/notion-setup.md` (publishing flow, Notion copy).

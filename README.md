@@ -29,6 +29,8 @@ Prefix each with `./scripts/with-node.sh`.
 | `npm run build:e2e` | Build with the sample entries from `e2e/content` added (test data, never published) |
 | `npm run e2e` | Playwright + axe end-to-end tests — run `npm run build:e2e` first |
 | `npm run new-post -- <slug> --tags a,b [--series key] [--note]` | Create `he.md` + `en.md` drafts with matching date/tags/series (next series order computed) |
+| `npx tsx scripts/set-shared.ts <slug> --tags a,b` / `--series-order <key> <slug>...` | Change tags or series position in both languages at once, or renumber a whole series |
+| `python3 scripts/check-python-examples.py content/posts/python-*/en.md` | Run every Python example in a post and compare it with the output block (`--fill` writes the real output) |
 
 ## Writing guide
 
