@@ -104,3 +104,33 @@ ctx(
     text(380, 168, 'Each new turn resends the whole history, so the window fills up as the conversation grows.', { size: 12.5, color: C.muted }),
   ],
 );
+
+// ai-rag-pipeline: indexing and query paths ------------------------------------------------------------------------------
+const rag = svgWriter(outDir('ai-rag-pipeline'));
+const idx = ['Documents', 'Split into chunks', 'Embed chunks', 'Vector store'];
+const qry = ['Question', 'Embed question', 'Top-k chunks', 'Prompt + chunks → LLM'];
+const row = (labels: string[], y: number, color: string) =>
+  labels.flatMap((label, i) => {
+    const x = 30 + i * 182;
+    return [
+      box(x, y, 160, 50, color),
+      text(x + 80, y + 30, label, { size: 13, weight: 600 }),
+      ...(i < labels.length - 1 ? [arrow(x + 160, y + 25, x + 182, y + 25, C.muted)] : []),
+    ];
+  });
+rag(
+  'rag-pipeline',
+  760,
+  250,
+  'The RAG pipeline',
+  'Indexing, done once: documents are split into chunks, each chunk is embedded, and the vectors are stored. Answering, for every question: the question is embedded, the closest chunks are retrieved from the vector store, and the question plus the chunks are sent to the LLM.',
+  [
+    text(30, 32, 'Indexing (once, and on every document change)', { size: 13, weight: 700, color: C.main, anchor: 'start' }),
+    ...row(idx, 44, C.main),
+    text(30, 140, 'Answering (every question)', { size: 13, weight: 700, color: C.green, anchor: 'start' }),
+    ...row(qry, 152, C.green),
+    arrow(656, 94, 476, 152, C.muted, true),
+    text(620, 128, 'search', { size: 12, color: C.muted }),
+    text(380, 236, 'The model answers from the retrieved text, not from memory.', { size: 12.5, color: C.muted }),
+  ],
+);
