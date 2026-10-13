@@ -276,3 +276,63 @@ pat(
     text(620, 498, 'until it passes', { size: 12, color: C.muted }),
   ],
 );
+
+// ai-guardrails: layers around the model -----------------------------------------------------------------------------------
+const guard = svgWriter(outDir('ai-guardrails'));
+const layers = [
+  { label: 'Input checks', sub: 'screen, validate, limit', color: C.amber },
+  { label: 'Model', sub: 'prompt + policy', color: C.main },
+  { label: 'Output checks', sub: 'schema, PII, grounding', color: C.amber },
+  { label: 'Action checks', sub: 'permissions, confirm', color: C.feature },
+];
+guard(
+  'guardrail-layers',
+  760,
+  200,
+  'Guardrail layers',
+  'A request passes through input checks (screening, validation and rate limits), then the model with its prompt and policy, then output checks (schema, personal data, grounding), and finally action checks (permissions and human confirmation) before anything reaches the user or the outside world. Each layer can block or fall back.',
+  [
+    text(30, 100, 'User', { size: 14, weight: 700, anchor: 'start' }),
+    arrow(70, 95, 96, 95, C.muted),
+    ...layers.flatMap((l, i) => {
+      const x = 100 + i * 158;
+      return [
+        box(x, 60, 138, 70, l.color),
+        text(x + 69, 90, l.label, { size: 14, weight: 700, color: l.color }),
+        text(x + 69, 112, l.sub, { size: 11.5, color: C.muted }),
+        ...(i < layers.length - 1 ? [arrow(x + 138, 95, x + 158, 95, C.muted)] : []),
+      ];
+    }),
+    text(380, 34, 'Each layer can block, fix, or fall back to a safe answer.', { size: 13, color: C.muted }),
+    text(380, 170, 'No single layer is enough; together they make failures rare and small.', { size: 12.5, color: C.muted }),
+  ],
+);
+
+// ai-decision-map: which technique to use ----------------------------------------------------------------------------------
+const map = svgWriter(outDir('ai-decision-map'));
+const q = (y: number, question: string, yes: string, color: string) => [
+  box(30, y, 400, 46, C.border),
+  text(230, y + 28, question, { size: 13, weight: 600 }),
+  arrow(430, y + 23, 490, y + 23, color),
+  text(460, y + 16, 'yes', { size: 11.5, color }),
+  box(490, y, 240, 46, color),
+  text(610, y + 28, yes, { size: 13, weight: 700, color }),
+];
+map(
+  'decision-map',
+  760,
+  470,
+  'Decision map',
+  'Go down the questions in order. Is the output wrong because the instructions are unclear? Improve the prompt. Does the model lack knowledge or need fresh or private data? Use RAG. Must it act or look things up? Give it tools. Are the steps known in advance? Use a workflow. Are they open-ended? Use an agent. Does behavior or format still fall short after all of that, with enough data? Fine-tune. Is the job narrow, high-volume or offline? Use a small, distilled or local model. Every step is checked with evals.',
+  [
+    text(30, 30, 'Start at the top. Stop at the first "yes" that fixes the problem, measure, repeat.', { size: 13, color: C.muted, anchor: 'start' }),
+    ...q(46, 'Unclear task, wrong format or tone?', 'Better prompt', C.main),
+    ...q(106, 'Missing, fresh or private knowledge?', 'RAG', C.green),
+    ...q(166, 'Needs to look things up or act?', 'Tools', C.amber),
+    ...q(226, 'Several steps, known in advance?', 'Workflow', C.amber),
+    ...q(286, 'Open-ended, steps unknown?', 'Agent', C.feature),
+    ...q(346, 'Behavior still off, enough good data?', 'Fine-tune', C.main),
+    ...q(406, 'Narrow, high-volume or offline job?', 'Small / local model', C.green),
+    ...[46, 106, 166, 226, 286, 346].map((y) => arrow(230, y + 46, 230, y + 60, C.grey)),
+  ],
+);

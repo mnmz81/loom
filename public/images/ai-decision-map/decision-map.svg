@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="470" viewBox="0 0 760 470" role="img" aria-labelledby="t d">
+<title id="t">Decision map</title>
+<desc id="d">Go down the questions in order. Is the output wrong because the instructions are unclear? Improve the prompt. Does the model lack knowledge or need fresh or private data? Use RAG. Must it act or look things up? Give it tools. Are the steps known in advance? Use a workflow. Are they open-ended? Use an agent. Does behavior or format still fall short after all of that, with enough data? Fine-tune. Is the job narrow, high-volume or offline? Use a small, distilled or local model. Every step is checked with evals.</desc>
+<defs><marker id="ah-f8fafc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#f8fafc"/></marker><marker id="ah-cbd5e1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#cbd5e1"/></marker><marker id="ah-0f172a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#0f172a"/></marker><marker id="ah-64748b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker><marker id="ah-2563eb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#2563eb"/></marker><marker id="ah-db2777" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#db2777"/></marker><marker id="ah-16a34a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#16a34a"/></marker><marker id="ah-dc2626" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#dc2626"/></marker><marker id="ah-d97706" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#d97706"/></marker><marker id="ah-94a3b8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#94a3b8"/></marker><marker id="ah-e2e8f0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#e2e8f0"/></marker></defs>
+<rect width="760" height="470" rx="14" fill="#f8fafc" stroke="#cbd5e1"/>
+<text x="30" y="30" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#64748b" font-weight="400" text-anchor="start">Start at the top. Stop at the first "yes" that fixes the problem, measure, repeat.</text>
+<rect x="30" y="46" width="400" height="46" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="230" y="74" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#0f172a" font-weight="600" text-anchor="middle">Unclear task, wrong format or tone?</text>
+<line x1="430" y1="69" x2="488" y2="69" stroke="#2563eb" stroke-width="2" marker-end="url(#ah-2563eb)"/>
+<text x="460" y="62" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="11.5" fill="#2563eb" font-weight="400" text-anchor="middle">yes</text>
+<rect x="490" y="46" width="240" height="46" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+<text x="610" y="74" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#2563eb" font-weight="700" text-anchor="middle">Better prompt</text>
+<rect x="30" y="106" width="400" height="46" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="230" y="134" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#0f172a" font-weight="600" text-anchor="middle">Missing, fresh or private knowledge?</text>
+<line x1="430" y1="129" x2="488" y2="129" stroke="#16a34a" stroke-width="2" marker-end="url(#ah-16a34a)"/>
+<text x="460" y="122" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="11.5" fill="#16a34a" font-weight="400" text-anchor="middle">yes</text>
+<rect x="490" y="106" width="240" height="46" rx="10" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+<text x="610" y="134" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#16a34a" font-weight="700" text-anchor="middle">RAG</text>
+<rect x="30" y="166" width="400" height="46" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="230" y="194" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#0f172a" font-weight="600" text-anchor="middle">Needs to look things up or act?</text>
+<line x1="430" y1="189" x2="488" y2="189" stroke="#d97706" stroke-width="2" marker-end="url(#ah-d97706)"/>
+<text x="460" y="182" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="11.5" fill="#d97706" font-weight="400" text-anchor="middle">yes</text>
+<rect x="490" y="166" width="240" height="46" rx="10" fill="#ffffff" stroke="#d97706" stroke-width="1.5"/>
+<text x="610" y="194" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#d97706" font-weight="700" text-anchor="middle">Tools</text>
+<rect x="30" y="226" width="400" height="46" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="230" y="254" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#0f172a" font-weight="600" text-anchor="middle">Several steps, known in advance?</text>
+<line x1="430" y1="249" x2="488" y2="249" stroke="#d97706" stroke-width="2" marker-end="url(#ah-d97706)"/>
+<text x="460" y="242" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="11.5" fill="#d97706" font-weight="400" text-anchor="middle">yes</text>
+<rect x="490" y="226" width="240" height="46" rx="10" fill="#ffffff" stroke="#d97706" stroke-width="1.5"/>
+<text x="610" y="254" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#d97706" font-weight="700" text-anchor="middle">Workflow</text>
+<rect x="30" y="286" width="400" height="46" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="230" y="314" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#0f172a" font-weight="600" text-anchor="middle">Open-ended, steps unknown?</text>
+<line x1="430" y1="309" x2="488" y2="309" stroke="#db2777" stroke-width="2" marker-end="url(#ah-db2777)"/>
+<text x="460" y="302" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="11.5" fill="#db2777" font-weight="400" text-anchor="middle">yes</text>
+<rect x="490" y="286" width="240" height="46" rx="10" fill="#ffffff" stroke="#db2777" stroke-width="1.5"/>
+<text x="610" y="314" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#db2777" font-weight="700" text-anchor="middle">Agent</text>
+<rect x="30" y="346" width="400" height="46" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="230" y="374" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#0f172a" font-weight="600" text-anchor="middle">Behavior still off, enough good data?</text>
+<line x1="430" y1="369" x2="488" y2="369" stroke="#2563eb" stroke-width="2" marker-end="url(#ah-2563eb)"/>
+<text x="460" y="362" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="11.5" fill="#2563eb" font-weight="400" text-anchor="middle">yes</text>
+<rect x="490" y="346" width="240" height="46" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+<text x="610" y="374" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#2563eb" font-weight="700" text-anchor="middle">Fine-tune</text>
+<rect x="30" y="406" width="400" height="46" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="230" y="434" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#0f172a" font-weight="600" text-anchor="middle">Narrow, high-volume or offline job?</text>
+<line x1="430" y1="429" x2="488" y2="429" stroke="#16a34a" stroke-width="2" marker-end="url(#ah-16a34a)"/>
+<text x="460" y="422" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="11.5" fill="#16a34a" font-weight="400" text-anchor="middle">yes</text>
+<rect x="490" y="406" width="240" height="46" rx="10" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+<text x="610" y="434" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#16a34a" font-weight="700" text-anchor="middle">Small / local model</text>
+<line x1="230" y1="92" x2="230" y2="104" stroke="#94a3b8" stroke-width="2" marker-end="url(#ah-94a3b8)"/>
+<line x1="230" y1="152" x2="230" y2="164" stroke="#94a3b8" stroke-width="2" marker-end="url(#ah-94a3b8)"/>
+<line x1="230" y1="212" x2="230" y2="224" stroke="#94a3b8" stroke-width="2" marker-end="url(#ah-94a3b8)"/>
+<line x1="230" y1="272" x2="230" y2="284" stroke="#94a3b8" stroke-width="2" marker-end="url(#ah-94a3b8)"/>
+<line x1="230" y1="332" x2="230" y2="344" stroke="#94a3b8" stroke-width="2" marker-end="url(#ah-94a3b8)"/>
+<line x1="230" y1="392" x2="230" y2="404" stroke="#94a3b8" stroke-width="2" marker-end="url(#ah-94a3b8)"/>
+</svg>
