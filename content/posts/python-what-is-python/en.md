@@ -153,4 +153,4 @@ It's a weaker fit when every microsecond counts, such as operating-system kernel
 
 ## What's next
 
-Next in the series: installing Python, running a script and using the interactive prompt.
+Next in the series: `print()`, the function that shows output, and the first one you'll use in every program.

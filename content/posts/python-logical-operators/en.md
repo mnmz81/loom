@@ -3,7 +3,7 @@ title: "Logical operators in Python: and, or, not"
 summary: "How and, or and not combine conditions in Python: truth tables, short-circuit evaluation, why and/or return one of their operands, precedence, chained comparisons, and any() and all()."
 date: 2026-10-13
 tags: [python]
-series: { key: python, order: 16 }
+series: { key: python, order: 12 }
 ---
 
 A single comparison answers one question: is the user an adult? Real conditions often ask several at once: is the user an adult **and** do they have a ticket? Python has three logical operators for this: `and`, `or` and `not`. They're words, not symbols like `&&` and `||` in other languages.
@@ -229,4 +229,4 @@ True False
 
 ## What's next
 
-Next in the series: code blocks and scope, which explains which variables are visible inside an `if`, a loop and a function.
+Next in the series: indentation, and the `IndentationError` you get when the blocks under your conditions are off.

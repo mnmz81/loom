@@ -3,7 +3,7 @@ title: "The date type in Python"
 summary: "How to work with dates in Python using datetime.date: creating dates, reading parts of a date, formatting with strftime and isoformat, date arithmetic with timedelta, and invalid dates."
 date: 2026-10-11
 tags: [python]
-series: { key: python, order: 10 }
+series: { key: python, order: 9 }
 ---
 
 Python has no built-in date value like `int` or `str`. Dates live in the standard library module `datetime`, and the type you usually need is `date`. A `date` holds a year, a month and a day, and nothing else: no time of day, no time zone. For a time, use `datetime`, which is a separate topic.
@@ -131,4 +131,4 @@ True
 
 ## What's next
 
-Next in the series: number operations, including `/`, `//`, `%` and `**`.
+Next in the series: lists, which hold many values in one variable.

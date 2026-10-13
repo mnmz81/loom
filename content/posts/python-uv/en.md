@@ -3,7 +3,7 @@ title: "uv: a fast Python package and project manager"
 summary: "What uv is and how to use it: the project workflow with uv init, uv add and uv run, the .venv, pyproject.toml and uv.lock, plus uv venv and uv pip for pip-style work."
 date: 2026-10-11
 tags: [python]
-series: { key: python, order: 7 }
+series: { key: python, order: 23 }
 ---
 
 uv is a tool from Astral, written in Rust, that does what pip does and more. The docs describe it as "an extremely fast Python package manager". It installs packages, creates virtual environments, and can even install Python versions. It also has a project workflow, where it manages the environment and the list of dependencies for you.
@@ -99,4 +99,4 @@ Keep in mind that `uv pip` is not pip. The docs say its commands "do not exactly
 
 ## What's next
 
-Next in the series: the rest of the basic syntax, starting with conditions (`if`, `elif`, `else`).
+That's the end of the series for now. Coming up next: reading and writing files, modules, and classes.

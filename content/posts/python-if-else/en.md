@@ -3,7 +3,7 @@ title: "if, elif, else: conditions in Python"
 summary: "How Python decides which code to run: if, else and elif, the comparison operators, truthy and falsy values, the conditional expression (x if C else y), and a first look at match."
 date: 2026-10-13
 tags: [python]
-series: { key: python, order: 15 }
+series: { key: python, order: 11 }
 ---
 
 So far every line in our programs ran, top to bottom. Real programs make decisions: show a different message to a minor, refuse an empty password, give a grade based on a score. In Python that's the job of the `if` statement. This post covers `if`, `else` and `elif`, the comparison operators you put in a condition, and the one-line conditional expression.

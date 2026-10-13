@@ -3,7 +3,7 @@ title: "The modulo operator % in Python"
 summary: "What % does in Python and where it's useful: even or odd, every Nth item, wrapping around a list or a clock, splitting seconds with divmod, digits, FizzBuzz, and how it treats negative numbers."
 date: 2026-10-13
 tags: [python]
-series: { key: python, order: 18 }
+series: { key: python, order: 14 }
 ---
 
 `%` is the modulo operator. It gives the remainder after division. The [number operations post](en/posts/python-number-operations/) introduced it in a few lines. It deserves its own post, because it shows up in conditions constantly: checking if a number is even, doing something every tenth time, or wrapping an index back to the start of a list.

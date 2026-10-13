@@ -3,7 +3,7 @@ title: "Number operations in Python"
 summary: "The arithmetic operators in Python: + - * / // % and **, the difference between true and floor division, negative numbers, divmod, round, and the math module."
 date: 2026-10-11
 tags: [python]
-series: { key: python, order: 11 }
+series: { key: python, order: 6 }
 ---
 
 Python does arithmetic the way you'd expect, with a few details that matter: `/` and `//` are different operations, `%` works with negative numbers in a specific way, and `round()` doesn't always round halves up. This post covers the operators, the common functions, and the surprises.

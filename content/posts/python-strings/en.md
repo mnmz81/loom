@@ -212,4 +212,4 @@ The most common string bug is calling a method and not using its return value. M
 
 ## What's next
 
-Next in the series: indentation, and the `IndentationError` you get when it's wrong.
+Next in the series: f-strings, the clean way to put values into text.

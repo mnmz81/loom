@@ -3,10 +3,10 @@ title: "Code blocks and scope in Python"
 summary: "What a code block is in Python, why if, for, while and try don't create a new scope, which blocks do (functions, classes, comprehensions), and the bugs that come from mixing them up."
 date: 2026-10-13
 tags: [python]
-series: { key: python, order: 17 }
+series: { key: python, order: 18 }
 ---
 
-The last two posts were full of indented blocks under `if` and `else`. A natural question follows: if I create a variable inside an `if` block, can I use it after the block? In many languages the answer is no. In Python it's yes, and the reason is the difference between a *block of code* and a *scope*. This post explains both, and the bugs you get when you confuse them.
+The last few posts were full of indented blocks: under `if` and `else`, under loops and under `def`. A natural question follows: if I create a variable inside an `if` block, can I use it after the block? In many languages the answer is no. In Python it's yes, and the reason is the difference between a *block of code* and a *scope*. This post explains both, and the bugs you get when you confuse them.
 
 Every example here was run with Python 3.13. The rules were checked against the [compound statements reference](https://docs.python.org/3/reference/compound_stmts.html) and the [execution model](https://docs.python.org/3/reference/executionmodel.html#naming-and-binding).
 
@@ -251,4 +251,4 @@ The reference says the exception "must be assigned to a different name to be abl
 
 ## What's next
 
-Next in the series: the modulo operator `%`, which shows up in conditions all the time: even or odd, every Nth item, and wrapping around.
+Next in the series: scope and naming, with the `global` and `nonlocal` keywords and how to choose good names.

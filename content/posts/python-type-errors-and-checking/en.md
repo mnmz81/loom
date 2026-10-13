@@ -3,7 +3,7 @@ title: "TypeError and type checking in Python"
 summary: "The common TypeError messages in Python and what they mean, checking types with type() and isinstance(), why type hints are not enforced, and when to check types versus catching the error."
 date: 2026-10-11
 tags: [python]
-series: { key: python, order: 14 }
+series: { key: python, order: 20 }
 ---
 
 A `TypeError` means you used a value in a way its type doesn't support. The docs describe it as "an operation or function is applied to an object of inappropriate type". It's one of the most common errors you'll see, and the message almost always tells you exactly what's wrong. This post goes through the usual messages, then covers how to check a type before you use a value.
@@ -204,4 +204,4 @@ print(double.__annotations__)
 
 ## What's next
 
-Next in the series: [conditions](en/posts/python-if-else/) (`if`, `elif`, `else`), which use all the values and checks from the last few posts.
+Next in the series: [exceptions](en/posts/python-exceptions/), the full story of `try`, `except`, `else` and `finally`.

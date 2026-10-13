@@ -3,7 +3,7 @@ title: "Type conversion in Python"
 summary: "How to convert between Python types with int(), float(), str(), bool(), list(), tuple() and set(): what each conversion does, truncation, bases, truthiness, and the errors when a conversion fails."
 date: 2026-10-11
 tags: [python]
-series: { key: python, order: 12 }
+series: { key: python, order: 7 }
 ---
 
 Python rarely converts types for you. `"5" + 1` is an error, not `6`. When you need a number from text, or text from a number, you call a conversion function yourself. The functions have the same names as the types, so `int("5")` builds an int from the string "5". This post covers what each conversion does, and what goes wrong when it can't.
@@ -153,4 +153,4 @@ Check user input, or catch the error with `try` and `except`, as described in th
 
 ## What's next
 
-Next in the series: f-strings, the clean way to put values into text.
+Next in the series: `input()`, which reads text from the user, and where type conversion comes in right away.

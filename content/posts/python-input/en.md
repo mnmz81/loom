@@ -115,4 +115,4 @@ The docs say: "When EOF is read, EOFError is raised." An empty line (just pressi
 
 ## What's next
 
-Next in the series: pip and uv are for installing packages. The next post goes back to the core language, with conditions (`if`, `elif`, `else`).
+Next in the series: the `date` type, for values that are days on a calendar.

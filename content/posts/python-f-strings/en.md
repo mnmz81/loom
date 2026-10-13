@@ -3,7 +3,7 @@ title: "f-strings: formatting text in Python"
 summary: "How f-strings work in Python: putting expressions in braces, format specs for width, alignment, precision, thousands separators and percentages, the = debug specifier, and !r conversions."
 date: 2026-10-11
 tags: [python]
-series: { key: python, order: 13 }
+series: { key: python, order: 5 }
 ---
 
 An f-string is a string with an `f` before the opening quote. Inside it, anything in braces is an expression that Python evaluates and puts into the text. It's the standard way to build output in Python today, and it replaces the older `%` formatting and `str.format()` in most new code.
@@ -175,4 +175,4 @@ print(f"{name!r}")
 
 ## What's next
 
-Next in the series: you have the basic tools now. The next step is putting them together in conditions, starting with `if`, `elif` and `else`.
+Next in the series: number operations, including `/`, `//`, `%` and `**`.

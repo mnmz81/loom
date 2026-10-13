@@ -3,7 +3,7 @@ title: "Variable scope and good variable names in Python"
 summary: "Where a variable can be seen and changed in Python: local, global and nonlocal scope, the global and nonlocal keywords, shadowing, and how to choose clear names that follow PEP 8."
 date: 2026-10-11
 tags: [python]
-series: { key: python, order: 9 }
+series: { key: python, order: 19 }
 ---
 
 A variable exists in a specific place in your code. The *scope* of a variable is the part of the program where its name can be used. Scope is the reason a variable can be "missing" in one function and work fine in another. This post covers how Python decides which name you mean, and how to choose names that make the code easier to read.
@@ -193,4 +193,4 @@ Trying `class = 1` gives `SyntaxError: invalid syntax`.
 
 ## What's next
 
-Next in the series: conditions (`if`, `elif`, `else`), which read variables and decide what to run.
+Next in the series: `TypeError`, the most common error when a value has the wrong type, and how to check types.

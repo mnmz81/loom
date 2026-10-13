@@ -3,7 +3,7 @@ title: "Indentation in Python and the IndentationError"
 summary: "How Python uses indentation to group code, the four IndentationError messages you'll meet, why tabs and spaces can trigger a TabError, and how to find and fix them."
 date: 2026-10-11
 tags: [python]
-series: { key: python, order: 5 }
+series: { key: python, order: 13 }
 ---
 
 In Python, indentation is part of the syntax. Other languages use braces `{}` to mark a block of code. Python uses the whitespace at the start of the line. The docs say: "indentation is Python's way of grouping statements". This post covers the rule, the errors you get when it breaks, and how to fix them.
@@ -145,4 +145,4 @@ Most editors can show whitespace characters and convert tabs to spaces, and that
 
 ## What's next
 
-Next in the series: the rest of the basic syntax, starting with conditions (`if`, `elif`, `else`).
+Next in the series: the modulo operator `%`, which shows up in conditions all the time: even or odd, every Nth item, and wrapping around.
