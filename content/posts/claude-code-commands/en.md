@@ -2,7 +2,7 @@
 title: "Claude Code slash commands: my cheat sheet, rechecked"
 summary: "The Claude Code slash commands worth knowing, grouped by what you're doing. Checked against the official docs for v2.1.294."
 date: 2026-10-08
-updated: 2026-10-09
+updated: 2026-10-14
 tags: [claude-code, cli, cheatsheet]
 ---
 
@@ -88,6 +88,7 @@ I keep a list of Claude Code commands in Notion so I don't have to remember them
 - `/reload-skills` and `/reload-plugins` pick up changes without a restart. `/plugin` manages plugins.
 - `/run` starts your app and drives it to see a change actually work, and `/verify` goes further and checks the behavior, not just the tests. `/run-skill-generator` writes the project skill they rely on.
 - `/mcp` manages MCP connections and OAuth. `/ide` and `/chrome` handle the IDE and Claude in Chrome.
+- `/plugin-authoring` writes a mod, a plugin that changes Claude Code from the inside. Mods have [their own post](en/posts/claude-code-mods/).
 
 Custom commands are written as skills (`.claude/skills/`). Old files in `.claude/commands/` still work, and if a skill and a command share a name, the skill wins.
 

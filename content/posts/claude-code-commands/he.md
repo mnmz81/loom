@@ -2,7 +2,7 @@
 title: "פקודות Claude Code: דף העזר שלי, אחרי בדיקה"
 summary: "פקודות ה-slash של Claude Code ששווה להכיר, מקובצות לפי מה שעושים. נבדק מול התיעוד הרשמי לגרסה 2.1.294."
 date: 2026-10-08
-updated: 2026-10-09
+updated: 2026-10-14
 tags: [claude-code, cli, cheatsheet]
 ---
 
@@ -88,6 +88,7 @@ tags: [claude-code, cli, cheatsheet]
 - `/reload-skills` ו-`/reload-plugins` קולטות שינויים בלי הפעלה מחדש. `/plugin` מנהלת תוספים.
 - `/run` מפעילה את האפליקציה ומנווטת בה כדי לראות ששינוי באמת עובד. `/verify` הולכת רחוק יותר ובודקת את ההתנהגות, לא רק את הבדיקות. `/run-skill-generator` כותבת את ה-skill של הפרויקט שהן נשענות עליו.
 - `/mcp` מנהלת חיבורי MCP ו-OAuth. `/ide` ו-`/chrome` מטפלות ב-IDE וב-Claude in Chrome.
+- `/plugin-authoring` כותבת mod, תוסף שמשנה את Claude Code מבפנים. על mods יש [פוסט נפרד](he/posts/claude-code-mods/).
 
 פקודות מותאמות נכתבות כ-skills (`.claude/skills/`). קבצים ישנים ב-`.claude/commands/` עדיין עובדים, ואם ל-skill ולפקודה יש אותו שם, ה-skill מנצח.
 
