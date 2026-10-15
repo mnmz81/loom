@@ -6,9 +6,9 @@ tags: [ai, llmops]
 series: { key: ai-production, order: 7 }
 ---
 
-The five AI series explained one technique per post. This post builds one small app with them, in the order you'd add them in a real project: a support assistant for an online shop that answers from the help center and can look up an order. Each step adds one piece and links to the post that explains it in depth. The [decision map](en/posts/ai-decision-map/) is the "why" behind the order: start simple, and add a piece only when a test shows you need it.
+The five AI series explained one technique per post. This post builds one small app with them, in the order you'd add them in a real project: a support assistant for an online shop that answers from the help center and can look up an order. Each step adds one piece and links to the post that explains it. The [decision map](en/posts/ai-decision-map/) is the "why" behind the order: start simple, add a piece only when a test shows you need it.
 
-The code follows the official docs and the code in the earlier posts. It was not run for this post, so every output block is **example output**. The model names are the ones used across the series. Check the [models overview](https://platform.claude.com/docs/en/models/overview) for current names before you copy anything.
+The code follows the official docs and the earlier posts. It was not run for this post, so every output block is **example output**. The model names are the ones used across the series; check the [models overview](https://platform.claude.com/docs/en/models/overview) for current names before you copy anything.
 
 ![A question is screened by a small model, the closest help chunks are retrieved, the main model answers with an order-status tool, and the reply cites its sources. Every request is logged, and evals run on every change.](/images/ai-end-to-end-app/app-flow.svg)
 
@@ -43,7 +43,7 @@ print(ask("Can I get a refund on my annual plan?"))
 I don't have Loomshop's refund policy, so I can't say for sure. Please check the Help Center or contact support.
 ```
 
-That's the right behavior for a model that doesn't know your shop: it says so instead of guessing, because the prompt told it to. It's also useless. The model needs your help articles, and that's a knowledge problem, not a prompt problem.
+That's right for a model that doesn't know your shop: it says so instead of guessing, because the prompt told it to. It's also useless. The model needs your help articles, a knowledge problem, not a prompt problem.
 
 ## Step 2: knowledge with RAG
 
@@ -83,11 +83,11 @@ def with_documents(question):
     )
 ```
 
-Three chunks don't need a vector database. A few thousand fit in memory like this. A real help center adds a vector store, and the tricks from [hybrid search and reranking](en/posts/ai-rag-hybrid-rerank/) once you measure that retrieval misses.
+Three chunks don't need a vector database, and a few thousand fit in memory like this. A real help center adds a vector store, and [hybrid search and reranking](en/posts/ai-rag-hybrid-rerank/) once you measure that retrieval misses.
 
 ## Step 3: a tool for live data
 
-"Where is order 1042?" can't be answered from help articles. The data lives in your order system and changes every hour. That's a job for a [tool](en/posts/ai-tools-function-calling/): the model asks for it, your code runs it, and the result goes back to the model. This `answer()` is the tool loop from that post, with the documents from step 2:
+"Where is order 1042?" can't be answered from help articles: the data lives in your order system and changes hourly. That's a job for a [tool](en/posts/ai-tools-function-calling/): the model asks, your code runs it, and the result goes back. This `answer()` is the tool loop from that post, with the documents from step 2:
 
 ```python
 ORDERS = {"1042": "shipped on 2026-10-11, arriving 2026-10-14"}  # your order system goes here
@@ -134,7 +134,7 @@ Order 1042 shipped on October 11 and should arrive on October 14.
 
 Notice what this app is not: an [agent](en/posts/ai-agents/). The steps are known in advance (retrieve, answer, maybe look up one order), so a fixed [workflow](en/posts/ai-workflow-patterns/) with one tool is enough, and much easier to test.
 
-The `cache_control` line turns on [prompt caching](en/posts/ai-cost-latency/). The system prompt and tool definitions are the same on every call, so after the first request they're read from the cache.
+The `cache_control` line turns on [prompt caching](en/posts/ai-cost-latency/): the system prompt and tool definitions are identical on every call, so they're read from the cache after the first request.
 
 ## Step 4: guardrails
 
@@ -187,7 +187,7 @@ passed 4/5
 FAIL: Where is order 9999? -> I couldn't find an order with the number 9999. Please check the number and try again.
 ```
 
-The failure is a good answer with different words. That's the limit of a "must include" check: it's fast and free, but strict about wording. For answers like this, the LLM-judge from the evals post grades meaning instead of words. Start with 20 to 50 real questions from your support inbox, and add every bug you find as a new case.
+The failure is a good answer with different words, the limit of a "must include" check: fast and free, but strict about wording. The LLM-judge from the evals post grades meaning instead. Start with 20 to 50 real questions from your support inbox, and add every bug you find as a new case.
 
 ## Step 6: watch it in production
 
@@ -213,10 +213,10 @@ def handle_logged(question):
 {"ms": 2140, "question": "Where is order 1042?", "reply": "Order 1042 shipped on October 11 ...", "refused": false}
 ```
 
-Also record `response.usage` from every model call: input and output tokens, and `cache_read_input_tokens` to confirm the cache works. Those numbers turn into cost per question and show where to save, as the [cost and latency post](en/posts/ai-cost-latency/) explains. Review a sample of real conversations every week, and turn the bad ones into eval cases.
+Also record `response.usage` from every model call: input and output tokens, and `cache_read_input_tokens` to confirm the cache works. They turn into cost per question and show where to save ([cost and latency post](en/posts/ai-cost-latency/)). Review real conversations weekly, and turn the bad ones into eval cases.
 
 ## What we left out, and why
 
-The app never needed [fine-tuning](en/posts/ai-fine-tuning/): its knowledge changes daily and lives in RAG, and the prompt handles tone. It didn't need [multiple agents](en/posts/ai-multi-agent/) or [long-term memory](en/posts/ai-memory-context/) either. Each of those would add cost and new ways to fail, without fixing a problem the evals showed. That's the whole method of this series in one app: start with a prompt, add a piece when a measurement asks for it, and keep the evals running.
+The app never needed [fine-tuning](en/posts/ai-fine-tuning/): its knowledge changes daily and lives in RAG, and the prompt handles tone. Nor [multiple agents](en/posts/ai-multi-agent/) or [long-term memory](en/posts/ai-memory-context/): each adds cost and new ways to fail without fixing a problem the evals showed. That's the method of this series in one app: start with a prompt, add a piece when a measurement asks, and keep the evals running.
 
 For any term used here, see the [AI glossary](en/posts/ai-glossary/).

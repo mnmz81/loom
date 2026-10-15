@@ -7,7 +7,7 @@ tags: [claude-code]
 
 Until now, if you wanted to change how Claude Code behaves, you used the hooks in your settings file: a shell command that runs on an event and can allow, block or add context. Since October 2026 there is another way, the **mod**. It is a plugin whose code is JavaScript or TypeScript functions that run inside Claude Code itself, so it can change almost anything: tool calls, the prompt, commands, and even what is drawn on screen.
 
-The details here were checked against the [official mods docs](https://code.claude.com/docs/en/plugins/mods/overview), and every example ran with Claude Code 2.1.295, the version that ships with the desktop app. The API still changes between releases, so read this post as a snapshot. The general command list is in the [Claude Code commands](en/posts/claude-code-commands/) post.
+The details were checked against the [official mods docs](https://code.claude.com/docs/en/plugins/mods/overview), and every example ran with Claude Code 2.1.295, the version that ships with the desktop app. The API still changes between releases, so read this as a snapshot. The command list is in the [Claude Code commands](en/posts/claude-code-commands/) post.
 
 ## What a mod is
 
@@ -15,9 +15,9 @@ A mod is a [plugin](https://code.claude.com/docs/en/plugins) with one code file,
 
 Each of these handlers, which the docs call a hook, gets three arguments:
 
-- `$`: the mods API. Everything the mod does outside its own code goes through it: drawing, registering a command, reading a file, running a process, calling a model. That is what lets Claude Code show what a mod does before you run it.
-- `e`: the event's data, such as the tool's name and its arguments. It is frozen; to change it, you pass a copy.
-- `next(e)`: passes the event on, to the next mods and then to Claude Code's own behavior, and returns the result. If you have written Express or Koa middleware, the shape will look familiar.
+- `$`: the mods API. Everything the mod does outside its own code goes through it: drawing, registering a command, reading a file, running a process, calling a model. That is how Claude Code can show what a mod does before you run it.
+- `e`: the event's data, such as the tool's name and arguments. It is frozen; to change it, pass a copy.
+- `next(e)`: passes the event on, to the next mods and then to Claude Code itself, and returns the result. Express or Koa middleware looks the same.
 
 Hooks run wherever Claude Code runs, including `claude -p`, the Agent SDK and the VS Code extension. What a mod draws shows up only in the terminal and in the desktop app's Code tab.
 
@@ -38,15 +38,15 @@ Mods overlap with tools that already exist. This table is based on the compariso
 | Draws in the interface | Yes | No | No | No |
 | Written in | JavaScript or TypeScript | A script and a `settings.json` entry | Markdown | Any language |
 
-If an existing hook already does the job, if you only need instructions (a skill), or if you need access to an external system ([MCP](en/posts/ai-mcp/)), there is no reason to write a mod. It is worth the effort when you want a pane, a band above the prompt, a command that runs without a Claude turn, or to rewrite an event on its way.
+If an existing hook does the job, if you only need instructions (a skill), or if you need an external system ([MCP](en/posts/ai-mcp/)), skip the mod. It is worth it for a pane, a band above the prompt, a command that runs without a Claude turn, or rewriting an event on its way.
 
 ## Where it came from
 
-- **September 3, 2026**: @poteat from the Claude Code team opened [issue #91870](https://github.com/anthropics/claude-code/issues/91870) with a proposal for "function hooks", demo videos and an architecture document, and asked the community whether it wanted this.
-- **September 9**: the decision to ship was made, and the product name became "Claude Mods". "Function hook" stays the technical name for what mods are built on. Early access opened through an environment variable.
+- **September 3, 2026**: @poteat from the Claude Code team opened [issue #91870](https://github.com/anthropics/claude-code/issues/91870) proposing "function hooks", with demo videos and an architecture document, and asked the community whether it wanted this.
+- **September 9**: the decision to ship was made, and the product name became "Claude Mods"; "function hook" stays the technical name of what mods are built on. Early access opened through an environment variable.
 - **October 1**: an update on the issue announced that the feature was live.
 
-Today mods are on by default, from version 2.1.287 in the terminal and 2.1.286 in the desktop app. If you set `CLAUDE_CODE_ENABLE_FUNCTION_HOOKS` during early access, you can delete it: newer versions ignore it, so even `0` turns nothing off.
+Mods are now on by default, from version 2.1.287 in the terminal and 2.1.286 in the desktop app. You can delete `CLAUDE_CODE_ENABLE_FUNCTION_HOOKS` if you set it during early access: newer versions ignore it, even `0`.
 
 ## What already runs as a mod
 
@@ -57,11 +57,11 @@ Some of Claude Code's own features are written as mods. You can see them in `/pl
 - `cc-plugin-sec-default`: protects what the organization manages (settings, hooks, permission rules) from mods a user installs.
 - `cc-plugin-telemetry`, `cc-plugin-plugin-authoring` and `cc-plugin-you-should-know`.
 
-The source of some of them is public in the [`mods`](https://github.com/anthropics/claude-code/tree/main/mods) folder of the Claude Code repository, tests included, and it is the best way to see what a real mod looks like. There are also sample mods in [`claude-code-playground`](https://github.com/anthropics/claude-code-playground/tree/main/claude-code/mods), such as `blast-radius`, which holds a risky command like `rm -rf` and shows what it would change.
+The source of some is public in the [`mods`](https://github.com/anthropics/claude-code/tree/main/mods) folder of the Claude Code repository, tests included: the best way to see a real mod. [`claude-code-playground`](https://github.com/anthropics/claude-code-playground/tree/main/claude-code/mods) has samples too, such as `blast-radius`, which holds a risky command like `rm -rf` and shows what it would change.
 
 ## A first mod: an npm guard
 
-In this blog every npm command must go through `./scripts/with-node.sh`, because the system Node is too old. Instead of hoping Claude remembers, you can write a mod that blocks every `npm` or `npx` that skips the script, and adds a `/node-guard` command that shows how many times that happened.
+In this blog every npm command must go through `./scripts/with-node.sh`, because the system Node is too old. Instead of hoping Claude remembers, write a mod that blocks every `npm` or `npx` that skips the script, and adds a `/node-guard` command that shows how often that happened.
 
 ### Three files
 
@@ -158,7 +158,7 @@ The output ends with these lines:
 ✔ Validation passed
 ```
 
-The `hooks:` line shows which events the mod registers for, and `calls:` shows what it asks Claude Code to do. The same command is useful before you install someone else's mod: you see up front whether it reads files, sends network requests or runs processes.
+`hooks:` shows which events the mod registers for, and `calls:` what it asks Claude Code to do. Run it before installing someone else's mod too: you see up front whether it reads files, sends network requests or runs processes.
 
 ### A test
 
@@ -213,11 +213,11 @@ claude -p "/node-guard" --plugin-dir ./node-guard
 node-guard: Blocked 0 npm commands since the mod loaded
 ```
 
-Claude Code puts the plugin's name in front of the text. The counter resets on every reload, because the module's variables start over. A value that has to survive goes in `$.state` (for the session) or `$.store` (across sessions).
+Claude Code prefixes the plugin's name. The counter resets on every reload, because the module's variables start over; a value that must survive goes in `$.state` (the session) or `$.store` (across sessions).
 
 ## Let Claude write the mod
 
-You don't have to write it yourself. You can ask in a normal session, for example "make a mod that shows the current git branch above the prompt". Claude works from a built-in skill named `plugin-authoring` (you can also load it yourself with `/plugin-authoring`), which knows which events and methods your installed version has.
+You don't have to write it yourself. Ask in a normal session, for example "make a mod that shows the current git branch above the prompt". Claude works from a built-in skill named `plugin-authoring` (load it yourself with `/plugin-authoring`), which knows the events and methods of your installed version.
 
 - Claude writes the mod to `~/.claude/dev-mods/<session-id>/<mod-name>/`.
 - When the first file is saved, Claude Code asks whether to enable hot reloading for the session. After **Enable for this session**, the mod loads when the turn ends, and reloads at the end of every turn that changes it.
@@ -236,7 +236,7 @@ When several mods listen to the same event, they wrap each other, like middlewar
 - **append**: the organization's defaults, in `appendPlugins`.
 - **builtin**: the mods that ship with Claude Code.
 
-Managed settings have a few switches worth knowing: `allowManagedModsOnly` runs hooks only from the organization's mods and the built-in ones, `disableSideloadFlags` rejects `--plugin-dir`, and `allowModsToOverrideDenyRules` decides whether a user's mod may approve a call that a `deny` rule refuses. An organization can also write a policy mod of its own that listens to `plugin.register` and refuses to load other mods based on what they call.
+Managed settings have a few switches: `allowManagedModsOnly` runs hooks only from the organization's mods and the built-in ones, `disableSideloadFlags` rejects `--plugin-dir`, and `allowModsToOverrideDenyRules` decides whether a user's mod may approve a call a `deny` rule refuses. An organization can also write a policy mod that listens to `plugin.register` and refuses to load other mods based on what they call.
 
 ## Security: a mod runs with your permissions
 
@@ -248,7 +248,7 @@ A mod is code that runs as your user, with no sandbox:
 - It can approve a tool call before you are asked, and spend tokens on your plan.
 - Even with the [sandbox](https://code.claude.com/docs/en/sandboxing) on, only Claude's Bash commands are isolated. A process the mod starts runs outside it.
 
-The one thing the docs promise a mod cannot change is the permission prompt. So install mods only from sources you trust, and run `claude plugin validate` on the code before installing. More on these risks in the [AI security](en/posts/ai-security/) post.
+The docs promise only that a mod cannot change the permission prompt. So install mods only from sources you trust, and run `claude plugin validate` first. More in the [AI security](en/posts/ai-security/) post.
 
 ## Install, turn off and share
 
@@ -268,7 +268,7 @@ To turn mods off:
 
 None of these stops the built-in mods. You turn those off one by one in `/plugin`, except `sec-default`.
 
-To share, a mod has a version in its manifest like any plugin. You can send the folder, publish it in your own marketplace or submit it to Anthropic's directory. A name that starts with `claude-` fails validation, because it looks like an Anthropic plugin. Say in the README which Claude Code version you tested with, because the API is still moving.
+To share, a mod has a version in its manifest like any plugin. Send the folder, publish it in your own marketplace or submit it to Anthropic's directory. A name starting with `claude-` fails validation, because it looks like an Anthropic plugin. Say in the README which Claude Code version you tested with, because the API is still moving.
 
 ## Pitfalls
 

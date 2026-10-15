@@ -6,7 +6,7 @@ tags: [python]
 series: { key: python, order: 10 }
 ---
 
-So far every variable held one value: a number, a string, a date. Real programs work with many values at once: the items in a cart, the lines of a file, the scores of a class. The basic tool for that is the list. The docs call it the most versatile of Python's compound data types: a sequence of values in square brackets, in a fixed order, that you can change.
+So far every variable held one value: a number, a string, a date. Real programs work with many values at once: the items in a cart, the lines of a file, the scores of a class. The basic tool is the list, which the docs call the most versatile of Python's compound data types: values in square brackets, in a fixed order, that you can change.
 
 Every example here was run with Python 3.13. The behavior was checked against the [lists section of the tutorial](https://docs.python.org/3/tutorial/introduction.html#lists), [more on lists](https://docs.python.org/3/tutorial/datastructures.html#more-on-lists) and the [`list` type reference](https://docs.python.org/3/library/stdtypes.html#lists).
 
@@ -30,7 +30,7 @@ print(type(scores))
 <class 'list'>
 ```
 
-A list can hold values of different types, like `mixed`, but usually all the items have the same type. `len()` gives the number of items, the same as for a string.
+A list can mix types, like `mixed`, but usually all items share one type. `len()` gives the number of items, as for a string.
 
 `list()` builds a list from anything you can go through item by item, like a string or a `range`:
 
@@ -61,7 +61,7 @@ apple date
 ['date', 'cherry', 'banana', 'apple']
 ```
 
-An index past the end is an error, but a slice past the end is not. It just returns what exists:
+An index past the end is an error, but a slice past the end just returns what exists:
 
 ```python
 print(fruits[1:100])
@@ -75,7 +75,7 @@ IndexError: list index out of range
 
 ## Changing a list
 
-Here lists differ from strings. A string can't be changed, but a list can. The tutorial puts it this way: "Unlike strings, which are immutable, lists are a mutable type". You can replace an item in place:
+Here lists differ from strings: a string can't be changed, but a list can (the tutorial: "lists are a mutable type"). You can replace an item in place:
 
 ```python
 scores = [90, 72, 85]
@@ -135,7 +135,7 @@ True False
 1 2
 ```
 
-`index()` raises an error when the value isn't there, so check with `in` first, or use the [conditions in the next post](en/posts/python-if-else/):
+`index()` raises an error when the value isn't there, so check with `in` first (see [conditions](en/posts/python-if-else/)):
 
 ```python
 print(colors.index("pink"))
@@ -194,7 +194,7 @@ print(sorted(words, key=len))
 ['fig', 'Apple', 'banana']
 ```
 
-Plain `sorted(words)` puts `"Apple"` first because uppercase letters come before lowercase ones. With `["banana", "apple", "Fig"]` the plain sort would put `"Fig"` first, which is rarely what you want for names.
+Plain `sorted(words)` puts `"Apple"` first because uppercase letters come before lowercase ones, which is rarely what you want for names.
 
 ## Two names, one list
 
@@ -226,7 +226,7 @@ print(a, c)
 [1, 2, 3] [1, 2, 3, 4]
 ```
 
-These are *shallow* copies: a list inside the list is still shared. For lists of numbers and strings, that never matters.
+These are *shallow* copies: a list inside the list is still shared. For numbers and strings, that never matters.
 
 ## Tuples: a list that can't change
 
@@ -246,7 +246,7 @@ point[0] = 10
 TypeError: 'tuple' object does not support item assignment
 ```
 
-`x, y = point` is *unpacking*: one name per item. It's how you take apart the pair that `divmod()` returns in the [number operations post](en/posts/python-number-operations/). Use a tuple for a fixed group of values that belong together, like coordinates, and a list for a collection that grows and shrinks.
+`x, y = point` is *unpacking*: one name per item, as with the pair `divmod()` returns in the [number operations post](en/posts/python-number-operations/). Use a tuple for a fixed group that belongs together, like coordinates, and a list for a collection that grows and shrinks.
 
 ## Common mistakes
 

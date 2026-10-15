@@ -6,7 +6,7 @@ tags: [python]
 series: { key: python, order: 11 }
 ---
 
-So far every line in our programs ran, top to bottom. Real programs make decisions: show a different message to a minor, refuse an empty password, give a grade based on a score. In Python that's the job of the `if` statement. This post covers `if`, `else` and `elif`, the comparison operators you put in a condition, and the one-line conditional expression.
+So far every line in our programs ran, top to bottom. Real programs make decisions: show a different message to a minor, refuse an empty password, grade a score. In Python that's the `if` statement. This post covers `if`, `else` and `elif`, the comparison operators, and the one-line conditional expression.
 
 Every example here was run with Python 3.13. The behavior was checked against the [tutorial section on `if` statements](https://docs.python.org/3/tutorial/controlflow.html#if-statements), the [comparisons reference](https://docs.python.org/3/reference/expressions.html#comparisons) and the [conditional expressions reference](https://docs.python.org/3/reference/expressions.html#conditional-expressions).
 
@@ -28,7 +28,7 @@ Drink water
 Done
 ```
 
-Both indented lines belong to the `if`. `print("Done")` is back at the left edge, so it runs no matter what. Indentation is how Python knows where the block ends, as explained in the [indentation post](en/posts/python-indentation-error/).
+Both indented lines belong to the `if`. `print("Done")` is back at the left edge, so it always runs. Indentation is how Python knows where the block ends ([indentation post](en/posts/python-indentation-error/)).
 
 ## else: the other branch
 
@@ -69,7 +69,7 @@ print(grade)
 B
 ```
 
-Python checks the conditions from the top and runs the **first** block whose condition is true. The rest are skipped, even if they're true too. That's why order matters. Here the checks are in the wrong order:
+Python checks the conditions from the top and runs the **first** block whose condition is true; the rest are skipped, even if true. That's why order matters. Here the checks are in the wrong order:
 
 ```python
 score = 95
@@ -160,7 +160,7 @@ No name given
 2 items
 ```
 
-`if name:` reads as "if there is a name". It's shorter than `if name != "":` and is the usual Python style. The [type conversion post](en/posts/python-type-conversion/) covers `bool()` and truthiness in more detail.
+`if name:` reads as "if there is a name". It's shorter than `if name != "":` and is the usual Python style. The [type conversion post](en/posts/python-type-conversion/) covers `bool()` and truthiness.
 
 ## Nested conditions
 
@@ -215,7 +215,7 @@ adult
 1 item
 ```
 
-Read it as "`adult` if the condition is true, else `minor`". The condition is evaluated first, then only one of the two values. Because it's an expression, it fits inside an assignment, a function call or an f-string. Keep it for short choices: if either side needs more than a few words, a normal `if`/`else` is easier to read.
+Read it as "`adult` if the condition is true, else `minor`". The condition is evaluated first, then only one of the two values. Being an expression, it fits inside an assignment, a call or an f-string. Keep it for short choices; if either side needs more than a few words, use a normal `if`/`else`.
 
 ## When there are many values: match
 
@@ -238,7 +238,7 @@ print(describe("go"), describe("stop"), describe("jump"))
 Starting Stopping Unknown command
 ```
 
-Only the first matching `case` runs. `|` means "or", and `_` matches anything, like `else`. `match` can do much more (unpacking lists and objects), as the [tutorial on `match`](https://docs.python.org/3/tutorial/controlflow.html#match-statements) shows. For a few conditions, `if`/`elif` is still the simpler choice.
+Only the first matching `case` runs. `|` means "or", and `_` matches anything, like `else`. `match` can do much more, such as unpacking lists and objects (see the [tutorial](https://docs.python.org/3/tutorial/controlflow.html#match-statements)), but for a few conditions `if`/`elif` is simpler.
 
 ## Common mistakes
 

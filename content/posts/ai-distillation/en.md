@@ -6,9 +6,9 @@ tags: [ai, fine-tuning]
 series: { key: ai-tuning, order: 2 }
 ---
 
-Large models are smart and expensive. Small models are cheap and fast, but less capable. **Distillation** tries to get some of both: a large **teacher** model teaches a small **student** model to imitate it on a specific job. Many of the small, fast models you can use today were trained partly this way.
+Large models are smart and expensive. Small models are cheap and fast, but less capable. **Distillation** gets some of both: a large **teacher** model teaches a small **student** to imitate it on a specific job. Many small, fast models today were trained partly this way.
 
-The soft-target example was run with Python 3.9 and its output is real. The teacher-data code follows the official API docs and was not run. The theory comes from [Distilling the Knowledge in a Neural Network](https://arxiv.org/abs/1503.02531) (Hinton, Vinyals and Dean, 2015).
+The soft-target example was run with Python 3.9 and its output is real. The teacher-data code follows the API docs and was not run. The theory comes from [Distilling the Knowledge in a Neural Network](https://arxiv.org/abs/1503.02531) (Hinton, Vinyals and Dean, 2015).
 
 ## The idea
 
@@ -79,9 +79,9 @@ For thousands of inputs, send them as a batch: the models overview lists Message
 
 ## Before you distill
 
-- **Check the terms of use.** Model providers' terms often restrict using a model's outputs to train other models, especially competing ones. Read the terms of the teacher you plan to use.
-- **Distill a narrow job.** A small student can match a large teacher on one task with a clear format. It will not match it on everything.
-- **Count the cost.** Teacher calls, filtering and training cost money and time. It pays off when the student will handle a large volume of requests, or must run where the large model cannot (on a device, offline, on your own servers).
-- **Compare with a plain small model first.** A current small model with a good prompt is sometimes already good enough.
+- **Check the terms of use.** Providers often restrict using a model's outputs to train other models, especially competing ones. Read your teacher's terms.
+- **Distill a narrow job.** A small student can match a large teacher on one task with a clear format, not on everything.
+- **Count the cost.** Teacher calls, filtering and training cost money and time. It pays off when the student handles a large volume, or must run where the large model cannot (on a device, offline, on your own servers).
+- **Compare with a plain small model first:** a current small model with a good prompt is sometimes enough.
 
 The next post covers running models on your own machine, which is where most distilled students end up.

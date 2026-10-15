@@ -10,15 +10,15 @@ Docker עונה על השאלה "איך מריצים את האפליקציה ב�
 
 המדריך הזה ממשיך מהנקודה שבה [Docker מאפס לגיבור](he/posts/docker-zero-to-hero/) נעצר. לוקחים את אותו אימג' קטן, `hello-app`, ומריצים אותו על קלאסטר Kubernetes מקומי, ומוסיפים רעיון אחד בכל פעם: Pods, ‏Deployments, ‏Services, עדכונים, הגדרות, בדיקות בריאות וסקיילינג.
 
-כל פקודה וכל שדה נבדקו מול [התיעוד הרשמי של Kubernetes](https://kubernetes.io/docs/home/) (גרסה v1.37 בזמן הכתיבה). פלט שכולל שמות שנוצרו אוטומטית, כתובות IP או זמנים ייראה קצת אחרת אצלכם.
+כל פקודה וכל שדה נבדקו מול [התיעוד הרשמי של Kubernetes](https://kubernetes.io/docs/home/) (גרסה v1.37 בזמן הכתיבה). שמות שנוצרו אוטומטית, כתובות IP וזמנים ייראו אחרת אצלכם.
 
 ## מה זה Kubernetes
 
 Kubernetes הוא **מתזמר קונטיינרים** (container orchestrator): תוכנה שמריצה קונטיינרים על קבוצת מכונות ושומרת שהם ימשיכו לרוץ. אומרים לו *מה* רוצים ("שלושה עותקים של האימג' הזה, נגישים בפורט 80"), והוא מחליט *איפה* ו*איך*, וממשיך לתקן כשהמציאות סוטה מזה.
 
-הוא קוד פתוח, התחיל ב-Google, והיום מתוחזק על ידי Cloud Native Computing Foundation. כל ענן גדול מציע אותו כשירות מנוהל: Amazon EKS, ‏Google GKE ו-Azure AKS.
+הוא קוד פתוח, התחיל ב-Google, ומתוחזק על ידי Cloud Native Computing Foundation. כל ענן גדול מציע אותו כשירות מנוהל: Amazon EKS, ‏Google GKE ו-Azure AKS.
 
-צריך אותו? לא תמיד. אפליקציה אחת על שרת אחד מסתדרת מצוין עם Docker Compose. ‏Kubernetes מתחיל להשתלם כשיש כמה שירותים, יותר ממכונה אחת, וצורך בפריסות בלי השבתה ובריפוי עצמי. עקומת הלמידה שלו אמיתית, והמדריך הזה כאן כדי לשטח אותה.
+צריך אותו? לא תמיד. אפליקציה אחת על שרת אחד מסתדרת עם Docker Compose. ‏Kubernetes משתלם כשיש כמה שירותים, יותר ממכונה אחת, וצורך בפריסות בלי השבתה ובריפוי עצמי.
 
 ### מצב רצוי: הרעיון האחד שצריך לזכור
 
@@ -26,7 +26,7 @@ Kubernetes הוא **מתזמר קונטיינרים** (container orchestrator): 
 
 ![מצהירים על replicas: 3 עם kubectl apply, ושרת ה-API שומר את זה כמצב הרצוי. בקר משווה אותו כל הזמן למצב בפועל. כשרק שני Pods רצים, הבקר פועל ומפעיל עוד אחד, עד שהמצב בפועל תואם לרצוי.](/images/kubernetes-zero-to-hero/desired-state.svg)
 
-אם Pod קורס, או ששרת שלם נופל, אף אחד לא צריך להריץ פקודה. הבקר רואה שניים רצים כשרוצים שלושה, ומפעיל שלישי. בגלל זה עבודה עם Kubernetes היא בעיקר *עריכת קבצים שמתארים את התוצאה*, ולא הקלדת פקודות שמבצעות צעדים.
+אם Pod קורס, או ששרת שלם נופל, אף אחד לא מריץ פקודה: הבקר רואה שניים רצים כשרוצים שלושה, ומפעיל שלישי. בגלל זה עבודה עם Kubernetes היא בעיקר *עריכת קבצים שמתארים את התוצאה*, ולא הקלדת פקודות שמבצעות צעדים.
 
 ## החלקים של קלאסטר
 
@@ -44,11 +44,11 @@ Kubernetes הוא **מתזמר קונטיינרים** (container orchestrator): 
 - **kube-proxy** (אופציונלי): מתחזק חוקי רשת על כל node כדי ש-Services יעבדו.
 - **סביבת ריצה לקונטיינרים (container runtime):** התוכנה שבאמת מריצה קונטיינרים, כמו containerd.
 
-כמעט אף פעם לא נוגעים באף אחד מהם ישירות. בשירות מנוהל, הענן מריץ בשבילכם את כל ה-control plane.
+כמעט לא נוגעים בהם ישירות, ובשירות מנוהל הענן מריץ את ה-control plane בשבילכם.
 
 ## הקמת קלאסטר מקומי
 
-צריך שני כלים: `kubectl`, כלי שורת הפקודה, ודרך להריץ קלאסטר על הלפטופ. המדריך משתמש ב-**kind** ‏("Kubernetes in Docker"), שמריץ כל node כקונטיינר של Docker. חלופות כמו minikube עובדות גם הן.
+צריך `kubectl`, כלי שורת הפקודה, וקלאסטר מקומי. המדריך משתמש ב-**kind** ‏("Kubernetes in Docker"), שמריץ כל node כקונטיינר של Docker. גם minikube עובד.
 
 ב-macOS עם Homebrew (ל[מערכות אחרות ראו את תיעוד ההתקנה של kubectl](https://kubernetes.io/docs/tasks/tools/)):
 
@@ -71,9 +71,9 @@ NAME                 STATUS   ROLES           AGE   VERSION
 kind-control-plane   Ready    control-plane   45s   v1.xx.x
 ```
 
-‏[המדריך המהיר של kind](https://kind.sigs.k8s.io/docs/user/quick-start/) מסביר את ברירות המחדל: שם הקלאסטר הוא `kind`, ו-kind מוסיף **context** של `kubectl` בשם `kind-kind` ועובר אליו. ‏context הוא הגדרה שמורה של "איזה קלאסטר, ובתור איזה משתמש", ונגיע אליו בהמשך המדריך.
+כברירת מחדל ([המדריך המהיר של kind](https://kind.sigs.k8s.io/docs/user/quick-start/)) שם הקלאסטר הוא `kind`, ו-kind מוסיף **context** של `kubectl` בשם `kind-kind` ועובר אליו. ‏context הוא הגדרה שמורה של "איזה קלאסטר, ובתור איזה משתמש", ונגיע אליו בהמשך.
 
-שומרים על `kubectl` בטווח של גרסת minor אחת מהקלאסטר. התיעוד מזהיר שפער גדול יותר עלול להפתיע.
+שומרים על `kubectl` בטווח של גרסת minor אחת מהקלאסטר; פער גדול יותר עלול להפתיע.
 
 ## ה-Pod הראשון
 
@@ -93,7 +93,7 @@ web    1/1     Running   0          12s
 
 ‏`kubectl get pods` מציג `ContainerCreating` בזמן שהאימג' יורד, ואחר כך `Running`.
 
-ועכשיו החלק החשוב: כמעט אף פעם לא יוצרים Pods ככה. על Pod בודד אף אחד לא שומר. אם הוא מת או שה-node שלו נופל, הוא נעלם. במקום זה יוצרים **Deployment**, שיוצר ומחליף Pods בשבילכם.
+כמעט אף פעם לא יוצרים Pods ככה: על Pod בודד אף אחד לא שומר, ואם הוא מת או שה-node שלו נופל, הוא נעלם. יוצרים **Deployment**, שיוצר ומחליף Pods בשבילכם.
 
 ## מניפסטים: תיאור אובייקטים ב-YAML
 
@@ -112,7 +112,7 @@ spec:                  # the desired state, different for every kind
       image: nginx:1.29
 ```
 
-‏`kubectl apply -f file.yaml` שולח מניפסט לקלאסטר. אם האובייקט לא קיים, הוא נוצר. אם הוא קיים, הוא מתעדכן כדי להתאים. לכן בטוח להריץ את `apply` שוב ושוב, ואפשר לשמור את הקבצים ב-Git כמקור האמת.
+‏`kubectl apply -f file.yaml` שולח מניפסט לקלאסטר: האובייקט נוצר, או מתעדכן כדי להתאים. לכן בטוח לחזור על `apply`, ואפשר לשמור את הקבצים ב-Git כמקור האמת.
 
 שני הרגלים עוזרים בכתיבת מניפסטים:
 
@@ -132,7 +132,7 @@ docker build -t hello-app:1.0 .
 kind load docker-image hello-app:1.0
 ```
 
-למה `1.0` ולא `latest`? ‏Kubernetes תמיד מנסה למשוך מ-registry אימג' עם התגית `:latest`, והאימג' שלנו קיים רק מקומית. התיעוד של kind ממליץ להימנע מ-`:latest` בדיוק מהסיבה הזו. זה גם הרגל טוב בכל מקרה: תגית גרסה אומרת בדיוק מה רץ.
+למה `1.0` ולא `latest`? ‏Kubernetes תמיד מנסה למשוך `:latest` מ-registry, והאימג' שלנו קיים רק מקומית. תגית גרסה היא הרגל טוב בכל מקרה: היא אומרת בדיוק מה רץ.
 
 עכשיו יוצרים תיקייה `k8s/` וקובץ `k8s/deployment.yaml`:
 
@@ -192,7 +192,7 @@ Pod חדש עם שם חדש כבר עולה. ביקשתם שלושה, אז יש 
 kubectl scale deployment/hello --replicas=5
 ```
 
-עדיף לערוך את הקובץ. אם משנים בפקודה ואחר כך מריצים `apply` על הקובץ, הקובץ מנצח וחוזרים ל-3.
+עדיף הקובץ: אם משנים בפקודה ואחר כך מריצים עליו `apply`, חוזרים ל-3.
 
 ## Services: כתובת קבועה ל-Pods
 
@@ -225,7 +225,7 @@ kubectl run tmp --rm -it --image=busybox:1.37 --restart=Never -- wget -qO- http:
 Hello from a container
 ```
 
-השם `hello` עובד כי לקלאסטר יש DNS משלו. באותו namespace מספיק שם ה-Service. מ-namespace אחר משתמשים ב-`hello.<namespace>`, או בשם המלא `hello.<namespace>.svc.cluster.local`.
+השם `hello` עובד כי לקלאסטר יש DNS משלו. באותו namespace מספיק שם ה-Service; מ-namespace אחר משתמשים ב-`hello.<namespace>`.
 
 כדי להגיע אליו מהדפדפן שלכם בזמן פיתוח, מעבירים פורט מקומי:
 
@@ -248,13 +248,13 @@ curl localhost:8080
 
 ![משתמש מהאינטרנט מגיע ל-Gateway או ל-Ingress, שמנתב לפי host ונתיב ל-Service מסוג ClusterIP, שמפזר בקשות בין שלושה Pods. למטה: ‏ClusterIP פנימי בלבד, ‏NodePort פותח גם פורט על כל node, ‏LoadBalancer מבקש גם מהענן load balancer חיצוני.](/images/kubernetes-zero-to-hero/traffic-in.svg)
 
-בקלאסטר בענן, `type: LoadBalancer` נותן כתובת IP ציבורית ל-Service אחד. כשיש הרבה שירותים לא רוצים load balancer לכל אחד, ובשביל זה יש את הסעיף הבא.
+בענן, `type: LoadBalancer` נותן ל-Service אחד כתובת IP ציבורית. עם הרבה שירותים לא רוצים load balancer לכל אחד, ובשביל זה יש את הסעיף הבא.
 
 ## הכנסת תעבורה מבחוץ: Gateway ו-Ingress
 
 כדי לנתב הרבה שמות host ונתיבים להרבה Services דרך נקודת כניסה אחת, ל-Kubernetes יש שני APIs:
 
-- **Ingress**, הישן. ‏[עמוד ה-Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) אומר היום במפורש: "פרויקט Kubernetes ממליץ להשתמש ב-Gateway במקום ב-Ingress. ה-API של Ingress הוקפא". הוא עדיין עובד ולא יוסר, אבל לא מקבל יכולות חדשות.
+- **Ingress**, הישן. ‏[עמוד ה-Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) ממליץ היום על Gateway במקומו ואומר שה-API של Ingress הוקפא: הוא עדיין עובד, אבל לא מקבל יכולות חדשות.
 - **Gateway API**, המחליף המומלץ. מי שמפעיל את הקלאסטר מקים `Gateway` (נקודת הכניסה), וכל צוות מחבר אליו אובייקטים מסוג `HTTPRoute`.
 
 ‏`HTTPRoute` ששולח את `hello.example.com` ל-Service שלנו:
@@ -275,9 +275,9 @@ spec:
           port: 80
 ```
 
-אף אחד משני ה-APIs לא עושה כלום לבד. צריך **בקר** שמממש אותו, מותקן בקלאסטר או מסופק על ידי הענן. ‏[האתר של Gateway API](https://gateway-api.sigs.k8s.io/) מפרט את המימושים.
+אף אחד משני ה-APIs לא עושה כלום לבד: צריך **בקר** שמממש אותו, מותקן בקלאסטר או מסופק על ידי הענן ([המימושים](https://gateway-api.sigs.k8s.io/)).
 
-פיסת היסטוריה טרייה שכדאי להכיר: הבקר הפופולרי **ingress-nginx** ‏[הוצא משימוש על ידי פרויקט Kubernetes במרץ 2026](https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/). התקנות קיימות ממשיכות לרוץ, אבל לא מקבלות יותר תיקוני אבטחה. אם מדריך כלשהו אומר להתקין אותו, בוחרים בקר שמתוחזק.
+כדאי לדעת: הבקר הפופולרי **ingress-nginx** ‏[הוצא משימוש במרץ 2026](https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/). התקנות קיימות ממשיכות לרוץ אבל בלי תיקוני אבטחה, ולכן אם מדריך אומר להתקין אותו, בוחרים בקר שמתוחזק.
 
 ## עדכונים מתגלגלים וחזרה לאחור
 
@@ -291,11 +291,11 @@ kubectl apply -f k8s/deployment.yaml
 kubectl rollout status deployment/hello
 ```
 
-‏Kubernetes לא עוצר הכול ומתחיל מחדש. הוא מבצע **עדכון מתגלגל** (rolling update): מפעיל Pod חדש, מחכה שיהיה מוכן, מסיר ישן, וחוזר על זה. כברירת מחדל מותר ליצור עד 25% Pods נוספים (`maxSurge`) ועד 25% יכולים להיות לא זמינים (`maxUnavailable`). עם 3 עותקים זה מתעגל ל-Pod חדש אחד בכל פעם, ואף אחד לא חסר.
+‏Kubernetes לא עוצר הכול ומתחיל מחדש. הוא מבצע **עדכון מתגלגל** (rolling update): מפעיל Pod חדש, מחכה שיהיה מוכן, מסיר ישן, וחוזר על זה. כברירת מחדל מותר ליצור עד 25% Pods נוספים (`maxSurge`) ועד 25% יכולים להיות לא זמינים (`maxUnavailable`); עם 3 עותקים זה Pod חדש אחד בכל פעם, ואף אחד לא חסר.
 
 ![עדכון מתגלגל של שלושה Pods מ-v1 ל-v2. ‏Pod של v2 עולה; כשהוא מוכן, Pod אחד של v1 מוסר; וכך שוב עד שכל השלושה מריצים v2. כל Pod חדש חייב לעבור את בדיקת ה-readiness שלו לפני שישן נעלם.](/images/kubernetes-zero-to-hero/rolling-update.svg)
 
-התיעוד מבהיר נקודה אחת: עדכון מתחיל "אם ורק אם תבנית ה-Pod של ה-Deployment (כלומר `.spec.template`) משתנה". שינוי של האימג' או של משתנה סביבה מתחיל עדכון. סקיילינג לא.
+עדכון מתחיל רק כשתבנית ה-Pod (`.spec.template`) משתנה, למשל האימג' או משתנה סביבה. סקיילינג לא מתחיל עדכון.
 
 אם הגרסה החדשה גרועה, חוזרים אחורה:
 
@@ -335,7 +335,7 @@ kubectl create secret generic hello-secret --from-literal=DB_PASSWORD=dev-only
 
 ‏`envFrom` טוען את כל המפתחות של ה-ConfigMap. ‏`secretKeyRef` בוחר מפתח אחד מה-Secret. (השרת הקטן שלנו קורא רק את `PORT`. הם כאן כדי להראות את החיבור.) אפשר גם לחבר ConfigMaps ו-Secrets כקבצים.
 
-אל תתנו לשם להטעות אתכם. ‏[התיעוד של Secrets](https://kubernetes.io/docs/concepts/configuration/secret/) מזהיר ש-Secrets "נשמרים כברירת מחדל לא מוצפנים במאגר הנתונים של שרת ה-API ‏(etcd)", והערכים ב-YAML רק מקודדים ב-base64, שכל אחד יכול לפענח. התיעוד ממליץ להפעיל הצפנה במנוחה (encryption at rest), להגביל עם RBAC מי יכול לקרוא Secrets, ולשקול מאגר סודות חיצוני. אף פעם לא מעלים ל-Git מניפסט של Secret עם ערכים אמיתיים.
+אל תתנו לשם להטעות אתכם. ‏[התיעוד של Secrets](https://kubernetes.io/docs/concepts/configuration/secret/) מזהיר ש-Secrets נשמרים כברירת מחדל לא מוצפנים ב-etcd, והערכים ב-YAML רק מקודדים ב-base64, שכל אחד יכול לפענח. מפעילים הצפנה במנוחה (encryption at rest), מגבילים עם RBAC מי קורא Secrets, ושוקלים מאגר סודות חיצוני. אף פעם לא מעלים ל-Git מניפסט של Secret עם ערכים אמיתיים.
 
 ## בדיקות בריאות: probes
 
@@ -361,7 +361,7 @@ kubectl create secret generic hello-secret --from-literal=DB_PASSWORD=dev-only
             failureThreshold: 3
 ```
 
-‏readiness הוא מה שהופך עדכונים מתגלגלים לבטוחים: Pod חדש מקבל תעבורה רק אחרי שהוא עונה. באפליקציה אמיתית מכוונים את הבדיקות ל-endpoint קל כמו `/healthz`. בדיקת ה-liveness צריכה להיות פשוטה. אם היא תלויה בבסיס הנתונים ובסיס הנתונים מגמגם, Kubernetes מפעיל מחדש את כל ה-Pods בבת אחת.
+‏readiness הופך עדכונים מתגלגלים לבטוחים: Pod חדש מקבל תעבורה רק אחרי שהוא עונה. באפליקציה אמיתית מכוונים את הבדיקות ל-endpoint קל כמו `/healthz`, ומשאירים את ה-liveness פשוט: אם הוא תלוי בבסיס הנתונים והוא מגמגם, Kubernetes מפעיל מחדש את כל ה-Pods בבת אחת.
 
 ## משאבים: requests ו-limits
 
@@ -379,7 +379,7 @@ kubectl create secret generic hello-secret --from-literal=DB_PASSWORD=dev-only
 - **Requests** הם מה שה-scheduler שומר. ‏Pod ממוקם רק על node שיש בו כמות פנויה כזו. ‏`100m` הם 100 millicores, עשירית CPU.
 - **Limits** הם התקרה. קונטיינר שעובר את מגבלת הזיכרון נהרג (`OOMKilled`) ומופעל מחדש. מעבר למגבלת CPU רק מאט אותו.
 
-בלי requests, ה-scheduler מנחש, ו-Pod רעב אחד יכול להרעיב את השכנים שלו. מגדירים אותם על הכול.
+בלי requests ה-scheduler מנחש ו-Pod רעב אחד יכול להרעיב את שכניו, אז מגדירים אותם בכל מקום.
 
 ## סקיילינג אוטומטי
 
@@ -406,7 +406,7 @@ spec:
           averageUtilization: 70
 ```
 
-זה שומר על בין 2 ל-10 Pods, ומכוון ל-70% בממוצע מה-CPU *שהתבקש*. בגלל זה ה-HPA צריך ש-requests של CPU יהיו מוגדרים. הוא צריך גם **Metrics Server** מותקן בקלאסטר, ו-kind לא כולל אותו. רוב העננים המנוהלים כן. ראו את [המדריך של HPA](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/). כש-HPA מנהל Deployment, מוחקים את `replicas` מהקובץ של ה-Deployment, אחרת כל `apply` מאפס אותו.
+זה שומר על 2 עד 10 Pods, ומכוון ל-70% בממוצע מה-CPU *שהתבקש*, ולכן requests של CPU חייבים להיות מוגדרים. הוא צריך גם **Metrics Server**, ש-kind לא כולל ורוב העננים המנוהלים כן ([המדריך של HPA](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/)). כש-HPA מנהל Deployment, מוחקים את `replicas` מהקובץ של ה-Deployment, אחרת כל `apply` מאפס אותו.
 
 ## נתונים: volumes ו-StatefulSets
 
@@ -427,7 +427,7 @@ spec:
 
 **StorageClass** ברירת המחדל של הקלאסטר מקצה את הדיסק בפועל (דיסק בענן ב-EKS/GKE/AKS, תיקייה מקומית ב-kind). אחר כך Pod מחבר את ה-claim תחת `volumes` ו-`volumeMounts`.
 
-לבסיסי נתונים ולאפליקציות אחרות שבהן כל עותק צריך זהות משלו ודיסק משלו, משתמשים ב-**StatefulSet** במקום ב-Deployment. זה נושא גדול. ב-production, הרבה צוותים מריצים את בסיס הנתונים כשירות ענן מנוהל (כמו Amazon RDS) ומשאירים ב-Kubernetes רק את האפליקציות בלי מצב.
+לבסיסי נתונים ולאפליקציות אחרות שבהן כל עותק צריך זהות משלו ודיסק משלו, משתמשים ב-**StatefulSet** במקום ב-Deployment. זה נושא גדול: הרבה צוותים מריצים את בסיס הנתונים כשירות ענן מנוהל (כמו Amazon RDS) ומשאירים ב-Kubernetes רק אפליקציות בלי מצב.
 
 ## Namespaces ו-contexts
 
@@ -497,15 +497,15 @@ helm uninstall my-release
 
 ## הרצה ב-production
 
-- **משתמשים בקלאסטר מנוהל** ‏(EKS, ‏GKE, ‏AKS), אלא אם להריץ Kubernetes זו העבודה שלכם. שדרוג ואבטחה של control plane הם הרבה עבודה.
+- **משתמשים בקלאסטר מנוהל** ‏(EKS, ‏GKE, ‏AKS), אלא אם להריץ Kubernetes זו העבודה שלכם.
 - **לפחות שני עותקים** של כל דבר שמשרת תעבורה, עם בדיקות readiness.
 - **requests על כל קונטיינר**, ומגבלת זיכרון.
-- **גרסאות אימג' נעוצות.** אף פעם לא `latest`. תגית גרסה, או digest כשצריך דיוק.
-- **בלי סודות ב-Git או באימג'ים.** משתמשים במאגר סודות חיצוני, או לפחות בהצפנה במנוחה וב-RBAC הדוק.
-- **הרשאות מינימליות.** תפקידי RBAC לכל צוות, ‏NetworkPolicies שמגבילות אילו Pods מדברים עם אילו, קונטיינרים שלא רצים כ-root.
+- **גרסאות אימג' נעוצות,** אף פעם לא `latest`.
+- **בלי סודות ב-Git או באימג'ים:** מאגר סודות חיצוני, או לפחות הצפנה במנוחה וב-RBAC הדוק.
+- **הרשאות מינימליות:** תפקידי RBAC לכל צוות, ‏NetworkPolicies, קונטיינרים שלא רצים כ-root.
 - **מניפסטים ב-Git**, שמוחלים על ידי pipeline או כלי GitOps, לא מהלפטופ של מישהו.
-- **לוגים לפלט הסטנדרטי**, שנאספים על ידי מערכת הלוגים של הקלאסטר, כמו ב-Docker.
-- **נשארים על גרסאות נתמכות.** ‏Kubernetes מוציא שלוש גרסאות minor בשנה, וכל אחת נתמכת בערך שנה. מתכננים שדרוגים.
+- **לוגים לפלט הסטנדרטי**, שהקלאסטר אוסף.
+- **נשארים על גרסאות נתמכות.** שלוש גרסאות minor בשנה, וכל אחת נתמכת בערך שנה. מתכננים שדרוגים.
 
 ## דף העזר
 
@@ -528,30 +528,25 @@ helm uninstall my-release
 
 ## מילון מונחים
 
-- **Cluster (קלאסטר):** ‏control plane ועוד ה-worker nodes שהוא מנהל.
-- **Node:** מכונה אחת (וירטואלית או פיזית) בקלאסטר.
+- **Cluster / Node:** ‏control plane ועוד ה-worker nodes שלו / מכונה אחת בקלאסטר.
 - **Control plane:** שרת ה-API, ‏etcd, ה-scheduler והבקרים.
-- **kubectl:** כלי שורת הפקודה ל-API של Kubernetes.
 - **Manifest (מניפסט):** קובץ YAML שמתאר את המצב הרצוי של אובייקט.
 - **Pod:** קונטיינר אחד או יותר שחולקים IP; היחידה הקטנה ביותר ש-Kubernetes מריץ.
-- **Deployment:** שומר על מספר Pods זהים רצים ומגלגל עדכונים.
-- **ReplicaSet:** האובייקט ש-Deployment משתמש בו כדי לשמור על מספר ה-Pods.
+- **Deployment / ReplicaSet:** שומר על Pods זהים רצים ומגלגל עדכונים / האובייקט שבו הוא משתמש לספירה.
 - **Service:** שם ו-IP קבועים מול קבוצת Pods שמשתנה.
 - **Label / selector:** תגיות key-value, והשאילתות שמתאימות להן.
-- **Gateway / HTTPRoute:** ה-API המומלץ לניתוב תעבורה מבחוץ פנימה.
-- **Ingress:** ה-API הישן והמוקפא לאותה משימה.
+- **Gateway / HTTPRoute:** ה-API המומלץ לניתוב תעבורה מבחוץ פנימה (Ingress הוא הישן והמוקפא).
 - **ConfigMap / Secret:** הגדרות / הגדרות רגישות, שמועברות לקונטיינרים.
 - **Probe:** בדיקת בריאות מסוג readiness, ‏liveness או startup.
 - **Requests / limits:** משאבים שמורים / המקסימום המותר.
 - **HPA:** משנה את מספר העותקים של Deployment לפי מדדים.
 - **PVC / StorageClass:** בקשה לאחסון / האופן שבו הקלאסטר מספק אותו.
 - **StatefulSet:** כמו Deployment, ל-Pods שצריכים זהות ואחסון קבועים.
-- **Namespace:** תיקייה לאובייקטים בתוך קלאסטר.
-- **Context:** הגדרה שמורה של קלאסטר ומשתמש ב-`~/.kube/config`.
+- **Namespace / Context:** תיקייה לאובייקטים בקלאסטר / הגדרה שמורה של קלאסטר ומשתמש.
 - **Helm chart:** סט מניפסטים ארוז עם תבניות.
 
 ## לאן ממשיכים
 
-עכשיו יש לכם את כל הלולאה: אימג' מ-Docker, ‏Deployment ששומר על עותקים שלו רצים, ‏Service שנותן להם כתובת אחת, ‏Gateway שמכניס את העולם, ועדכונים, בדיקות בריאות ו-requests ששומרים שהכול יהיה תקין. כדי שזה ייקלט, מעלים פרויקט משלכם ל-kind: כותבים Deployment ו-Service, שוברים בכוונה בדיקת בריאות, ומתקנים אותה עם `describe` ו-`logs`.
+עכשיו יש לכם את כל הלולאה: אימג' מ-Docker, ‏Deployment ששומר על עותקים שלו רצים, ‏Service שנותן להם כתובת אחת, ‏Gateway שמכניס את העולם, ועדכונים, בדיקות בריאות ו-requests ששומרים שהכול יהיה תקין. כדי שזה ייקלט, מעלים פרויקט משלכם ל-kind, שוברים בכוונה בדיקת בריאות, ומתקנים אותה עם `describe` ו-`logs`.
 
-‏[המדריך הרשמי Kubernetes Basics](https://kubernetes.io/docs/tutorials/kubernetes-basics/) ו[פרק המושגים](https://kubernetes.io/docs/concepts/) הם הקריאה הבאה הטובה ביותר. כדי לבנות ולדחוף את האימג' אוטומטית בכל מיזוג, ראו [GitHub Actions מאפס לגיבור](he/posts/github-actions-zero-to-hero/). לצד של הענן, ‏[AWS מאפס לגיבור](he/posts/aws-zero-to-hero/) מראה איפה EKS משתלב. וכשאתם בתוך קונטיינר עם `kubectl exec`, ‏[דף העזר לפקודות Linux](he/posts/linux-commands/) מכיל את מה שתקלידו.
+‏[Kubernetes Basics](https://kubernetes.io/docs/tutorials/kubernetes-basics/) ו[פרק המושגים](https://kubernetes.io/docs/concepts/) הם הקריאה הבאה הטובה ביותר. כדי לבנות ולדחוף את האימג' בכל מיזוג, ראו [GitHub Actions מאפס לגיבור](he/posts/github-actions-zero-to-hero/); ‏[AWS מאפס לגיבור](he/posts/aws-zero-to-hero/) מראה איפה EKS משתלב; ובתוך קונטיינר, ‏[דף העזר לפקודות Linux](he/posts/linux-commands/) מכיל את מה שתקלידו.

@@ -8,7 +8,7 @@ series: { key: python, order: 1 }
 
 Python is a high-level, general-purpose programming language. The official FAQ describes it as "an interpreted, interactive, object-oriented programming language" that also supports procedural and functional styles. It runs on Windows, macOS and Linux, and it's used for web backends, automation scripts, data analysis, games, teaching and a lot more.
 
-This is the first post in a series where each post covers one Python topic. Every code example here was run, and the claims were checked against the official Python docs.
+This is the first post in a series where each post covers one Python topic. Every example was run, and the claims were checked against the official docs.
 
 ## A short history
 
@@ -38,7 +38,7 @@ In C or Java you compile first and then run. In Python you run the source direct
 
 There's also an interactive mode: type `python3` and you get a prompt where every line runs immediately. It's a good place to try small ideas.
 
-Two honest caveats. First, the distinction is blurry: the standard implementation (CPython) compiles your source to bytecode behind the scenes, and caches it in `.pyc` files. Second, interpreted programs generally run more slowly than compiled ones, which is the price of the short edit-and-run cycle.
+Two caveats. The distinction is blurry: the standard implementation (CPython) compiles your source to bytecode behind the scenes and caches it in `.pyc` files. And interpreted programs generally run more slowly than compiled ones, the price of the short edit-and-run cycle.
 
 ### 2. Indentation is the syntax
 
@@ -62,7 +62,7 @@ is is short
 readable is longer than 2
 ```
 
-This is the code you'd write anyway to make it readable, except now it's enforced. Indenting a line by accident is an error, not a silent change in meaning:
+This is the layout you'd write anyway for readability, now enforced. An accidental indent is an error, not a silent change in meaning:
 
 ```text
 IndentationError: unexpected indent
@@ -94,9 +94,9 @@ Python is **dynamically typed** (types belong to values, and are checked as the 
 TypeError: can only concatenate str (not "int") to str
 ```
 
-The exact wording of error messages changes between versions, but the error itself doesn't.
+Error message wording changes between versions, but the error doesn't.
 
-Because Python looks at what an object can do rather than what it's called, code works with anything that fits. This is called duck typing in the docs: "If it looks like a duck and quacks like a duck, it must be a duck."
+Python looks at what an object can do rather than what it's called, so code works with anything that fits. The docs call this duck typing: "If it looks like a duck and quacks like a duck, it must be a duck."
 
 ```python
 def total(items):
@@ -113,7 +113,7 @@ print(total({10, 20}))
 30
 ```
 
-One function, three kinds of collections. If you want, you can add **type hints** (`def total(items: list[int]) -> int:`), but they're optional and Python doesn't enforce them. They're for editors and checkers like mypy.
+One function, three kinds of collections. You can add **type hints** (`def total(items: list[int]) -> int:`), but they're optional, not enforced by Python, and meant for editors and checkers like mypy.
 
 ### 4. Big built-in data types
 

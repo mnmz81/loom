@@ -6,7 +6,7 @@ tags: [python]
 series: { key: python, order: 21 }
 ---
 
-The posts so far showed plenty of errors: `IndexError`, `KeyError`, `ValueError`, `TypeError`. Each one stopped the program. The [TypeError post](en/posts/python-type-errors-and-checking/) showed a first `try`/`except` that catches an error instead. This post covers the whole mechanism. The tutorial puts it this way: "Errors detected during execution are called exceptions and are not unconditionally fatal".
+The posts so far showed plenty of errors: `IndexError`, `KeyError`, `ValueError`, `TypeError`. Each stopped the program. The [TypeError post](en/posts/python-type-errors-and-checking/) showed a first `try`/`except` that catches one instead. This post covers the whole mechanism: errors detected during execution are called exceptions and "are not unconditionally fatal".
 
 Every example here was run with Python 3.13. The behavior was checked against the [errors and exceptions tutorial](https://docs.python.org/3/tutorial/errors.html) and the [built-in exceptions reference](https://docs.python.org/3/library/exceptions.html).
 
@@ -32,7 +32,7 @@ Traceback (most recent call last):
 ZeroDivisionError: division by zero
 ```
 
-The last line is the exception type and its message. The frame just above it is the line that failed, inside `average`. The frame above that is the call that led there. The `~` and `^` marks point at the exact part of the line.
+The last line is the exception type and message. The frame above it is the line that failed, inside `average`; the one above that is the call that led there. The `~` and `^` marks point at the exact part of the line.
 
 ## try and except
 
@@ -94,7 +94,7 @@ can't divide by zero
 bad input: unsupported operand type(s) for /: 'int' and 'str'
 ```
 
-An exception type also matches its subclasses. `LookupError` catches both `IndexError` and `KeyError`, because both are kinds of lookup errors. The full family tree is at the end of the [built-in exceptions reference](https://docs.python.org/3/library/exceptions.html#exception-hierarchy).
+An exception type also matches its subclasses: `LookupError` catches both `IndexError` and `KeyError`. The full family tree is in the [built-in exceptions reference](https://docs.python.org/3/library/exceptions.html#exception-hierarchy).
 
 ## else and finally
 
@@ -122,9 +122,9 @@ bad: x
 done with 'x'
 ```
 
-Why `else` and not just more lines in `try`? Code in `else` isn't protected by the `except`, so an unexpected error there isn't hidden. Keep the `try` block as small as the line that can fail.
+Why `else` and not more lines in `try`? Code in `else` isn't protected by the `except`, so an unexpected error there isn't hidden. Keep the `try` block as small as the line that can fail.
 
-For files, `with open(...)` already does the cleanup that `finally` would do, and closes the file even when an exception happens.
+For files, `with open(...)` already does `finally`'s cleanup and closes the file even on an exception.
 
 ## Raising your own exceptions
 

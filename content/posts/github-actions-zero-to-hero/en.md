@@ -6,17 +6,17 @@ tags: [github, ci-cd]
 series: { key: devops, order: 4 }
 ---
 
-Every project has chores that should happen on every change: run the tests, check the formatting, build, publish a package, deploy. Doing them by hand works until the day someone forgets. **GitHub Actions** is GitHub's built-in automation: you describe the chores in a YAML file in the repository, and GitHub runs them on its own machines whenever something happens.
+Every project has chores that should happen on every change: run the tests, check the formatting, build, publish, deploy. Doing them by hand works until someone forgets. **GitHub Actions** is GitHub's built-in automation: you describe the chores in a YAML file in the repository, and GitHub runs them on its own machines whenever something happens.
 
 [GitHub from zero to hero](en/posts/github-zero-to-hero/) introduced Actions in one section. This guide goes all the way: events, jobs, expressions, matrix builds, caching, secrets, deployments without stored keys, building a Docker image, and the security habits that keep a workflow from becoming a back door.
 
-Every key, command and action version was checked against the [GitHub Actions documentation](https://docs.github.com/en/actions) and the actions' own release pages in October 2026. Action versions move: check each action's page for the current major version.
+Every key, command and action version was checked against the [GitHub Actions documentation](https://docs.github.com/en/actions) and the actions' release pages in October 2026. Versions move: check each action's page for the current major.
 
 ## What GitHub Actions is
 
 GitHub Actions is a **CI/CD** platform. **Continuous integration** (CI) means every change is built and tested automatically, so problems show up within minutes, on the pull request, before anything is merged. **Continuous delivery/deployment** (CD) means the tested result is released or deployed automatically too.
 
-Actions isn't limited to CI/CD. A workflow can label new issues, close stale ones, publish a release when you push a tag, or run a report every Monday morning. Anything that can be scripted and triggered by an event in a repository fits.
+Actions isn't limited to CI/CD. A workflow can label new issues, close stale ones, publish a release when you push a tag, or run a report every Monday. Anything scriptable and triggered by a repository event fits.
 
 ### The parts of a workflow
 
@@ -67,7 +67,7 @@ Line by line:
 - `actions/setup-node` installs Node 24, and `cache: npm` caches the npm download folder between runs.
 - The two `run` steps are plain shell commands.
 
-Commit and push. Open the **Actions** tab, and the run is there with a live log for each step. On a pull request, the result shows up as a check next to the commit: a yellow dot while it runs, then a green check or a red cross.
+Commit and push. The **Actions** tab shows the run with a live log for each step. On a pull request the result appears as a check: a yellow dot while it runs, then a green check or red cross.
 
 ### Reading a run from the terminal
 
@@ -109,9 +109,9 @@ on:
 - **`workflow_dispatch`** adds a **Run workflow** button to the Actions tab, with optional inputs (up to 25). From the terminal: `gh workflow run ci.yml -f environment=production`.
 - **`schedule`** uses cron syntax. Minutes, hours, day of month, month, day of week: `30 5 * * 1-5` is 05:30 Monday to Friday. Schedules run in UTC unless you add a `timezone`.
 
-Some facts about schedules from the docs, because they surprise people. Scheduled runs use "the latest commit on the default branch". The shortest interval is every 5 minutes. Runs "can be delayed during periods of high loads", so don't rely on exact minutes. And in public repositories, scheduled workflows are disabled automatically after 60 days without activity in the repository.
+Schedules surprise people. Scheduled runs use the latest commit on the default branch, the shortest interval is 5 minutes, runs can be delayed under high load, so don't rely on exact minutes, and in public repositories scheduled workflows are disabled after 60 days without repository activity.
 
-Other useful events: `release` (a release was published), `workflow_call` (another workflow calls this one, covered below), `workflow_run` (after another workflow finishes), and `issues` or `issue_comment` for repository automation.
+Other useful events: `release` (published), `workflow_call` (another workflow calls this one, below), `workflow_run` (after another workflow finishes), and `issues` or `issue_comment` for repository automation.
 
 ## Jobs, steps and runners
 
@@ -137,13 +137,13 @@ jobs:
           npm test
 ```
 
-- `timeout-minutes` stops a stuck job. Set it on everything: the default is 360 minutes, which a hung test happily uses up.
+- `timeout-minutes` stops a stuck job. Set it everywhere: the default is 360 minutes, which a hung test happily uses up.
 - `defaults.run.working-directory` runs every `run` step in a subfolder, handy in a monorepo.
-- `env` at the job level is visible to every step. It can also be set per workflow or per step.
-- `name` on a step is what the log shows. Without it, the log shows the command.
-- `run: |` is YAML for a multi-line string. Each line runs in the same shell, and on Linux the default shell is Bash with "stop at the first failing command" turned on.
+- `env` at the job level is visible to every step (it can also be set per workflow or step).
+- `name` on a step is what the log shows instead of the command.
+- `run: |` is a multi-line string. Each line runs in the same shell; on Linux that is Bash, stopping at the first failing command.
 
-Every job starts on a clean machine. Files from one job don't exist in the next, unless you pass them along as an artifact (below). GitHub-hosted runners come with many tools preinstalled (Git, Docker, Node, Python and more). The [runner images repository](https://github.com/actions/runner-images) lists them.
+Every job starts on a clean machine, so files from one job don't exist in the next unless passed along as an artifact (below). GitHub-hosted runners come with many tools preinstalled (Git, Docker, Node, Python...); the [runner images repository](https://github.com/actions/runner-images) lists them.
 
 ### Jobs that depend on each other
 
@@ -171,7 +171,7 @@ jobs:
       - run: npm ci && npm run build
 ```
 
-`build` starts only after both `lint` and `test` succeed. If either fails, `build` is skipped. This is how a pipeline is built: checks in parallel, then build, then deploy.
+`build` starts only after both `lint` and `test` succeed; if either fails, it is skipped. That's a pipeline: checks in parallel, then build, then deploy.
 
 ![lint and three test jobs from a matrix run in parallel. build needs all of them. deploy-staging needs build. deploy-prod needs deploy-staging and uses the production environment, which waits for approval.](/images/github-actions-zero-to-hero/job-graph.svg)
 
@@ -207,11 +207,11 @@ steps:
       path: reports/
 ```
 
-By default a step runs only if every step before it succeeded. The status functions change that: `failure()` runs only after a failure, `always()` runs no matter what, and `cancelled()` runs if the run was cancelled. There are also helpers such as `contains()`, `startsWith()`, `format()`, `toJSON()` and `hashFiles()`. See the [expressions reference](https://docs.github.com/en/actions/reference/workflows-and-actions/expressions).
+By default a step runs only if every earlier step succeeded. Status functions change that: `failure()` runs only after a failure, `always()` runs no matter what, `cancelled()` runs if the run was cancelled. Helpers include `contains()`, `startsWith()`, `format()`, `toJSON()` and `hashFiles()` ([expressions reference](https://docs.github.com/en/actions/reference/workflows-and-actions/expressions)).
 
 ## Passing data between steps and jobs
 
-A step can't set a normal shell variable for the next step, because each step runs in its own process. Instead, steps write to special files. The [workflow commands reference](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands) defines them:
+A step can't set a shell variable for the next step, because each runs in its own process. Instead, steps write to special files ([workflow commands](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands)):
 
 ```yaml
 jobs:
@@ -236,9 +236,9 @@ jobs:
 - `$GITHUB_OUTPUT`: a step with an `id` writes `name=value`, and later steps read `steps.<id>.outputs.<name>`.
 - `$GITHUB_ENV`: sets an environment variable for the *following* steps of the job.
 - Job `outputs`: expose a step output to other jobs, which read it through `needs`.
-- `$GITHUB_STEP_SUMMARY`: Markdown that appears on the run's summary page. Great for test results or a link to a preview.
+- `$GITHUB_STEP_SUMMARY`: Markdown shown on the run's summary page, great for test results.
 
-GitHub also sets many variables in every job, such as `GITHUB_SHA`, `GITHUB_REF_NAME` and `GITHUB_REPOSITORY`. The snippet above uses `GITHUB_SHA`.
+GitHub also sets variables like `GITHUB_SHA`, `GITHUB_REF_NAME` and `GITHUB_REPOSITORY` in every job.
 
 ## Matrix builds
 
@@ -265,7 +265,7 @@ jobs:
 
 ![A job with a matrix of two operating systems and three Node versions expands into six jobs, one per combination, running in parallel.](/images/github-actions-zero-to-hero/matrix.svg)
 
-Two times three is six jobs, all running in parallel. By default, when one combination fails, GitHub cancels the others (`fail-fast: true`). Setting it to `false` lets every combination finish, so you see the full picture. `include` adds extra combinations, `exclude` removes some, and `max-parallel` limits how many run at once.
+Two times three is six parallel jobs. By default, when one combination fails GitHub cancels the others (`fail-fast: true`); `false` lets all finish, so you see the full picture. `include` adds combinations, `exclude` removes some, and `max-parallel` limits how many run at once.
 
 ## Caching and artifacts
 
@@ -284,9 +284,9 @@ A **cache** makes the *next* run faster. The easiest way is the `cache` option o
       pip-${{ runner.os }}-
 ```
 
-The `key` changes whenever `requirements.txt` changes, so a new dependency list gets a new cache. `restore-keys` falls back to the newest cache that starts with the prefix. A cache can be evicted at any time, so the workflow must still work without it.
+The `key` changes whenever `requirements.txt` does, so a new dependency list gets a new cache; `restore-keys` falls back to the newest cache with the prefix. A cache can be evicted any time, so the workflow must work without it.
 
-An **artifact** is a *result* of the run: a build, a test report, a log. A job uploads it, and a later job in the same run, or a person on the run page, downloads it:
+An **artifact** is a *result* of the run: a build, a test report, a log. A job uploads it, and a later job in the run, or a person on the run page, downloads it:
 
 ```yaml
 jobs:
@@ -333,13 +333,13 @@ steps:
   - run: curl --fail "${{ vars.APP_URL }}/health"
 ```
 
-**Secrets** are encrypted and GitHub masks their values in logs. **Variables** are for non-sensitive settings such as URLs and feature flags, and are shown in plain text. Both can be defined for a repository, an environment, or a whole organization.
+**Secrets** are encrypted and masked in logs. **Variables** are for non-sensitive settings such as URLs and feature flags, shown in plain text. Both can be defined for a repository, an environment, or a whole organization.
 
-Two rules from the docs. Secrets "are not passed to the runner when a workflow is triggered from a forked repository", so a stranger's PR can't read them. And if a value isn't a secret but you compute something sensitive in a step, hide it with `echo "::add-mask::$VALUE"` before it can reach the log.
+Two rules. Secrets aren't passed to the runner when a workflow is triggered from a fork, so a stranger's PR can't read them. And if you compute something sensitive in a step, hide it with `echo "::add-mask::$VALUE"` before it reaches the log.
 
 ## Permissions and the GITHUB_TOKEN
 
-At the start of every job, GitHub creates a token called `GITHUB_TOKEN`, valid only for that repository and only until the job ends. Actions such as `actions/checkout` use it automatically. You can pass it explicitly as `${{ secrets.GITHUB_TOKEN }}`, for example to `gh` commands:
+At the start of every job, GitHub creates a `GITHUB_TOKEN`, valid only for that repository until the job ends. Actions such as `actions/checkout` use it automatically; pass it explicitly as `${{ secrets.GITHUB_TOKEN }}`, for example to `gh`:
 
 ```yaml
 permissions:
@@ -358,7 +358,7 @@ jobs:
           PR: ${{ github.event.pull_request.number }}
 ```
 
-The `permissions` key sets what the token may do. The [security guide](https://docs.github.com/en/actions/reference/security/secure-use) says to grant "the minimum required permissions": set read-only at the top of the workflow, and add write permissions only on the jobs that need them. Common ones: `contents` (code and releases), `pull-requests`, `issues`, `packages` (container images), `pages`, `id-token` (OIDC, below). For pull requests from forks, the token is read-only no matter what you ask for.
+The `permissions` key sets what the token may do. The [security guide](https://docs.github.com/en/actions/reference/security/secure-use) says to grant the minimum: read-only at the top of the workflow, write only on the jobs that need it. Common ones: `contents` (code and releases), `pull-requests`, `issues`, `packages` (container images), `pages`, `id-token` (OIDC, below). For fork PRs the token is read-only whatever you ask.
 
 ## Environments and deployments
 
@@ -378,11 +378,11 @@ jobs:
           API_KEY: ${{ secrets.PRODUCTION_API_KEY }}
 ```
 
-When the run reaches this job, it pauses with a **Review deployments** button. The secret `PRODUCTION_API_KEY` exists only in the `production` environment, so no other job can read it. The `url` shows up on the run and in the repository's deployments list. Protection rules on private repositories depend on your plan. Check [the environments docs](https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments) for yours.
+When the run reaches this job, it pauses with a **Review deployments** button. `PRODUCTION_API_KEY` exists only in the `production` environment, so no other job can read it, and the `url` shows on the run and in the deployments list. Protection rules on private repositories depend on your plan ([environments docs](https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments)).
 
 ## Deploying without stored keys: OIDC
 
-The old way to deploy to a cloud is to create an access key and save it as a secret. That key lives forever, works from anywhere, and is one leak away from disaster. **OIDC** (OpenID Connect) replaces it with credentials that are created per run and expire on their own.
+The old way to deploy to a cloud is an access key saved as a secret. It lives forever, works from anywhere, and is one leak from disaster. **OIDC** (OpenID Connect) replaces it with credentials created per run that expire on their own.
 
 ![The workflow job, with permissions id-token: write, requests a token from GitHub's OIDC provider and gets back a signed token naming the repository, branch and workflow. It exchanges the token with the cloud, whose trust rule allows only this repository and branch, and receives temporary credentials that expire in about an hour. No long-lived key is stored anywhere.](/images/github-actions-zero-to-hero/oidc.svg)
 
@@ -405,7 +405,7 @@ jobs:
       - run: aws s3 sync dist/ s3://my-bucket/
 ```
 
-AWS, Azure and Google Cloud all support this, and so do many other services. If your cloud supports OIDC, prefer it over stored keys. See [the OIDC docs](https://docs.github.com/en/actions/concepts/security/openid-connect).
+AWS, Azure, Google Cloud and many other services support this; prefer it over stored keys ([OIDC docs](https://docs.github.com/en/actions/concepts/security/openid-connect)).
 
 ## A real pipeline: build and push a Docker image
 
@@ -514,11 +514,11 @@ runs:
 
 Then any job uses it with `uses: ./.github/actions/setup` (after `actions/checkout`). Note that `run` steps in a composite action must name their `shell`.
 
-Rule of thumb: reuse whole jobs with a reusable workflow, and reuse a few steps inside a job with a composite action.
+Rule of thumb: a reusable workflow for whole jobs, a composite action for a few steps inside a job.
 
 ## Concurrency and timeouts
 
-Push three commits in a row, and three runs start. Usually only the last one matters:
+Push three commits in a row, and three runs start, but usually only the last matters:
 
 ```yaml
 concurrency:
@@ -526,14 +526,14 @@ concurrency:
   cancel-in-progress: true
 ```
 
-Runs in the same `group` don't overlap: a new run cancels the one in progress for the same branch. For deployments, use `cancel-in-progress: false`, so a deploy is never killed halfway; the next one waits instead. Add `timeout-minutes` to every job, as shown earlier.
+Runs in the same `group` don't overlap: a new run cancels the one in progress for the same branch. For deployments use `cancel-in-progress: false`, so a deploy is never killed halfway and the next waits instead. Add `timeout-minutes` to every job.
 
 ## Security habits
 
-A workflow runs code with access to your repository and secrets, so it deserves the same care as production code. The [security guide](https://docs.github.com/en/actions/reference/security/secure-use) covers it in detail. The essentials:
+A workflow runs code with access to your repository and secrets, so treat it like production code ([security guide](https://docs.github.com/en/actions/reference/security/secure-use)). The essentials:
 
 - **Least privilege.** `permissions: contents: read` at the top, more only where needed.
-- **Pin third-party actions to a commit SHA.** A tag like `@v4` can be moved to point at new code. The docs advise to "pin references to actions to a commit SHA", for example `uses: some-org/some-action@<40-character-sha> # v4.2.0`. Dependabot can keep the pins up to date.
+- **Pin third-party actions to a commit SHA.** A tag like `@v4` can be moved to new code: `uses: some-org/some-action@<40-character-sha> # v4.2.0`. Dependabot can keep the pins current.
 - **Never put untrusted input directly in a `run` script.** A PR title or branch name is written by whoever opened the PR. This is a script injection hole:
 
 ```yaml
@@ -546,10 +546,10 @@ A workflow runs code with access to your repository and secrets, so it deserves 
     TITLE: ${{ github.event.pull_request.title }}
 ```
 
-- **Be very careful with `pull_request_target`.** It runs with the base repository's secrets and a write token, even for PRs from forks. The docs warn that "running untrusted code on the `pull_request_target` trigger may lead to security vulnerabilities". Never check out and run the PR's code in it.
-- **No self-hosted runners on public repositories.** The docs say they "should almost never be used for public repositories", because anyone can open a PR that runs code on your machine.
+- **Be very careful with `pull_request_target`.** It runs with the base repository's secrets and a write token, even for fork PRs. Never check out and run the PR's code in it.
+- **No self-hosted runners on public repositories:** anyone can open a PR that runs code on your machine.
 - **Prefer OIDC to long-lived cloud keys**, and environments with reviewers for production.
-- **Keep actions updated.** Add Dependabot for the `github-actions` ecosystem so version bumps arrive as PRs:
+- **Keep actions updated.** Add Dependabot for the `github-actions` ecosystem so bumps arrive as PRs:
 
 ```yaml
 # .github/dependabot.yml
@@ -568,14 +568,14 @@ When a run fails:
 1. Open the failed step's log. The error is usually in the last 20 lines. `gh run view <run-id> --log-failed` shows only the failed parts.
 2. Check the **annotations** at the top of the run summary. Linters and test tools often report errors there, with file and line.
 3. Re-run with more logging: **Re-run jobs → Enable debug logging**, or `gh run rerun <run-id> --debug`. Setting a secret or variable `ACTIONS_STEP_DEBUG` to `true` turns it on for every run.
-4. Print what you're unsure about. A step with `env: { EVENT: "${{ toJSON(github.event) }}" }` and `run: echo "$EVENT"` dumps the whole event payload, passed through an environment variable for the same reason as above.
-5. Reproduce it locally. The runner is just Linux: run the same commands in a container. The community tool [act](https://github.com/nektos/act) runs workflows locally in Docker, with some differences from the real runners.
+4. Print what you're unsure about. A step with `env: { EVENT: "${{ toJSON(github.event) }}" }` and `run: echo "$EVENT"` dumps the event payload (through an environment variable, for the same reason as above).
+5. Reproduce it locally. The runner is just Linux: run the same commands in a container, or use the community tool [act](https://github.com/nektos/act), which runs workflows in Docker with some differences from the real runners.
 
-The usual suspects: a missing `actions/checkout`, a path relative to the wrong folder, a secret that isn't available (fork PRs, or a secret defined in an environment the job doesn't use), a `permissions` block that's too tight (`Resource not accessible by integration`), a cache key that never changes, and YAML indentation.
+The usual suspects: a missing `actions/checkout`, a path relative to the wrong folder, an unavailable secret (fork PRs, or one defined in an environment the job doesn't use), too-tight `permissions` (`Resource not accessible by integration`), a cache key that never changes, and YAML indentation.
 
 ## Cost and limits
 
-GitHub-hosted runners are free for public repositories on standard runners. Private repositories get a monthly allowance of minutes and storage that depends on the plan, with macOS and Windows minutes counting more than Linux ones. Prices and allowances change, so check [the Actions billing page](https://docs.github.com/en/billing/concepts/product-billing/github-actions) instead of trusting a number from a blog post. Concurrency groups, `paths` filters, caching and timeouts are also how you keep the bill down.
+Standard GitHub-hosted runners are free for public repositories. Private repositories get a monthly allowance of minutes and storage that depends on the plan, with macOS and Windows minutes counting more than Linux. Allowances change, so check [the Actions billing page](https://docs.github.com/en/billing/concepts/product-billing/github-actions). Concurrency groups, `paths` filters, caching and timeouts also keep the bill down.
 
 ## The cheat sheet
 
@@ -602,25 +602,22 @@ GitHub-hosted runners are free for public repositories on standard runners. Priv
 
 - **Workflow:** a YAML file in `.github/workflows/` that defines automation.
 - **Event / trigger:** what starts a workflow (`push`, `pull_request`, `schedule`...).
-- **Job:** a group of steps that runs on one runner.
-- **Step:** one command (`run`) or one action (`uses`) in a job.
+- **Job / Step:** a group of steps on one runner / one command (`run`) or action (`uses`).
 - **Action:** a reusable step, from a repository or the Marketplace.
 - **Runner:** the machine that runs a job; GitHub-hosted or self-hosted.
 - **Expression / context:** `${{ }}` syntax, and the objects it reads (`github`, `secrets`, `matrix`...).
-- **Matrix:** running one job with many combinations of values.
-- **Cache:** files saved between runs to speed them up.
-- **Artifact:** files produced by a run, shared between jobs or downloaded.
+- **Matrix:** one job run with many combinations of values.
+- **Cache / Artifact:** files saved between runs to speed them up / files produced by a run.
 - **Secret / variable:** an encrypted value / a plain configuration value.
 - **GITHUB_TOKEN:** the automatic, short-lived token of each job.
 - **Environment:** a deployment target with its own secrets and protection rules.
 - **OIDC:** short-lived cloud credentials instead of stored keys.
-- **Reusable workflow:** a workflow called as a job by other workflows.
-- **Composite action:** several steps packaged as one action.
+- **Reusable workflow / Composite action:** a workflow called as a job / several steps packaged as one.
 - **Concurrency group:** runs that must not overlap.
 - **CI/CD:** building and testing every change, and releasing it automatically.
 
 ## Where to go next
 
-You've got the whole toolkit: events that start workflows, jobs that run in parallel or in order, expressions and outputs that connect them, matrices, caches and artifacts, secrets kept in the right place, deployments that need approval and no stored keys, and the habits that keep it all safe. To make it stick, add a workflow to a project of yours: tests on every PR, a build artifact, and a deploy job behind an environment.
+You've got the whole toolkit: events, jobs that run in parallel or in order, expressions and outputs, matrices, caches and artifacts, secrets in the right place, approved deployments with no stored keys, and the habits that keep it safe. To make it stick, add a workflow to a project of yours: tests on every PR, a build artifact, and a deploy job behind an environment.
 
-GitHub's [Actions documentation](https://docs.github.com/en/actions) and the [workflow syntax reference](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax) are the best next reading. For the repository side (pull requests, branch protection that requires your checks), see [GitHub from zero to hero](en/posts/github-zero-to-hero/). To containerize what you build, see [Docker from zero to hero](en/posts/docker-zero-to-hero/), and to run it at scale, [Kubernetes from zero to hero](en/posts/kubernetes-zero-to-hero/).
+GitHub's [Actions documentation](https://docs.github.com/en/actions) and [workflow syntax reference](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax) are the best next reading. For the repository side (pull requests, branch protection that requires your checks), see [GitHub from zero to hero](en/posts/github-zero-to-hero/); to containerize what you build, [Docker from zero to hero](en/posts/docker-zero-to-hero/); to run it at scale, [Kubernetes from zero to hero](en/posts/kubernetes-zero-to-hero/).

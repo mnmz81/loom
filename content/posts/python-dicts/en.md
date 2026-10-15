@@ -6,7 +6,7 @@ tags: [python]
 series: { key: python, order: 16 }
 ---
 
-A [list](en/posts/python-lists/) finds a value by its position: `scores[2]`. Often you want to find a value by a name instead: the price of "apple", the phone number of "Dana", the setting called "theme". That's a dictionary, `dict` for short. The tutorial says it's "best to think of a dictionary as a set of key: value pairs, with the requirement that the keys are unique".
+A [list](en/posts/python-lists/) finds a value by position: `scores[2]`. Often you want a name instead: the price of "apple", the phone number of "Dana", the setting called "theme". That's a dictionary, `dict` for short: "a set of key: value pairs, with the requirement that the keys are unique", as the tutorial puts it.
 
 Every example here was run with Python 3.13. The behavior was checked against the [dictionaries section of the tutorial](https://docs.python.org/3/tutorial/datastructures.html#dictionaries) and the [mapping types reference](https://docs.python.org/3/library/stdtypes.html#mapping-types-dict).
 
@@ -32,7 +32,7 @@ print(person)
 {'name': 'Dana', 'age': 31}
 ```
 
-`{}` is an empty dictionary, not an empty set. `dict(name="Dana")` is another way to write string keys. A dictionary keeps its pairs in the order you added them.
+`{}` is an empty dictionary, not an empty set. `dict(name="Dana")` is another way to write string keys. Pairs keep the order you added them.
 
 ## Reading safely: in and get()
 
@@ -65,7 +65,7 @@ None
 
 ## Adding, changing and removing
 
-Assigning to a key adds it if it's new, and replaces the value if it already exists. Keys are unique, so there's never a second "apple":
+Assigning to a key adds it if it's new, and replaces the value if it exists. Keys are unique, so there's never a second "apple":
 
 ```python
 stock = {"apple": 10}
@@ -124,7 +124,7 @@ bread   9.90
 milk    6.20
 ```
 
-The format specs `:<6` and `:>5.2f` line up the columns, as in the [f-strings post](en/posts/python-f-strings/). Don't add or remove keys while you loop over a dictionary: Python raises `RuntimeError: dictionary changed size during iteration`. Loop over `list(prices)` if you need to.
+The format specs `:<6` and `:>5.2f` line up the columns, as in the [f-strings post](en/posts/python-f-strings/). Don't add or remove keys while looping over a dictionary (`RuntimeError: dictionary changed size during iteration`); loop over `list(prices)` if you must.
 
 ## Counting with a dictionary
 
@@ -144,11 +144,11 @@ print(max(counts, key=counts.get))
 the
 ```
 
-`max(counts, key=counts.get)` finds the key with the largest value. The standard library also has `collections.Counter`, which does the counting in one line, but the loop above is what it does for you.
+`max(counts, key=counts.get)` finds the key with the largest value. The standard library's `collections.Counter` does the counting in one line; the loop above is what it does for you.
 
 ## Nested data
 
-Values can be anything, including lists and other dictionaries. That's how most real data looks, for example a JSON response from a web API:
+Values can be anything, including lists and other dictionaries, like a JSON response from a web API:
 
 ```python
 user = {
@@ -185,7 +185,7 @@ treasure
 TypeError: unhashable type: 'list'
 ```
 
-A tuple of coordinates works as a key. A list doesn't, because it could change after it was used as a key. Values have no such limit.
+A tuple of coordinates works as a key; a list doesn't, because it could change after being used as one. Values have no such limit.
 
 ## Common mistakes
 

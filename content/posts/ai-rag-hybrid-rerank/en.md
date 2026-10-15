@@ -12,9 +12,9 @@ The rank-fusion example was run with Python 3.9 and its output is real. The rera
 
 ## Keyword search still matters
 
-Embeddings find meaning, but they can miss exact strings: an error code like `ERR_401`, a product number, a person's name. Classic keyword search is good at exactly that. The standard algorithm is **BM25**: it scores a chunk higher when it contains the query's words, especially rare words, and adjusts for the chunk's length.
+Embeddings find meaning, but can miss exact strings: an error code like `ERR_401`, a product number, a name. Keyword search is good at exactly that. The standard algorithm is **BM25**: it scores a chunk higher when it contains the query's words, especially rare ones, adjusted for chunk length.
 
-Most search engines and many databases support BM25 out of the box (Elasticsearch, OpenSearch, PostgreSQL full-text search with an extension, and libraries such as `rank_bm25` for Python).
+Most search engines and many databases support BM25 (Elasticsearch, OpenSearch, PostgreSQL full-text search with an extension, `rank_bm25` for Python).
 
 ## Hybrid search
 
@@ -66,7 +66,7 @@ for r in reranked.results:
 0.25  20th-century innovations centered on electronic
 ```
 
-The usual pattern is wide-then-narrow: retrieve many candidates cheaply, then rerank down to the few you send. In Anthropic's experiment, they retrieved the top 150 chunks and reranked them down to 20.
+The pattern is wide-then-narrow: retrieve many candidates cheaply, then rerank down to the few you send. Anthropic retrieved the top 150 chunks and reranked them to 20.
 
 ## Contextual chunks
 
@@ -88,7 +88,7 @@ Write a short context that situates this chunk within the overall document,
 to improve search retrieval of the chunk. Answer only with the context.
 ```
 
-Because the whole document is sent again for every chunk, prompt caching makes this much cheaper: the document part is cached and only the chunk changes.
+Since the whole document is sent for every chunk, prompt caching makes this much cheaper: only the chunk changes.
 
 ## How much it helps
 
@@ -101,6 +101,6 @@ Anthropic measured how often the right chunk was missing from the top 20 results
 | Contextual embeddings + contextual BM25 | 2.9% (49% fewer) |
 | The above + reranking | 1.9% (67% fewer) |
 
-These numbers come from their datasets and models. The direction is what transfers: each layer helps. Measure on your own questions before and after each change.
+These numbers come from their datasets and models; what transfers is the direction. Measure on your own questions before and after each change.
 
 The next post covers the last step: letting the model decide how and when to search, and graph-based retrieval.

@@ -6,9 +6,9 @@ tags: [ai, rag]
 series: { key: ai-rag, order: 4 }
 ---
 
-The RAG pipeline from the previous posts runs the same way for every question: one search, then one answer. That works for questions like "how many vacation days do I get?". It breaks down for questions that need several searches, or that are about a whole collection rather than one passage. This post covers two answers to that: agentic RAG and GraphRAG.
+The RAG pipeline from the previous posts runs the same way for every question: one search, then one answer. That works for "how many vacation days do I get?". It breaks down when a question needs several searches, or is about a whole collection rather than one passage. This post covers two answers: agentic RAG and GraphRAG.
 
-The graph example was run with Python 3.9 and its output is real. The tool definition follows the [tool use docs](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview), and the GraphRAG description follows the paper [From Local to Global](https://arxiv.org/abs/2404.16130).
+The graph example was run with Python 3.9 and its output is real. The tool definition follows the [tool use docs](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview), and GraphRAG follows the paper [From Local to Global](https://arxiv.org/abs/2404.16130).
 
 ## Where a fixed pipeline breaks
 
@@ -41,7 +41,7 @@ search_tool = {
 }
 ```
 
-Your code runs the actual search (the hybrid search and reranking from the previous post) whenever the model asks for it. The tools series that comes next shows the complete loop. The trade-off is clear: better answers on hard questions, at the cost of more model calls, more tokens and more latency. For simple question-answer traffic, the fixed pipeline is still cheaper.
+Your code runs the actual search (hybrid search and reranking from the previous post) whenever the model asks. The next series shows the complete loop. The trade-off: better answers on hard questions, at the cost of more calls, tokens and latency. For simple traffic, the fixed pipeline is cheaper.
 
 ## Knowledge graphs
 
@@ -91,6 +91,6 @@ The paper targets "global sensemaking" questions over a whole corpus, such as th
 - **Agentic RAG**: questions that need several searches or several sources, when quality matters more than latency and cost.
 - **GraphRAG**: questions about relationships and themes across a large collection. Building and updating the graph costs many LLM calls, so use it when those questions are the core of the product.
 
-In every case, measure: a small set of real questions with known answers tells you which approach actually helps. The production series covers how.
+In every case, measure: a small set of real questions with known answers shows which approach helps. The production series covers how.
 
-This ends the RAG series. The next series covers tools and agents: how a model takes action.
+This ends the RAG series. Next: tools and agents, how a model takes action.

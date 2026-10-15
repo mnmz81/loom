@@ -5,11 +5,11 @@ date: 2026-10-10
 tags: [linux, cli, cheatsheet]
 ---
 
-Sooner or later every developer ends up in a terminal on a Linux server: a cloud machine, a container, a CI job. This is the list of commands I reach for there, grouped by what you're trying to do, with the flags that matter and the traps around them. Anything marked ⚠️ can destroy data, so read it twice before running it.
+Sooner or later every developer ends up in a terminal on a Linux server: a cloud machine, a container, a CI job. These are the commands I reach for there, grouped by goal, with the flags that matter and the traps around them. Anything marked ⚠️ can destroy data, so read it twice before running it.
 
 A few notes first:
 
-- Examples assume **GNU/Linux** with a Bash-like shell (Ubuntu, Debian, Fedora and so on). On a Mac the commands come from BSD and differ in details. Where it matters I say so (`sed -i`, `ps`, `ss`, `journalctl`, `systemctl` don't work the same way there, or don't exist).
+- Examples assume **GNU/Linux** with a Bash-like shell (Ubuntu, Debian, Fedora...). On a Mac the commands come from BSD and differ in details; where it matters I say so (`sed -i`, `ps`, `ss`, `journalctl`, `systemctl`).
 - Linux is case-sensitive: `File.txt` and `file.txt` are different files.
 - When unsure, ask the machine: `man <command>` opens the manual, and `<command> --help` prints a short summary.
 
@@ -35,7 +35,7 @@ For where this fits in a bigger picture, see [AWS from zero to hero](en/posts/aw
 - `mkdir <dir>` creates a directory, and `mkdir -p a/b/c` creates the whole path (no error if it already exists).
 - `cp <src> <dst>` copies a file, `cp -r <dir> <dst>` copies a directory, and `cp -a` copies and preserves permissions and times.
 - `mv <src> <dst>` moves or renames. It silently overwrites an existing destination: add `-i` to be asked first, or `-n` to never overwrite.
-- `rm <file>` deletes a file. `rm -r <dir>` deletes a directory and everything in it, and `rm -rf <dir>` does it without asking ⚠️. There is no trash can: deleted means gone. Read the path twice, and be extra careful with variables (`rm -rf "$DIR/"` when `$DIR` is empty is the classic disaster).
+- `rm <file>` deletes a file. `rm -r <dir>` deletes a directory and everything in it, and `rm -rf <dir>` does it without asking ⚠️. There is no trash can. Read the path twice, and beware of variables (`rm -rf "$DIR/"` with an empty `$DIR` is the classic disaster).
 - `ln -s <target> <link>` creates a symbolic link (a pointer to a path). Without `-s` it makes a hard link.
 - `file <name>` tells what kind of file it is, and `stat <file>` shows size, permissions, owner and timestamps.
 - Quote names with spaces: `cp "My File.txt" backup/`.
@@ -69,7 +69,7 @@ find / -name "nginx.conf" 2>/dev/null     # search everywhere, hide "permission 
 ```
 
 - `find ... -print0 | xargs -0 <command>` is the safe way to feed filenames to another command, because it copes with spaces and newlines in names.
-- `locate <name>` searches a prebuilt index of file names and is much faster than `find`, but it needs `plocate` or `mlocate` installed and an updated index (`sudo updatedb`).
+- `locate <name>` searches a prebuilt index and is much faster than `find`, but needs `plocate` or `mlocate` and an updated index (`sudo updatedb`).
 
 ## Pipes, redirection and chaining
 
@@ -95,7 +95,7 @@ sed -n '10,20p' file.txt                           # print only lines 10 to 20
 
 - `sort` sorts lines. `-n` sorts numerically, `-r` reverses, `-u` removes duplicates, and `-k2` sorts by the second column.
 - `uniq` collapses *adjacent* identical lines, so sort first. `uniq -c` prefixes each line with how many times it occurred.
-- `sed -i 's/old/new/g' file` edits the file in place ⚠️. On GNU/Linux the syntax is `sed -i`. On macOS it needs a suffix argument: `sed -i '' ...`. Run it without `-i` first to check the result.
+- `sed -i 's/old/new/g' file` edits the file in place ⚠️. On macOS it needs a suffix argument: `sed -i '' ...`. Run it without `-i` first.
 - `awk` is a tiny language for columns: `awk '{sum += $3} END {print sum}' file` adds up the third column.
 - `xargs` turns input lines into arguments: `cat urls.txt | xargs -n 1 curl -sI`.
 - `jq` (usually installed separately) is `grep` and `sed` for JSON: `curl -s <url> | jq '.items[0].name'`.
@@ -108,21 +108,21 @@ sed -n '10,20p' file.txt                           # print only lines 10 to 20
 
 - `chmod 755 <file>` sets the permissions numerically. Common values: `644` for files (owner writes, everyone reads), `755` for scripts and directories, `600` for secrets such as SSH keys.
 - `chmod +x <file>` makes a file executable, `chmod u+w <file>` adds write for the owner, and `chmod go-rwx <file>` removes everything for group and others.
-- `chmod -R u+rwX,go-w <dir>` changes a whole tree. The capital `X` adds execute only to directories and to files that already have it, so you don't make every file executable.
-- On a directory, `x` means "may enter it and reach the files inside", so a directory without it is closed even if you can read its name.
+- `chmod -R u+rwX,go-w <dir>` changes a whole tree. The capital `X` adds execute only to directories and files that already have it.
+- On a directory, `x` means "may enter it and reach the files inside".
 - `chown <user>:<group> <file>` changes the owner and group (it needs `sudo` unless you already own the file). `-R` applies it recursively.
-- `sudo <command>` runs one command as the administrator (root). `sudo -i` opens a root shell, and `sudo -u <user> <command>` runs as someone else. Prefer a single `sudo` command to staying in a root shell.
-- `whoami` prints your user name, `id` shows your user and group IDs, and `groups` lists your groups.
-- `chmod -R 777` is almost never the right answer ⚠️. It lets anyone write to everything. Find out which user needs access and grant exactly that.
+- `sudo <command>` runs one command as root. `sudo -i` opens a root shell, and `sudo -u <user> <command>` runs as someone else. Prefer a single `sudo` command to staying in a root shell.
+- `whoami` prints your user name, `id` your user and group IDs, `groups` your groups.
+- `chmod -R 777` is almost never the answer ⚠️: it lets anyone write to everything. Grant exactly the access a user needs.
 
 ## Processes
 
-- `ps aux` lists every process with its owner, CPU and memory use, and `ps -ef` shows the same with parent process IDs. (They use two different option styles, which is why you'll see both.) `ps aux --sort=-%mem | head` shows the biggest memory users on GNU/Linux.
+- `ps aux` lists every process with its owner, CPU and memory use, and `ps -ef` adds parent process IDs. `ps aux --sort=-%mem | head` shows the biggest memory users on GNU/Linux.
 - `pgrep -af <name>` finds processes by name and prints their command lines.
 - `top` is the live view of what's busy: press `q` to quit, `M` to sort by memory and `P` by CPU. `htop` is a nicer version you usually install yourself.
-- `kill <pid>` asks a process to stop politely (the SIGTERM signal). `kill -9 <pid>` forces it with SIGKILL, with no chance to clean up, so use it only when the polite way failed ⚠️. `pkill <name>` does the same by name.
-- `jobs`, `fg` and `bg` manage jobs in your current shell. `Ctrl-Z` suspends the running command, `bg` continues it in the background, and `fg` brings it back. End a command with `&` to start it in the background.
-- `nohup <command> &` keeps a command running after you log out, writing its output to `nohup.out`. For anything long-lived, a service (below) or `tmux`/`screen` is better.
+- `kill <pid>` asks a process to stop politely (SIGTERM). `kill -9 <pid>` forces it with SIGKILL, with no chance to clean up, so use it only when the polite way failed ⚠️. `pkill <name>` does the same by name.
+- `jobs`, `fg` and `bg` manage jobs in your shell: `Ctrl-Z` suspends the running command, `bg` continues it in the background, `fg` brings it back. End a command with `&` to start it in the background.
+- `nohup <command> &` keeps a command running after you log out. For anything long-lived, a service (below) or `tmux`/`screen` is better.
 - `lsof -i :8080` shows what is using a port, and `lsof <file>` shows who has a file open.
 
 ## Services and logs (systemd)
@@ -130,8 +130,8 @@ sed -n '10,20p' file.txt                           # print only lines 10 to 20
 Most modern Linux distributions manage services with **systemd**. (Not on a Mac, and usually not inside a container.)
 
 - `systemctl status <service>` shows whether a service is running and its latest log lines.
-- `sudo systemctl start|stop|restart|reload <service>` controls it right now. `reload` re-reads the configuration without a full restart, if the service supports it.
-- `sudo systemctl enable <service>` starts it at boot, `disable` turns that off, and `enable --now` does it and starts it immediately.
+- `sudo systemctl start|stop|restart|reload <service>` controls it now; `reload` re-reads the configuration without a full restart, if supported.
+- `sudo systemctl enable <service>` starts it at boot, `disable` turns that off, and `enable --now` also starts it immediately.
 - `systemctl list-units --type=service` lists the services, and `systemctl --failed` lists the ones that failed.
 - `sudo systemctl daemon-reload` makes systemd re-read unit files after you edit them.
 
@@ -153,16 +153,16 @@ Plain log files still live in `/var/log` for many programs: `tail -f /var/log/sy
 ## Disk and memory
 
 - `df -h` shows free space per filesystem. A full disk is the cause of a surprising number of "it just stopped working" incidents.
-- `du -sh <dir>` shows the total size of a directory, and `du -h -d 1 . | sort -h` shows the size of each folder one level down, smallest first, so the culprit is at the bottom. (`-d 1` is `--max-depth=1`; `sort -h` sorts human-readable sizes and is a GNU option.)
-- `ncdu` is an interactive disk-usage browser that you install separately. It's the quickest way to find what filled the disk.
-- `free -h` shows memory and swap. The "available" column is the one that matters, not "free": Linux uses spare memory as cache.
+- `du -sh <dir>` shows a directory's total size, and `du -h -d 1 . | sort -h` shows each folder one level down, smallest first, so the culprit is at the bottom. (`sort -h` is a GNU option.)
+- `ncdu` is an interactive disk-usage browser, installed separately: the quickest way to find what filled the disk.
+- `free -h` shows memory and swap. Read the "available" column, not "free": Linux uses spare memory as cache.
 - `uptime` shows how long the machine has been up and the load averages, and `lsblk` lists disks and partitions.
 - `mount | grep <path>` and `findmnt` show what's mounted where.
 
 ## Networking
 
 - `ip addr` (short: `ip a`) shows the machine's addresses, and `ip route` shows the routing table. These replaced the older `ifconfig` and `route`.
-- `ss -tulpn` lists listening sockets: `-t` TCP, `-u` UDP, `-l` listening only, `-p` the owning process, `-n` numbers instead of names (run it with `sudo` to see processes of other users). `ss -s` prints a summary, and a filter such as `ss -tn 'sport = :80'` narrows it to one port. (`netstat` is the old tool for the same job.)
+- `ss -tulpn` lists listening sockets: `-t` TCP, `-u` UDP, `-l` listening only, `-p` the owning process, `-n` numbers instead of names (use `sudo` to see other users' processes). `ss -s` prints a summary, and `ss -tn 'sport = :80'` narrows it to one port. (`netstat` is the old tool.)
 - `ping -c 4 <host>` checks that a host answers (`-c` limits the count, otherwise it runs forever).
 - `curl <url>` fetches a URL. The flags worth knowing: `-I` headers only, `-s` silent, `-L` follow redirects, `-o <file>` save to a file, `-f` fail on HTTP errors, `-X POST -d '{"a":1}' -H 'Content-Type: application/json'` to send data. `curl -fsSL <url> -o file` is the reliable download. `wget <url>` also downloads.
 - `dig <domain> +short` (or `nslookup`) looks up DNS records, and `dig <domain> MX` asks for a specific type.
@@ -187,12 +187,12 @@ rsync -avzn --delete ./site/ user@host:/var/www/site/   # dry run (-n) of a mirr
 
 - Private keys must be private: `chmod 600 ~/.ssh/key.pem`, or SSH refuses to use them.
 - `~/.ssh/config` lets you give a server a short name, so `ssh myserver` replaces the long line.
-- `rsync` is the better copy tool: it transfers only what changed. The **trailing slash** on the source matters: `site/` copies the *contents* of the folder, `site` copies the folder itself into the destination. `--delete` removes files from the destination that aren't in the source ⚠️, so always dry-run (`-n`) first.
+- `rsync` is the better copy tool: it transfers only what changed. The **trailing slash** matters: `site/` copies the folder's *contents*, `site` copies the folder itself. `--delete` removes destination files missing from the source ⚠️, so dry-run (`-n`) first.
 
 ## Archives and compression
 
 - `tar czf backup.tar.gz <dir>` creates a gzip-compressed archive: `c` create, `z` gzip, `f` the file name that follows. Use `J` instead of `z` for xz, and `j` for bzip2.
-- `tar xzf backup.tar.gz` extracts it, `tar tzf backup.tar.gz` lists the contents without extracting, and `-C <dir>` extracts into a different folder: `tar xzf backup.tar.gz -C /tmp/restore`. Add `-v` to see each file as it goes. Modern `tar` can usually detect the compression itself when you extract with plain `tar xf`.
+- `tar xzf backup.tar.gz` extracts it, `tar tzf backup.tar.gz` lists the contents, and `-C <dir>` extracts elsewhere: `tar xzf backup.tar.gz -C /tmp/restore`. Add `-v` to see each file. Modern `tar xf` usually detects the compression itself.
 - `tar czf backup.tar.gz --exclude=node_modules <dir>` leaves things out.
 - `gzip <file>` compresses a single file (and replaces it with `<file>.gz`), and `gunzip <file>.gz` reverses it.
 - `zip -r archive.zip <dir>` and `unzip archive.zip` handle the Windows-friendly format, and may need installing.
@@ -229,18 +229,18 @@ sudo pacman -S curl                           # Arch
 
 ## Commands that bite
 
-The ones to treat with respect, all in one place:
+The ones to treat with respect, in one place:
 
 - `rm -rf` with a wrong or empty path, or `sudo rm -rf /` ⚠️.
 - `chmod -R 777` or `chown -R` on the wrong directory.
-- `>` onto a file you meant to append to: it truncates the file instantly.
+- `>` onto a file you meant to append to: it truncates instantly.
 - `mv` and `cp` over an existing file, with no warning unless you use `-i`.
-- `dd` writing to the wrong device ⚠️: it will happily overwrite a whole disk.
-- `kill -9`, `pkill` and `killall` with a pattern that matches more than you intended.
-- `find ... -delete`, `sed -i` and `rsync --delete` without the dry run first.
+- `dd` writing to the wrong device ⚠️: it will overwrite a whole disk.
+- `kill -9`, `pkill` and `killall` with a pattern that matches more than you meant.
+- `find ... -delete`, `sed -i` and `rsync --delete` without a dry run first.
 - Piping a download straight into a shell.
 
-The habit that covers most of these: run the harmless version first (`ls` instead of `rm`, `find` without `-delete`, `rsync -n`, `sed` without `-i`) and look at the result.
+The habit that covers most of these: run the harmless version first (`ls` instead of `rm`, `find` without `-delete`, `rsync -n`, `sed` without `-i`) and look.
 
 ## The cheat sheet
 
@@ -266,4 +266,4 @@ The habit that covers most of these: run the harmless version first (`ls` instea
 
 ## Where to go next
 
-Pick two or three of these and use them on a real machine until your fingers know them: `grep`, `find`, `tail -f`, `ss`, `journalctl` and `rsync` cover most of what a server asks of you. For the full picture of any command, `man` is the source: the manual pages ship with the tools themselves. The [GNU Coreutils manual](https://www.gnu.org/software/coreutils/manual/) and the [systemd documentation](https://systemd.io/) are the best places for the details behind the commands above, and a free Linux shell is one `docker run --rm -it ubuntu bash` away (see [Docker from zero to hero](en/posts/docker-zero-to-hero/)).
+Use a few of these on a real machine until your fingers know them: `grep`, `find`, `tail -f`, `ss`, `journalctl` and `rsync` cover most of what a server asks of you. For any command, `man` is the source. The [GNU Coreutils manual](https://www.gnu.org/software/coreutils/manual/) and the [systemd documentation](https://systemd.io/) have the details, and a free Linux shell is one `docker run --rm -it ubuntu bash` away (see [Docker from zero to hero](en/posts/docker-zero-to-hero/)).

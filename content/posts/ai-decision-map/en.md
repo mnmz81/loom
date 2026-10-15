@@ -6,7 +6,7 @@ tags: [ai, llmops]
 series: { key: ai-production, order: 6 }
 ---
 
-This series covered a lot of techniques. In practice, the hard part is not how each one works but which one to reach for. This post puts them side by side, with a map for choosing, and links each choice back to the post that explains it.
+This series covered a lot of techniques. The hard part is not how each works but which to reach for. This post puts them side by side, with a map for choosing, and links each choice to the post that explains it.
 
 The map follows the advice that runs through the official sources quoted in the series, most of all Anthropic's [Building effective agents](https://www.anthropic.com/research/building-effective-agents): find the simplest solution that works, and add complexity only when measurements show it helps.
 
@@ -16,7 +16,7 @@ Go down the questions in order and stop at the first one that addresses your act
 
 ![Decision map: better prompt, RAG, tools, workflow, agent, fine-tune, small or local model, from the top down](/images/ai-decision-map/decision-map.svg)
 
-The order matters. Each step down costs more to build, run and maintain than the one above it. Teams that start at the bottom (fine-tuning a model for a problem that a clear prompt or a retrieval step would have solved) pay for it in time and money.
+The order matters: each step down costs more to build, run and maintain. Teams that start at the bottom (fine-tuning for a problem a clear prompt or retrieval step would have solved) pay for it in time and money.
 
 ## What each technique changes
 
@@ -59,7 +59,7 @@ A checklist that collects the production series:
 
 ## Where to go from here
 
-The field moves fast, and some details in this series (model names, prices, beta features) will change. The concepts change much more slowly: tokens and context, retrieval, the tool loop, workflows versus agents, evals. When something new comes out, ask the same questions as in the map: what does it change, what problem does it fix, and how will you measure that it helped?
+The field moves fast, and details in this series (model names, prices, beta features) will change. The concepts change slowly: tokens and context, retrieval, the tool loop, workflows versus agents, evals. When something new comes out, ask the map's questions: what does it change, what problem does it fix, and how will you measure that it helped?
 
 For the terms used across the series, see the [AI glossary cheat sheet](en/posts/ai-glossary/).
 

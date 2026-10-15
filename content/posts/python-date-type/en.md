@@ -6,9 +6,9 @@ tags: [python]
 series: { key: python, order: 9 }
 ---
 
-Python has no built-in date value like `int` or `str`. Dates live in the standard library module `datetime`, and the type you usually need is `date`. A `date` holds a year, a month and a day, and nothing else: no time of day, no time zone. For a time, use `datetime`, which is a separate topic.
+Python has no built-in date value like `int` or `str`. Dates live in the standard library module `datetime`, and the type you usually need is `date`. A `date` holds a year, a month and a day: no time of day, no time zone. For a time, use `datetime`, a separate topic.
 
-Every example here was run with Python 3.13. The behavior was checked against the [official `date` objects docs](https://docs.python.org/3/library/datetime.html#date-objects).
+Every example here was run with Python 3.13 and checked against the [`date` objects docs](https://docs.python.org/3/library/datetime.html#date-objects).
 
 ## Creating a date
 
@@ -29,7 +29,7 @@ datetime.date(2026, 10, 11)
 
 `print` shows the ISO format (`YYYY-MM-DD`). `repr` shows how you'd write the object in code.
 
-All three arguments are required. The docs say each value must be in range: the month from 1 to 12, and the day from 1 up to the number of days in that month. Otherwise you get a `ValueError`:
+All three arguments are required and must be in range (month 1 to 12, day 1 up to the month's length), or you get a `ValueError`:
 
 ```python
 date(2026, 2, 30)
@@ -39,7 +39,7 @@ date(2026, 2, 30)
 ValueError: day is out of range for month
 ```
 
-To get today's date, call `date.today()`. Its output changes every day, so this post doesn't print it. It returns a `date`, and its type is `<class 'datetime.date'>`.
+To get today's date, call `date.today()`. Its output changes daily, so it isn't printed here.
 
 ## Reading parts of a date
 
@@ -53,7 +53,7 @@ print(d.weekday(), d.isoweekday())
 6 7
 ```
 
-`weekday()` counts from Monday as 0, so Sunday is 6. `isoweekday()` counts from Monday as 1, so Sunday is 7. The docs use both, so pick one and stick to it.
+`weekday()` counts Monday as 0 (Sunday is 6), `isoweekday()` counts Monday as 1 (Sunday is 7). Pick one and stick to it.
 
 ## Formatting a date
 
@@ -111,7 +111,7 @@ print((d - date(2026, 1, 1)).days)
 283
 ```
 
-`.days` returns the number of days as an integer, which is usually what you want for a calculation.
+`.days` returns the number of days as an integer, usually what a calculation needs.
 
 Dates can be compared with `<`, `>` and `==`:
 

@@ -8,7 +8,7 @@ series: { key: ai-tuning, order: 1 }
 
 **Fine-tuning** means continuing to train a model on your own examples, so that its weights change. It is the most powerful way to adapt a model, and the most expensive one to do right. This post covers when it is worth it, and how LoRA makes it cheap enough to try.
 
-The LoRA arithmetic was run with Python 3.9 and its output is real. The PEFT code follows the [Hugging Face PEFT quicktour](https://huggingface.co/docs/peft/quicktour), and its output line is quoted from there. Fine-tuning requires a model whose weights you can train: an open-weight model, or a hosted model whose provider offers fine-tuning.
+The LoRA arithmetic was run with Python 3.9 and its output is real. The PEFT code and its output line follow the [Hugging Face PEFT quicktour](https://huggingface.co/docs/peft/quicktour). Fine-tuning requires a model whose weights you can train: open-weight, or hosted with fine-tuning offered.
 
 ## Try the cheaper options first
 
@@ -29,7 +29,7 @@ Supervised fine-tuning data is a set of example conversations: the input and the
 {"messages": [{"role": "system", "content": "Classify the ticket. Answer with one label."}, {"role": "user", "content": "The app crashes when I upload a photo"}, {"role": "assistant", "content": "bug"}]}
 ```
 
-Data quality decides most of the result. Practitioner guides warn that a small, sloppy dataset produces a model that is confidently wrong in your domain. Aim for hundreds to thousands of clean, varied examples that look like real traffic, and hold back a part for testing.
+Data quality decides most of the result: a small, sloppy dataset produces a model that is confidently wrong in your domain. Aim for hundreds to thousands of clean, varied examples that look like real traffic, and hold some back for testing.
 
 ## LoRA: train a small add-on
 
@@ -88,6 +88,6 @@ A fine-tuned model must be compared, on the same test set, with the cheaper opti
 - **The target task got better**, measured on examples the model did not train on.
 - **Nothing else broke.** Fine-tuning on a narrow task can make a model worse at general instructions it used to follow.
 
-If a well-written prompt reaches the same score, keep the prompt. Base models keep improving, and a fine-tune is something you have to retrain and maintain. The evals post in the production series shows how to build the test set.
+If a well-written prompt reaches the same score, keep the prompt: base models keep improving, and a fine-tune must be retrained and maintained. The evals post shows how to build the test set.
 
 The next post covers distillation: training a small model to imitate a large one.

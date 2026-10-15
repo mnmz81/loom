@@ -30,11 +30,11 @@ Docker היא פלטפורמה פתוחה לפיתוח, להפצה ולהרצה 
 
 ![משמאל: מחסנית של מכונות וירטואליות עם חומרה, מערכת הפעלה מארחת עם hypervisor, ושתי מכונות וירטואליות, לכל אחת מערכת הפעלה אורחת, ספריות ואפליקציה משלה. מימין: מחסנית של containers עם חומרה, מערכת הפעלה מארחת, Docker Engine ושלושה containers שמחזיקים רק ספריות ואפליקציה וחולקים את הליבה של המארח.](/images/docker-zero-to-hero/containers-vs-vms.svg)
 
-מצד שני, container מבודד כברירת מחדל, אבל הוא לא מכונה נפרדת, ולכן הבידוד חלש מזה של VM. (במחשב Mac או Windows, Docker Desktop מריץ ברקע מכונה וירטואלית קטנה של Linux, כי containers צריכים ליבת Linux. כמעט אף פעם לא מרגישים בזה.)
+מצד שני, container הוא לא מכונה נפרדת, ולכן הבידוד שלו חלש מזה של VM. (ב-Mac וב-Windows, Docker Desktop מריץ ברקע VM קטן של Linux, כי containers צריכים ליבת Linux.)
 
 ## מתקינים ובודקים שזה עובד
 
-הדרך הקלה היא **Docker Desktop** (ל-Mac, ל-Windows ול-Linux), מ-[docker.com](https://docs.docker.com/get-started/get-docker/). בשרת Linux אפשר להתקין במקום זה את **Docker Engine** לבדו. שימו לב ש-Docker Desktop דורש מנוי בתשלום לשימוש מסחרי בחברות גדולות (התיעוד מציב את הגבול מעל 250 עובדים או מעל 10 מיליון דולר הכנסה שנתית), והוא חינמי לשימוש אישי ולעסקים קטנים.
+הדרך הקלה היא **Docker Desktop** (ל-Mac, ל-Windows ול-Linux), מ-[docker.com](https://docs.docker.com/get-started/get-docker/). בשרת Linux אפשר להתקין את **Docker Engine** לבדו. Docker Desktop דורש מנוי בתשלום בחברות גדולות (מעל 250 עובדים או 10 מיליון דולר הכנסה) והוא חינמי לשימוש אישי ולעסקים קטנים.
 
 ואז בודקים:
 
@@ -74,7 +74,7 @@ docker start web          # מפעיל שוב את אותו container
 docker rm web             # מוחק אותו (קודם עוצרים, או משתמשים ב-rm -f)
 ```
 
-container חי כל עוד התהליך הראשי שלו חי. ‏`hello-world` מדפיס את ההודעה והתהליך נגמר, ולכן ה-container נעצר. ‏`nginx` ממשיך לרוץ עד שעוצרים אותו. אם container שהופעל "יוצא מיד", התהליך שבפנים הסתיים או קרס: בודקים `docker logs`.
+container חי כל עוד התהליך הראשי שלו חי. ‏`hello-world` מדפיס הודעה ונעצר; ‏`nginx` רץ עד שעוצרים אותו. אם container "יוצא מיד", התהליך שבפנים הסתיים או קרס: בודקים `docker logs`.
 
 כמה דגלים של `docker run` שישמשו אותנו כל הזמן:
 
@@ -100,9 +100,9 @@ docker rmi node:24-slim      # מוחק אחד
 
 שם של image נראה כך: ‏`node:24-slim`: השם, נקודתיים, ו-**tag** שבדרך כלל מקודד גרסה וטעם. כמה הרגלים:
 
-- tags יכולים לזוז. ‏`latest` הוא סתם tag ומשמעותו "מה שהמפרסם תייג אחרון", לא "החדש ביותר" ולא "הטוב ביותר". בכל דבר שרוצים לשחזר, משתמשים בגרסה מפורשת.
-- לשחזור מלא אפשר לקבע **digest** (‏`image@sha256:...`), שמזהה תוכן מדויק. הוא לא משתנה, אבל מעדכנים אותו ידנית (או נותנים לכלי כמו Dependabot).
-- מעדיפים **Docker Official Images** ומפרסמים מאומתים ב-Docker Hub, וגרסאות קטנות (‏`-slim`, ‏`alpine`) כשהן מתאימות.
+- tags יכולים לזוז. ‏`latest` פירושו "מה שהמפרסם תייג אחרון", לא "החדש ביותר". בכל דבר שרוצים לשחזר, משתמשים בגרסה מפורשת.
+- לדיוק מלא מקבעים **digest** (‏`image@sha256:...`). הוא לא משתנה, אבל מעדכנים אותו ידנית (או עם כלי כמו Dependabot).
+- מעדיפים **Docker Official Images**, מפרסמים מאומתים וגרסאות קטנות (‏`-slim`, ‏`alpine`).
 
 ## האפליקציה שלנו, ב-container
 
@@ -174,7 +174,7 @@ curl localhost:3000
 Hello from a container
 ```
 
-הדגל `-t hello-app` נותן שם (tag) ל-image, והנקודה `.` היא **build context**: התיקייה שהבנייה רשאית להעתיק ממנה קבצים. הרגע ארזנו אפליקציה. כל מי שיש לו Docker יכול להריץ את אותן שתי פקודות ולקבל אותה תוצאה, בלי להתקין Node.
+הדגל `-t hello-app` נותן tag ל-image, והנקודה `.` היא **build context**: התיקייה שהבנייה רשאית להעתיק ממנה. כל מי שיש לו Docker יכול להריץ את אותן פקודות ולקבל אותה תוצאה, בלי להתקין Node.
 
 ### שכבות ו-build cache
 
@@ -182,13 +182,13 @@ Hello from a container
 
 ![מחסנית שכבות ל-Dockerfile: ‏FROM node:24-slim, ‏WORKDIR /app, ‏COPY של קבצי ה-package, ‏RUN npm ci, ‏COPY של קוד המקור, ושכבת container דקה לקריאה וכתיבה למעלה. ארבע השכבות התחתונות מסומנות כ-cached וה-COPY של קוד המקור מסומן כ-rebuilt.](/images/docker-zero-to-hero/image-layers.svg)
 
-זה מסביר את הסדר ב-Dockerfile שלנו. עורכים קבצי מקור כל היום, אבל התלויות משתנות לעתים רחוקות. כשמעתיקים את `package*.json` ומתקינים *לפני* שמעתיקים את המקור, עריכה של `server.js` בונה מחדש רק את ה-`COPY` האחרון, וה-`npm ci` האיטי מגיע מה-cache. אם הופכים את הסדר, כל עריכה קטנה מתקינה הכול מחדש.
+זה מסביר את הסדר ב-Dockerfile שלנו. המקור משתנה כל היום, התלויות לעתים רחוקות. כי `package*.json` מועתק ומותקן *לפני* המקור, עריכה של `server.js` בונה מחדש רק את ה-`COPY` האחרון, וה-`npm ci` האיטי מגיע מה-cache. בסדר ההפוך כל עריכה מתקינה הכול מחדש.
 
 הכלל: **שמים למעלה את מה שמשתנה לעתים רחוקות, ולמטה את מה שמשתנה לעתים קרובות.**
 
-containers מוסיפים עוד דבר אחד: שכבה דקה לקריאה וכתיבה מעל ה-image. כל מה ש-container כותב הולך לשם, והיא נמחקת עם ה-container. בגלל זה נתונים צריכים volumes (בהמשך).
+container מוסיף שכבה דקה לקריאה וכתיבה מעל ה-image. מה שהוא כותב הולך לשם ונמחק איתו, ולכן נתונים צריכים volumes (בהמשך).
 
-עוד מלכודת cache ב-images מבוססי Debian: מריצים `apt-get update` ו-`apt-get install` באותו `RUN`, כדי שלא ישתמשו שוב ברשימת חבילות ישנה מה-cache, ומנקים באותה שורה כדי לשמור על שכבה קטנה:
+מלכודת cache ב-images מבוססי Debian: מריצים `apt-get update` ו-`apt-get install` באותו `RUN` כדי שלא ישתמשו ברשימת חבילות ישנה, ומנקים באותה שורה כדי לשמור על שכבה קטנה:
 
 ```dockerfile
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -213,7 +213,7 @@ FROM nginx:alpine
 COPY --from=build /app/dist /usr/share/nginx/html
 ```
 
-בשלב הראשון יש Node וכל תלויות הפיתוח. ה-image הסופי הוא רק nginx והקבצים הבנויים, ושלב הבנייה נזרק. (תיקיית הפלט, כאן `dist`, תלויה בפרויקט.) זו הדרך הסטנדרטית לשלוח אפליקציית front-end כמו זו שהבלוג הזה בנוי ממנה.
+בשלב הראשון יש Node וכל תלויות הפיתוח; ה-image הסופי הוא רק nginx והקבצים הבנויים. (תיקיית הפלט, כאן `dist`, תלויה בפרויקט.) זו הדרך הסטנדרטית לשלוח אפליקציית front-end.
 
 ### שתי דרכים לכתוב את פקודת ההפעלה
 
@@ -224,7 +224,7 @@ ENTRYPOINT ["s3cmd"]
 CMD ["--help"]
 ```
 
-אז `docker run image` מריץ `s3cmd --help`, ו-`docker run image ls s3://bucket` מריץ `s3cmd ls s3://bucket`. תמיד משתמשים ב-**exec form**, מערך ה-JSON (‏`["node", "server.js"]`), ולא במחרוזת רגילה: הוא מריץ את התוכנית ישירות כתהליך הראשי של ה-container, כך שהיא מקבלת אותות כמו בקשת העצירה. בצורת ה-shell יש shell באמצע שעלול לבלוע אותם.
+אז `docker run image` מריץ `s3cmd --help`, ו-`docker run image ls s3://bucket` מריץ `s3cmd ls s3://bucket`. משתמשים ב-**exec form**, מערך ה-JSON (‏`["node", "server.js"]`), ולא במחרוזת: התוכנית הופכת לתהליך הראשי ומקבלת אותות כמו בקשת העצירה, ובצורת ה-shell יש shell באמצע שעלול לבלוע אותם.
 
 ## פורטים
 
@@ -239,7 +239,7 @@ docker run -d -P nginx                         # מפרסם כל פורט שעש
 
 ![הדפדפן מגיע ל-container בשם web דרך פורט 8080 במארח שממופה ל-3000 ב-container. ה-containers‏ web ו-db חולקים רשת מוגדרת-משתמש, ולכן web מגיע למסד הנתונים לפי שם בפורט 5432. הפורט של מסד הנתונים לא מפורסם, ולכן שום דבר מבחוץ לא יכול להגיע אליו.](/images/docker-zero-to-hero/ports-and-networks.svg)
 
-שני דברים לזכור. כברירת מחדל פורט מפורסם מאזין בכל ממשקי הרשת של המחשב, כך שכל מי שמגיע למחשב שלנו מגיע לאפליקציה. למסדי נתונים ולשירותים רגישים, או לא מפרסמים בכלל או קושרים ל-`127.0.0.1` כמו למעלה. ו-`EXPOSE` ב-Dockerfile הוא רק תיעוד: הוא לא מפרסם כלום. רק `-p` או `-P` פותחים פורט החוצה.
+שני דברים לזכור. פורט מפורסם מאזין כברירת מחדל בכל ממשקי הרשת, כך שכל מי שמגיע למחשב מגיע לאפליקציה. למסדי נתונים ולשירותים רגישים לא מפרסמים, או קושרים ל-`127.0.0.1` כמו למעלה. ו-`EXPOSE` הוא רק תיעוד: רק `-p` או `-P` פותחים פורט.
 
 ## נתונים: volumes ו-bind mounts
 
@@ -258,9 +258,9 @@ docker run --rm -it -v "$(pwd)":/app -w /app node:24-slim sh    # bind mount: ה
 docker run -d -v pgdata:/data:ro nginx                         # volume לקריאה בלבד
 ```
 
-מוחקים את ה-container בשם `db` ומפעילים חדש עם אותו `-v pgdata:...`, והנתונים עדיין שם. (נתיב הנתונים בתוך image תלוי ב-image, והוא השתנה בין כמה גרסאות ראשיות של ה-image של Postgres, אז בודקים בדף ה-image ב-Docker Hub מה הנתיב הנכון.)
+מוחקים את ה-container בשם `db` ומפעילים חדש עם אותו `-v pgdata:...`, והנתונים עדיין שם. (נתיב הנתונים תלוי ב-image והשתנה בין גרסאות של Postgres, אז בודקים בדף ה-image ב-Docker Hub.)
 
-`-v` היא הצורה הקצרה. ‏`--mount` מפורשת יותר, והיא זו שצריך לאפשרויות מתקדמות:
+`-v` היא הצורה הקצרה; ‏`--mount` מפורשת יותר ונדרשת לאפשרויות מתקדמות:
 
 ```bash
 docker run -d --name devtest --mount source=myvol,target=/app nginx
@@ -284,9 +284,9 @@ docker run -d --name db --network app-net -e POSTGRES_PASSWORD=dev-only postgres
 docker run -d --name web --network app-net -p 8080:3000 -e DATABASE_URL=postgres://postgres:dev-only@db:5432/postgres hello-app
 ```
 
-בתוך `web`, שם המארח `db` מתורגם עכשיו ל-container של מסד הנתונים. שימו לב שמסד הנתונים לא קיבל `-p`: הוא לא צריך להיות נגיש מהמחשב שלנו, רק מ-`web`. פורטים ברשת פתוחים בין ה-containers שלה, ונגישים מבחוץ רק כשמפרסמים אותם.
+בתוך `web`, השם `db` מתורגם עכשיו ל-container של מסד הנתונים. מסד הנתונים לא קיבל `-p`: רק `web` צריך להגיע אליו. פורטים פתוחים בין ה-containers של הרשת, ונגישים מבחוץ רק כשמפרסמים אותם.
 
-יש גם דרייברים אחרים למקרים מיוחדים: ‏`--network host` מסיר את הבידוד וחולק את הרשת של המארח, ו-`--network none` מנתק את ה-container לגמרי.
+למקרים מיוחדים: ‏`--network host` חולק את הרשת של המארח, ו-`--network none` מנתק את ה-container לגמרי.
 
 ## הגדרות וסודות
 
@@ -297,7 +297,7 @@ docker run -e LOG_LEVEL=debug hello-app
 docker run --env-file .env hello-app
 ```
 
-אזהרה אחת מהתיעוד של Docker עצמו: לא משתמשים במשתני סביבה לנתונים רגישים כמו סיסמאות בשום דבר אמיתי. הם מופיעים ב-`docker inspect` ויכולים לדלוף. משתמשים ב-secrets (גם Compose וגם Swarm תומכים בהם) או במאגר הסודות של הפלטפורמה. לפיתוח מקומי, סיסמאות מסוג `dev-only` כמו למעלה בסדר. ולעולם לא עושים `COPY` לקובץ `.env` או למפתח לתוך image: כל מי שיכול למשוך את ה-image יכול לקרוא אותו, ושכבה ש"נמחקה" אחר כך עדיין נמצאת בהיסטוריה של ה-image.
+התיעוד של Docker מזהיר מפני משתני סביבה לסיסמאות אמיתיות: הם מופיעים ב-`docker inspect` ויכולים לדלוף. משתמשים ב-secrets (Compose ו-Swarm תומכים בהם) או במאגר הסודות של הפלטפורמה. סיסמאות `dev-only` כמו למעלה בסדר מקומית. לעולם לא עושים `COPY` לקובץ `.env` או למפתח לתוך image: כל מי שמושך אותו יכול לקרוא, ושכבה ש"נמחקה" אחר כך עדיין בהיסטוריה.
 
 ## Docker Compose: כל האפליקציה בקובץ אחד
 
@@ -330,9 +330,9 @@ volumes:
   pgdata:
 ```
 
-קוראים את זה כמו משפט: *שירות `web` שנבנה מהתיקייה הזאת, מפורסם על 8080, שמחכה לשירות `db` שנוצר מה-image של Postgres, והנתונים שלו חיים ב-volume בשם `pgdata`.* Compose גם מכניס אוטומטית את שני השירותים לרשת משותפת, ולכן `web` מגיע למסד הנתונים בשם `db`. (השרת הזעיר שלנו עדיין לא קורא את `DATABASE_URL`; הוא כאן כדי להראות את החיווט.)
+קוראים את זה כמו משפט: *שירות `web` שנבנה מהתיקייה הזאת, מפורסם על 8080, שמחכה לשירות `db` מה-image של Postgres, והנתונים שלו ב-volume בשם `pgdata`.* Compose מכניס את שני השירותים לרשת משותפת, ולכן `web` מגיע למסד הנתונים בשם `db`. (השרת הזעיר שלנו לא קורא את `DATABASE_URL`; הוא רק מראה את החיווט.)
 
-ה-`healthcheck` יחד עם `condition: service_healthy` הוא החלק שמפספסים. ‏`depends_on` רגיל קובע רק סדר הפעלה: Compose מחשיב תלות כמוכנה ברגע שה-container שלה *רץ*, לא כשהתוכנה שבפנים מקבלת חיבורים. למסד נתונים יכולות לקחת שניות להתאתחל, ובדיקת הבריאות היא מה שגורם ל-`web` לחכות באמת.
+את ה-`healthcheck` עם `condition: service_healthy` מפספסים. ‏`depends_on` רגיל קובע רק סדר הפעלה: תלות נחשבת מוכנה כשה-container שלה *רץ*, לא כשהתוכנה שבפנים מקבלת חיבורים. מסד נתונים יכול לקחת שניות להתאתחל, ובדיקת הבריאות גורמת ל-`web` לחכות באמת.
 
 הפקודות שצריך:
 
@@ -345,9 +345,9 @@ docker compose down             # עוצר ומוחק את ה-containers ואת 
 docker compose down -v          # ...וגם את ה-volumes בעלי השם (זה מוחק את הנתונים שלנו)
 ```
 
-שימו לב לרווח: ‏`docker compose` היא הפקודה הנוכחית, מובנית ב-Docker. ‏`docker-compose` העצמאית הישנה היא הדור הקודם.
+שימו לב לרווח: ‏`docker compose` היא הפקודה הנוכחית; ‏`docker-compose` העצמאית היא הדור הקודם.
 
-כדי להוציא הגדרות מהקובץ, משתמשים ב-`environment` (כמו למעלה) או ב-`env_file`:
+כדי להוציא הגדרות מהקובץ, משתמשים ב-`env_file`:
 
 ```yaml
 services:
@@ -386,19 +386,18 @@ docker system prune -a        # ...וגם כל image שאף container לא מש�
 docker builder prune          # רק את ה-build cache
 ```
 
-‏`docker system prune` מבקש אישור, וכברירת מחדל **לא** נוגע ב-volumes, כך שהנתונים שלנו בטוחים. הוספת `--volumes` מוחקת גם volumes אנונימיים שלא בשימוש, אז קוראים את האזהרה לפני שאומרים כן.
+‏`docker system prune` מבקש אישור ו**לא** נוגע ב-volumes כברירת מחדל. ‏`--volumes` מוחק גם volumes אנונימיים שלא בשימוש, אז קוראים את האזהרה קודם.
 
 ## images קטנים ובטוחים
 
-- **images בסיס קטנים.** מתחילים מ-image מהימן ומינימלי (‏`-slim`, ‏`alpine`) ומשתמשים בבנייה רב-שלבית כדי שכלי בנייה לא יגיעו לפרודקשן.
-- **עניין אחד לכל container.** אפליקציית web ומסד הנתונים שלה הם שני containers, לא אחד.
-- **לא רצים כ-root.** מוסיפים `USER` (ב-images של Node יש משתמש `node`). אם תוקף נכנס ל-container, יש לו פחות הרשאות.
-- **מסדרים בשביל ה-cache.** תלויות קודם, מקור אחרון.
-- **מחזיקים `.dockerignore`.** בנייה מהירה יותר, context קטן יותר, בלי סודות במקרה.
-- **מקבעים גרסאות** של images בסיס (ו-digests כשצריך דיוק), ובונים מחדש בקביעות כדי לקבל תיקוני אבטחה.
-- **בלי סודות ב-images או ב-Dockerfiles.** לא כ-`ENV`, לא כקובץ מועתק.
-- **סורקים את ה-images** לפגיעויות ידועות עם סורק ב-CI, ומעדכנים את ה-image הבסיסי כשהוא מדווח על תיקון.
-- **תהליך אחד, בחזית.** התהליך הראשי של ה-container הוא ה-container. כותבים ל-standard output וקוראים עם `docker logs`.
+- **images בסיס קטנים** (‏`-slim`, ‏`alpine`) ובנייה רב-שלבית, כדי שכלי בנייה לא יגיעו לפרודקשן.
+- **עניין אחד לכל container.** אפליקציית web ומסד הנתונים שלה הם שני containers.
+- **לא רצים כ-root.** מוסיפים `USER`, כך שלתוקף ב-container יש פחות הרשאות.
+- **מסדרים בשביל ה-cache** ו**מחזיקים `.dockerignore`**: בנייה מהירה יותר, בלי סודות במקרה.
+- **מקבעים גרסאות** של images בסיס, ובונים מחדש בקביעות בשביל תיקוני אבטחה.
+- **בלי סודות ב-images או ב-Dockerfiles,** לא כ-`ENV`, לא כקובץ מועתק.
+- **סורקים את ה-images** לפגיעויות ידועות ב-CI.
+- **תהליך אחד, בחזית,** שכותב ל-standard output בשביל `docker logs`.
 
 ## דף העזר
 
@@ -420,26 +419,25 @@ docker builder prune          # רק את ה-build cache
 
 ## מילון מונחים
 
-- **Image:** תבנית לקריאה בלבד (אפליקציה + תלויות) שמפעילים ממנה containers.
+- **Image:** תבנית לקריאה בלבד שמפעילים ממנה containers.
 - **Container:** מופע רץ ומבודד של image.
-- **Dockerfile:** קובץ הטקסט של ההוראות שבונה image.
-- **Layer (שכבה):** צעד אחד של image, נשמר ב-cache ומשמש שוב.
-- **Build context:** התיקייה ש-`docker build` רשאי להעתיק ממנה קבצים.
+- **Dockerfile:** ההוראות שבונות image.
+- **Layer (שכבה):** צעד אחד של image, שמור ב-cache.
+- **Build context:** התיקייה ש-`docker build` רשאי להעתיק ממנה.
 - **Registry / Docker Hub:** המקום שבו images נשמרים ומשותפים.
-- **Tag / digest:** תווית גרסה ידידותית / טביעת אצבע מדויקת של התוכן.
+- **Tag / digest:** תווית גרסה / טביעת אצבע מדויקת של התוכן.
 - **Volume:** אחסון שמנוהל על ידי Docker ושורד containers.
 - **Bind mount:** תיקיית מארח שמחוברת ל-container.
-- **Network (רשת):** רשת מקומית וירטואלית בין containers; במוגדרות-משתמש יש חיפוש לפי שם.
+- **Network (רשת):** רשת וירטואלית בין containers; במוגדרות-משתמש יש חיפוש לפי שם.
 - **פרסום פורט (‏`-p`):** העברת פורט במארח לפורט ב-container.
-- **Compose:** כלי שמריץ אפליקציה מרובת containers מ-`compose.yaml`.
-- **Service:** הגדרה של container אחד בקובץ Compose.
-- **Multi-stage build:** בנייה בשלב אחד ושליחה של התוצאה בלבד.
+- **Compose / Service:** מריץ אפליקציה מרובת containers מ-`compose.yaml` / הגדרה של container אחד בו.
+- **Multi-stage build:** בנייה בשלב אחד ושליחת התוצאה בלבד.
 - **Daemon:** התהליך ברקע (‏`dockerd`) שעושה את העבודה.
 
 ## לאן ממשיכים
 
-עכשיו אנחנו מכירים את התמונה כולה: image נבנה מ-Dockerfile, container הוא image רץ, פורטים, volumes ורשתות מחברים אותו לעולם, ו-Compose מתאר אפליקציה שלמה בקובץ אחד. כדי לקבע את זה, מכניסים ל-container אפליקציה קיימת: כותבים Dockerfile, מוסיפים `.dockerignore`, ומריצים עם Compose לצד מסד הנתונים שלו.
+עכשיו אנחנו מכירים את התמונה כולה: image נבנה מ-Dockerfile, container הוא image רץ, פורטים, volumes ורשתות מחברים אותו לעולם, ו-Compose מתאר אפליקציה שלמה בקובץ אחד. כדי לקבע את זה, מכניסים ל-container אפליקציה קיימת, עם Dockerfile, `.dockerignore` ו-Compose לצד מסד הנתונים שלה.
 
-הצעד הטבעי הבא הוא לתת לרובוטים לעשות את זה: לבנות ולדחוף את ה-image אוטומטית בכל מיזוג עם workflow של GitHub Actions. ‏[GitHub Actions מאפס לגיבור](he/posts/github-actions-zero-to-hero/) בונה בדיוק את ה-pipeline הזה, ‏[GitHub מאפס לגיבור](he/posts/github-zero-to-hero/) מכסה את הצד של הריפוזיטורי, וראו את [Git מאפס לגיבור](he/posts/git-zero-to-hero/) אם בקרת גרסאות עדיין חדשה. ה-[Get started](https://docs.docker.com/get-started/) של Docker עצמו וה-[Dockerfile best practices](https://docs.docker.com/build/building/best-practices/) הם ההמשך הטוב ביותר.
+הצעד הבא: לבנות ולדחוף את ה-image אוטומטית בכל מיזוג. ‏[GitHub Actions מאפס לגיבור](he/posts/github-actions-zero-to-hero/) בונה בדיוק את ה-pipeline הזה, ‏[GitHub מאפס לגיבור](he/posts/github-zero-to-hero/) מכסה את הצד של הריפוזיטורי, ו-[Git מאפס לגיבור](he/posts/git-zero-to-hero/) שם אם בקרת גרסאות עדיין חדשה. ה-[Get started](https://docs.docker.com/get-started/) של Docker וה-[Dockerfile best practices](https://docs.docker.com/build/building/best-practices/) הם ההמשך הטוב ביותר.
 
 כדי להריץ הרבה containers על כמה מכונות, עם ריפוי עצמי ועדכונים בלי השבתה, ממשיכים ל-[Kubernetes מאפס לגיבור](he/posts/kubernetes-zero-to-hero/). כדי להריץ containers בענן, מתחילים במפה ב-[AWS מאפס לגיבור](he/posts/aws-zero-to-hero/). ואם הפקודות שמקלידים בתוך container הן החלק הלא מוכר, ב[דף העזר לפקודות Linux](he/posts/linux-commands/) יש אותן.

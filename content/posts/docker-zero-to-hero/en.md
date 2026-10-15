@@ -30,11 +30,11 @@ A virtual machine carries a whole guest operating system with its own kernel. A 
 
 ![Left: a virtual machine stack with hardware, a host OS with a hypervisor, and two virtual machines, each with its own guest OS, libraries and app. Right: a container stack with hardware, a host OS, the Docker Engine, and three containers that hold only libraries and an app and share the host kernel.](/images/docker-zero-to-hero/containers-vs-vms.svg)
 
-The flip side: a container is isolated by default, but it is not a separate machine, so isolation is weaker than a VM's. (On a Mac or Windows computer, Docker Desktop runs a small Linux virtual machine in the background, because containers need a Linux kernel. You rarely notice.)
+The flip side: a container is not a separate machine, so its isolation is weaker than a VM's. (On Mac and Windows, Docker Desktop quietly runs a small Linux VM, because containers need a Linux kernel.)
 
 ## Install and check it works
 
-The easiest route is **Docker Desktop** (Mac, Windows and Linux), from [docker.com](https://docs.docker.com/get-started/get-docker/). On a Linux server you can install **Docker Engine** on its own instead. Note that Docker Desktop requires a paid subscription for commercial use in larger companies (the docs set the line at more than 250 employees or more than $10 million in annual revenue), and it's free for personal use and small businesses.
+The easiest route is **Docker Desktop** (Mac, Windows and Linux), from [docker.com](https://docs.docker.com/get-started/get-docker/). On a Linux server you can install **Docker Engine** alone. Docker Desktop needs a paid subscription in larger companies (over 250 employees or $10 million in revenue) and is free for personal use and small businesses.
 
 Then check:
 
@@ -74,7 +74,7 @@ docker start web          # start the same container again
 docker rm web             # delete it (stop first, or use rm -f)
 ```
 
-A container lives as long as its main process. `hello-world` prints its message and the process ends, so the container stops. `nginx` keeps running until you stop it. If a container you start "exits immediately", the process inside finished or crashed: check `docker logs`.
+A container lives as long as its main process. `hello-world` prints its message and stops; `nginx` runs until you stop it. If a container "exits immediately", its process finished or crashed: check `docker logs`.
 
 Some `docker run` flags you'll use all the time:
 
@@ -100,9 +100,9 @@ docker rmi node:24-slim      # remove one
 
 An image name looks like `node:24-slim`: the name, a colon, and a **tag** that usually encodes a version and a flavor. A few habits:
 
-- Tags can move. `latest` is just a tag and means "whatever the publisher tagged last", not "the newest" or "the best". Use a specific version in anything you want to reproduce.
-- For full reproducibility you can pin a **digest** (`image@sha256:...`), which names exact content. It never changes, but you update it by hand (or let a tool such as Dependabot do it).
-- Prefer **Docker Official Images** and verified publishers on Docker Hub, and small variants (`-slim`, `alpine`) when they work for you.
+- Tags can move. `latest` just means "whatever the publisher tagged last", not "the newest". Use a specific version for anything reproducible.
+- To be exact, pin a **digest** (`image@sha256:...`). It never changes, but you update it by hand (or with a tool such as Dependabot).
+- Prefer **Docker Official Images**, verified publishers, and small variants (`-slim`, `alpine`).
 
 ## Our app, in a container
 
@@ -174,7 +174,7 @@ curl localhost:3000
 Hello from a container
 ```
 
-`-t hello-app` names (tags) the image, and the `.` is the **build context**: the folder whose files the build may copy from. You just packaged an app. Anyone with Docker can run the same two commands and get the same result, without installing Node.
+`-t hello-app` tags the image, and the `.` is the **build context**: the folder the build may copy from. Anyone with Docker can now run the same commands and get the same result, without installing Node.
 
 ### Layers and the build cache
 
@@ -182,13 +182,13 @@ Each Dockerfile instruction creates a **layer**, and an image is a stack of them
 
 ![A stack of layers for the Dockerfile: FROM node:24-slim, WORKDIR /app, COPY package files, RUN npm ci, COPY of the source, and a thin read-write container layer on top. The four lowest layers are marked cached and the COPY of the source is marked rebuilt.](/images/docker-zero-to-hero/image-layers.svg)
 
-That explains the order in our Dockerfile. You edit source files all day, but dependencies change rarely. By copying `package*.json` and installing *before* copying the source, an edit to `server.js` rebuilds only the last `COPY`, and the slow `npm ci` comes from cache. Reverse the order and every tiny edit reinstalls everything.
+That explains the order in our Dockerfile. Source changes all day, dependencies rarely. Because `package*.json` is copied and installed *before* the source, an edit to `server.js` rebuilds only the last `COPY`, and the slow `npm ci` comes from cache. Reverse the order and every edit reinstalls everything.
 
 The rule: **put what changes rarely at the top and what changes often at the bottom.**
 
-Containers add one more thing: a thin read-write layer on top of the image. Whatever a container writes goes there, and it's deleted with the container. That is why data needs volumes (below).
+A container adds a thin read-write layer on top of the image. What it writes goes there and is deleted with the container, which is why data needs volumes (below).
 
-Another cache trap on Debian-based images: do `apt-get update` and `apt-get install` in the same `RUN`, so a stale package list isn't reused from the cache, and clean up in the same line to keep the layer small:
+A cache trap on Debian-based images: run `apt-get update` and `apt-get install` in the same `RUN` so a stale package list isn't reused, and clean up in the same line to keep the layer small:
 
 ```dockerfile
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -213,7 +213,7 @@ FROM nginx:alpine
 COPY --from=build /app/dist /usr/share/nginx/html
 ```
 
-The first stage has Node and every dev dependency. The final image is just nginx plus the built files, and the build stage is thrown away. (The output folder, `dist` here, depends on your project.) This is the standard way to ship a front-end app like the one this blog is built with.
+The first stage has Node and every dev dependency; the final image is just nginx plus the built files. (The output folder, `dist` here, depends on your project.) This is the standard way to ship a front-end app.
 
 ### Two ways to write the start command
 
@@ -224,7 +224,7 @@ ENTRYPOINT ["s3cmd"]
 CMD ["--help"]
 ```
 
-Then `docker run image` runs `s3cmd --help`, and `docker run image ls s3://bucket` runs `s3cmd ls s3://bucket`. Always use the **exec form**, the JSON array (`["node", "server.js"]`), rather than a plain string: it runs your program directly as the container's main process, so it receives signals like the stop request. With the shell form, a shell sits in between and may swallow them.
+Then `docker run image` runs `s3cmd --help`, and `docker run image ls s3://bucket` runs `s3cmd ls s3://bucket`. Use the **exec form**, the JSON array (`["node", "server.js"]`), not a plain string: your program becomes the main process and receives signals like the stop request, while the shell form puts a shell in between that may swallow them.
 
 ## Ports
 
@@ -239,7 +239,7 @@ docker run -d -P nginx                         # publish every EXPOSEd port to r
 
 ![Your browser reaches the web container through port 8080 on the host mapped to 3000 in the container. The web and db containers share a user-defined network, so web reaches the database by name on port 5432. The database port is not published, so nothing outside can reach it.](/images/docker-zero-to-hero/ports-and-networks.svg)
 
-Two things to remember. By default a published port listens on *all* of your computer's network interfaces, so anyone who can reach your machine can reach the app. For databases and other sensitive services, either don't publish at all or bind to `127.0.0.1` as above. And `EXPOSE` in a Dockerfile is only documentation: it publishes nothing. Only `-p` or `-P` open a port to the outside.
+Two things to remember. A published port listens on *all* network interfaces by default, so anyone who can reach your machine can reach the app. For databases and other sensitive services, don't publish, or bind to `127.0.0.1` as above. And `EXPOSE` is only documentation: only `-p` or `-P` open a port.
 
 ## Data: volumes and bind mounts
 
@@ -258,9 +258,9 @@ docker run --rm -it -v "$(pwd)":/app -w /app node:24-slim sh    # bind mount: yo
 docker run -d -v pgdata:/data:ro nginx                         # read-only volume
 ```
 
-Remove the `db` container and start a new one with the same `-v pgdata:...`, and the data is still there. (The data path inside an image is image-specific, and it has changed between some major versions of the Postgres image, so check the image's page on Docker Hub for the right one.)
+Remove the `db` container and start a new one with the same `-v pgdata:...`, and the data is still there. (The data path is image-specific and has changed between Postgres image versions, so check the image's Docker Hub page.)
 
-`-v` is the short form. `--mount` is more explicit, and is the one you need for advanced options:
+`-v` is the short form; `--mount` is more explicit and needed for advanced options:
 
 ```bash
 docker run -d --name devtest --mount source=myvol,target=/app nginx
@@ -284,9 +284,9 @@ docker run -d --name db --network app-net -e POSTGRES_PASSWORD=dev-only postgres
 docker run -d --name web --network app-net -p 8080:3000 -e DATABASE_URL=postgres://postgres:dev-only@db:5432/postgres hello-app
 ```
 
-Inside `web`, the host name `db` now resolves to the database container. Note that the database never got a `-p`: it doesn't need to be reachable from your computer, only from `web`. Ports on a network are open between its containers, and become reachable from outside only when published.
+Inside `web`, the name `db` now resolves to the database container. The database never got a `-p`: only `web` needs to reach it. Ports are open between a network's containers, and reachable from outside only when published.
 
-Other drivers exist for special cases: `--network host` removes the isolation and shares the host's network, and `--network none` cuts the container off completely.
+Special cases: `--network host` shares the host's network, and `--network none` cuts the container off completely.
 
 ## Configuration and secrets
 
@@ -297,7 +297,7 @@ docker run -e LOG_LEVEL=debug hello-app
 docker run --env-file .env hello-app
 ```
 
-One warning from Docker's own docs: don't use environment variables for sensitive data such as passwords in anything real. They show up in `docker inspect` and can leak. Use secrets (Compose and Swarm both support them) or your platform's secret store. For local development, `dev-only` style passwords like the ones above are fine. And never `COPY` a `.env` file or a key into an image: anyone who can pull the image can read it, and a layer you "deleted" later is still in the image's history.
+Docker's own docs warn against environment variables for real passwords: they show up in `docker inspect` and can leak. Use secrets (Compose and Swarm support them) or your platform's secret store. `dev-only` passwords like the ones above are fine locally. Never `COPY` a `.env` file or key into an image: anyone who can pull it can read it, and a layer you "deleted" later is still in the history.
 
 ## Docker Compose: the whole app in one file
 
@@ -330,9 +330,9 @@ volumes:
   pgdata:
 ```
 
-Read it like a sentence: *a `web` service built from this folder, published on 8080, which waits for a `db` service made from the Postgres image, whose data lives in a volume called `pgdata`.* Compose also puts both services on a shared network automatically, so `web` reaches the database as `db`. (Our tiny server doesn't read `DATABASE_URL` yet; it's there to show the wiring.)
+Read it like a sentence: *a `web` service built from this folder, published on 8080, which waits for a `db` service from the Postgres image, whose data lives in a volume called `pgdata`.* Compose puts both services on a shared network, so `web` reaches the database as `db`. (Our tiny server doesn't read `DATABASE_URL`; it just shows the wiring.)
 
-The `healthcheck` plus `condition: service_healthy` is the part people miss. A plain `depends_on` only controls start order: Compose considers a dependency ready as soon as its container is *running*, not when the software inside accepts connections. A database can take seconds to initialize, so the health check is what makes `web` wait for real.
+People miss `healthcheck` plus `condition: service_healthy`. A plain `depends_on` only controls start order: a dependency counts as ready once its container is *running*, not when the software inside accepts connections. A database can take seconds to initialize, so the health check makes `web` really wait.
 
 The commands you need:
 
@@ -345,9 +345,9 @@ docker compose down             # stop and remove the containers and the network
 docker compose down -v          # ...and also the named volumes (this deletes your data)
 ```
 
-Note the space: `docker compose` is the current command, built into Docker. The older standalone `docker-compose` is the previous generation.
+Note the space: `docker compose` is the current command; the standalone `docker-compose` is the previous generation.
 
-To keep configuration out of the file, use `environment` (as above) or `env_file`:
+To keep configuration out of the file, use `env_file`:
 
 ```yaml
 services:
@@ -386,19 +386,18 @@ docker system prune -a        # ...and every image no container uses
 docker builder prune          # only the build cache
 ```
 
-`docker system prune` asks for confirmation, and by default does **not** touch volumes, so your data is safe. Adding `--volumes` also removes unused anonymous volumes, so read the warning before you say yes.
+`docker system prune` asks for confirmation and does **not** touch volumes by default. `--volumes` also removes unused anonymous volumes, so read the warning first.
 
 ## Making images small and safe
 
-- **Small base images.** Start from a trusted, minimal image (`-slim`, `alpine`) and use multi-stage builds so build tools never reach production.
-- **One concern per container.** A web app and its database are two containers, not one.
-- **Don't run as root.** Add `USER` (the Node images ship a `node` user). If an attacker gets into the container, they get fewer rights.
-- **Order for the cache.** Dependencies first, source last.
-- **Keep a `.dockerignore`.** Faster builds, smaller context, no accidental secrets.
-- **Pin versions** of base images (and digests when you need exactness), and rebuild regularly to pick up security fixes.
-- **No secrets in images or Dockerfiles.** Not as `ENV`, not as a copied file.
-- **Scan your images** for known vulnerabilities with a scanner in CI, and update the base image when it reports a fix.
-- **One process, in the foreground.** The container's main process is the container. Log to the standard output and read it with `docker logs`.
+- **Small base images** (`-slim`, `alpine`) and multi-stage builds, so build tools never reach production.
+- **One concern per container.** A web app and its database are two containers.
+- **Don't run as root.** Add `USER`, so an attacker in the container gets fewer rights.
+- **Order for the cache,** and **keep a `.dockerignore`**: faster builds, no accidental secrets.
+- **Pin versions** of base images, and rebuild regularly for security fixes.
+- **No secrets in images or Dockerfiles,** not as `ENV`, not as a copied file.
+- **Scan your images** for known vulnerabilities in CI.
+- **One process, in the foreground,** logging to standard output for `docker logs`.
 
 ## The cheat sheet
 
@@ -420,26 +419,25 @@ docker builder prune          # only the build cache
 
 ## Glossary
 
-- **Image:** a read-only template (app + dependencies) that containers are started from.
+- **Image:** a read-only template containers start from.
 - **Container:** a running, isolated instance of an image.
-- **Dockerfile:** the text file of instructions that builds an image.
-- **Layer:** one step of an image, cached and reused.
-- **Build context:** the folder whose files `docker build` may copy from.
+- **Dockerfile:** the instructions that build an image.
+- **Layer:** one cached step of an image.
+- **Build context:** the folder `docker build` may copy from.
 - **Registry / Docker Hub:** where images are stored and shared.
-- **Tag / digest:** a human-friendly version label / an exact content fingerprint.
+- **Tag / digest:** a version label / an exact content fingerprint.
 - **Volume:** Docker-managed storage that outlives containers.
 - **Bind mount:** a host folder mounted into a container.
 - **Network:** a virtual LAN between containers; user-defined ones give name lookup.
 - **Publish a port (`-p`):** forward a host port to a container port.
-- **Compose:** a tool that runs a multi-container app from `compose.yaml`.
-- **Service:** one container definition in a Compose file.
-- **Multi-stage build:** building in one stage and shipping only the result.
+- **Compose / Service:** runs a multi-container app from `compose.yaml` / one container definition in it.
+- **Multi-stage build:** build in one stage, ship only the result.
 - **Daemon:** the background process (`dockerd`) that does the work.
 
 ## Where to go next
 
-You now know the whole picture: an image is built from a Dockerfile, a container is a running image, ports, volumes and networks connect it to the world, and Compose describes a whole app in one file. To make it stick, containerize something you already have: write a Dockerfile, add a `.dockerignore`, and run it with Compose next to its database.
+You now know the whole picture: an image is built from a Dockerfile, a container is a running image, ports, volumes and networks connect it to the world, and Compose describes a whole app in one file. To make it stick, containerize something you already have, with a Dockerfile, a `.dockerignore`, and Compose next to its database.
 
-A natural next step is to let robots do it: build and push your image automatically on every merge with a GitHub Actions workflow. [GitHub Actions from zero to hero](en/posts/github-actions-zero-to-hero/) builds exactly that pipeline, [GitHub from zero to hero](en/posts/github-zero-to-hero/) covers the repository side, and see [Git from zero to hero](en/posts/git-zero-to-hero/) if version control is still new. Docker's own [Get started guide](https://docs.docker.com/get-started/) and the [Dockerfile best practices](https://docs.docker.com/build/building/best-practices/) are the best next reading.
+Next, build and push your image automatically on every merge: [GitHub Actions from zero to hero](en/posts/github-actions-zero-to-hero/) builds that pipeline, [GitHub from zero to hero](en/posts/github-zero-to-hero/) covers the repository side, and [Git from zero to hero](en/posts/git-zero-to-hero/) is there if version control is new. Docker's [Get started guide](https://docs.docker.com/get-started/) and [Dockerfile best practices](https://docs.docker.com/build/building/best-practices/) are the best further reading.
 
 To run many containers across several machines, with self-healing and zero-downtime updates, continue with [Kubernetes from zero to hero](en/posts/kubernetes-zero-to-hero/). To run containers in the cloud, start with the map in [AWS from zero to hero](en/posts/aws-zero-to-hero/). And if the commands you type inside a container are the unfamiliar part, the [Linux commands cheat sheet](en/posts/linux-commands/) has them.

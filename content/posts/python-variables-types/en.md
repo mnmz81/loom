@@ -6,9 +6,9 @@ tags: [python]
 series: { key: python, order: 3 }
 ---
 
-A variable in Python is a name that points to a value. You don't declare it or give it a type. You assign it, and the type comes with the value. This post covers the basic types, how to check them, and how to convert between them.
+A variable in Python is a name that points to a value. You don't declare it or give it a type: you assign it, and the type comes with the value. This post covers the basic types, how to check them, and how to convert between them.
 
-Every code example here was run with Python 3.13, and the claims were checked against the [official tutorial](https://docs.python.org/3/tutorial/introduction.html) and the [`type()` docs](https://docs.python.org/3/library/functions.html#type).
+Every example here was run with Python 3.13 and checked against the [official tutorial](https://docs.python.org/3/tutorial/introduction.html) and the [`type()` docs](https://docs.python.org/3/library/functions.html#type).
 
 ## Assignment
 
@@ -62,7 +62,7 @@ Python <class 'str'>
 True <class 'bool'>
 ```
 
-- `int`: whole numbers, with no fixed size. `1_000_000` is valid. The underscores are only for readability.
+- `int`: whole numbers, with no fixed size. `1_000_000` is valid; underscores are only for readability.
 - `float`: numbers with a fractional part.
 - `str`: text, covered in the next post.
 - `bool`: `True` or `False`.
@@ -102,11 +102,11 @@ True
 True
 ```
 
-`bool` is a subclass of `int`, so `True` is an int too. That's why the second check returns `True`.
+`bool` is a subclass of `int`, so `True` is an int too.
 
 ## Converting between types
 
-Python doesn't convert types on its own in most cases, so you do it explicitly with the type name:
+Python rarely converts types on its own, so you do it explicitly with the type name:
 
 ```python
 print(int("42") + 1)
@@ -146,9 +146,9 @@ print(n)
 NameError: name 'n' is not defined
 ```
 
-The fix is to assign the name first, or check that you spelled it the same way everywhere.
+Assign the name first, and check you spelled it the same way everywhere.
 
-**Mixing `=` and `==`.** `=` assigns. `==` compares. `if x = 5:` is a syntax error, and `if x == 5:` is the check you want.
+**Mixing `=` and `==`.** `=` assigns, `==` compares: `if x = 5:` is a syntax error, `if x == 5:` is the check.
 
 **Adding a string and a number.** `"5" + 1` raises `TypeError`. Convert one side first: `int("5") + 1` gives `6`.
 

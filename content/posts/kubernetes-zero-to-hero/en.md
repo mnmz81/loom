@@ -10,15 +10,15 @@ Docker answers "how do I run my app in a container?". The next question comes fa
 
 This guide picks up where [Docker from zero to hero](en/posts/docker-zero-to-hero/) left off. We take the same small `hello-app` image and run it on a local Kubernetes cluster, adding one idea at a time: Pods, Deployments, Services, rollouts, configuration, health checks and scaling.
 
-Every command and field was checked against the [official Kubernetes documentation](https://kubernetes.io/docs/home/) (v1.37 at the time of writing). Output that includes generated names, IPs or ages will look a little different on your machine.
+Every command and field was checked against the [official Kubernetes documentation](https://kubernetes.io/docs/home/) (v1.37 at the time of writing). Generated names, IPs and ages will differ on your machine.
 
 ## What Kubernetes is
 
 Kubernetes is a **container orchestrator**: software that runs containers across a group of machines and keeps them running. You tell it *what* you want ("three copies of this image, reachable on port 80"), and it figures out *where* and *how*, and keeps fixing things when reality drifts.
 
-It's open source, started at Google, and is now maintained by the Cloud Native Computing Foundation. Every big cloud offers it as a managed service: Amazon EKS, Google GKE and Azure AKS.
+It's open source, started at Google, and maintained by the Cloud Native Computing Foundation. Every big cloud offers it as a managed service: Amazon EKS, Google GKE and Azure AKS.
 
-Do you need it? Not always. One app on one server is fine with Docker Compose. Kubernetes starts to pay off when you have several services, more than one machine, and a need for zero-downtime deploys and self-healing. It has a real learning curve, and this guide is here to flatten it.
+Do you need it? Not always. One app on one server is fine with Docker Compose. Kubernetes pays off with several services, more than one machine, and a need for zero-downtime deploys and self-healing.
 
 ### Desired state: the one idea to remember
 
@@ -26,7 +26,7 @@ Almost everything in Kubernetes follows one pattern. You write down the **desire
 
 ![You declare replicas: 3 with kubectl apply, and the API server stores it as the desired state. A controller keeps comparing it with the actual state. When only two Pods are running, the controller acts and starts one more, until actual matches desired.](/images/kubernetes-zero-to-hero/desired-state.svg)
 
-If a Pod crashes, or a whole server dies, nobody has to run a command. The controller sees two running where three are wanted, and starts a third. This is why Kubernetes work is mostly *editing files that describe the result*, not typing commands that perform steps.
+If a Pod crashes, or a whole server dies, nobody runs a command: the controller sees two running where three are wanted, and starts a third. That's why Kubernetes work is mostly *editing files that describe the result*, not typing commands that perform steps.
 
 ## The parts of a cluster
 
@@ -44,11 +44,11 @@ The [components page](https://kubernetes.io/docs/concepts/overview/components/) 
 - **kube-proxy** (optional): maintains network rules on each node so Services work.
 - **Container runtime:** the software that actually runs containers, such as containerd.
 
-You will rarely touch any of these directly. On a managed service, the cloud runs the whole control plane for you.
+You will rarely touch these directly, and on a managed service the cloud runs the control plane for you.
 
 ## Set up a local cluster
 
-You need two tools: `kubectl`, the command-line client, and a way to run a cluster on your laptop. This guide uses **kind** ("Kubernetes in Docker"), which runs each node as a Docker container. Alternatives such as minikube work too.
+You need `kubectl`, the command-line client, and a local cluster. This guide uses **kind** ("Kubernetes in Docker"), which runs each node as a Docker container. minikube works too.
 
 On macOS with Homebrew (see the [kubectl install docs](https://kubernetes.io/docs/tasks/tools/) for other systems):
 
@@ -71,9 +71,9 @@ NAME                 STATUS   ROLES           AGE   VERSION
 kind-control-plane   Ready    control-plane   45s   v1.xx.x
 ```
 
-The [kind quick start](https://kind.sigs.k8s.io/docs/user/quick-start/) explains the defaults: the cluster is named `kind`, and kind adds a `kubectl` **context** named `kind-kind` and switches to it. A context is a saved "which cluster, as which user" setting, covered later in this guide.
+By default ([kind quick start](https://kind.sigs.k8s.io/docs/user/quick-start/)) the cluster is named `kind`, and kind adds a `kubectl` **context** named `kind-kind` and switches to it. A context is a saved "which cluster, as which user" setting, covered later.
 
-Keep your `kubectl` within one minor version of the cluster. The docs warn that a bigger gap can cause surprises.
+Keep `kubectl` within one minor version of the cluster; a bigger gap can cause surprises.
 
 ## Your first Pod
 
@@ -93,7 +93,7 @@ web    1/1     Running   0          12s
 
 `kubectl get pods` shows `ContainerCreating` while the image downloads, then `Running`.
 
-Now the important part: you will almost never create Pods like this. A bare Pod has no one watching it. If it dies or its node fails, it's gone. Instead you create a **Deployment**, which creates and replaces Pods for you.
+You will almost never create Pods like this: a bare Pod has no one watching it, and if it dies or its node fails, it's gone. Create a **Deployment** instead, which creates and replaces Pods for you.
 
 ## Manifests: describing objects in YAML
 
@@ -112,7 +112,7 @@ spec:                  # the desired state, different for every kind
       image: nginx:1.29
 ```
 
-`kubectl apply -f file.yaml` sends a manifest to the cluster. If the object doesn't exist, it's created. If it does, it's updated to match. That makes `apply` safe to run again and again, and lets you keep the files in Git as the source of truth.
+`kubectl apply -f file.yaml` sends a manifest to the cluster: the object is created, or updated to match. That makes `apply` safe to repeat, and lets you keep the files in Git as the source of truth.
 
 Two habits help when writing manifests:
 
@@ -132,7 +132,7 @@ docker build -t hello-app:1.0 .
 kind load docker-image hello-app:1.0
 ```
 
-Why `1.0` and not `latest`? Kubernetes always tries to pull an image tagged `:latest` from a registry, and our image only exists locally. kind's docs say to avoid `:latest` for this reason. It's a good habit anyway: a version tag tells you exactly what's running.
+Why `1.0` and not `latest`? Kubernetes always tries to pull `:latest` from a registry, and our image exists only locally. A version tag is a good habit anyway: it tells you exactly what's running.
 
 Now create a folder `k8s/` and a file `k8s/deployment.yaml`:
 
@@ -192,7 +192,7 @@ Scaling is one field. Change `replicas: 3` to `5` in the file and `apply` again,
 kubectl scale deployment/hello --replicas=5
 ```
 
-Prefer editing the file. If you scale by command and later `apply` the file, the file wins and you're back to 3.
+Prefer the file: if you scale by command and later `apply` it, you're back to 3.
 
 ## Services: a stable address for Pods
 
@@ -225,7 +225,7 @@ kubectl run tmp --rm -it --image=busybox:1.37 --restart=Never -- wget -qO- http:
 Hello from a container
 ```
 
-The name `hello` works because the cluster runs its own DNS. Inside the same namespace the Service name is enough. From another namespace, use `hello.<namespace>`, or the full name `hello.<namespace>.svc.cluster.local`.
+The name `hello` works because the cluster runs its own DNS. In the same namespace the Service name is enough; from another, use `hello.<namespace>`.
 
 To reach it from your own browser during development, forward a local port:
 
@@ -248,13 +248,13 @@ Without a `type`, a Service is **ClusterIP**: reachable only inside the cluster.
 
 ![A user on the internet reaches a Gateway or Ingress, which routes by host and path to a ClusterIP Service, which spreads requests across three Pods. Below: ClusterIP is internal only, NodePort also opens a port on every node, LoadBalancer also asks the cloud for an external load balancer.](/images/kubernetes-zero-to-hero/traffic-in.svg)
 
-On a cloud cluster, `type: LoadBalancer` gives you a public IP for one Service. With many services you don't want a load balancer for each one, which is where the next section comes in.
+On a cloud cluster, `type: LoadBalancer` gives one Service a public IP. With many services you don't want a load balancer each, which is where the next section comes in.
 
 ## Getting traffic in: Gateway and Ingress
 
 To route many hostnames and paths to many Services through one entry point, Kubernetes has two APIs:
 
-- **Ingress**, the older one. The [Ingress page](https://kubernetes.io/docs/concepts/services-networking/ingress/) now says plainly: "The Kubernetes project recommends using Gateway instead of Ingress. The Ingress API has been frozen." It still works and won't be removed, but it gets no new features.
+- **Ingress**, the older one. The [Ingress page](https://kubernetes.io/docs/concepts/services-networking/ingress/) now recommends Gateway instead and says the Ingress API is frozen: it still works, but gets no new features.
 - **Gateway API**, the recommended replacement. A cluster operator sets up a `Gateway` (the entry point), and each team attaches `HTTPRoute` objects to it.
 
 An `HTTPRoute` that sends `hello.example.com` to our Service:
@@ -275,9 +275,9 @@ spec:
           port: 80
 ```
 
-Neither API does anything on its own. You need a **controller** that implements it, installed in the cluster or provided by your cloud. The [Gateway API site](https://gateway-api.sigs.k8s.io/) lists the implementations.
+Neither API does anything alone: you need a **controller** that implements it, installed in the cluster or provided by your cloud ([implementations](https://gateway-api.sigs.k8s.io/)).
 
-One piece of recent history worth knowing: the popular **ingress-nginx** controller was [retired by the Kubernetes project in March 2026](https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/). Existing installs keep running but get no more security fixes. If a tutorial tells you to install it, choose a maintained controller instead.
+Worth knowing: the popular **ingress-nginx** controller was [retired in March 2026](https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/). Existing installs keep running but get no security fixes, so if a tutorial says to install it, pick a maintained controller.
 
 ## Rolling updates and rollbacks
 
@@ -291,11 +291,11 @@ kubectl apply -f k8s/deployment.yaml
 kubectl rollout status deployment/hello
 ```
 
-Kubernetes doesn't stop everything and start again. It does a **rolling update**: start a new Pod, wait until it's ready, remove an old one, repeat. By default up to 25% extra Pods may be created (`maxSurge`) and up to 25% may be unavailable (`maxUnavailable`). With 3 replicas that rounds to one new Pod at a time and none missing.
+Kubernetes doesn't stop everything and restart. It does a **rolling update**: start a new Pod, wait until it's ready, remove an old one, repeat. By default up to 25% extra Pods may be created (`maxSurge`) and 25% may be unavailable (`maxUnavailable`); with 3 replicas that means one new Pod at a time and none missing.
 
 ![A rolling update of three Pods from v1 to v2. A v2 Pod starts; once it's ready, one v1 Pod is removed; this repeats until all three run v2. Each new Pod must pass its readiness probe before an old one goes away.](/images/kubernetes-zero-to-hero/rolling-update.svg)
 
-The docs make one point clear: a rollout is triggered "if and only if the Deployment's Pod template (that is, `.spec.template`) is changed". Changing the image or an environment variable starts a rollout. Scaling doesn't.
+A rollout starts only when the Pod template (`.spec.template`) changes, such as the image or an environment variable. Scaling doesn't start one.
 
 If the new version is bad, go back:
 
@@ -335,7 +335,7 @@ Then pass them to the container as environment variables, in the Pod template of
 
 `envFrom` loads every key of the ConfigMap. `secretKeyRef` picks one key from the Secret. (Our tiny server reads only `PORT`. These are here to show the wiring.) ConfigMaps and Secrets can also be mounted as files.
 
-Don't let the name fool you. The [Secrets docs](https://kubernetes.io/docs/concepts/configuration/secret/) warn that Secrets are "by default, stored unencrypted in the API server's underlying data store (etcd)", and the values in YAML are only base64-encoded, which anyone can decode. The docs recommend turning on encryption at rest, limiting who can read Secrets with RBAC, and considering an external secret store. Never commit a Secret manifest with real values to Git.
+Don't let the name fool you. The [Secrets docs](https://kubernetes.io/docs/concepts/configuration/secret/) warn that Secrets are stored unencrypted in etcd by default, and values in YAML are only base64-encoded, which anyone can decode. Turn on encryption at rest, limit who can read Secrets with RBAC, and consider an external secret store. Never commit a Secret manifest with real values to Git.
 
 ## Health checks: probes
 
@@ -361,7 +361,7 @@ Add them to the container in `deployment.yaml`:
             failureThreshold: 3
 ```
 
-Readiness is what makes rolling updates safe: a new Pod gets traffic only after it answers. In a real app, point the probes at a light endpoint such as `/healthz`. Keep the liveness check simple. If it depends on the database and the database blips, Kubernetes restarts every Pod at once.
+Readiness makes rolling updates safe: a new Pod gets traffic only after it answers. In a real app, point probes at a light endpoint such as `/healthz`, and keep liveness simple: if it depends on the database and the database blips, Kubernetes restarts every Pod at once.
 
 ## Resources: requests and limits
 
@@ -379,7 +379,7 @@ Tell Kubernetes how much CPU and memory each container needs:
 - **Requests** are what the scheduler reserves. A Pod is placed only on a node with that much free. `100m` is 100 millicores, a tenth of a CPU.
 - **Limits** are the ceiling. A container that goes over its memory limit is killed (`OOMKilled`) and restarted. Going over a CPU limit just slows it down.
 
-Without requests, the scheduler is guessing, and one hungry Pod can starve its neighbors. Set them on everything.
+Without requests the scheduler is guessing and one hungry Pod can starve its neighbors, so set them everywhere.
 
 ## Scaling automatically
 
@@ -406,7 +406,7 @@ spec:
           averageUtilization: 70
 ```
 
-This keeps between 2 and 10 Pods, aiming for 70% of the *requested* CPU on average. That's why the HPA needs CPU requests to be set. It also needs the **Metrics Server** installed in the cluster, which kind doesn't include. Most managed clouds do. See the [HPA walkthrough](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/). When an HPA manages a Deployment, remove `replicas` from the Deployment's file, or every `apply` resets it.
+This keeps 2 to 10 Pods, aiming for 70% of the *requested* CPU on average, so CPU requests must be set. It also needs the **Metrics Server**, which kind doesn't include and most managed clouds do ([HPA walkthrough](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/)). When an HPA manages a Deployment, remove `replicas` from the Deployment's file, or every `apply` resets it.
 
 ## Data: volumes and StatefulSets
 
@@ -427,7 +427,7 @@ spec:
 
 The cluster's default **StorageClass** provisions the actual disk (a cloud disk on EKS/GKE/AKS, a local folder on kind). A Pod then mounts the claim under `volumes` and `volumeMounts`.
 
-For databases and other apps where each replica needs its own identity and its own disk, use a **StatefulSet** instead of a Deployment. It's a big topic. In production, many teams run their database as a managed cloud service (such as Amazon RDS) and keep only the stateless apps in Kubernetes.
+For databases and apps where each replica needs its own identity and disk, use a **StatefulSet** instead of a Deployment. It's a big topic: many teams run the database as a managed cloud service (such as Amazon RDS) and keep only stateless apps in Kubernetes.
 
 ## Namespaces and contexts
 
@@ -497,15 +497,15 @@ In teams, the last step is usually **GitOps**: a tool such as Argo CD or Flux wa
 
 ## Running in production
 
-- **Use a managed cluster** (EKS, GKE, AKS) unless running Kubernetes is your job. Upgrading and securing a control plane is a lot of work.
+- **Use a managed cluster** (EKS, GKE, AKS) unless running Kubernetes is your job.
 - **At least two replicas** of everything that serves traffic, with readiness probes.
 - **Requests on every container**, and a memory limit.
-- **Pinned image versions.** Never `latest`. A version tag, or a digest for exactness.
-- **No secrets in Git or images.** Use an external secret store, or at least encryption at rest and tight RBAC.
-- **Least privilege.** RBAC roles per team, NetworkPolicies to limit which Pods can talk to which, containers that don't run as root.
+- **Pinned image versions,** never `latest`.
+- **No secrets in Git or images:** an external secret store, or at least encryption at rest and tight RBAC.
+- **Least privilege:** RBAC roles per team, NetworkPolicies, containers that don't run as root.
 - **Manifests in Git**, applied by a pipeline or GitOps tool, not from someone's laptop.
-- **Logs to standard output**, collected by the cluster's logging, as with Docker.
-- **Stay on supported versions.** Kubernetes releases three minor versions a year, and each is supported for about a year. Plan upgrades.
+- **Logs to standard output**, collected by the cluster.
+- **Stay on supported versions.** Three minor releases a year, each supported for about a year. Plan upgrades.
 
 ## The cheat sheet
 
@@ -528,30 +528,25 @@ In teams, the last step is usually **GitOps**: a tool such as Argo CD or Flux wa
 
 ## Glossary
 
-- **Cluster:** a control plane plus the worker nodes it manages.
-- **Node:** one machine (virtual or physical) in the cluster.
+- **Cluster / Node:** a control plane plus its worker nodes / one machine in it.
 - **Control plane:** the API server, etcd, scheduler and controllers.
-- **kubectl:** the command-line client for the Kubernetes API.
-- **Manifest:** a YAML file that describes an object's desired state.
-- **Pod:** one or more containers that share an IP; the smallest unit Kubernetes runs.
-- **Deployment:** keeps a number of identical Pods running and rolls out updates.
-- **ReplicaSet:** the object a Deployment uses to keep the Pod count.
+- **Manifest:** a YAML file describing an object's desired state.
+- **Pod:** one or more containers sharing an IP; the smallest unit Kubernetes runs.
+- **Deployment / ReplicaSet:** keeps identical Pods running and rolls out updates / the object it uses to keep the count.
 - **Service:** a stable name and IP in front of a changing set of Pods.
 - **Label / selector:** key-value tags, and the queries that match them.
-- **Gateway / HTTPRoute:** the recommended API for routing outside traffic in.
-- **Ingress:** the older, frozen API for the same job.
+- **Gateway / HTTPRoute:** the recommended API for routing outside traffic in (Ingress is the older, frozen one).
 - **ConfigMap / Secret:** settings / sensitive settings, passed to containers.
 - **Probe:** a readiness, liveness or startup health check.
 - **Requests / limits:** reserved resources / the maximum allowed.
 - **HPA:** scales a Deployment's replicas based on metrics.
 - **PVC / StorageClass:** a request for storage / how the cluster provides it.
-- **StatefulSet:** like a Deployment, for Pods that need stable identity and storage.
-- **Namespace:** a folder for objects inside a cluster.
-- **Context:** a saved cluster-plus-user setting in `~/.kube/config`.
+- **StatefulSet:** like a Deployment, for Pods needing stable identity and storage.
+- **Namespace / Context:** a folder for objects in a cluster / a saved cluster-plus-user setting.
 - **Helm chart:** a packaged, templated set of manifests.
 
 ## Where to go next
 
-You now have the whole loop: an image from Docker, a Deployment that keeps copies of it running, a Service that gives them one address, a Gateway that lets the world in, and rollouts, probes and requests that keep it all healthy. To make it stick, put a project of your own on kind: write the Deployment and Service, break a probe on purpose, and fix it with `describe` and `logs`.
+You now have the whole loop: an image from Docker, a Deployment that keeps copies running, a Service that gives them one address, a Gateway that lets the world in, and rollouts, probes and requests that keep it healthy. To make it stick, put a project of your own on kind, break a probe on purpose, and fix it with `describe` and `logs`.
 
-The official [Kubernetes Basics tutorial](https://kubernetes.io/docs/tutorials/kubernetes-basics/) and the [concepts section](https://kubernetes.io/docs/concepts/) are the best next reading. To build and push your image automatically on every merge, see [GitHub Actions from zero to hero](en/posts/github-actions-zero-to-hero/). For the cloud side, [AWS from zero to hero](en/posts/aws-zero-to-hero/) maps where EKS fits. And when you're inside a container with `kubectl exec`, the [Linux commands cheat sheet](en/posts/linux-commands/) has what you'll type.
+The official [Kubernetes Basics tutorial](https://kubernetes.io/docs/tutorials/kubernetes-basics/) and [concepts section](https://kubernetes.io/docs/concepts/) are the best next reading. To build and push your image on every merge, see [GitHub Actions from zero to hero](en/posts/github-actions-zero-to-hero/); [AWS from zero to hero](en/posts/aws-zero-to-hero/) maps where EKS fits; and inside a container, the [Linux commands cheat sheet](en/posts/linux-commands/) has what you'll type.

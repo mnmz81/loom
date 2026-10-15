@@ -6,17 +6,17 @@ tags: [github, ci-cd]
 series: { key: devops, order: 4 }
 ---
 
-לכל פרויקט יש מטלות שצריכות לקרות בכל שינוי: להריץ את הבדיקות, לבדוק עיצוב קוד, לבנות, לפרסם חבילה, לפרוס. לעשות את זה ידנית עובד עד היום שמישהו שוכח. ‏**GitHub Actions** הוא האוטומציה המובנית של GitHub: מתארים את המטלות בקובץ YAML בתוך הריפוזיטורי, ו-GitHub מריץ אותן על מכונות משלו בכל פעם שמשהו קורה.
+לכל פרויקט יש מטלות שצריכות לקרות בכל שינוי: בדיקות, עיצוב קוד, בנייה, פרסום, פריסה. ידנית זה עובד עד שמישהו שוכח. ‏**GitHub Actions** הוא האוטומציה המובנית של GitHub: מתארים את המטלות בקובץ YAML בתוך הריפוזיטורי, ו-GitHub מריץ אותן על מכונות משלו בכל פעם שמשהו קורה.
 
 ‏[GitHub מאפס לגיבור](he/posts/github-zero-to-hero/) הציג את Actions בפרק אחד. המדריך הזה הולך עד הסוף: אירועים, jobs, ביטויים, matrix, מטמון, סודות, פריסה בלי מפתחות שמורים, בניית אימג' של Docker, והרגלי האבטחה ששומרים על workflow מלהפוך לדלת אחורית.
 
-כל מפתח, פקודה וגרסת action נבדקו מול [התיעוד של GitHub Actions](https://docs.github.com/en/actions) ומול עמודי הגרסאות של ה-actions עצמם באוקטובר 2026. גרסאות של actions מתקדמות: בודקים בעמוד של כל action מה הגרסה הראשית העדכנית.
+כל מפתח, פקודה וגרסת action נבדקו מול [התיעוד של GitHub Actions](https://docs.github.com/en/actions) ומול עמודי הגרסאות של ה-actions באוקטובר 2026. גרסאות מתקדמות: בודקים בעמוד של כל action מה הגרסה הראשית העדכנית.
 
 ## מה זה GitHub Actions
 
 GitHub Actions היא פלטפורמת **CI/CD**. ‏**אינטגרציה רציפה** (CI) פירושה שכל שינוי נבנה ונבדק אוטומטית, כך שבעיות צצות תוך דקות, על ה-pull request, לפני שמשהו ממוזג. ‏**מסירה/פריסה רציפה** (CD) פירושה שגם התוצאה הבדוקה משוחררת או נפרסת אוטומטית.
 
-Actions לא מוגבלת ל-CI/CD. ‏workflow יכול לתייג issues חדשים, לסגור ישנים, לפרסם release כשדוחפים תגית, או להריץ דוח כל יום שני בבוקר. כל דבר שאפשר לכתוב כסקריפט ולהפעיל מאירוע בריפוזיטורי מתאים.
+Actions לא מוגבלת ל-CI/CD. ‏workflow יכול לתייג issues חדשים, לסגור ישנים, לפרסם release כשדוחפים תגית, או להריץ דוח כל יום שני. כל דבר שאפשר לכתוב כסקריפט ולהפעיל מאירוע בריפוזיטורי מתאים.
 
 ### החלקים של workflow
 
@@ -67,7 +67,7 @@ jobs:
 - ‏`actions/setup-node` מתקין Node 24, ו-`cache: npm` שומר את תיקיית ההורדות של npm במטמון בין הרצות.
 - שני צעדי ה-`run` הם פקודות shell רגילות.
 
-עושים commit ו-push. פותחים את לשונית **Actions**, וההרצה שם, עם לוג חי לכל צעד. ב-pull request התוצאה מופיעה כבדיקה ליד ה-commit: נקודה צהובה בזמן ההרצה, ואחר כך וי ירוק או איקס אדום.
+עושים commit ו-push. לשונית **Actions** מציגה את ההרצה עם לוג חי לכל צעד. ב-pull request התוצאה מופיעה כבדיקה: נקודה צהובה בזמן ההרצה, ואחר כך וי ירוק או איקס אדום.
 
 ### קריאת הרצה מהטרמינל
 
@@ -109,9 +109,9 @@ on:
 - **`workflow_dispatch`** מוסיף כפתור **Run workflow** בלשונית Actions, עם קלטים אופציונליים (עד 25). מהטרמינל: `gh workflow run ci.yml -f environment=production`.
 - **`schedule`** משתמש בתחביר cron. דקות, שעות, יום בחודש, חודש, יום בשבוע: `30 5 * * 1-5` הוא 05:30 בימים שני עד שישי. תזמונים רצים לפי UTC, אלא אם מוסיפים `timezone`.
 
-כמה עובדות על תזמונים מהתיעוד, כי הן מפתיעות. הרצות מתוזמנות משתמשות ב"commit האחרון בענף ברירת המחדל". המרווח הקצר ביותר הוא כל 5 דקות. הרצות "יכולות להתעכב בתקופות של עומס גבוה", אז לא סומכים על דקה מדויקת. ובריפוזיטוריז ציבוריים, workflows מתוזמנים מושבתים אוטומטית אחרי 60 יום בלי פעילות בריפוזיטורי.
+תזמונים מפתיעים אנשים. הרצות מתוזמנות משתמשות ב-commit האחרון בענף ברירת המחדל, המרווח הקצר ביותר הוא 5 דקות, הרצות יכולות להתעכב בעומס גבוה ולכן לא סומכים על דקה מדויקת, ובריפוזיטוריז ציבוריים workflows מתוזמנים מושבתים אחרי 60 יום בלי פעילות.
 
-עוד אירועים שימושיים: `release` ‏(release פורסם), `workflow_call` ‏(workflow אחר קורא לזה, נגיע לזה בהמשך), `workflow_run` ‏(אחרי ש-workflow אחר מסתיים), ו-`issues` או `issue_comment` לאוטומציה של הריפוזיטורי.
+עוד אירועים שימושיים: `release` ‏(פורסם), `workflow_call` ‏(workflow אחר קורא לזה, בהמשך), `workflow_run` ‏(אחרי ש-workflow אחר מסתיים), ו-`issues` או `issue_comment` לאוטומציה של הריפוזיטורי.
 
 ## Jobs, צעדים ו-runners
 
@@ -137,13 +137,13 @@ jobs:
           npm test
 ```
 
-- ‏`timeout-minutes` עוצר job תקוע. מגדירים אותו על הכול: ברירת המחדל היא 360 דקות, ובדיקה תקועה תנצל את כולן בשמחה.
+- ‏`timeout-minutes` עוצר job תקוע. מגדירים אותו בכל מקום: ברירת המחדל היא 360 דקות, ובדיקה תקועה תנצל את כולן בשמחה.
 - ‏`defaults.run.working-directory` מריץ כל צעד `run` בתת-תיקייה, שימושי ב-monorepo.
-- ‏`env` ברמת ה-job נראה לכל הצעדים. אפשר להגדיר אותו גם ברמת ה-workflow או ברמת צעד.
-- ‏`name` על צעד הוא מה שהלוג מציג. בלעדיו הלוג מציג את הפקודה.
-- ‏`run: |` הוא YAML למחרוזת של כמה שורות. כל השורות רצות באותו shell, ובלינוקס ה-shell ברירת המחדל הוא Bash עם "עצור בפקודה הראשונה שנכשלת".
+- ‏`env` ברמת ה-job נראה לכל הצעדים (אפשר גם ברמת workflow או צעד).
+- ‏`name` על צעד הוא מה שהלוג מציג במקום הפקודה.
+- ‏`run: |` הוא מחרוזת של כמה שורות. כולן רצות באותו shell, ובלינוקס זה Bash שעוצר בפקודה הראשונה שנכשלת.
 
-כל job מתחיל על מכונה נקייה. קבצים מ-job אחד לא קיימים ב-job הבא, אלא אם מעבירים אותם כ-artifact (בהמשך). על runners שמתארחים ב-GitHub מותקנים מראש הרבה כלים (Git, ‏Docker, ‏Node, ‏Python ועוד). ‏[ריפוזיטורי האימג'ים של ה-runners](https://github.com/actions/runner-images) מפרט אותם.
+כל job מתחיל על מכונה נקייה, ולכן קבצים מ-job אחד לא קיימים בבא אלא אם מעבירים אותם כ-artifact (בהמשך). על runners של GitHub מותקנים מראש הרבה כלים (Git, ‏Docker, ‏Node, ‏Python ועוד); ‏[ריפוזיטורי האימג'ים של ה-runners](https://github.com/actions/runner-images) מפרט אותם.
 
 ### Jobs שתלויים זה בזה
 
@@ -171,7 +171,7 @@ jobs:
       - run: npm ci && npm run build
 ```
 
-‏`build` מתחיל רק אחרי ש-`lint` וגם `test` מצליחים. אם אחד מהם נכשל, `build` מדולג. ככה בונים pipeline: בדיקות במקביל, אחר כך build, ואחר כך פריסה.
+‏`build` מתחיל רק אחרי ש-`lint` וגם `test` מצליחים; אם אחד נכשל, הוא מדולג. זה pipeline: בדיקות במקביל, אחר כך build, ואחר כך פריסה.
 
 ![lint ושלושה jobs של test מתוך matrix רצים במקביל. ‏build צריך את כולם. ‏deploy-staging צריך את build. ‏deploy-prod צריך את deploy-staging ומשתמש בסביבת production, שמחכה לאישור.](/images/github-actions-zero-to-hero/job-graph.svg)
 
@@ -207,11 +207,11 @@ steps:
       path: reports/
 ```
 
-כברירת מחדל צעד רץ רק אם כל הצעדים שלפניו הצליחו. פונקציות הסטטוס משנות את זה: `failure()` רץ רק אחרי כישלון, `always()` רץ בכל מקרה, ו-`cancelled()` רץ אם ההרצה בוטלה. יש גם פונקציות עזר כמו `contains()`, ‏`startsWith()`, ‏`format()`, ‏`toJSON()` ו-`hashFiles()`. ראו את [התיעוד של ביטויים](https://docs.github.com/en/actions/reference/workflows-and-actions/expressions).
+כברירת מחדל צעד רץ רק אם כל הצעדים שלפניו הצליחו. פונקציות הסטטוס משנות את זה: `failure()` רץ רק אחרי כישלון, `always()` בכל מקרה, ו-`cancelled()` אם ההרצה בוטלה. יש גם `contains()`, ‏`startsWith()`, ‏`format()`, ‏`toJSON()` ו-`hashFiles()` ([התיעוד של ביטויים](https://docs.github.com/en/actions/reference/workflows-and-actions/expressions)).
 
 ## העברת מידע בין צעדים ובין jobs
 
-צעד לא יכול להגדיר משתנה shell רגיל לצעד הבא, כי כל צעד רץ בתהליך משלו. במקום זה, צעדים כותבים לקבצים מיוחדים. ‏[התיעוד של workflow commands](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands) מגדיר אותם:
+צעד לא יכול להגדיר משתנה shell לצעד הבא, כי כל צעד רץ בתהליך משלו. במקום זה צעדים כותבים לקבצים מיוחדים ([workflow commands](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands)):
 
 ```yaml
 jobs:
@@ -236,9 +236,9 @@ jobs:
 - ‏`$GITHUB_OUTPUT`: צעד עם `id` כותב `name=value`, וצעדים מאוחרים יותר קוראים `steps.<id>.outputs.<name>`.
 - ‏`$GITHUB_ENV`: מגדיר משתנה סביבה לצעדים *הבאים* של ה-job.
 - ‏`outputs` של job: חושף פלט של צעד ל-jobs אחרים, שקוראים אותו דרך `needs`.
-- ‏`$GITHUB_STEP_SUMMARY`: Markdown שמופיע בעמוד הסיכום של ההרצה. מצוין לתוצאות בדיקות או לקישור לתצוגה מקדימה.
+- ‏`$GITHUB_STEP_SUMMARY`: Markdown שמופיע בעמוד הסיכום של ההרצה, מצוין לתוצאות בדיקות.
 
-GitHub גם מגדירה הרבה משתנים בכל job, כמו `GITHUB_SHA`, ‏`GITHUB_REF_NAME` ו-`GITHUB_REPOSITORY`. הקטע למעלה משתמש ב-`GITHUB_SHA`.
+GitHub גם מגדירה בכל job משתנים כמו `GITHUB_SHA`, ‏`GITHUB_REF_NAME` ו-`GITHUB_REPOSITORY`.
 
 ## Matrix
 
@@ -265,7 +265,7 @@ jobs:
 
 ![job עם matrix של שתי מערכות הפעלה ושלוש גרסאות Node מתפצל לשישה jobs, אחד לכל צירוף, שרצים במקביל.](/images/github-actions-zero-to-hero/matrix.svg)
 
-שתיים כפול שלוש זה שישה jobs, כולם במקביל. כברירת מחדל, כשצירוף אחד נכשל, GitHub מבטלת את השאר (`fail-fast: true`). ‏`false` נותן לכל הצירופים לסיים, וכך רואים את התמונה המלאה. ‏`include` מוסיף צירופים, ‏`exclude` מוריד צירופים, ו-`max-parallel` מגביל כמה ירוצו בבת אחת.
+שתיים כפול שלוש זה שישה jobs במקביל. כברירת מחדל, כשצירוף אחד נכשל GitHub מבטלת את השאר (`fail-fast: true`); ‏`false` נותן לכולם לסיים, וכך רואים את התמונה המלאה. ‏`include` מוסיף צירופים, ‏`exclude` מוריד, ו-`max-parallel` מגביל כמה ירוצו בבת אחת.
 
 ## מטמון ו-artifacts
 
@@ -284,7 +284,7 @@ jobs:
       pip-${{ runner.os }}-
 ```
 
-ה-`key` משתנה בכל פעם ש-`requirements.txt` משתנה, אז רשימת תלויות חדשה מקבלת מטמון חדש. ‏`restore-keys` נופל חזרה למטמון החדש ביותר שמתחיל בקידומת. מטמון יכול להימחק בכל רגע, ולכן ה-workflow חייב לעבוד גם בלעדיו.
+ה-`key` משתנה כש-`requirements.txt` משתנה, אז רשימת תלויות חדשה מקבלת מטמון חדש; ‏`restore-keys` נופל חזרה למטמון החדש ביותר עם הקידומת. מטמון יכול להימחק בכל רגע, ולכן ה-workflow חייב לעבוד גם בלעדיו.
 
 **artifact** הוא *תוצר* של ההרצה: build, דוח בדיקות, לוג. ‏job מעלה אותו, ו-job מאוחר יותר באותה הרצה, או אדם מעמוד ההרצה, מוריד אותו:
 
@@ -333,13 +333,13 @@ steps:
   - run: curl --fail "${{ vars.APP_URL }}/health"
 ```
 
-**סודות** (secrets) מוצפנים, ו-GitHub מסתירה את הערכים שלהם בלוגים. ‏**משתנים** (variables) נועדו להגדרות לא רגישות כמו כתובות ודגלי פיצ'רים, והם מוצגים כטקסט גלוי. את שניהם אפשר להגדיר לריפוזיטורי, לסביבה, או לארגון שלם.
+**סודות** (secrets) מוצפנים ומוסתרים בלוגים. ‏**משתנים** (variables) נועדו להגדרות לא רגישות כמו כתובות ודגלי פיצ'רים, ומוצגים כטקסט גלוי. את שניהם אפשר להגדיר לריפוזיטורי, לסביבה, או לארגון שלם.
 
-שני כללים מהתיעוד. סודות "לא מועברים ל-runner כשה-workflow מופעל מריפוזיטורי fork", ולכן PR של אדם זר לא יכול לקרוא אותם. ואם ערך הוא לא סוד אבל צעד מחשב משהו רגיש, מסתירים אותו עם `echo "::add-mask::$VALUE"` לפני שהוא מגיע ללוג.
+שני כללים. סודות לא מועברים ל-runner כשה-workflow מופעל מ-fork, ולכן PR של אדם זר לא יכול לקרוא אותם. ואם צעד מחשב משהו רגיש, מסתירים אותו עם `echo "::add-mask::$VALUE"` לפני שהוא מגיע ללוג.
 
 ## הרשאות ו-GITHUB_TOKEN
 
-בתחילת כל job, GitHub יוצרת טוקן בשם `GITHUB_TOKEN`, שתקף רק לריפוזיטורי הזה ורק עד שה-job מסתיים. ‏actions כמו `actions/checkout` משתמשים בו אוטומטית. אפשר להעביר אותו במפורש כ-`${{ secrets.GITHUB_TOKEN }}`, למשל לפקודות `gh`:
+בתחילת כל job, GitHub יוצרת `GITHUB_TOKEN`, תקף רק לריפוזיטורי הזה עד שה-job מסתיים. ‏actions כמו `actions/checkout` משתמשים בו אוטומטית; אפשר להעביר אותו במפורש כ-`${{ secrets.GITHUB_TOKEN }}`, למשל ל-`gh`:
 
 ```yaml
 permissions:
@@ -358,7 +358,7 @@ jobs:
           PR: ${{ github.event.pull_request.number }}
 ```
 
-המפתח `permissions` קובע מה הטוקן רשאי לעשות. ‏[מדריך האבטחה](https://docs.github.com/en/actions/reference/security/secure-use) אומר לתת "את ההרשאות המינימליות הנדרשות": קריאה בלבד בראש ה-workflow, והרשאות כתיבה רק ב-jobs שצריכים אותן. הנפוצות: `contents` ‏(קוד ו-releases), ‏`pull-requests`, ‏`issues`, ‏`packages` ‏(אימג'ים של קונטיינרים), ‏`pages`, ‏`id-token` ‏(OIDC, בהמשך). ב-pull requests מ-forks הטוקן הוא קריאה בלבד, לא משנה מה מבקשים.
+המפתח `permissions` קובע מה הטוקן רשאי לעשות. ‏[מדריך האבטחה](https://docs.github.com/en/actions/reference/security/secure-use) אומר לתת את המינימום: קריאה בלבד בראש ה-workflow, וכתיבה רק ב-jobs שצריכים. הנפוצות: `contents` ‏(קוד ו-releases), ‏`pull-requests`, ‏`issues`, ‏`packages` ‏(אימג'ים), ‏`pages`, ‏`id-token` ‏(OIDC, בהמשך). ב-PRs מ-forks הטוקן הוא קריאה בלבד, לא משנה מה מבקשים.
 
 ## סביבות ופריסות
 
@@ -378,11 +378,11 @@ jobs:
           API_KEY: ${{ secrets.PRODUCTION_API_KEY }}
 ```
 
-כשההרצה מגיעה ל-job הזה, היא נעצרת עם כפתור **Review deployments**. הסוד `PRODUCTION_API_KEY` קיים רק בסביבת `production`, ולכן אף job אחר לא יכול לקרוא אותו. ה-`url` מופיע בהרצה וברשימת הפריסות של הריפוזיטורי. חוקי הגנה בריפוזיטוריז פרטיים תלויים בתוכנית שלכם. בודקים ב[תיעוד של סביבות](https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments).
+כשההרצה מגיעה ל-job הזה, היא נעצרת עם כפתור **Review deployments**. הסוד `PRODUCTION_API_KEY` קיים רק בסביבת `production`, ולכן אף job אחר לא יכול לקרוא אותו, וה-`url` מופיע בהרצה וברשימת הפריסות. חוקי הגנה בריפוזיטוריז פרטיים תלויים בתוכנית ([תיעוד של סביבות](https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments)).
 
 ## פריסה בלי מפתחות שמורים: OIDC
 
-הדרך הישנה לפרוס לענן היא ליצור מפתח גישה ולשמור אותו כסוד. המפתח הזה חי לנצח, עובד מכל מקום, ונמצא במרחק דליפה אחת מאסון. ‏**OIDC** ‏(OpenID Connect) מחליף אותו בהרשאות שנוצרות לכל הרצה ופגות מעצמן.
+הדרך הישנה לפרוס לענן היא מפתח גישה ששמור כסוד. הוא חי לנצח, עובד מכל מקום, ונמצא במרחק דליפה אחת מאסון. ‏**OIDC** ‏(OpenID Connect) מחליף אותו בהרשאות שנוצרות לכל הרצה ופגות מעצמן.
 
 ![job ב-workflow, עם permissions id-token: write, מבקש טוקן מספק ה-OIDC של GitHub ומקבל טוקן חתום שמציין את הריפוזיטורי, הענף וה-workflow. הוא מחליף את הטוקן אצל הענן, שחוק האמון שלו מתיר רק את הריפוזיטורי והענף האלה, ומקבל הרשאות זמניות שפגות בערך אחרי שעה. שום מפתח קבוע לא שמור בשום מקום.](/images/github-actions-zero-to-hero/oidc.svg)
 
@@ -405,7 +405,7 @@ jobs:
       - run: aws s3 sync dist/ s3://my-bucket/
 ```
 
-‏AWS, ‏Azure ו-Google Cloud תומכים בזה, וגם הרבה שירותים אחרים. אם הענן שלכם תומך ב-OIDC, מעדיפים אותו על פני מפתחות שמורים. ראו את [התיעוד של OIDC](https://docs.github.com/en/actions/concepts/security/openid-connect).
+‏AWS, ‏Azure, Google Cloud והרבה שירותים אחרים תומכים בזה; מעדיפים אותו על פני מפתחות שמורים ([התיעוד של OIDC](https://docs.github.com/en/actions/concepts/security/openid-connect)).
 
 ## Pipeline אמיתי: בנייה ודחיפה של אימג' Docker
 
@@ -514,11 +514,11 @@ runs:
 
 ואז כל job משתמש בו עם `uses: ./.github/actions/setup` (אחרי `actions/checkout`). שימו לב שצעדי `run` ב-composite action חייבים לציין `shell`.
 
-כלל אצבע: jobs שלמים משתפים עם reusable workflow, וכמה צעדים בתוך job משתפים עם composite action.
+כלל אצבע: reusable workflow ל-jobs שלמים, composite action לכמה צעדים בתוך job.
 
 ## Concurrency ומגבלות זמן
 
-דוחפים שלושה commits ברצף, ושלוש הרצות מתחילות. בדרך כלל רק האחרונה חשובה:
+דוחפים שלושה commits ברצף, ושלוש הרצות מתחילות, אבל בדרך כלל רק האחרונה חשובה:
 
 ```yaml
 concurrency:
@@ -526,14 +526,14 @@ concurrency:
   cancel-in-progress: true
 ```
 
-הרצות באותה `group` לא חופפות: הרצה חדשה מבטלת את זו שרצה באותו ענף. לפריסות משתמשים ב-`cancel-in-progress: false`, כדי שפריסה לא תיקטע באמצע; הבאה מחכה במקום זה. ומוסיפים `timeout-minutes` לכל job, כמו שראינו קודם.
+הרצות באותה `group` לא חופפות: הרצה חדשה מבטלת את זו שרצה באותו ענף. לפריסות משתמשים ב-`cancel-in-progress: false`, כדי שפריסה לא תיקטע באמצע והבאה תחכה. ומוסיפים `timeout-minutes` לכל job.
 
 ## הרגלי אבטחה
 
-workflow מריץ קוד עם גישה לריפוזיטורי ולסודות, ולכן מגיע לו אותו יחס כמו לקוד production. ‏[מדריך האבטחה](https://docs.github.com/en/actions/reference/security/secure-use) מפרט הכול. העיקר:
+workflow מריץ קוד עם גישה לריפוזיטורי ולסודות, ולכן מתייחסים אליו כמו לקוד production ([מדריך האבטחה](https://docs.github.com/en/actions/reference/security/secure-use)). העיקר:
 
 - **הרשאות מינימליות.** ‏`permissions: contents: read` בראש הקובץ, ויותר רק איפה שצריך.
-- **נועצים actions של צד שלישי ל-SHA של commit.** אפשר להזיז תגית כמו `@v4` כך שתצביע על קוד חדש. התיעוד ממליץ "לנעוץ הפניות ל-actions ל-SHA של commit", למשל `uses: some-org/some-action@<40-character-sha> # v4.2.0`. ‏Dependabot יכול לעדכן את הנעיצות.
+- **נועצים actions של צד שלישי ל-SHA של commit.** אפשר להזיז תגית כמו `@v4` לקוד חדש: `uses: some-org/some-action@<40-character-sha> # v4.2.0`. ‏Dependabot יכול לעדכן את הנעיצות.
 - **אף פעם לא מכניסים קלט לא מהימן ישירות לסקריפט `run`.** כותרת PR או שם ענף נכתבים על ידי מי שפתח את ה-PR. זה חור של script injection:
 
 ```yaml
@@ -546,10 +546,10 @@ workflow מריץ קוד עם גישה לריפוזיטורי ולסודות, ו
     TITLE: ${{ github.event.pull_request.title }}
 ```
 
-- **זהירות רבה עם `pull_request_target`.** הוא רץ עם הסודות של ריפוזיטורי הבסיס ועם טוקן כתיבה, גם ל-PRs מ-forks. התיעוד מזהיר ש"הרצת קוד לא מהימן בטריגר `pull_request_target` עלולה להוביל לפרצות אבטחה". אף פעם לא עושים בו checkout לקוד של ה-PR ומריצים אותו.
-- **בלי self-hosted runners בריפוזיטוריז ציבוריים.** התיעוד אומר ש"כמעט אף פעם לא כדאי להשתמש בהם בריפוזיטוריז ציבוריים", כי כל אחד יכול לפתוח PR שמריץ קוד על המכונה שלכם.
+- **זהירות רבה עם `pull_request_target`.** הוא רץ עם הסודות של ריפוזיטורי הבסיס ועם טוקן כתיבה, גם ל-PRs מ-forks. אף פעם לא עושים בו checkout לקוד של ה-PR ומריצים אותו.
+- **בלי self-hosted runners בריפוזיטוריז ציבוריים:** כל אחד יכול לפתוח PR שמריץ קוד על המכונה שלכם.
 - **מעדיפים OIDC על פני מפתחות ענן קבועים**, וסביבות עם מאשרים ל-production.
-- **שומרים על actions מעודכנים.** מוסיפים Dependabot לאקוסיסטם `github-actions`, כך שעדכוני גרסה מגיעים כ-PRs:
+- **שומרים על actions מעודכנים.** מוסיפים Dependabot לאקוסיסטם `github-actions`, כך שעדכונים מגיעים כ-PRs:
 
 ```yaml
 # .github/dependabot.yml
@@ -568,14 +568,14 @@ updates:
 1. פותחים את הלוג של הצעד שנכשל. השגיאה בדרך כלל ב-20 השורות האחרונות. ‏`gh run view <run-id> --log-failed` מציג רק את החלקים שנכשלו.
 2. בודקים את ה-**annotations** בראש סיכום ההרצה. ‏linters וכלי בדיקות מדווחים שם הרבה פעמים על שגיאות, עם קובץ ושורה.
 3. מריצים מחדש עם יותר לוגים: **Re-run jobs → Enable debug logging**, או `gh run rerun <run-id> --debug`. סוד או משתנה בשם `ACTIONS_STEP_DEBUG` עם הערך `true` מפעיל את זה בכל ההרצות.
-4. מדפיסים את מה שלא בטוחים בו. צעד עם `env: { EVENT: "${{ toJSON(github.event) }}" }` ו-`run: echo "$EVENT"` מדפיס את כל המידע של האירוע, דרך משתנה סביבה מאותה סיבה שראינו למעלה.
-5. משחזרים מקומית. ה-runner הוא פשוט לינוקס: מריצים את אותן פקודות בקונטיינר. כלי הקהילה [act](https://github.com/nektos/act) מריץ workflows מקומית ב-Docker, עם כמה הבדלים מה-runners האמיתיים.
+4. מדפיסים את מה שלא בטוחים בו. צעד עם `env: { EVENT: "${{ toJSON(github.event) }}" }` ו-`run: echo "$EVENT"` מדפיס את כל מידע האירוע (דרך משתנה סביבה, מאותה סיבה).
+5. משחזרים מקומית. ה-runner הוא פשוט לינוקס: מריצים את אותן פקודות בקונטיינר, או עם כלי הקהילה [act](https://github.com/nektos/act) שמריץ workflows ב-Docker עם כמה הבדלים מה-runners האמיתיים.
 
-החשודים הרגילים: `actions/checkout` חסר, נתיב יחסי לתיקייה הלא נכונה, סוד שלא זמין (PRs מ-forks, או סוד שמוגדר בסביבה שה-job לא משתמש בה), בלוק `permissions` הדוק מדי (`Resource not accessible by integration`), מפתח מטמון שאף פעם לא משתנה, והזחה של YAML.
+החשודים הרגילים: `actions/checkout` חסר, נתיב יחסי לתיקייה הלא נכונה, סוד שלא זמין (PRs מ-forks, או סוד בסביבה שה-job לא משתמש בה), `permissions` הדוק מדי (`Resource not accessible by integration`), מפתח מטמון שאף פעם לא משתנה, והזחה של YAML.
 
 ## עלות ומגבלות
 
-runners שמתארחים ב-GitHub הם בחינם לריפוזיטוריז ציבוריים, ב-runners הסטנדרטיים. ריפוזיטוריז פרטיים מקבלים מכסה חודשית של דקות ואחסון שתלויה בתוכנית, ודקות של macOS ו-Windows נספרות יותר מדקות של לינוקס. מחירים ומכסות משתנים, אז בודקים ב[עמוד החיוב של Actions](https://docs.github.com/en/billing/concepts/product-billing/github-actions) במקום לסמוך על מספר מפוסט בבלוג. קבוצות concurrency, מסנני `paths`, מטמון ומגבלות זמן הם גם הדרך לשמור על החשבון נמוך.
+runners סטנדרטיים של GitHub הם בחינם לריפוזיטוריז ציבוריים. ריפוזיטוריז פרטיים מקבלים מכסה חודשית של דקות ואחסון שתלויה בתוכנית, ודקות של macOS ו-Windows נספרות יותר מלינוקס. מכסות משתנות, אז בודקים ב[עמוד החיוב של Actions](https://docs.github.com/en/billing/concepts/product-billing/github-actions). קבוצות concurrency, מסנני `paths`, מטמון ומגבלות זמן גם שומרים על החשבון נמוך.
 
 ## דף העזר
 
@@ -602,25 +602,22 @@ runners שמתארחים ב-GitHub הם בחינם לריפוזיטוריז צי
 
 - **Workflow:** קובץ YAML ב-`.github/workflows/` שמגדיר אוטומציה.
 - **Event / trigger (אירוע):** מה שמפעיל workflow ‏(`push`, ‏`pull_request`, ‏`schedule`...).
-- **Job:** קבוצת צעדים שרצה על runner אחד.
-- **Step (צעד):** פקודה אחת (`run`) או action אחד (`uses`) ב-job.
+- **Job / Step (צעד):** קבוצת צעדים שרצה על runner אחד / פקודה אחת (`run`) או action אחד (`uses`).
 - **Action:** צעד לשימוש חוזר, מריפוזיטורי או מה-Marketplace.
 - **Runner:** המכונה שמריצה job; מתארחת ב-GitHub או self-hosted.
 - **Expression / context (ביטוי / הקשר):** תחביר `${{ }}`, והאובייקטים שהוא קורא (`github`, ‏`secrets`, ‏`matrix`...).
 - **Matrix:** הרצה של job אחד עם הרבה צירופי ערכים.
-- **Cache (מטמון):** קבצים שנשמרים בין הרצות כדי להאיץ אותן.
-- **Artifact:** קבצים שהרצה מייצרת, שמשותפים בין jobs או מורדים.
+- **Cache (מטמון) / Artifact:** קבצים שנשמרים בין הרצות כדי להאיץ אותן / קבצים שהרצה מייצרת.
 - **Secret / variable (סוד / משתנה):** ערך מוצפן / ערך הגדרות גלוי.
 - **GITHUB_TOKEN:** הטוקן האוטומטי וקצר החיים של כל job.
 - **Environment (סביבה):** יעד פריסה עם סודות וחוקי הגנה משלו.
 - **OIDC:** הרשאות ענן קצרות חיים במקום מפתחות שמורים.
-- **Reusable workflow:** ‏workflow שנקרא כ-job מ-workflows אחרים.
-- **Composite action:** כמה צעדים שארוזים כ-action אחד.
+- **Reusable workflow / Composite action:** ‏workflow שנקרא כ-job / כמה צעדים שארוזים כ-action אחד.
 - **Concurrency group:** הרצות שאסור להן לחפוף.
 - **CI/CD:** בנייה ובדיקה של כל שינוי, ושחרור אוטומטי שלו.
 
 ## לאן ממשיכים
 
-עכשיו יש לכם את כל ארגז הכלים: אירועים שמפעילים workflows, ‏jobs שרצים במקביל או לפי סדר, ביטויים ופלטים שמחברים ביניהם, matrix, מטמון ו-artifacts, סודות שנשמרים במקום הנכון, פריסות שדורשות אישור ובלי מפתחות שמורים, וההרגלים ששומרים שהכול יהיה בטוח. כדי שזה ייקלט, מוסיפים workflow לפרויקט שלכם: בדיקות בכל PR, ‏artifact של build, ו-job של פריסה מאחורי סביבה.
+עכשיו יש לכם את כל ארגז הכלים: אירועים, jobs שרצים במקביל או לפי סדר, ביטויים ופלטים, matrix, מטמון ו-artifacts, סודות במקום הנכון, פריסות מאושרות בלי מפתחות שמורים, וההרגלים ששומרים שהכול בטוח. כדי שזה ייקלט, מוסיפים workflow לפרויקט שלכם: בדיקות בכל PR, ‏artifact של build, ו-job של פריסה מאחורי סביבה.
 
-‏[התיעוד של Actions](https://docs.github.com/en/actions) ו[מדריך התחביר של workflows](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax) הם הקריאה הבאה הטובה ביותר. לצד של הריפוזיטורי (pull requests, הגנת ענפים שדורשת את הבדיקות שלכם), ראו [GitHub מאפס לגיבור](he/posts/github-zero-to-hero/). כדי לארוז את מה שאתם בונים בקונטיינר, ראו [Docker מאפס לגיבור](he/posts/docker-zero-to-hero/), וכדי להריץ אותו בקנה מידה, ‏[Kubernetes מאפס לגיבור](he/posts/kubernetes-zero-to-hero/).
+‏[התיעוד של Actions](https://docs.github.com/en/actions) ו[מדריך התחביר של workflows](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax) הם הקריאה הבאה הטובה ביותר. לצד של הריפוזיטורי (pull requests, הגנת ענפים שדורשת את הבדיקות שלכם), ראו [GitHub מאפס לגיבור](he/posts/github-zero-to-hero/); לארוז בקונטיינר, [Docker מאפס לגיבור](he/posts/docker-zero-to-hero/); להריץ בקנה מידה, [Kubernetes מאפס לגיבור](he/posts/kubernetes-zero-to-hero/).

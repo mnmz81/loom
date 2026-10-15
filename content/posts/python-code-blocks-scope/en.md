@@ -6,7 +6,7 @@ tags: [python]
 series: { key: python, order: 18 }
 ---
 
-The last few posts were full of indented blocks: under `if` and `else`, under loops and under `def`. A natural question follows: if I create a variable inside an `if` block, can I use it after the block? In many languages the answer is no. In Python it's yes, and the reason is the difference between a *block of code* and a *scope*. This post explains both, and the bugs you get when you confuse them.
+The last few posts were full of indented blocks: under `if` and `else`, loops and `def`. A natural question: if I create a variable inside an `if` block, can I use it after the block? In many languages, no. In Python, yes, because a *block of code* is not a *scope*. This post explains both, and the bugs you get when you confuse them.
 
 Every example here was run with Python 3.13. The rules were checked against the [compound statements reference](https://docs.python.org/3/reference/compound_stmts.html) and the [execution model](https://docs.python.org/3/reference/executionmodel.html#naming-and-binding).
 
@@ -33,7 +33,7 @@ checked 150
 checked -1
 ```
 
-`print("checked", n)` is at the function's level, so it runs every time. The two prints above it belong to the `if`. The [indentation post](en/posts/python-indentation-error/) covers the errors you get when the indentation is off.
+`print("checked", n)` is at the function's level, so it runs every time; the two prints above it belong to the `if`. The [indentation post](en/posts/python-indentation-error/) covers indentation errors.
 
 A block can also sit on the same line as its header, separated by semicolons:
 
@@ -67,7 +67,7 @@ set inside if
 2 20
 ```
 
-`message` is still there after the `if`. After the loop, `i` and `last` keep the values from the last iteration. The reference says it outright: "Names in the target list are not deleted when the loop is finished". A `while` loop works the same way:
+`message` is still there after the `if`, and after the loop `i` and `last` keep the last iteration's values (the reference: "Names in the target list are not deleted when the loop is finished"). A `while` loop works the same way:
 
 ```python
 count = 0
@@ -98,7 +98,7 @@ print(greeting)
 NameError: name 'greeting' is not defined
 ```
 
-The condition is false, so the assignment never ran. The fix is to give the variable a value before the `if`, or in every branch:
+The condition is false, so the assignment never ran. Give the variable a value before the `if`, or in every branch:
 
 ```python
 hour = 9
@@ -218,7 +218,7 @@ inside: 2
 outside: 1
 ```
 
-There are two different `enemies` here. The `global` and `nonlocal` keywords, and the `UnboundLocalError` you get when you mix reading and assigning, are covered in the [scope and naming post](en/posts/python-scope-and-naming/). The usual advice still holds: pass values in as arguments and return results, instead of changing globals.
+There are two different `enemies` here. The `global` and `nonlocal` keywords, and the `UnboundLocalError` from mixing reading and assigning, are in the [scope and naming post](en/posts/python-scope-and-naming/). The advice stands: pass values in as arguments and return results, instead of changing globals.
 
 ## The one surprise: except ... as
 

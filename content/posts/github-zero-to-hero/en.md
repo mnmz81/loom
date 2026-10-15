@@ -8,7 +8,7 @@ series: { key: devops, order: 2 }
 
 Git saves your project's history on your computer. GitHub is where that history goes to be shared, reviewed, tested and published. This guide continues the recipe book from [Git from zero to hero](en/posts/git-zero-to-hero/): we put it online, change it through a pull request, let a robot test it, and finally publish it as a website.
 
-You don't need to know Git perfectly, but you should be comfortable with `git add`, `git commit` and branches. If those feel new, read that guide first and come back.
+You should be comfortable with `git add`, `git commit` and branches; if those feel new, read that guide first.
 
 ## What GitHub is (and what it adds to Git)
 
@@ -24,7 +24,7 @@ The repository itself (the commits) is plain Git. Everything else is GitHub's la
 - **Pages** to host a static website straight from a repository.
 - **Projects**, **Releases**, **Discussions** and a security toolbox around all of that.
 
-GitHub isn't the only host: GitLab and Bitbucket do the same job with different names. The Git part works identically with all of them.
+GitLab and Bitbucket do the same job with different names; the Git part works identically with all of them.
 
 ## Get started
 
@@ -35,7 +35,7 @@ Sign up at [github.com](https://github.com), then use **New repository** (the **
 - **Name:** `recipes`.
 - **Visibility:** *public* (anyone can read it) or *private* (only people you invite). You can change it later.
 - **Add a README:** yes. A **README** is a Markdown file shown on the repository's front page, and it's the first thing anyone reads.
-- **.gitignore and license:** optional templates. A `.gitignore` keeps junk out of the repo. A license says what others may do with your code; without one, nobody else is formally allowed to reuse it.
+- **.gitignore and license:** optional templates. A `.gitignore` keeps junk out of the repo. Without a license, nobody else is formally allowed to reuse your code.
 
 ### Connect your computer: SSH or HTTPS
 
@@ -49,13 +49,13 @@ To push, GitHub has to know it's you. GitHub no longer accepts your account pass
    ```
 
    It walks you through signing in with the browser and stores the credentials for Git.
-2. **SSH key**, which I prefer because you set it up once and forget it:
+2. **SSH key**, which I prefer: set it up once and forget it:
 
    ```bash
    ssh-keygen -t ed25519 -C "dana@example.com"
    ```
 
-   Press Enter to accept the default location, and choose a passphrase. This makes two files: a private key (`~/.ssh/id_ed25519`, never share it) and a public key (`~/.ssh/id_ed25519.pub`). Copy the contents of the public one, and in GitHub open **Settings → SSH and GPG keys → New SSH key** and paste it. Then test:
+   Accept the default location and choose a passphrase. This makes a private key (`~/.ssh/id_ed25519`, never share it) and a public key (`~/.ssh/id_ed25519.pub`). Copy the public one into **Settings → SSH and GPG keys → New SSH key** on GitHub. Then test:
 
    ```bash
    ssh -T git@github.com
@@ -65,8 +65,8 @@ To push, GitHub has to know it's you. GitHub no longer accepts your account pass
    Hi dana! You've successfully authenticated, but GitHub does not provide shell access.
    ```
 
-   That message is the success message. Repository URLs then look like `git@github.com:dana/recipes.git`.
-3. **HTTPS with a personal access token**, which works anywhere but means managing a token. A credential helper (which `gh auth login` configures) keeps this painless.
+   That is the success message. Repository URLs then look like `git@github.com:dana/recipes.git`.
+3. **HTTPS with a personal access token**, which works anywhere but means managing a token. A credential helper (which `gh auth login` configures) keeps it painless.
 
 ### Put your project on GitHub
 
@@ -96,12 +96,12 @@ Refresh the repository page and your files and full history are there.
 
 ## The GitHub flow
 
-Teams need a routine that keeps `main` working while many people change things. GitHub's own recommendation is a short loop, called the **GitHub flow**:
+Teams need a routine that keeps `main` working while many people change things. GitHub recommends a short loop, the **GitHub flow**:
 
 ![Six boxes in a row: create a branch, commit and push, open a pull request, review and discuss, merge the pull request, delete the branch. A dashed arrow from review back to commit and push says: changes requested, push more commits.](/images/github-zero-to-hero/github-flow.svg)
 
 1. **Create a branch** from `main` with a short, descriptive name (`add-soup-recipe`). `main` stays untouched.
-2. **Commit and push.** Small commits, each one a complete, isolated change, so any of them can be reverted alone. Push regularly: it backs up your work and lets others see it.
+2. **Commit and push.** Small commits, each a complete, isolated change that can be reverted alone. Push regularly: it backs up your work.
 3. **Open a pull request** to ask for feedback. Unsure it's ready? Open a *draft* pull request.
 4. **Review and discuss.** Answer comments by pushing more commits to the same branch. The pull request updates itself.
 5. **Merge** once it's approved and the checks are green.
@@ -118,7 +118,7 @@ git commit -m "Add soup recipe"
 git push -u origin add-soup-recipe
 ```
 
-(With `push.autoSetupRemote true` from the Git guide, the `-u` isn't needed.) The push output prints a link for opening a pull request. GitHub also shows a yellow **Compare & pull request** banner on the repository page for a recently pushed branch.
+(With `push.autoSetupRemote true` from the Git guide, `-u` isn't needed.) The push output prints a link for opening a pull request, and the repository page shows a yellow **Compare & pull request** banner.
 
 ## Pull requests
 
@@ -148,7 +148,7 @@ Reviewers open the **Files changed** tab and can:
 - Write a **suggestion**: a comment containing a proposed replacement that the author applies with one click.
 - Finish with one of three verdicts: **Comment**, **Approve**, or **Request changes**.
 
-As the author, you answer by pushing more commits, then mark conversations as resolved. When you're reviewing someone else, criticize the code, not the person, and say what you'd do instead. When you're reviewed, remember the reviewer is looking at your change for the first time, so anything confusing to them is worth fixing, not defending.
+As the author, answer by pushing more commits, then resolve the conversations. When reviewing, criticize the code, not the person, and say what you'd do instead. When reviewed, remember the reviewer sees your change for the first time: anything confusing to them is worth fixing, not defending.
 
 To try someone else's PR on your machine:
 
@@ -163,10 +163,10 @@ When the PR is approved, the **Merge** button offers up to three methods (a repo
 ![The same pull request with commits C, D and E, shown three times. Merge commit keeps C, D and E and adds a merge commit M with two parents. Squash and merge replaces them with one commit S. Rebase and merge copies them onto main as C prime, D prime and E prime with no merge commit.](/images/github-zero-to-hero/merge-methods.svg)
 
 - **Merge commit** keeps every commit of the branch and adds a merge commit. Full history, but a branchy graph.
-- **Squash and merge** collapses the whole PR into one commit. The history of `main` stays short, with one commit per PR. The branch's intermediate commits aren't kept on `main`.
-- **Rebase and merge** replays each commit on top of `main` without a merge commit. A straight line, but the commits get new hashes (the same effect as the `git rebase` from the Git guide).
+- **Squash and merge** collapses the whole PR into one commit, so `main` stays short, one commit per PR.
+- **Rebase and merge** replays each commit on top of `main` without a merge commit. A straight line, but the commits get new hashes (like `git rebase` in the Git guide).
 
-Many teams pick squash: one PR, one commit, one clear message. Use whichever your team agreed on. From the CLI:
+Many teams pick squash: one PR, one commit, one clear message. Use what your team agreed on. From the CLI:
 
 ```bash
 gh pr merge --squash --delete-branch
@@ -180,19 +180,18 @@ git pull
 git branch -d add-soup-recipe
 ```
 
-In the repository's **Settings → General** there's an option to delete head branches automatically after merge, which saves the cleanup.
+**Settings → General** can delete head branches automatically after merge.
 
 ## Issues
 
-An **issue** is a note about something to do or something broken. Open one for a bug, a feature idea, or a question. A good issue says what you expected, what happened instead, and how to reproduce it.
+An **issue** is a note about something to do or something broken: a bug, a feature idea, a question. A good one says what you expected, what happened, and how to reproduce it.
 
 Useful pieces:
 
 - **Labels** (`bug`, `good first issue`) to sort and filter.
 - **Assignees** for who's on it, and **milestones** for grouping issues toward a goal.
 - **Mentions:** write `@dana` to notify a person, and `#42` to link to issue or PR 42.
-- **Closing keywords:** a PR that says `Closes #42` links to the issue and closes it on merge.
-- **Templates:** put Markdown or form files in `.github/ISSUE_TEMPLATE/` and GitHub offers them when someone opens an issue. A `pull_request_template.md` in `.github/` pre-fills PR descriptions the same way.
+- **Templates:** Markdown or form files in `.github/ISSUE_TEMPLATE/` are offered when someone opens an issue, and a `pull_request_template.md` in `.github/` pre-fills PR descriptions.
 
 ```bash
 gh issue create --title "Soup recipe is missing salt" --body "Step 2 never mentions salt."
@@ -203,7 +202,7 @@ gh issue list
 
 ## Forks: contributing to someone else's project
 
-You can't push to a repository you don't have write access to, which is the normal situation with open source. The answer is a **fork**: your own copy of the repository, on your account.
+With open source you usually can't push to the repository. The answer is a **fork**: your own copy of it, on your account.
 
 ![Three boxes. upstream is the original project on GitHub. Your fork is your copy on GitHub, made with a Fork button from upstream. Your computer holds the local clone, cloned from the fork with git clone and pushed back to it with git push. A pull request goes from your fork to upstream, and git fetch upstream brings new upstream commits to your computer.](/images/github-zero-to-hero/fork-workflow.svg)
 
@@ -233,7 +232,7 @@ git merge upstream/main
 git push
 ```
 
-Before contributing, read the project's `CONTRIBUTING.md` and look for issues labeled `good first issue`. Maintainers appreciate small, focused PRs that follow their rules.
+Read the project's `CONTRIBUTING.md` first and look for `good first issue` labels. Maintainers appreciate small, focused PRs.
 
 ## Actions: let GitHub run your checks
 
@@ -270,7 +269,7 @@ jobs:
       - run: npm test
 ```
 
-Read it top to bottom: *on every pull request, and on pushes to `main`, start a fresh Ubuntu machine, check out the code, install Node 24, install dependencies and run the tests.* Open a PR, and a yellow dot turns into a green check or a red cross next to it. The **Actions** tab shows each run's logs.
+Read it top to bottom: *on every pull request and push to `main`, start a fresh Ubuntu machine, check out the code, install Node 24 and dependencies, and run the tests.* Open a PR, and a yellow dot turns into a green check or red cross. The **Actions** tab shows each run's logs.
 
 ```bash
 gh run list --limit 5     # recent runs
@@ -279,11 +278,11 @@ gh run watch              # follow a run live
 
 Things worth knowing:
 
-- **Secrets:** store passwords and tokens in **Settings → Secrets and variables → Actions** and use them as `${{ secrets.MY_TOKEN }}`. Never write them in the YAML. GitHub hides secret values in logs, but you shouldn't test that.
+- **Secrets:** store passwords and tokens in **Settings → Secrets and variables → Actions** and use them as `${{ secrets.MY_TOKEN }}`. Never write them in the YAML.
 - **Permissions:** the `permissions:` key limits what the automatic token may do. Start with `contents: read` and add only what a job needs.
-- **Fork PRs** don't get your secrets, so a stranger's PR can't read them.
+- **Fork PRs** don't get your secrets.
 - **Pin versions** of actions (`@v5`), so a workflow doesn't change under you.
-- Free usage has limits that depend on your plan and on whether the repository is public. Check the current pricing page before relying on heavy builds.
+- Free usage has limits that depend on your plan and on whether the repository is public; check the pricing page before heavy builds.
 
 For everything beyond the basics (matrix builds, caching, environments, OIDC deployments and workflow security), see [GitHub Actions from zero to hero](en/posts/github-actions-zero-to-hero/).
 
@@ -314,7 +313,7 @@ steps:
   - uses: actions/deploy-pages@v4
 ```
 
-Every merge to `main` rebuilds and republishes the site, so publishing becomes "merge a PR". Two gotchas: if the site is served from `/<repo>/` rather than a custom domain, your links need the right base path, and pushes made by a workflow with the default `GITHUB_TOKEN` don't trigger another Pages build.
+Every merge to `main` republishes the site, so publishing becomes "merge a PR". Two gotchas: a site served from `/<repo>/` needs the right base path in its links, and pushes made by a workflow with the default `GITHUB_TOKEN` don't trigger another Pages build.
 
 ## Protecting `main`
 
@@ -335,7 +334,7 @@ A `CODEOWNERS` file (in `.github/`, the root or `docs/`) maps paths to people or
 *.yml        @dana @devops-team
 ```
 
-The last matching line wins. Combined with "require review from code owners", it makes sure the right person always looks at risky files.
+The last matching line wins. With "require review from code owners", the right person always sees risky files.
 
 ## Releases and tags
 
@@ -347,22 +346,22 @@ git push --tags
 gh release create v1.0 --generate-notes
 ```
 
-`--generate-notes` builds the changelog from the merged PRs since the last release, which is one more reason to give PRs good titles. Versions like `v1.4.2` usually follow [semantic versioning](https://semver.org): bump the first number for breaking changes, the second for new features, the third for fixes.
+`--generate-notes` builds the changelog from merged PRs since the last release, one more reason for good PR titles. Versions like `v1.4.2` usually follow [semantic versioning](https://semver.org): bump the first number for breaking changes, the second for features, the third for fixes.
 
 ## Keeping a repository safe
 
-- **Never commit secrets.** If a token reaches a commit, treat it as leaked even after you delete it: revoke it and make a new one first, and clean the history second. GitHub's **secret scanning** can warn you, and on supported secrets block the push.
-- **Dependabot** opens PRs that update outdated or vulnerable dependencies. Turn it on in the repository's security settings, or add a `.github/dependabot.yml` for regular version updates.
-- **Code scanning** (CodeQL) looks for common vulnerabilities in your code on each PR.
-- Turn on **two-factor authentication** for your account. It's the most effective single thing you can do.
+- **Never commit secrets.** A token that reached a commit is leaked even after you delete it: revoke and replace it first, clean the history second. **Secret scanning** can warn you, and block the push for supported secrets.
+- **Dependabot** opens PRs that update outdated or vulnerable dependencies. Turn it on in the security settings, or add a `.github/dependabot.yml`.
+- **Code scanning** (CodeQL) looks for common vulnerabilities on each PR.
+- Turn on **two-factor authentication**: the most effective single thing you can do.
 - Add a `SECURITY.md` that says how to report a vulnerability privately.
 
 ## Codespaces and Copilot
 
 Two optional extras you'll hear about:
 
-- **Codespaces** gives you a development environment in the cloud, opened in the browser or VS Code, with the repository and its tools already set up. Handy for onboarding or a quick fix from a borrowed laptop. Press `.` on any repository page for the lighter, edit-only web editor.
-- **GitHub Copilot** is GitHub's AI assistant. It completes code, answers questions about a repository, and can take on tasks from an issue and open a PR for you to review. Plans and limits change often, so check GitHub's pricing page rather than trusting a blog post (including this one). Whoever uses it, the review rule stays the same: you merge only what you've understood.
+- **Codespaces** gives you a cloud development environment, in the browser or VS Code, with the repository and its tools set up. Handy for onboarding or a quick fix from a borrowed laptop. Press `.` on any repository page for the lighter, edit-only web editor.
+- **GitHub Copilot** is GitHub's AI assistant. It completes code, answers questions about a repository, and can take an issue and open a PR for you to review. Plans and limits change often, so check GitHub's pricing page. Either way, merge only what you've understood.
 
 ## The `gh` cheat sheet
 
@@ -385,34 +384,31 @@ The browser is fine, but these cover a day's work from the terminal:
 
 ## Habits that keep a team calm
 
-- **One branch, one purpose, one PR.** Mixed changes are hard to review and hard to revert.
+- **One branch, one purpose, one PR.** Mixed changes are hard to review and revert.
 - **Never work directly on `main`.** Protect it, so you can't.
-- **Write the PR description for a reader who has no context.** It will be you in three months.
-- **Review quickly.** A PR waiting for days gets stale and conflicts pile up. Pull often from `main`.
+- **Write the PR description for a reader with no context.** It will be you in three months.
+- **Review quickly.** A PR waiting for days gets stale. Pull often from `main`.
 - **Let the robot be strict** (tests, lint, type checks) so humans can talk about design.
-- **Small and frequent beats big and rare**, for commits, PRs and releases.
-- **Don't force-push to shared branches.** If you rebased your own PR branch, `--force-with-lease` is the safe form.
+- **Small and frequent beats big and rare,** for commits, PRs and releases.
+- **Don't force-push to shared branches;** after rebasing your own PR branch, use `--force-with-lease`.
 
 ## Glossary
 
 - **Repository (repo):** a project and its history, hosted on GitHub.
 - **Remote / origin:** the hosted copy; `origin` is the default nickname.
-- **Clone:** download a repository with its full history.
-- **Fork:** your own GitHub copy of someone else's repository.
+- **Clone / Fork:** download a repository with its history / your own GitHub copy of someone else's.
 - **Upstream:** the original repository you forked from.
 - **Pull request (PR):** a proposal to merge one branch into another, with discussion and checks.
 - **Review:** comments and a verdict (approve, request changes) on a PR.
-- **Issue:** a tracked task, bug or idea.
-- **Draft PR:** a PR that signals "not ready to merge".
+- **Issue / Draft PR:** a tracked task, bug or idea / a PR marked "not ready to merge".
 - **Merge methods:** merge commit, squash and merge, rebase and merge.
 - **Branch protection / ruleset:** rules a branch must satisfy before changes land.
 - **CODEOWNERS:** a file mapping paths to the people who must review them.
-- **Workflow:** an Actions YAML file made of jobs and steps.
-- **Runner:** the machine that runs a job.
+- **Workflow / Runner:** an Actions YAML file of jobs and steps / the machine that runs a job.
 - **Secret:** an encrypted value (a token, a password) available to workflows.
 - **Pages:** free static site hosting from a repository.
 - **Release:** a tag plus notes and files.
 
 ## Where to go next
 
-You now know the loop: branch, commit, push, pull request, review, merge, with a robot checking your work and a website that rebuilds itself. The best way to make it stick is to do it once for real: fork a small open-source project, fix a typo in its docs, and open a PR. For the Git side of everything here, see [Git from zero to hero](en/posts/git-zero-to-hero/) and my [Git cheat sheet](en/posts/git-commands/). To package an app so it runs the same on every machine (and on those Actions runners), see [Docker from zero to hero](en/posts/docker-zero-to-hero/). GitHub's own [Docs](https://docs.github.com) and the free interactive courses at [skills.github.com](https://skills.github.com) are good next steps.
+You now know the loop: branch, commit, push, pull request, review, merge, with a robot checking your work and a website that rebuilds itself. To make it stick, do it once for real: fork a small open-source project, fix a typo in its docs, and open a PR. For the Git side, see [Git from zero to hero](en/posts/git-zero-to-hero/) and my [Git cheat sheet](en/posts/git-commands/). To package an app so it runs the same everywhere (including on Actions runners), see [Docker from zero to hero](en/posts/docker-zero-to-hero/). GitHub's [Docs](https://docs.github.com) and the free courses at [skills.github.com](https://skills.github.com) are good next steps.
