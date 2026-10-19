@@ -3,7 +3,7 @@ title: "AWS: IAM, the CLI and S3"
 summary: "Users, roles and policies in IAM and the best practices that matter, signing in to the AWS CLI with short-term credentials and profiles, and storing files in S3 buckets safely."
 date: 2026-10-10
 tags: [aws, cloud]
-series: { key: devops, order: 61 }
+series: { key: devops, order: 24 }
 ---
 
 This part assumes an account set up as in [AWS from zero to hero](en/posts/aws-zero-to-hero/): MFA on the root user and a budget in place.

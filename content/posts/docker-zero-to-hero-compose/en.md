@@ -3,7 +3,7 @@ title: "Docker from zero to hero: Compose, debugging and cleanup"
 summary: "Running the app and its database from one compose.yaml with health checks, the Compose commands, a debugging toolbox, freeing disk space, and habits for production images."
 date: 2026-10-10
 tags: [docker, containers]
-series: { key: devops, order: 33 }
+series: { key: devops, order: 14 }
 ---
 
 [The previous part](en/posts/docker-zero-to-hero-ports-volumes-networks/) wired `hello-app` to Postgres with a network, a volume and three long `docker run` lines. Compose replaces those lines with one file.

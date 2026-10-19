@@ -3,7 +3,7 @@ title: "GitHub מאפס לגיבור: ה-GitHub flow ו-pull requests"
 summary: "חלק 2 במדריך ל-GitHub: ה-GitHub flow צעד אחר צעד, pull request טוב, ביקורת קוד עם הערות ו-suggestions, ושלוש הדרכים למזג."
 date: 2026-10-09
 tags: [github, git]
-series: { key: devops, order: 21 }
+series: { key: devops, order: 8 }
 ---
 
 ספר המתכונים נמצא ב-GitHub מאז [חלק 1](he/posts/github-zero-to-hero/). בחלק הזה משנים אותו כמו שצוות היה משנה, בלי לשבור את `main` אף פעם.

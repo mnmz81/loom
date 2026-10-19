@@ -3,7 +3,7 @@ title: "Kubernetes: rolling updates, config, probes and autoscaling"
 summary: "Update hello-app without downtime and roll back, pass settings with ConfigMaps and Secrets, add readiness and liveness probes, set requests and limits, and scale with an HPA."
 date: 2026-10-13
 tags: [kubernetes, containers]
-series: { key: devops, order: 52 }
+series: { key: devops, order: 21 }
 ---
 
 This part builds on the `hello` Deployment and Service in `k8s/` from [Deployments, Services and getting traffic in](en/posts/kubernetes-zero-to-hero-deployments-services/). Each change below is an edit to `k8s/deployment.yaml` followed by `kubectl apply`.

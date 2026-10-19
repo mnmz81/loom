@@ -4,10 +4,10 @@ summary: "What GitHub Actions is, the parts of a workflow, a first CI workflow f
 date: 2026-10-13
 updated: 2026-10-19
 tags: [github, ci-cd]
-series: { key: devops, order: 40 }
+series: { key: devops, order: 15 }
 ---
 
-Every project has chores that should happen on every change: run the tests, check the formatting, build, publish, deploy. Doing them by hand works until someone forgets. **GitHub Actions** is GitHub's built-in automation: you describe the chores in a YAML file in the repository, and GitHub runs them on its own machines whenever something happens. [GitHub from zero to hero](en/posts/github-zero-to-hero/) introduced Actions in one section; this series of four posts goes all the way.
+Every project has chores that should happen on every change: run the tests, check the formatting, build, publish, deploy. Doing them by hand works until someone forgets. **GitHub Actions** is GitHub's built-in automation: you describe the chores in a YAML file in the repository, and GitHub runs them on its own machines whenever something happens. [GitHub from zero to hero](en/posts/github-zero-to-hero-actions/) introduced Actions in one post; this series of four posts goes all the way.
 
 Every key, command and action version was checked against the [GitHub Actions documentation](https://docs.github.com/en/actions) and the actions' release pages in October 2026. Versions move: check each action's page for the current major.
 

@@ -3,7 +3,7 @@ title: "Git מאפס לגיבור: rebase וכלים שימושיים"
 summary: "חלק 5 במדריך ל-Git: ‏rebase והכלל היחיד שבא איתו, rebase אינטראקטיבי לסידור commits, ואחר כך stash, ‏cherry-pick, ‏bisect ו-.gitignore."
 date: 2026-10-09
 tags: [git, cli]
-series: { key: devops, order: 14 }
+series: { key: devops, order: 5 }
 ---
 
 ב[חלק 4](he/posts/git-zero-to-hero-branches/) חיברנו את ענף הפיצה ל-`main` במיזוג. ‏rebase היא הדרך השנייה לעדכן ענף.

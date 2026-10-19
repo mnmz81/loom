@@ -4,12 +4,12 @@ summary: "What Kubernetes is and the desired-state idea, the parts of a cluster,
 date: 2026-10-13
 updated: 2026-10-19
 tags: [kubernetes, containers]
-series: { key: devops, order: 50 }
+series: { key: devops, order: 19 }
 ---
 
 Docker answers "how do I run my app in a container?". The next question comes fast: how do I run ten copies of it across several servers, restart the ones that crash, update them without downtime, and send traffic only to the healthy ones? That's the job of **Kubernetes** (often written **K8s**: K, eight letters, s).
 
-This series takes the `hello-app` image from [Docker from zero to hero](en/posts/docker-zero-to-hero/) and runs it on a local Kubernetes cluster. Every command and field was checked against the [official Kubernetes documentation](https://kubernetes.io/docs/home/) (v1.37 at the time of writing). Generated names, IPs and ages will differ on your machine.
+This series takes the `hello-app` image from [Docker from zero to hero](en/posts/docker-zero-to-hero-dockerfile/) and runs it on a local Kubernetes cluster. Every command and field was checked against the [official Kubernetes documentation](https://kubernetes.io/docs/home/) (v1.37 at the time of writing). Generated names, IPs and ages will differ on your machine.
 
 ## What Kubernetes is
 

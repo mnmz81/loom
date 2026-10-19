@@ -3,7 +3,7 @@ title: "AWS: ‏IAM, ה-CLI ו-S3"
 summary: "users, ‏roles ו-policies ב-IAM והשיטות המומלצות שחשובות, כניסה ל-AWS CLI עם credentials קצרי טווח ו-profiles, ושמירת קבצים ב-buckets של S3 בצורה בטוחה."
 date: 2026-10-10
 tags: [aws, cloud]
-series: { key: devops, order: 61 }
+series: { key: devops, order: 24 }
 ---
 
 החלק הזה מניח חשבון שהוקם כמו ב-[AWS מאפס לגיבור](he/posts/aws-zero-to-hero/): ‏MFA על משתמש ה-root ותקציב מוגדר.

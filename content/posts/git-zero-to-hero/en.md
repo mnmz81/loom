@@ -4,7 +4,7 @@ summary: "Part 1 of the Git guide: what Git is, a one-time setup, a first reposi
 date: 2026-10-09
 updated: 2026-10-19
 tags: [git, cli]
-series: { key: devops, order: 10 }
+series: { key: devops, order: 1 }
 ---
 
 This guide builds a tiny project in Git, a recipe book, and each idea shows up when the project needs it. Keep a terminal open and type along: we work in a fresh folder, so nothing can break.

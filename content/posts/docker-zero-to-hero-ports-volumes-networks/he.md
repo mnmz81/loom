@@ -3,7 +3,7 @@ title: "Docker מאפס לגיבור: פורטים, volumes ורשתות"
 summary: "מחברים containers לעולם: פרסום פורטים בלי לחשוף יותר מדי, volumes, ‏bind mounts ו-tmpfs, רשתות שבהן containers מוצאים זה את זה לפי שם, והעברת הגדרות וסודות."
 date: 2026-10-10
 tags: [docker, containers]
-series: { key: devops, order: 32 }
+series: { key: devops, order: 13 }
 ---
 
 ה-image ‏`hello-app` [מהחלק על ה-Dockerfile](he/posts/docker-zero-to-hero-dockerfile/) רץ לבד. כאן הוא מקבל פורט שאפשר להגיע אליו, נתונים ששורדים את ה-container ומסד נתונים Postgres לידו.

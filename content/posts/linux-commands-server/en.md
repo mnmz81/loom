@@ -7,7 +7,7 @@ tags: [linux, cli, cheatsheet]
 series: { key: linux-commands, order: 3 }
 ---
 
-Commands for running a Linux server; connecting to one in the cloud is covered in [AWS from zero to hero](en/posts/aws-zero-to-hero/). Examples assume **GNU/Linux** with a Bash-like shell; macOS differences are noted. Anything marked ⚠️ can destroy data: run the harmless version first (`rsync -n`) and look.
+Commands for running a Linux server; connecting to one in the cloud is covered in [AWS from zero to hero](en/posts/aws-zero-to-hero-ec2-vpc-rds/). Examples assume **GNU/Linux** with a Bash-like shell; macOS differences are noted. Anything marked ⚠️ can destroy data: run the harmless version first (`rsync -n`) and look.
 
 ## Processes
 

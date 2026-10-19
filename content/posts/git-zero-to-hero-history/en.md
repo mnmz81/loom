@@ -3,7 +3,7 @@ title: "Git from zero to hero: reading diffs and history"
 summary: "Part 2 of the Git guide: how to read git diff, what each diff command compares, good commit messages, git log, and what a commit really contains."
 date: 2026-10-09
 tags: [git, cli]
-series: { key: devops, order: 11 }
+series: { key: devops, order: 2 }
 ---
 
 The recipe book from [part 1](en/posts/git-zero-to-hero/) has two commits. This part reads what changed and what Git stored.

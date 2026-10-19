@@ -4,7 +4,7 @@ summary: "חלק 1 במדריך ל-GitHub: מה GitHub מוסיף ל-Git, יצי
 date: 2026-10-09
 updated: 2026-10-19
 tags: [github, git]
-series: { key: devops, order: 20 }
+series: { key: devops, order: 7 }
 ---
 
 המדריך הזה מעלה לרשת את ספר המתכונים מ-[Git מאפס לגיבור](he/posts/git-zero-to-hero/): נשנה אותו דרך pull request, ניתן לרובוט לבדוק אותו, ונפרסם אותו כאתר. הוא מניח היכרות עם `git add`, `git commit` וענפים.

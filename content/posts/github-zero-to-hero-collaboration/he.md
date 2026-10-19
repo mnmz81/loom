@@ -3,7 +3,7 @@ title: "GitHub מאפס לגיבור: issues, ‏forks ו-main מוגן"
 summary: "חלק 3 במדריך ל-GitHub: ‏issues ותוויות, תרומה לפרויקט של מישהו אחר דרך fork, הגנה על ענף, CODEOWNERS ושמירה על ריפוזיטורי בטוח."
 date: 2026-10-09
 tags: [github, git]
-series: { key: devops, order: 22 }
+series: { key: devops, order: 9 }
 ---
 
 ב[חלק 2](he/posts/github-zero-to-hero-pull-requests/) שינינו את ספר המתכונים דרך pull request. החלק הזה מוסיף את מה שמאפשר לאנשים אחרים לעבוד עליו: ‏issues, ‏forks, כללים על `main` ואבטחה.

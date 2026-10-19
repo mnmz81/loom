@@ -3,7 +3,7 @@ title: "Git from zero to hero: undoing mistakes"
 summary: "Part 3 of the Git guide: naming commits (HEAD~1, HEAD^2, HEAD@{2}), detached HEAD, and the right undo for each mistake: restore, amend, reset, revert and reflog."
 date: 2026-10-09
 tags: [git, cli]
-series: { key: devops, order: 12 }
+series: { key: devops, order: 3 }
 ---
 
 Every undo in Git names a commit, so this part starts with how to point at one, using the recipe book's history from [part 2](en/posts/git-zero-to-hero-history/).

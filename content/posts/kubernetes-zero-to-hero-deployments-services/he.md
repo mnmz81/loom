@@ -3,10 +3,10 @@ title: "Kubernetes: ‏Deployments, ‏Services והכנסת תעבורה מבח
 summary: "מריצים את hello-app כ-Deployment ששומר על שלושה עותקים, נותנים לו כתובת קבועה עם Service, משווים בין סוגי Service, ומנתבים תעבורה מבחוץ עם Gateway API או Ingress."
 date: 2026-10-13
 tags: [kubernetes, containers]
-series: { key: devops, order: 51 }
+series: { key: devops, order: 20 }
 ---
 
-החלק הזה צריך את הקלאסטר של kind ואת יסודות המניפסטים מ[Kubernetes מאפס לגיבור](he/posts/kubernetes-zero-to-hero/), ואת האימג' `hello-app` מ[Docker מאפס לגיבור](he/posts/docker-zero-to-hero/): שרת Node קטן על פורט 3000.
+החלק הזה צריך את הקלאסטר של kind ואת יסודות המניפסטים מ[Kubernetes מאפס לגיבור](he/posts/kubernetes-zero-to-hero/), ואת האימג' `hello-app` מ[Docker מאפס לגיבור](he/posts/docker-zero-to-hero-dockerfile/): שרת Node קטן על פורט 3000.
 
 ## Deployments: שומרים על N עותקים רצים
 

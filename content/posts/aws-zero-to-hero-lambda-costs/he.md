@@ -3,7 +3,7 @@ title: "AWS: ‏Lambda, ניטור ואיך נמנעים מחשבונית מפת
 summary: "מריצים קוד באירועים עם Lambda, עוקבים אחריו עם CloudWatch ו-CloudTrail, באיזה שירות לבחור, וחמש הסיבות שמאחורי כמעט כל חשבונית AWS מפתיעה."
 date: 2026-10-10
 tags: [aws, cloud]
-series: { key: devops, order: 63 }
+series: { key: devops, order: 26 }
 ---
 
 החלק האחרון בסדרת AWS. הוא נשען על roles של IAM מ[IAM, ה-CLI ו-S3](he/posts/aws-zero-to-hero-iam-cli-s3/) ועל השרתים ומסדי הנתונים מ[EC2, ‏VPC ו-RDS](he/posts/aws-zero-to-hero-ec2-vpc-rds/).
@@ -73,4 +73,4 @@ Lambda מתאימה לקוד דבק ולעבודה מונחית אירועים: 
 
 בונים משהו קטן שנוגע בכמה חלקים: ‏bucket פרטי ב-S3 שמעלים אליו קבצים עם ה-CLI, פונקציית Lambda שרצה כשקובץ מגיע, ולוג ב-CloudWatch שמראה אותה עובדת. ואז מוחקים הכול ובודקים את החשבונית.
 
-הצעדים הבאים: להעלות את האפליקציה מ-[Docker מאפס לגיבור](he/posts/docker-zero-to-hero/) ל-ECS, ולהפוך פריסות לאוטומטיות עם היסודות של Actions ב-[GitHub מאפס לגיבור](he/posts/github-zero-to-hero/). התיעוד הרשמי מצוין: מתחילים בדף [AWS Free Tier](https://aws.amazon.com/free/), ב-[IAM best practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html) וב-[AWS CLI user guide](https://docs.aws.amazon.com/cli/latest/userguide/).
+הצעדים הבאים: להעלות את האפליקציה מ-[Docker מאפס לגיבור](he/posts/docker-zero-to-hero/) ל-ECS, ולהפוך פריסות לאוטומטיות עם היסודות של Actions ב-[GitHub מאפס לגיבור](he/posts/github-zero-to-hero-actions/). התיעוד הרשמי מצוין: מתחילים בדף [AWS Free Tier](https://aws.amazon.com/free/), ב-[IAM best practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html) וב-[AWS CLI user guide](https://docs.aws.amazon.com/cli/latest/userguide/).

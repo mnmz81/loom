@@ -4,7 +4,7 @@ summary: "What Docker is, images, containers and registries, how containers diff
 date: 2026-10-10
 updated: 2026-10-19
 tags: [docker, containers]
-series: { key: devops, order: 30 }
+series: { key: devops, order: 11 }
 ---
 
 "It works on my machine" is the oldest sentence in software. Docker mostly retires it: you package your app together with everything it needs, and then it runs the same way on your laptop, on a teammate's laptop and on a server. Over four posts we containerize one small web app, adding each idea when the app needs it; this one covers the vocabulary and running other people's images.

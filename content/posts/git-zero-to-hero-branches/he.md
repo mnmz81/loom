@@ -3,7 +3,7 @@ title: "Git מאפס לגיבור: ענפים, מיזוג וקונפליקטים
 summary: "חלק 4 במדריך ל-Git: מה זה ענף באמת, fast-forward ו-commit מיזוג, איך מיזוג תלת-כיווני מחליט, ואיך פותרים קונפליקט בלי לחץ."
 date: 2026-10-09
 tags: [git, cli]
-series: { key: devops, order: 13 }
+series: { key: devops, order: 4 }
 ---
 
 ענף הוא התווית מ[חלק 2](he/posts/git-zero-to-hero-history/) שזזה קדימה עם כל commit. בחלק הזה משתמשים בענף כדי לנסות מתכון לפיצה בספר המתכונים בלי לגעת ב-`main`.

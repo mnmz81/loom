@@ -3,7 +3,7 @@ title: "Docker from zero to hero: a Dockerfile for your own app"
 summary: "Containerizing a small Node app: writing a Dockerfile and .dockerignore, building and running it, layers and the build cache, multi-stage builds, and CMD versus ENTRYPOINT."
 date: 2026-10-10
 tags: [docker, containers]
-series: { key: devops, order: 31 }
+series: { key: devops, order: 12 }
 ---
 
 [The first part](en/posts/docker-zero-to-hero/) ran images someone else built. Here we build one for our own app, the `hello-app` the rest of the series keeps using.

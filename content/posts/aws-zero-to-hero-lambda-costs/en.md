@@ -3,7 +3,7 @@ title: "AWS: Lambda, monitoring and avoiding surprise bills"
 summary: "Running code on events with Lambda, watching it with CloudWatch and CloudTrail, which service to reach for, and the five causes of nearly every surprise AWS bill."
 date: 2026-10-10
 tags: [aws, cloud]
-series: { key: devops, order: 63 }
+series: { key: devops, order: 26 }
 ---
 
 The last part of the AWS series. It builds on IAM roles from [IAM, the CLI and S3](en/posts/aws-zero-to-hero-iam-cli-s3/) and the servers and databases from [EC2, VPC and RDS](en/posts/aws-zero-to-hero-ec2-vpc-rds/).
@@ -73,4 +73,4 @@ The habits that prevent them: set a **budget** on day one, **tag** everything wi
 
 Build something small that touches several pieces: a private S3 bucket you upload to with the CLI, a Lambda that runs when a file arrives, and a CloudWatch log to watch it work. Then delete everything and check the bill.
 
-Next: put the app from [Docker from zero to hero](en/posts/docker-zero-to-hero/) on ECS, and automate deployments with the Actions basics in [GitHub from zero to hero](en/posts/github-zero-to-hero/). The official docs are excellent: start with the [AWS Free Tier](https://aws.amazon.com/free/) page, the [IAM best practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html) and the [AWS CLI user guide](https://docs.aws.amazon.com/cli/latest/userguide/).
+Next: put the app from [Docker from zero to hero](en/posts/docker-zero-to-hero/) on ECS, and automate deployments with the Actions basics in [GitHub from zero to hero](en/posts/github-zero-to-hero-actions/). The official docs are excellent: start with the [AWS Free Tier](https://aws.amazon.com/free/) page, the [IAM best practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html) and the [AWS CLI user guide](https://docs.aws.amazon.com/cli/latest/userguide/).

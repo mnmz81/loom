@@ -3,7 +3,7 @@ title: "Git from zero to hero: branches, merging and conflicts"
 summary: "Part 4 of the Git guide: what a branch really is, fast-forward and merge commits, how a three-way merge decides, and how to resolve a conflict calmly."
 date: 2026-10-09
 tags: [git, cli]
-series: { key: devops, order: 13 }
+series: { key: devops, order: 4 }
 ---
 
 A branch is the label from [part 2](en/posts/git-zero-to-hero-history/) that moves forward with each commit. This part uses one to try a pizza recipe in the recipe book without touching `main`.

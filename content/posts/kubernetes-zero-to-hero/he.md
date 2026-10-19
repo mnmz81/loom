@@ -4,12 +4,12 @@ summary: "מה זה Kubernetes והרעיון של מצב רצוי, החלקים
 date: 2026-10-13
 updated: 2026-10-19
 tags: [kubernetes, containers]
-series: { key: devops, order: 50 }
+series: { key: devops, order: 19 }
 ---
 
 Docker עונה על השאלה "איך מריצים את האפליקציה בקונטיינר?". השאלה הבאה מגיעה מהר: איך מריצים עשרה עותקים שלה על כמה שרתים, מפעילים מחדש את אלה שקורסים, מעדכנים אותם בלי זמן השבתה, ושולחים תעבורה רק לאלה שתקינים? זה התפקיד של **Kubernetes** (שנכתב הרבה פעמים **K8s**: ‏K, שמונה אותיות, s).
 
-הסדרה לוקחת את האימג' `hello-app` מ[Docker מאפס לגיבור](he/posts/docker-zero-to-hero/) ומריצה אותו על קלאסטר Kubernetes מקומי. כל פקודה וכל שדה נבדקו מול [התיעוד הרשמי של Kubernetes](https://kubernetes.io/docs/home/) (גרסה v1.37 בזמן הכתיבה). שמות שנוצרו אוטומטית, כתובות IP וזמנים ייראו אחרת אצלכם.
+הסדרה לוקחת את האימג' `hello-app` מ[Docker מאפס לגיבור](he/posts/docker-zero-to-hero-dockerfile/) ומריצה אותו על קלאסטר Kubernetes מקומי. כל פקודה וכל שדה נבדקו מול [התיעוד הרשמי של Kubernetes](https://kubernetes.io/docs/home/) (גרסה v1.37 בזמן הכתיבה). שמות שנוצרו אוטומטית, כתובות IP וזמנים ייראו אחרת אצלכם.
 
 ## מה זה Kubernetes
 

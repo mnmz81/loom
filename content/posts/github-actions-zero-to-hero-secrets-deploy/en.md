@@ -3,7 +3,7 @@ title: "GitHub Actions from zero to hero: secrets, permissions and deployments"
 summary: "Secrets and variables, the GITHUB_TOKEN and its permissions, environments with required reviewers, deploying to a cloud with OIDC instead of stored keys, and a pipeline that pushes a Docker image."
 date: 2026-10-13
 tags: [github, ci-cd]
-series: { key: devops, order: 42 }
+series: { key: devops, order: 17 }
 ---
 
 [The jobs part](en/posts/github-actions-zero-to-hero-jobs/) built and tested the code. Publishing and deploying it needs credentials, and this part keeps them out of the workflow file.

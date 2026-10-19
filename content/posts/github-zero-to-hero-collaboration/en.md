@@ -3,7 +3,7 @@ title: "GitHub from zero to hero: issues, forks and a protected main"
 summary: "Part 3 of the GitHub guide: issues and labels, contributing to someone else's project through a fork, branch protection, CODEOWNERS and keeping a repository safe."
 date: 2026-10-09
 tags: [github, git]
-series: { key: devops, order: 22 }
+series: { key: devops, order: 9 }
 ---
 
 [Part 2](en/posts/github-zero-to-hero-pull-requests/) changed the recipe book through a pull request. This part adds the pieces that let other people work on it: issues, forks, rules on `main`, and security.

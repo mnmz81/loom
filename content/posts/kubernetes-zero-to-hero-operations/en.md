@@ -3,7 +3,7 @@ title: "Kubernetes: storage, namespaces, debugging and Helm"
 summary: "Persistent volumes and StatefulSets, namespaces and kubectl contexts, a debugging routine with the common Pod statuses, Kustomize and Helm, and a production checklist."
 date: 2026-10-13
 tags: [kubernetes, containers]
-series: { key: devops, order: 53 }
+series: { key: devops, order: 22 }
 ---
 
 The last part of the Kubernetes series: what you need once `hello-app` runs with [rollouts, config and probes](en/posts/kubernetes-zero-to-hero-rollouts-config/), and you start keeping data, running several environments and fixing things that break.
@@ -112,4 +112,4 @@ In teams, the last step is usually **GitOps**: a tool such as Argo CD or Flux wa
 
 Put a project of your own on kind, break a probe on purpose, and fix it with `describe` and `logs`.
 
-The official [Kubernetes Basics tutorial](https://kubernetes.io/docs/tutorials/kubernetes-basics/) and [concepts section](https://kubernetes.io/docs/concepts/) are the best next reading. To build and push your image on every merge, see [GitHub Actions from zero to hero](en/posts/github-actions-zero-to-hero/); [AWS from zero to hero](en/posts/aws-zero-to-hero/) maps where EKS fits; and inside a container, the [Linux commands cheat sheet](en/posts/linux-commands/) has what you'll type.
+The official [Kubernetes Basics tutorial](https://kubernetes.io/docs/tutorials/kubernetes-basics/) and [concepts section](https://kubernetes.io/docs/concepts/) are the best next reading. To build and push your image on every merge, see [GitHub Actions from zero to hero](en/posts/github-actions-zero-to-hero-secrets-deploy/); [AWS from zero to hero](en/posts/aws-zero-to-hero/) maps where EKS fits; and inside a container, the [Linux commands cheat sheet](en/posts/linux-commands/) has what you'll type.

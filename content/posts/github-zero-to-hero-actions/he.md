@@ -3,7 +3,7 @@ title: "GitHub מאפס לגיבור: Actions, ‏Pages ו-releases"
 summary: "חלק 4 במדריך ל-GitHub: ‏workflow ראשון ב-Actions, ‏secrets והרשאות, פרסום אתר עם GitHub Pages, ‏releases עם הערות אוטומטיות, Codespaces ו-Copilot."
 date: 2026-10-09
 tags: [github, git]
-series: { key: devops, order: 23 }
+series: { key: devops, order: 10 }
 ---
 
 את ה-pull requests מ[חלק 2](he/posts/github-zero-to-hero-pull-requests/) מישהו צריך לבדוק, וספר המתכונים עדיין לא אתר. ‏GitHub יכול לעשות את שניהם.

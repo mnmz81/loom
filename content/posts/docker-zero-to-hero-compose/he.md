@@ -3,7 +3,7 @@ title: "Docker מאפס לגיבור: Compose, דיבוג וניקוי"
 summary: "מריצים את האפליקציה ואת מסד הנתונים מקובץ compose.yaml אחד עם בדיקות בריאות, פקודות Compose, ארגז כלים לדיבוג, פינוי מקום בדיסק והרגלים ל-images של פרודקשן."
 date: 2026-10-10
 tags: [docker, containers]
-series: { key: devops, order: 33 }
+series: { key: devops, order: 14 }
 ---
 
 [בחלק הקודם](he/posts/docker-zero-to-hero-ports-volumes-networks/) חיברנו את `hello-app` ל-Postgres עם רשת, volume ושלוש שורות `docker run` ארוכות. Compose מחליף את השורות האלה בקובץ אחד.

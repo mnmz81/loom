@@ -3,7 +3,7 @@ title: "GitHub Actions from zero to hero: reuse, security and debugging"
 summary: "Reusable workflows and composite actions, concurrency groups, the security habits that keep a workflow from becoming a back door, debugging a failed run, and what Actions costs."
 date: 2026-10-13
 tags: [github, ci-cd]
-series: { key: devops, order: 43 }
+series: { key: devops, order: 18 }
 ---
 
 With [the deployment pipeline](en/posts/github-actions-zero-to-hero-secrets-deploy/) running, what's left is keeping many workflows short, safe and fixable.
@@ -129,4 +129,4 @@ Standard GitHub-hosted runners are free for public repositories. Private reposit
 
 To make it stick, add a workflow to a project of yours: tests on every PR, a build artifact, and a deploy job behind an environment.
 
-GitHub's [Actions documentation](https://docs.github.com/en/actions) and [workflow syntax reference](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax) are the best next reading. For the repository side (pull requests, branch protection that requires your checks), see [GitHub from zero to hero](en/posts/github-zero-to-hero/); to containerize what you build, [Docker from zero to hero](en/posts/docker-zero-to-hero/); to run it at scale, [Kubernetes from zero to hero](en/posts/kubernetes-zero-to-hero/).
+GitHub's [Actions documentation](https://docs.github.com/en/actions) and [workflow syntax reference](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax) are the best next reading. For the repository side (pull requests, branch protection that requires your checks), see [GitHub from zero to hero](en/posts/github-zero-to-hero-collaboration/); to containerize what you build, [Docker from zero to hero](en/posts/docker-zero-to-hero/); to run it at scale, [Kubernetes from zero to hero](en/posts/kubernetes-zero-to-hero/).

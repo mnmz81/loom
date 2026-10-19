@@ -3,7 +3,7 @@ title: "GitHub Actions from zero to hero: jobs, expressions, matrix and caching"
 summary: "Growing a workflow: job options, jobs that wait for each other, expressions and contexts, passing values between steps and jobs, matrix builds, caches and artifacts."
 date: 2026-10-13
 tags: [github, ci-cd]
-series: { key: devops, order: 41 }
+series: { key: devops, order: 16 }
 ---
 
 [The first part](en/posts/github-actions-zero-to-hero/) ran a single `test` job on every push and pull request. A real pipeline has several jobs, conditions and files that move between them.

@@ -3,7 +3,7 @@ title: "Git from zero to hero: rebase and handy tools"
 summary: "Part 5 of the Git guide: rebase and the one rule that comes with it, interactive rebase to tidy commits, then stash, cherry-pick, bisect and .gitignore."
 date: 2026-10-09
 tags: [git, cli]
-series: { key: devops, order: 14 }
+series: { key: devops, order: 5 }
 ---
 
 [Part 4](en/posts/git-zero-to-hero-branches/) joined the pizza branch to `main` with a merge. Rebase is the other way to bring a branch up to date.

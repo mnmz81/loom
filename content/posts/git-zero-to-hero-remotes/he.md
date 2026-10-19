@@ -3,7 +3,7 @@ title: "Git מאפס לגיבור: remotes ו-GitHub"
 summary: "חלק 6 במדריך ל-Git: ‏clone, ‏push, ‏fetch ו-pull, ענפי מעקב ו-ahead/behind, מה עושים כש-push נדחה, force-with-lease ותגיות."
 date: 2026-10-09
 tags: [git, cli]
-series: { key: devops, order: 15 }
+series: { key: devops, order: 6 }
 ---
 
 כל מה שבחלקים 1 עד 5 נמצא על המחשב שלנו. כדי לשתף את ספר המתכונים צריך **remote**: עותק של הריפו במקום אחר, בדרך כלל GitHub.

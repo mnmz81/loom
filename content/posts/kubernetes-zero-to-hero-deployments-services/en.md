@@ -3,10 +3,10 @@ title: "Kubernetes: Deployments, Services and getting traffic in"
 summary: "Run hello-app as a Deployment that keeps three copies alive, give it a stable address with a Service, compare Service types, and route outside traffic with Gateway API or Ingress."
 date: 2026-10-13
 tags: [kubernetes, containers]
-series: { key: devops, order: 51 }
+series: { key: devops, order: 20 }
 ---
 
-This part needs the kind cluster and the manifest basics from [Kubernetes from zero to hero](en/posts/kubernetes-zero-to-hero/), and the `hello-app` image from [Docker from zero to hero](en/posts/docker-zero-to-hero/): a tiny Node server on port 3000.
+This part needs the kind cluster and the manifest basics from [Kubernetes from zero to hero](en/posts/kubernetes-zero-to-hero/), and the `hello-app` image from [Docker from zero to hero](en/posts/docker-zero-to-hero-dockerfile/): a tiny Node server on port 3000.
 
 ## Deployments: keep N copies running
 

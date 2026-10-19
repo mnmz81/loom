@@ -3,7 +3,7 @@ title: "Git מאפס לגיבור: לקרוא diff והיסטוריה"
 summary: "חלק 2 במדריך ל-Git: איך קוראים git diff, מה כל פקודת diff משווה, הודעות commit טובות, git log, ומה באמת יש בתוך commit."
 date: 2026-10-09
 tags: [git, cli]
-series: { key: devops, order: 11 }
+series: { key: devops, order: 2 }
 ---
 
 בספר המתכונים מ[חלק 1](he/posts/git-zero-to-hero/) יש שני commits. בחלק הזה קוראים מה השתנה ומה Git שמר.

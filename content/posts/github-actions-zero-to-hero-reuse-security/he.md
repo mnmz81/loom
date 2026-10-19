@@ -3,7 +3,7 @@ title: "GitHub Actions מאפס לגיבור: שימוש חוזר, אבטחה ו
 summary: "reusable workflows ו-composite actions, קבוצות concurrency, הרגלי האבטחה ששומרים על workflow מלהפוך לדלת אחורית, דיבאג של הרצה שנכשלה, וכמה Actions עולה."
 date: 2026-10-13
 tags: [github, ci-cd]
-series: { key: devops, order: 43 }
+series: { key: devops, order: 18 }
 ---
 
 [ה-pipeline של הפריסה](he/posts/github-actions-zero-to-hero-secrets-deploy/) כבר רץ. נשאר לשמור על הרבה workflows קצרים, בטוחים וקלים לתיקון.
@@ -129,4 +129,4 @@ runners סטנדרטיים של GitHub הם בחינם לריפוזיטוריז 
 
 כדי שזה ייקלט, מוסיפים workflow לפרויקט שלכם: בדיקות בכל PR, ‏artifact של build, ו-job של פריסה מאחורי סביבה.
 
-‏[התיעוד של Actions](https://docs.github.com/en/actions) ו[מדריך התחביר של workflows](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax) הם הקריאה הבאה הטובה ביותר. לצד של הריפוזיטורי (pull requests, הגנת ענפים שדורשת את הבדיקות שלכם), ראו [GitHub מאפס לגיבור](he/posts/github-zero-to-hero/); לארוז בקונטיינר, [Docker מאפס לגיבור](he/posts/docker-zero-to-hero/); להריץ בקנה מידה, [Kubernetes מאפס לגיבור](he/posts/kubernetes-zero-to-hero/).
+‏[התיעוד של Actions](https://docs.github.com/en/actions) ו[מדריך התחביר של workflows](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax) הם הקריאה הבאה הטובה ביותר. לצד של הריפוזיטורי (pull requests, הגנת ענפים שדורשת את הבדיקות שלכם), ראו [GitHub מאפס לגיבור](he/posts/github-zero-to-hero-collaboration/); לארוז בקונטיינר, [Docker מאפס לגיבור](he/posts/docker-zero-to-hero/); להריץ בקנה מידה, [Kubernetes מאפס לגיבור](he/posts/kubernetes-zero-to-hero/).

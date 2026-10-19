@@ -3,7 +3,7 @@ title: "Git from zero to hero: remotes and GitHub"
 summary: "Part 6 of the Git guide: clone, push, fetch and pull, remote-tracking branches and ahead/behind, what to do when a push is rejected, force-with-lease and tags."
 date: 2026-10-09
 tags: [git, cli]
-series: { key: devops, order: 15 }
+series: { key: devops, order: 6 }
 ---
 
 Everything in parts 1 to 5 lives on your computer. To share the recipe book you need a **remote**: a copy of the repository somewhere else, usually GitHub.

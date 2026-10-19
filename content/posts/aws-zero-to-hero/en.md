@@ -4,7 +4,7 @@ summary: "What AWS is and the shared responsibility model, Regions and Availabil
 date: 2026-10-10
 updated: 2026-10-19
 tags: [aws, cloud]
-series: { key: devops, order: 60 }
+series: { key: devops, order: 23 }
 ---
 
 AWS has well over a hundred services, and the console menu looks like a wall. A small core does most of the work: somewhere to store files, somewhere to run code, a network around them, a database, and a way to control who can touch what. Learn those, and the rest is variations.

@@ -3,7 +3,7 @@ title: "GitHub Actions מאפס לגיבור: סודות, הרשאות ופרי�
 summary: "סודות ומשתנים, ה-GITHUB_TOKEN וההרשאות שלו, סביבות עם מאשרים נדרשים, פריסה לענן עם OIDC במקום מפתחות שמורים, ו-pipeline שדוחף אימג' Docker."
 date: 2026-10-13
 tags: [github, ci-cd]
-series: { key: devops, order: 42 }
+series: { key: devops, order: 17 }
 ---
 
 [בחלק על jobs](he/posts/github-actions-zero-to-hero-jobs/) בנינו ובדקנו את הקוד. כדי לפרסם ולפרוס אותו צריך הרשאות, והחלק הזה שומר אותן מחוץ לקובץ ה-workflow.

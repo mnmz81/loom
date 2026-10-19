@@ -3,7 +3,7 @@ title: "Kubernetes: אחסון, namespaces, דיבאג ו-Helm"
 summary: "volumes קבועים ו-StatefulSets, ‏namespaces ו-contexts של kubectl, שגרת דיבאג עם הסטטוסים הנפוצים של Pod, ‏Kustomize ו-Helm, ורשימת בדיקה ל-production."
 date: 2026-10-13
 tags: [kubernetes, containers]
-series: { key: devops, order: 53 }
+series: { key: devops, order: 22 }
 ---
 
 החלק האחרון בסדרת Kubernetes: מה שצריך כש-`hello-app` כבר רץ עם [עדכונים, הגדרות ובדיקות בריאות](he/posts/kubernetes-zero-to-hero-rollouts-config/), ומתחילים לשמור נתונים, להריץ כמה סביבות ולתקן דברים שנשברים.
@@ -112,4 +112,4 @@ helm uninstall my-release
 
 מעלים פרויקט משלכם ל-kind, שוברים בכוונה בדיקת בריאות, ומתקנים אותה עם `describe` ו-`logs`.
 
-‏[Kubernetes Basics](https://kubernetes.io/docs/tutorials/kubernetes-basics/) ו[פרק המושגים](https://kubernetes.io/docs/concepts/) הם הקריאה הבאה הטובה ביותר. כדי לבנות ולדחוף את האימג' בכל מיזוג, ראו [GitHub Actions מאפס לגיבור](he/posts/github-actions-zero-to-hero/); ‏[AWS מאפס לגיבור](he/posts/aws-zero-to-hero/) מראה איפה EKS משתלב; ובתוך קונטיינר, ב[דף העזר לפקודות Linux](he/posts/linux-commands/) יש את מה שתקלידו.
+‏[Kubernetes Basics](https://kubernetes.io/docs/tutorials/kubernetes-basics/) ו[פרק המושגים](https://kubernetes.io/docs/concepts/) הם הקריאה הבאה הטובה ביותר. כדי לבנות ולדחוף את האימג' בכל מיזוג, ראו [GitHub Actions מאפס לגיבור](he/posts/github-actions-zero-to-hero-secrets-deploy/); ‏[AWS מאפס לגיבור](he/posts/aws-zero-to-hero/) מראה איפה EKS משתלב; ובתוך קונטיינר, ב[דף העזר לפקודות Linux](he/posts/linux-commands/) יש את מה שתקלידו.

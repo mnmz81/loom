@@ -28,7 +28,7 @@ Always prefix commands with `./scripts/with-node.sh` (system Node is 20):
 Use the project skill **`new-post`** (`.claude/skills/new-post/SKILL.md`) for every new post or substantial edit: scaffold (`npm run new-post`), check the official docs, both languages, images, tags, cross-links, verify, commit, Notion copy. The build rejects he/en pairs whose shared facts or body structure differ.
 
 ### Length and style (every post, new or edited)
-- **Max 6 minutes reading time per language** (`python3 scripts/reading-time.py <slug>`). Longer → split into a series of posts, each standing on its own. The build fails above 6 min; the old long posts are in `OVER_LIMIT_ALLOWED` in `scripts/content/collect.ts` — remove a slug once it is split, never add one.
+- **Max 6 minutes reading time per language** (`python3 scripts/reading-time.py <slug>`). Longer → split into a series of posts, each standing on its own. The build fails above 6 min, with no exceptions (`MAX_READING_MINUTES` in `scripts/content/collect.ts`).
 - **No padding, no repetition.** Say each thing once, in the place it belongs. No intro that restates the title, no "as we saw above", no closing recap of the sections, no paragraph that explains what the next code block shows and then a line under it that explains it again. Prefer one example over two that teach the same thing. If a sentence can go without losing a fact, it goes.
 
 The site has no write path (no CMS, no request form): posts are written only on the author's computer, by asking Claude Code here.

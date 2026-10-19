@@ -3,7 +3,7 @@ title: "Git מאפס לגיבור: לבטל טעויות"
 summary: "חלק 3 במדריך ל-Git: איך מצביעים על commit ‏(HEAD~1, HEAD^2, HEAD@{2}), מה זה detached HEAD, והביטול הנכון לכל טעות: restore, amend, reset, revert ו-reflog."
 date: 2026-10-09
 tags: [git, cli]
-series: { key: devops, order: 12 }
+series: { key: devops, order: 3 }
 ---
 
 כל ביטול ב-Git מצביע על commit כלשהו, ולכן החלק הזה מתחיל באיך מצביעים על commit, עם ההיסטוריה של ספר המתכונים מ[חלק 2](he/posts/git-zero-to-hero-history/).

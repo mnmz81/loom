@@ -3,7 +3,7 @@ title: "Kubernetes: עדכונים מתגלגלים, הגדרות, בדיקות 
 summary: "מעדכנים את hello-app בלי השבתה וחוזרים אחורה, מעבירים הגדרות עם ConfigMaps ו-Secrets, מוסיפים בדיקות readiness ו-liveness, מגדירים requests ו-limits, ומגדילים עם HPA."
 date: 2026-10-13
 tags: [kubernetes, containers]
-series: { key: devops, order: 52 }
+series: { key: devops, order: 21 }
 ---
 
 החלק הזה ממשיך מה-Deployment וה-Service בשם `hello` שבתיקייה `k8s/`, מ[Deployments, ‏Services והכנסת תעבורה מבחוץ](he/posts/kubernetes-zero-to-hero-deployments-services/). כל שינוי כאן הוא עריכה של `k8s/deployment.yaml` ואחריה `kubectl apply`.

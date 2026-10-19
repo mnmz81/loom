@@ -175,11 +175,6 @@ function loadEntries(contentDir: string, errors: string[]): RawEntry[] {
 
 /** Longest allowed translation; a longer topic is split into several posts (a series). */
 export const MAX_READING_MINUTES = 6;
-/** Entries written before the limit. Remove a slug once it is split or cut; never add one. */
-const OVER_LIMIT_ALLOWED = new Set([
-  'ai-end-to-end-app', 'ai-webmcp', 'aws-zero-to-hero', 'docker-zero-to-hero', 'git-commands',
-  'git-zero-to-hero', 'github-actions-zero-to-hero', 'github-zero-to-hero', 'kubernetes-zero-to-hero', 'linux-commands',
-]);
 
 function validate(entries: RawEntry[], series: Map<string, SeriesFile>, contentDir: string, errors: string[]): void {
   const bySlug = new Map<string, RawEntry[]>();
@@ -204,7 +199,7 @@ function validate(entries: RawEntry[], series: Map<string, SeriesFile>, contentD
     const sources = LANGS.flatMap((lang) => entry.sources[lang] ?? []);
     for (const { file, body } of sources) {
       const minutes = readingMinutes(body);
-      if (minutes > MAX_READING_MINUTES && !OVER_LIMIT_ALLOWED.has(entry.slug)) {
+      if (minutes > MAX_READING_MINUTES) {
         errors.push(`${file}: ${minutes} min read, the limit is ${MAX_READING_MINUTES} (cut repetition, or split it into a series)`);
       }
     }

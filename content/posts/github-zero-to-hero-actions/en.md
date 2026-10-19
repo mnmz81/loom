@@ -3,7 +3,7 @@ title: "GitHub from zero to hero: Actions, Pages and releases"
 summary: "Part 4 of the GitHub guide: a first Actions workflow, secrets and permissions, publishing a site with GitHub Pages, releases with generated notes, Codespaces and Copilot."
 date: 2026-10-09
 tags: [github, git]
-series: { key: devops, order: 23 }
+series: { key: devops, order: 10 }
 ---
 
 The pull requests from [part 2](en/posts/github-zero-to-hero-pull-requests/) need someone to check them, and the recipe book still isn't a website. GitHub can do both.

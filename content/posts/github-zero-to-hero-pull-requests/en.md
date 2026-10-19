@@ -3,7 +3,7 @@ title: "GitHub from zero to hero: the GitHub flow and pull requests"
 summary: "Part 2 of the GitHub guide: the GitHub flow step by step, a good pull request, reviewing with comments and suggestions, and the three ways to merge."
 date: 2026-10-09
 tags: [github, git]
-series: { key: devops, order: 21 }
+series: { key: devops, order: 8 }
 ---
 
 The recipe book is on GitHub since [part 1](en/posts/github-zero-to-hero/). This part changes it the way a team would, without ever breaking `main`.

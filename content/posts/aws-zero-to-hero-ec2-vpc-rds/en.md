@@ -3,7 +3,7 @@ title: "AWS: EC2 servers, VPC networks and RDS databases"
 summary: "Launching and connecting to an EC2 instance and what it costs, a VPC with public and private subnets across two zones, and a managed RDS database the internet can't reach."
 date: 2026-10-10
 tags: [aws, cloud]
-series: { key: devops, order: 62 }
+series: { key: devops, order: 25 }
 ---
 
 This part uses the AWS CLI and the IAM ideas from [IAM, the CLI and S3](en/posts/aws-zero-to-hero-iam-cli-s3/).
@@ -34,7 +34,7 @@ aws ec2 stop-instances --instance-ids <id>        # start-instances brings it ba
 aws ec2 terminate-instances --instance-ids <id>   # deletes it
 ```
 
-Then connect with `ssh -i my-key.pem ec2-user@<public-ip>` (Amazon Linux uses `ec2-user`, Ubuntu `ubuntu`). The commands you'll reach for on that server are in my [Linux commands cheat sheet](en/posts/linux-commands/). EC2 Instance Connect and Session Manager open a shell without SSH keys.
+Then connect with `ssh -i my-key.pem ec2-user@<public-ip>` (Amazon Linux uses `ec2-user`, Ubuntu `ubuntu`). The commands you'll reach for on that server are in my [Linux commands cheat sheet](en/posts/linux-commands-server/). EC2 Instance Connect and Session Manager open a shell without SSH keys.
 
 Three EC2 facts that save money and pain:
 

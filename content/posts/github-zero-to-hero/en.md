@@ -4,7 +4,7 @@ summary: "Part 1 of the GitHub guide: what GitHub adds to Git, creating a reposi
 date: 2026-10-09
 updated: 2026-10-19
 tags: [github, git]
-series: { key: devops, order: 20 }
+series: { key: devops, order: 7 }
 ---
 
 This guide takes the recipe book from [Git from zero to hero](en/posts/git-zero-to-hero/) online: we change it through a pull request, let a robot test it, and publish it as a website. It assumes you know `git add`, `git commit` and branches.

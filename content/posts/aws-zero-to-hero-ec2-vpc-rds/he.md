@@ -3,7 +3,7 @@ title: "AWS: שרתי EC2, רשתות VPC ומסדי נתונים ב-RDS"
 summary: "מפעילים instance של EC2, מתחברים אליו ומבינים כמה הוא עולה, ‏VPC עם subnets ציבוריים ופרטיים בשני אזורים, ומסד נתונים מנוהל ב-RDS שאי אפשר להגיע אליו מהאינטרנט."
 date: 2026-10-10
 tags: [aws, cloud]
-series: { key: devops, order: 62 }
+series: { key: devops, order: 25 }
 ---
 
 החלק הזה משתמש ב-AWS CLI וברעיונות של IAM מ[IAM, ה-CLI ו-S3](he/posts/aws-zero-to-hero-iam-cli-s3/).
@@ -34,7 +34,7 @@ aws ec2 stop-instances --instance-ids <id>        # start-instances brings it ba
 aws ec2 terminate-instances --instance-ids <id>   # deletes it
 ```
 
-ואז מתחברים עם `ssh -i my-key.pem ec2-user@<public-ip>` (ב-Amazon Linux המשתמש הוא `ec2-user`, ב-Ubuntu ‏`ubuntu`). את הפקודות שתצטרכו על השרת תמצאו ב[דף העזר לפקודות Linux](he/posts/linux-commands/). גם EC2 Instance Connect ו-Session Manager פותחים shell בלי מפתחות SSH.
+ואז מתחברים עם `ssh -i my-key.pem ec2-user@<public-ip>` (ב-Amazon Linux המשתמש הוא `ec2-user`, ב-Ubuntu ‏`ubuntu`). את הפקודות שתצטרכו על השרת תמצאו ב[דף העזר לפקודות Linux](he/posts/linux-commands-server/). גם EC2 Instance Connect ו-Session Manager פותחים shell בלי מפתחות SSH.
 
 שלוש עובדות על EC2 שחוסכות כסף וכאב ראש:
 

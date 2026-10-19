@@ -3,7 +3,7 @@ title: "Docker from zero to hero: ports, volumes and networks"
 summary: "Connecting containers to the world: publishing ports safely, volumes, bind mounts and tmpfs, user-defined networks for containers that talk by name, and passing configuration and secrets."
 date: 2026-10-10
 tags: [docker, containers]
-series: { key: devops, order: 32 }
+series: { key: devops, order: 13 }
 ---
 
 The `hello-app` image from [the Dockerfile part](en/posts/docker-zero-to-hero-dockerfile/) runs on its own. Here it gets a reachable port, data that outlives the container, and a Postgres database next to it.

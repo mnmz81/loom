@@ -3,7 +3,7 @@ title: "Docker מאפס לגיבור: Dockerfile לאפליקציה שלנו"
 summary: "מכניסים אפליקציית Node קטנה ל-container: כותבים Dockerfile ו-.dockerignore, בונים ומריצים, שכבות ו-build cache, בנייה רב-שלבית, ו-CMD מול ENTRYPOINT."
 date: 2026-10-10
 tags: [docker, containers]
-series: { key: devops, order: 31 }
+series: { key: devops, order: 12 }
 ---
 
 [בחלק הראשון](he/posts/docker-zero-to-hero/) הרצנו images שמישהו אחר בנה. כאן נבנה image לאפליקציה שלנו, ה-`hello-app` שילווה את שאר הסדרה.

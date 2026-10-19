@@ -3,7 +3,7 @@ title: "GitHub Actions מאפס לגיבור: jobs, ביטויים, matrix ומ�
 summary: "ה-workflow גדל: אפשרויות של job, ‏jobs שמחכים זה לזה, ביטויים והקשרים, העברת ערכים בין צעדים ובין jobs, ‏matrix, מטמון ו-artifacts."
 date: 2026-10-13
 tags: [github, ci-cd]
-series: { key: devops, order: 41 }
+series: { key: devops, order: 16 }
 ---
 
 [בחלק הראשון](he/posts/github-actions-zero-to-hero/) רץ job אחד, `test`, בכל push ו-pull request. ב-pipeline אמיתי יש כמה jobs, תנאים, וקבצים שעוברים ביניהם.
