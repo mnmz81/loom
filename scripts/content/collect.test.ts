@@ -456,6 +456,12 @@ describe('buildContent — validation', () => {
     expect(message).not.toMatch(/he\.md: \d+ min read/);
   });
 
+  it('exempts the reference pages (cheat sheets) from the reading-time limit', async () => {
+    const long = '## A\n\n' + 'word '.repeat(1300) + '\n';
+    const dirs = makeContent({ 'posts/git-commands/en.md': md({ title: 'T', summary: 'S', date: '2026-01-01', tags: ['ai'] }, long) });
+    await expect(build(dirs)).resolves.toBeDefined();
+  });
+
   it('rejects translations with different shared facts even when one is a draft', async () => {
     expect(
       await errorOf({

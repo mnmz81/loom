@@ -34,7 +34,7 @@ aws ec2 stop-instances --instance-ids <id>        # start-instances brings it ba
 aws ec2 terminate-instances --instance-ids <id>   # deletes it
 ```
 
-ואז מתחברים עם `ssh -i my-key.pem ec2-user@<public-ip>` (ב-Amazon Linux המשתמש הוא `ec2-user`, ב-Ubuntu ‏`ubuntu`). את הפקודות שתצטרכו על השרת תמצאו ב[דף העזר לפקודות Linux](he/posts/linux-commands-server/). גם EC2 Instance Connect ו-Session Manager פותחים shell בלי מפתחות SSH.
+ואז מתחברים עם `ssh -i my-key.pem ec2-user@<public-ip>` (ב-Amazon Linux המשתמש הוא `ec2-user`, ב-Ubuntu ‏`ubuntu`). את הפקודות שתצטרכו על השרת תמצאו ב[דף העזר לפקודות Linux](he/posts/linux-commands/). גם EC2 Instance Connect ו-Session Manager פותחים shell בלי מפתחות SSH.
 
 שלוש עובדות על EC2 שחוסכות כסף וכאב ראש:
 

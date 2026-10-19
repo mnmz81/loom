@@ -1,10 +1,9 @@
 ---
-title: "פקודות Linux: קבצים, צפייה, חיפוש וארכיונים"
-summary: "דף העזר שלי ל-Linux, חלק 1: עזרה, ניווט, העתקה ומחיקה, צפייה בקבצים, grep ו-find, ‏tar ו-zip."
+title: "פקודות Linux: דף העזר שלי"
+summary: "פקודות ה-Linux ששווה להכיר בעל פה, מקובצות לפי משימה: קבצים, חיפוש, טקסט, הרשאות, תהליכים, שירותים ולוגים, דיסק, רשת, ארכיונים, חבילות, SSH וקיצורי shell."
 date: 2026-10-10
 updated: 2026-10-19
 tags: [linux, cli, cheatsheet]
-series: { key: linux-commands, order: 1 }
 ---
 
 הפקודות שאני שולף על שרת Linux, בתוך container או במשימת CI. הדוגמאות מניחות **GNU/Linux** עם shell בסגנון Bash; ב-Mac הגרסאות של BSD שונות בפרטים, ואיפה שזה משנה אני מציין את זה. Linux רגישה לאותיות גדולות וקטנות: `File.txt` ו-`file.txt` הם שני קבצים שונים. סימן ⚠️ אומר שהפקודה יכולה להרוס נתונים: מריצים קודם את הגרסה הלא מזיקה (`ls` לפני `rm`, ‏`find` בלי `-delete`) ומסתכלים. Linux חד-פעמי לתרגול נמצא במרחק פקודה אחת: `docker run --rm -it ubuntu bash` (ראו [Docker מאפס לגיבור](he/posts/docker-zero-to-hero/)).
@@ -66,6 +65,123 @@ find / -name "nginx.conf" 2>/dev/null     # search everywhere, hide "permission 
 - `find ... -print0 | xargs -0 <פקודה>` היא הדרך הבטוחה להעביר שמות קבצים לפקודה אחרת, כי היא מתמודדת עם רווחים ושורות חדשות בשמות.
 - `locate <שם>` מחפשת באינדקס מוכן והיא הרבה יותר מהירה מ-`find`, אבל דורשת `plocate` או `mlocate` ואינדקס מעודכן (`sudo updatedb`).
 
+## צינורות, הפניות ושרשור
+
+- `a | b` שולחת את הפלט של `a` לתוך `b`.
+- `cmd > file` כותבת את הפלט לקובץ ומחליפה אותו ⚠️. `cmd >> file` מוסיפה לסופו. `cmd < file` קוראת קלט מקובץ.
+- לכל תוכנה יש שני ערוצי פלט: פלט סטנדרטי (1) ושגיאה סטנדרטית (2). `cmd 2> errors.txt` מפנה רק את השגיאות, `cmd > out.txt 2>&1` שולחת את שניהם לאותו קובץ, ו-`cmd > /dev/null 2>&1` זורקת הכול (`/dev/null` הוא הפח).
+- `cmd | tee file` מציגה את הפלט וגם שומרת אותו. `tee -a` מוסיפה לסוף.
+- `$(cmd)` מכניסה את הפלט של פקודה לתוך פקודה אחרת: `echo "Today is $(date +%F)"`.
+- `a && b` מריצה את `b` רק אם `a` הצליחה, `a || b` מריצה את `b` רק אם `a` נכשלה, ו-`a; b` מריצה את שתיהן בכל מקרה. `$?` מחזיק את קוד היציאה של הפקודה האחרונה: `0` פירושו הצלחה.
+
+## עיבוד טקסט
+
+```bash
+cut -d: -f1,3 /etc/passwd                         # fields 1 and 3, split on ":"
+awk -F: '{print $1}' /etc/passwd                   # the first field, with awk
+sort file.txt | uniq -c | sort -rn | head          # the most frequent lines, ranked
+tr 'a-z' 'A-Z' < file.txt                          # translate characters (here: upper-case)
+sed 's/old/new/g' file.txt                         # replace in the output (file unchanged)
+sed -n '10,20p' file.txt                           # print only lines 10 to 20
+```
+
+- `sort` ממיינת שורות. `-n` ממיין מספרית, `-r` הופך, `-u` מסיר כפילויות, ו-`-k2` ממיין לפי העמודה השנייה.
+- `uniq` מקפלת שורות זהות *סמוכות*, ולכן ממיינים קודם. `uniq -c` מוסיפה לכל שורה את מספר ההופעות שלה.
+- `sed -i 's/old/new/g' file` עורכת את הקובץ במקום ⚠️. ב-macOS צריך ארגומנט סיומת: `sed -i '' ...`. מריצים קודם בלי `-i`.
+- `awk` היא שפה זעירה לעמודות: `awk '{sum += $3} END {print sum}' file` מחברת את העמודה השלישית.
+- `xargs` הופכת שורות קלט לארגומנטים: `cat urls.txt | xargs -n 1 curl -sI`.
+- `jq` (בדרך כלל מותקנת בנפרד) היא `grep` ו-`sed` ל-JSON: `curl -s <url> | jq '.items[0].name'`.
+
+## הרשאות ובעלות
+
+`ls -l` מראה מי יכול לעשות מה. המחרוזת `-rwxr-xr--` היא סוג קובץ ואחריו שלוש שלשות: לבעלים, לקבוצה ולכל השאר. כל שלשה היא קריאה (r, ‏4), כתיבה (w, ‏2) והרצה (x, ‏1), וחיבור המספרים נותן את הצורה האוקטלית ש-`chmod` משתמשת בה.
+
+![מחרוזת ההרשאות של ls -l, ‏-rwxr-xr--, מפוצלת לתו סוג ולשלוש שלשות: בעלים rwx = 7, קבוצה r-x = 5, אחרים r-- = 4, וזה מספר ה-chmod‏ 754.](/images/linux-commands/permissions.svg)
+
+- `chmod 755 <קובץ>` קובעת הרשאות במספרים. ערכים נפוצים: `644` לקבצים (הבעלים כותב, כולם קוראים), `755` לסקריפטים ולתיקיות, `600` לסודות כמו מפתחות SSH.
+- `chmod +x <קובץ>` הופכת קובץ להרצה, `chmod u+w <קובץ>` מוסיפה כתיבה לבעלים, ו-`chmod go-rwx <קובץ>` מסירה הכול מהקבוצה ומהאחרים.
+- `chmod -R u+rwX,go-w <תיקייה>` משנה עץ שלם. ה-`X` הגדולה מוסיפה הרצה רק לתיקיות ולקבצים שכבר יש להם אותה.
+- בתיקייה, `x` פירושו "מותר להיכנס אליה ולהגיע לקבצים שבתוכה".
+- `chown <משתמש>:<קבוצה> <קובץ>` משנה בעלים וקבוצה (דורשת `sudo` אלא אם הקובץ כבר שלנו). `-R` מחילה את זה רקורסיבית ⚠️, אז קודם בודקים את הנתיב.
+- `sudo <פקודה>` מריצה פקודה אחת כ-root. `sudo -i` פותחת shell של root, ו-`sudo -u <משתמש> <פקודה>` מריצה כמישהו אחר. עדיף `sudo` על פקודה בודדת מאשר להישאר ב-shell של root.
+- `whoami` מדפיסה את שם המשתמש, `id` את מזהי המשתמש והקבוצות, ו-`groups` את הקבוצות.
+- `chmod -R 777` כמעט אף פעם אינה התשובה ⚠️: היא מאפשרת לכל אחד לכתוב לכל דבר. נותנים בדיוק את הגישה שמשתמש צריך.
+
+## תהליכים
+
+- `ps aux` רושמת כל תהליך עם הבעלים שלו ושימוש ב-CPU ובזיכרון, ו-`ps -ef` מוסיפה מזהי תהליכי אב. ‏`ps aux --sort=-%mem | head` מציגה את צורכי הזיכרון הגדולים ב-GNU/Linux.
+- `pgrep -af <שם>` מוצאת תהליכים לפי שם ומדפיסה את שורות הפקודה שלהם.
+- `top` היא התצוגה החיה של מה שעסוק: `q` יוצא, `M` ממיין לפי זיכרון ו-`P` לפי CPU. `htop` היא גרסה נעימה יותר שבדרך כלל מתקינים בעצמנו.
+- `kill <pid>` מבקשת מתהליך להיעצר בנימוס (SIGTERM). `kill -9 <pid>` כופה זאת עם SIGKILL, בלי הזדמנות לנקות אחריו, ולכן רק כשהדרך הנימוסית נכשלה ⚠️. `pkill <שם>` ו-`killall <שם>` עושות אותו דבר לפי שם, אז בודקים שהתבנית לא תופסת יותר ממה שהתכוונו.
+- `jobs`, `fg` ו-`bg` מנהלות משימות ב-shell: `Ctrl-Z` משעה את הפקודה שרצה, `bg` ממשיכה אותה ברקע, ו-`fg` מחזירה אותה לחזית. מסיימים פקודה ב-`&` כדי להפעיל אותה ברקע.
+- `nohup <פקודה> &` משאירה פקודה רצה גם אחרי שמתנתקים. לכל דבר ארוך טווח עדיף שירות (בהמשך) או `tmux`/`screen`.
+- `lsof -i :8080` מראה מה משתמש בפורט, ו-`lsof <קובץ>` מראה מי פתח קובץ.
+
+## שירותים ולוגים (systemd)
+
+ברוב ההפצות המודרניות של Linux מנהלים שירותים עם **systemd** ([תיעוד](https://systemd.io/)). (לא ב-Mac, ובדרך כלל לא בתוך container.)
+
+- `systemctl status <שירות>` מראה אם שירות רץ ואת שורות הלוג האחרונות שלו.
+- `sudo systemctl start|stop|restart|reload <שירות>` שולטת בו מיד; ‏`reload` קוראת מחדש את ההגדרות בלי הפעלה מחדש מלאה, אם נתמך.
+- `sudo systemctl enable <שירות>` מפעילה אותו באתחול, `disable` מבטלת זאת, ו-`enable --now` מפעילה גם מיד.
+- `systemctl list-units --type=service` רושמת את השירותים, ו-`systemctl --failed` רושמת את אלה שנכשלו.
+- `sudo systemctl daemon-reload` גורמת ל-systemd לקרוא מחדש קובצי unit אחרי שערכנו אותם.
+
+`journalctl` קוראת את הלוגים ש-systemd אוספת:
+
+```bash
+journalctl -u nginx                   # logs of one service
+journalctl -u nginx -f                # follow them live
+journalctl -u nginx -n 100            # the last 100 lines
+journalctl -b                         # everything since this boot (-b -1 = the previous boot)
+journalctl --since "1 hour ago"       # a time window (also --until)
+journalctl -p err                     # only errors and worse
+journalctl -k                         # kernel messages, like dmesg
+journalctl --disk-usage               # how much space the journal takes
+```
+
+קובצי לוג רגילים עדיין חיים ב-`/var/log` בהרבה תוכנות: `tail -f /var/log/syslog` (ב-Debian וב-Ubuntu) או `/var/log/messages` (במשפחת Red Hat).
+
+## דיסק וזיכרון
+
+- `df -h` מראה מקום פנוי לכל מערכת קבצים. דיסק מלא הוא הסיבה למספר מפתיע של תקריות "פתאום זה הפסיק לעבוד".
+- `du -sh <תיקייה>` מראה את הגודל הכולל של תיקייה, ו-`du -h -d 1 . | sort -h` מראה כל תיקייה ברמה אחת מתחת, מהקטנה לגדולה, כך שהאשם בתחתית. (‏`sort -h` היא אפשרות של GNU.)
+- `ncdu` הוא דפדפן אינטראקטיבי לשימוש בדיסק שמתקינים בנפרד: הדרך המהירה ביותר למצוא מה מילא את הדיסק.
+- `free -h` מציגה זיכרון ו-swap. קוראים את העמודה "available", לא "free": Linux משתמשת בזיכרון פנוי כ-cache.
+- `uptime` מראה כמה זמן המכונה פועלת ואת עומסי הממוצע, ו-`lsblk` רושמת דיסקים וחלוקות.
+- `mount | grep <נתיב>` ו-`findmnt` מראות מה מחובר לאן.
+- `dd` כותבת בתים גולמיים להתקן ⚠️: אם מכוונים אותה להתקן הלא נכון, היא דורסת דיסק שלם.
+
+## רשת
+
+- `ip addr` (בקיצור: `ip a`) מציגה את הכתובות של המכונה, ו-`ip route` מציגה את טבלת הניתוב. הן החליפו את `ifconfig` ו-`route` הישנות.
+- `ss -tulpn` רושמת sockets שמאזינים: `-t` ל-TCP, `-u` ל-UDP, `-l` רק מאזינים, `-p` התהליך שמחזיק, `-n` מספרים במקום שמות (עם `sudo` רואים תהליכים של משתמשים אחרים). ‏`ss -s` מדפיסה סיכום, ו-`ss -tn 'sport = :80'` מצמצמת לפורט אחד. (‏`netstat` היא הכלי הישן.)
+- `ping -c 4 <host>` בודקת שמארח עונה (`-c` מגביל את המספר, אחרת היא רצה לנצח).
+- `curl <url>` מושכת כתובת. הדגלים שכדאי להכיר: `-I` רק כותרות, `-s` שקט, `-L` עוקב אחרי הפניות, `-o <file>` שומר לקובץ, `-f` נכשל על שגיאות HTTP, ו-`-X POST -d '{"a":1}' -H 'Content-Type: application/json'` לשליחת נתונים. `curl -fsSL <url> -o file` היא ההורדה האמינה. גם `wget <url>` מורידה.
+- `dig <domain> +short` (או `nslookup`) מחפשת רשומות DNS, ו-`dig <domain> MX` מבקשת סוג מסוים.
+- `nc -zv <host> <port>` בודקת אם פורט TCP נגיש.
+- `traceroute <host>` מראה את הקפיצות בדרך (ייתכן שצריך להתקין).
+- `curl -fsSL <url> | sh` מריצה סקריפט ישר מהאינטרנט ⚠️. מורידים אותו, קוראים אותו, ורק אז מריצים.
+
+## SSH והעתקת קבצים
+
+```bash
+ssh user@host                          # log in
+ssh -i ~/.ssh/key.pem user@host        # with a specific key
+ssh -p 2222 user@host                  # a different port
+ssh user@host 'df -h'                  # run one command and come back
+ssh-keygen -t ed25519 -C "me@laptop"   # create a key pair
+ssh-copy-id user@host                  # install your public key on the server
+scp file.txt user@host:/tmp/           # copy a file to the server
+scp user@host:/var/log/app.log .       # copy a file from the server
+rsync -avzP ./site/ user@host:/var/www/site/   # sync a folder, resumable, with progress
+rsync -avzn --delete ./site/ user@host:/var/www/site/   # dry run (-n) of a mirror
+```
+
+- מפתחות פרטיים חייבים להיות פרטיים: `chmod 600 ~/.ssh/key.pem`, אחרת SSH מסרבת להשתמש בהם.
+- `~/.ssh/config` מאפשר לתת לשרת שם קצר, כך ש-`ssh myserver` מחליף את השורה הארוכה.
+- `rsync` היא כלי ההעתקה הטוב יותר: היא מעבירה רק את מה שהשתנה. **לוכסן הסיום** חשוב: `site/` מעתיקה את *התוכן* של התיקייה, ו-`site` את התיקייה עצמה. ‏`--delete` מסירה מהיעד קבצים שאינם במקור ⚠️, ולכן קודם dry run (`-n`).
+
 ## ארכיונים ודחיסה
 
 - `tar czf backup.tar.gz <תיקייה>` יוצרת ארכיון דחוס ב-gzip: `c` יצירה, `z` gzip, `f` שם הקובץ שבא אחריו. משתמשים ב-`J` במקום `z` ל-xz, וב-`j` ל-bzip2.
@@ -73,3 +189,32 @@ find / -name "nginx.conf" 2>/dev/null     # search everywhere, hide "permission 
 - `tar czf backup.tar.gz --exclude=node_modules <תיקייה>` משאירה דברים בחוץ.
 - `gzip <קובץ>` דוחסת קובץ בודד (ומחליפה אותו ב-`<קובץ>.gz`), ו-`gunzip <קובץ>.gz` הופכת זאת.
 - `zip -r archive.zip <תיקייה>` ו-`unzip archive.zip` מטפלות בפורמט הידידותי ל-Windows, וייתכן שצריך להתקין אותן.
+
+## התקנת תוכנה
+
+הפקודה תלויה בהפצה:
+
+```bash
+sudo apt update && sudo apt install -y curl   # Debian, Ubuntu
+sudo dnf install curl                         # Fedora, RHEL and relatives
+sudo apk add curl                             # Alpine (common in containers)
+sudo pacman -S curl                           # Arch
+```
+
+- ב-Debian וב-Ubuntu, `apt update` מרעננת את רשימת החבילות ו-`apt upgrade` מתקינה עדכונים זמינים. `apt search <מילה>` מוצאת חבילות, `apt remove <pkg>` מסירה, ו-`dpkg -l | grep <מילה>` מראה מה מותקן.
+- `cat /etc/os-release` אומרת באיזו הפצה וגרסה אנחנו, כדי לבחור את השורה הנכונה למעלה.
+
+## על המערכת ועל הסשן
+
+- `uname -a` מציגה את הליבה והארכיטקטורה, `hostnamectl` מציגה את שם המארח ואת מערכת ההפעלה, ו-`date` מציגה את השעה. `date +%F` מדפיסה אותה כ-`2026-10-10`, נוח לשמות קבצים.
+- `env` (או `printenv`) רושמת משתני סביבה, `echo "$PATH"` מראה איפה ה-shell מחפש תוכנות, ו-`export NAME=value` קובעת משתנה לתוכנות שמפעילים מה-shell הזה.
+- `history` רושמת פקודות עבר. `Ctrl-R` מחפשת בהן תוך כדי הקלדה, וזה מהיר יותר מהחיצים.
+- `alias ll='ls -lah'` יוצרת קיצור לסשן הזה. כדי לשמור אותו, מוסיפים את השורה ל-`~/.bashrc`.
+- `crontab -e` עורכת את המשימות המתוזמנות שלנו ו-`crontab -l` רושמת אותן. בשורה יש חמישה שדות זמן ואז הפקודה: `30 2 * * * /home/me/backup.sh` רצה ב-02:30 בכל יום (דקה, שעה, יום בחודש, חודש, יום בשבוע).
+- `sudo shutdown -h now` ו-`sudo reboot` עושות מה שהן אומרות ⚠️. במכונה מרוחקת, מוודאים שזה באמת מה שרוצים.
+
+## קיצורי shell ששווה ללמוד
+
+- `Ctrl-C` עוצר את הפקודה שרצה, `Ctrl-D` מסיים קלט (ומנתק מפרומפט ריק), `Ctrl-L` מנקה את המסך, `Ctrl-Z` משעה את הפקודה.
+- `Ctrl-A` ו-`Ctrl-E` קופצים להתחלה ולסוף השורה, `Ctrl-W` מוחק את המילה הקודמת ו-`Ctrl-U` מוחק עד ההתחלה.
+- `!!` חוזרת על הפקודה הקודמת, ולכן `sudo !!` פירושו "שכחתי sudo". `!$` הוא הארגומנט האחרון של הפקודה הקודמת.

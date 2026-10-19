@@ -175,6 +175,8 @@ function loadEntries(contentDir: string, errors: string[]): RawEntry[] {
 
 /** Longest allowed translation; a longer topic is split into several posts (a series). */
 export const MAX_READING_MINUTES = 6;
+/** Reference pages (cheat sheets) stay one page to search in, so the limit does not apply to them. */
+const REFERENCE_PAGES = new Set(['git-commands', 'linux-commands']);
 
 function validate(entries: RawEntry[], series: Map<string, SeriesFile>, contentDir: string, errors: string[]): void {
   const bySlug = new Map<string, RawEntry[]>();
@@ -199,7 +201,7 @@ function validate(entries: RawEntry[], series: Map<string, SeriesFile>, contentD
     const sources = LANGS.flatMap((lang) => entry.sources[lang] ?? []);
     for (const { file, body } of sources) {
       const minutes = readingMinutes(body);
-      if (minutes > MAX_READING_MINUTES) {
+      if (minutes > MAX_READING_MINUTES && !REFERENCE_PAGES.has(entry.slug)) {
         errors.push(`${file}: ${minutes} min read, the limit is ${MAX_READING_MINUTES} (cut repetition, or split it into a series)`);
       }
     }

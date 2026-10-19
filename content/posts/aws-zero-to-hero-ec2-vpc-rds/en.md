@@ -34,7 +34,7 @@ aws ec2 stop-instances --instance-ids <id>        # start-instances brings it ba
 aws ec2 terminate-instances --instance-ids <id>   # deletes it
 ```
 
-Then connect with `ssh -i my-key.pem ec2-user@<public-ip>` (Amazon Linux uses `ec2-user`, Ubuntu `ubuntu`). The commands you'll reach for on that server are in my [Linux commands cheat sheet](en/posts/linux-commands-server/). EC2 Instance Connect and Session Manager open a shell without SSH keys.
+Then connect with `ssh -i my-key.pem ec2-user@<public-ip>` (Amazon Linux uses `ec2-user`, Ubuntu `ubuntu`). The commands you'll reach for on that server are in my [Linux commands cheat sheet](en/posts/linux-commands/). EC2 Instance Connect and Session Manager open a shell without SSH keys.
 
 Three EC2 facts that save money and pain:
 

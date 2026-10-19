@@ -1,6 +1,0 @@
-title:
-  he: "דף העזר שלי ל-Linux"
-  en: "My Linux cheat sheet"
-description:
-  he: פקודות ה-Linux שאני שולף על שרת, בתוך container או במשימת CI, מקובצות לפי משימה.
-  en: The Linux commands I reach for on a server, in a container or in a CI job, grouped by task.
