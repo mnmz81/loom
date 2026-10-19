@@ -19,7 +19,7 @@ import {
   type TagCount,
   TYPE_SEGMENT,
 } from '../../src/app/core/content.models';
-import { createRenderer, type RenderedMarkdown } from './markdown';
+import { createRenderer, readingMinutes, type RenderedMarkdown } from './markdown';
 import { bodyShape, shapeDiff } from './parity';
 import { formatZodError, isKebab, noteFrontmatter, postFrontmatter, type SeriesFile, seriesFile, type TagsFile, tagsFile } from './schema';
 
@@ -173,6 +173,14 @@ function loadEntries(contentDir: string, errors: string[]): RawEntry[] {
   return entries;
 }
 
+/** Longest allowed translation; a longer topic is split into several posts (a series). */
+export const MAX_READING_MINUTES = 6;
+/** Entries written before the limit. Remove a slug once it is split or cut; never add one. */
+const OVER_LIMIT_ALLOWED = new Set([
+  'ai-end-to-end-app', 'ai-webmcp', 'aws-zero-to-hero', 'claude-code-mods', 'docker-zero-to-hero', 'git-commands',
+  'git-zero-to-hero', 'github-actions-zero-to-hero', 'github-zero-to-hero', 'kubernetes-zero-to-hero', 'linux-commands',
+]);
+
 function validate(entries: RawEntry[], series: Map<string, SeriesFile>, contentDir: string, errors: string[]): void {
   const bySlug = new Map<string, RawEntry[]>();
   for (const entry of entries) bySlug.set(entry.slug, [...(bySlug.get(entry.slug) ?? []), entry]);
@@ -194,6 +202,12 @@ function validate(entries: RawEntry[], series: Map<string, SeriesFile>, contentD
       }
     }
     const sources = LANGS.flatMap((lang) => entry.sources[lang] ?? []);
+    for (const { file, body } of sources) {
+      const minutes = readingMinutes(body);
+      if (minutes > MAX_READING_MINUTES && !OVER_LIMIT_ALLOWED.has(entry.slug)) {
+        errors.push(`${file}: ${minutes} min read, the limit is ${MAX_READING_MINUTES} (cut repetition, or split it into a series)`);
+      }
+    }
     for (const { file, fm } of sources) {
       if (fm.series && !series.has(fm.series.key)) {
         errors.push(`${file}: unknown series "${fm.series.key}" (expected ${join(contentDir, 'series', `${fm.series.key}.yaml`)})`);

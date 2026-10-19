@@ -445,6 +445,17 @@ describe('buildContent — validation', () => {
     expect(message).toMatch(/code blocks: he 1 vs en 0/);
   });
 
+  it('rejects a translation longer than the reading-time limit, drafts included', async () => {
+    const long = '## A\n\n' + 'word '.repeat(1300) + '\n';
+    const base = { title: 'T', summary: 'S', date: '2026-01-01', tags: ['ai'] };
+    const message = await errorOf({
+      'posts/a/he.md': md(base, '## א\n\nקצר\n'),
+      'posts/a/en.md': md({ ...base, draft: true }, long),
+    });
+    expect(message).toMatch(/posts\/a\/en\.md: 7 min read, the limit is 6/);
+    expect(message).not.toMatch(/he\.md: \d+ min read/);
+  });
+
   it('rejects translations with different shared facts even when one is a draft', async () => {
     expect(
       await errorOf({

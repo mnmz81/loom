@@ -26,12 +26,14 @@ Run every command with `./scripts/with-node.sh` (system Node is 20).
 - Python posts: `PYTHON=python3.13 python3 scripts/check-python-examples.py content/posts/<slug>/en.md` runs every block and compares it with the output block after it (`--fill` writes the real output in).
 - Reordering or retagging: `npx tsx scripts/set-shared.ts` changes `tags` / `series` in both files at once (`--series-order <key> <slug>...` renumbers a series); then fix the "What's next" paragraphs that point at the old order.
 - Prices, plans and UI paths change: hedge or link instead of stating them.
-- Read the previous post in the series and match its structure, length and tone.
+- Read the previous post in the series and match its structure and tone.
+- Plan the length before writing: **6 minutes max per language** (about 1,200 words, code included). If the outline won't fit, split it into several posts (a series) now, not after writing.
 - Repo docs: `docs/contracts/content-format.md` (layout, frontmatter, tags) and `docs/notion-setup.md` (publishing flow, Notion copy).
 
 ## 3. Write both languages
 
 - Hebrew first (default language), then English with the **same facts and same structure**.
+- **No padding.** Each idea once: no intro that restates the title, no "as mentioned", no recap at the end, no prose that repeats what a code block or table already shows. One example per point. Cut every sentence that adds no fact.
 - The build enforces parity: same number of `##` / `###` headings, same number of code blocks, same images (`scripts/content/parity.ts`). Code blocks may differ only in comments.
 - Fill `title` and `summary` (1–200 characters, check the length) in each language; remove `draft: true` from both when done.
 - Hebrew: natural Israeli Hebrew, gender-neutral address (plural "אתם" or impersonal). Run the `hebrew-localization:hebrew-ai-tells` skill on the Hebrew draft when it is available.
@@ -58,6 +60,8 @@ Run every command with `./scripts/with-node.sh` (system Node is 20).
 ```
 
 Both must pass. Fix the content, never the validation, unless the user asks.
+
+Check the length: `python3 scripts/reading-time.py <slug>` — both languages ≤ 6 min. Then re-read each language once only for repetition and cut it, even when under the limit.
 
 ## 7. Commit
 

@@ -68,6 +68,8 @@ Keys must be kebab-case. Missing tag or language → label = the key.
 ## Body
 CommonMark + GFM tables/linkify; raw HTML disabled. Fenced code with a language gets Shiki highlighting (light + dark). `##` and `###` headings form the TOC. Images: `![alt](/images/<slug>/x.png)`. Code blocks always render left-to-right.
 
+Length: each translation is at most **6 minutes** to read (200 words per minute, code included, `readingMinutes` in `scripts/content/markdown.ts`); a longer one fails the build. A bigger topic is split into a series. Entries written before the limit are listed in `OVER_LIMIT_ALLOWED` (`scripts/content/collect.ts`) until they are split.
+
 ## Example
 ```markdown
 ---

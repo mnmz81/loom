@@ -35,6 +35,11 @@ export function countWords(text: string): number {
   return text.match(/[\p{L}\p{N}][\p{L}\p{M}\p{N}'’_-]*/gu)?.length ?? 0;
 }
 
+/** Estimated reading time shown on the site (200 words per minute, at least 1). */
+export function readingMinutes(markdown: string): number {
+  return Math.max(1, Math.round(countWords(markdown) / WORDS_PER_MINUTE));
+}
+
 // Plain heading text from the inline token's children (same text markdown-it-anchor slugs from).
 function plainText(inline: Token | undefined): string {
   return (inline?.children ?? [])
@@ -90,7 +95,7 @@ export async function createRenderer(): Promise<Renderer> {
     return {
       html: md.renderer.render(tokens, md.options, env),
       toc,
-      readingMinutes: Math.max(1, Math.round(countWords(markdown) / WORDS_PER_MINUTE)),
+      readingMinutes: readingMinutes(markdown),
     };
   };
 }
