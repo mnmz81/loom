@@ -6,13 +6,11 @@ tags: [python]
 series: { key: python, order: 23 }
 ---
 
-uv is a tool from Astral, written in Rust, that does what pip does and more. The docs describe it as "an extremely fast Python package manager". It installs packages, creates virtual environments, and can even install Python versions. It also has a project workflow, where it manages the environment and the list of dependencies for you.
+uv is a tool from Astral, written in Rust, that the docs describe as "an extremely fast Python package manager". It installs packages, creates virtual environments, and can even install Python versions.
 
-Every command here was run with uv 0.11 and Python 3.13. The behavior was checked against the [uv docs](https://docs.astral.sh/uv/).
+Every command ran with uv 0.11 and Python 3.13, checked against the [uv docs](https://docs.astral.sh/uv/).
 
 ## Two ways to use uv
-
-uv has two modes:
 
 1. **The project workflow:** `uv init`, `uv add`, `uv run`. uv keeps the dependencies and the environment in sync for you. This is the recommended way for new projects.
 2. **The pip-style workflow:** `uv venv` and `uv pip install`. The docs call it "a drop-in replacement for common pip, pip-tools, and virtualenv commands" for projects that aren't ready to switch.
@@ -60,7 +58,7 @@ uv run python -c "import requests; print(requests.__version__)"
 2.34.2
 ```
 
-You don't have to activate `.venv` yourself. Before each `uv run`, uv checks that the lockfile matches `pyproject.toml`, and that the environment matches the lockfile. Commit `pyproject.toml` and `uv.lock` to git, and skip `.venv`. The `.venv` can be rebuilt from the lockfile.
+You don't have to activate `.venv` yourself. Before each `uv run`, uv checks that the lockfile matches `pyproject.toml`, and that the environment matches the lockfile. Commit `pyproject.toml` and `uv.lock` to git, but not `.venv`: it is machine-specific, can be rebuilt from the lockfile, and `uv init` already lists it in `.gitignore`.
 
 ## The pip-style workflow
 
@@ -87,14 +85,12 @@ Keep in mind that `uv pip` is not pip. The docs say its commands "do not exactly
 
 ## When to use which
 
-- **New project:** use `uv init`, `uv add` and `uv run`. You get a lockfile for free.
 - **Existing project with a `requirements.txt`:** `uv pip install -r requirements.txt` works, and you can switch to the project workflow later.
 - **Quick experiment:** `uv venv` and `uv pip install` are enough.
 
 ## Common mistakes
 
 - **Editing `uv.lock` by hand.** Change dependencies with `uv add` and `uv remove`, and let uv update the lockfile.
-- **Committing `.venv`.** It's machine-specific. Add it to `.gitignore`. `uv init` already does this.
 - **Mixing `uv pip` and `pip` in one environment.** Pick one for a project, so you don't end up with two sets of records for the same packages.
 
 ## What's next

@@ -6,9 +6,9 @@ tags: [python]
 series: { key: python, order: 14 }
 ---
 
-`%` is the modulo operator. It gives the remainder after division. The [number operations post](en/posts/python-number-operations/) introduced it in a few lines. It deserves its own post, because it shows up in conditions constantly: checking if a number is even, doing something every tenth time, or wrapping an index back to the start of a list.
+`%` is the modulo operator: the remainder after division. The [number operations post](en/posts/python-number-operations/) introduced it in a few lines.
 
-Every example here was run with Python 3.13. The behavior was checked against the [binary arithmetic operations reference](https://docs.python.org/3/reference/expressions.html#binary-arithmetic-operations) and the [`divmod()` docs](https://docs.python.org/3/library/functions.html#divmod).
+Every example ran with Python 3.13, checked against the [binary arithmetic operations reference](https://docs.python.org/3/reference/expressions.html#binary-arithmetic-operations) and the [`divmod()` docs](https://docs.python.org/3/library/functions.html#divmod).
 
 ## What % does
 
@@ -22,13 +22,13 @@ print(17 % 5, 10 % 2, 3 % 7, 0 % 4)
 2 0 3 0
 ```
 
-17 is three groups of 5, plus 2 left over. 10 divides by 2 exactly, so the remainder is 0. 3 is smaller than 7, so the whole 3 is left over.
+17 is three groups of 5 plus 2. 3 is smaller than 7, so all of it is left over.
 
 `%` goes hand in hand with floor division `//`. The docs give the identity `x == (x//y)*y + (x%y)`: the quotient times the divisor, plus the remainder, gives back the original number.
 
 ## Even or odd
 
-The classic use. A number is even when dividing it by 2 leaves nothing:
+A number is even when dividing it by 2 leaves nothing:
 
 ```python
 number = 7
@@ -77,20 +77,9 @@ Mon
 Thu
 ```
 
-Today is index 5 (Friday). Three days later is index 8, and `8 % 7` is 1, Monday. Eight days back is index -3, and `-3 % 7` is 4, Thursday. The index never falls off the list.
+Today is index 5 (Friday). Three days later is index 8, and `8 % 7` is 1, Monday. Eight days back is index -3, and `-3 % 7` is 4, Thursday. The index never falls off the list. A 24-hour clock works the same way.
 
-A clock works the same way, with 24 hours:
-
-```python
-hour = 22
-print((hour + 5) % 24)
-```
-
-```text
-3
-```
-
-Compound assignment works too. `%=` keeps an angle between 0 and 359:
+`%=` keeps an angle between 0 and 359:
 
 ```python
 angle = 350
@@ -135,7 +124,7 @@ print(n % 10, n % 100, n // 10 % 10)
 
 ## FizzBuzz
 
-The famous interview exercise is a test of `%` and `elif` order. Print the numbers from 1 to 15, but "Fizz" for multiples of 3, "Buzz" for multiples of 5, and "FizzBuzz" for multiples of both:
+The interview exercise tests `%` and `elif` order: print the numbers from 1 to 15, but "Fizz" for multiples of 3, "Buzz" for multiples of 5, and "FizzBuzz" for multiples of both:
 
 ```python
 for n in range(1, 16):
@@ -153,7 +142,7 @@ for n in range(1, 16):
 1 2 Fizz 4 Buzz Fizz 7 8 Fizz Buzz 11 Fizz 13 14 FizzBuzz
 ```
 
-(The output is shown on one line to save space.) The `n % 15` check must come first. Otherwise 15 would match `n % 3 == 0` and print "Fizz", as explained in the [`if`/`elif` post](en/posts/python-if-else/).
+(Output shown on one line to save space.) The `n % 15` check must come first, or 15 would match `n % 3 == 0` and print "Fizz", as explained in the [`if`/`elif` post](en/posts/python-if-else/).
 
 ## Negative numbers
 
@@ -173,7 +162,7 @@ print(math.fmod(-7, 3))
 -1.0
 ```
 
-`-7 // 3` rounds down to -3, and `-3 * 3 + 2` is -7, so the remainder is 2. In C or JavaScript, `-7 % 3` is -1. If you need that behavior, `math.fmod()` gives it, and the [math docs](https://docs.python.org/3/library/math.html#math.fmod) recommend `fmod()` for floats and `%` for integers.
+`-7 // 3` rounds down to -3, and `-3 * 3 + 2` is -7, so the remainder is 2. In C or JavaScript, `-7 % 3` is -1. `math.fmod()` gives that behavior, and the [math docs](https://docs.python.org/3/library/math.html#math.fmod) recommend `fmod()` for floats and `%` for integers.
 
 Python's rule is the reason the wrap-around trick works with negative indexes, and why `n % 2 == 1` is a correct odd check even for negative `n`:
 
@@ -199,15 +188,13 @@ print(7.5 % 2, 5 % 0.1)
 1.5 0.09999999999999973
 ```
 
-You'd expect `5 % 0.1` to be 0. It isn't, because 0.1 can't be stored exactly. Use `%` with whole numbers when you can.
+`5 % 0.1` isn't 0 because 0.1 can't be stored exactly. Use `%` with whole numbers when you can.
 
 ## Common mistakes
 
 - **Dividing by zero.** `5 % 0` raises `ZeroDivisionError: integer modulo by zero`, the same as `5 / 0`.
 - **Confusing `%` with percent.** `50 % 10` is 0, not "5". For a percentage, multiply: `part / total * 100`.
-- **Porting code from another language.** With negative numbers, `%` in Python returns a different result than in C, Java or JavaScript.
-- **Wrong order in FizzBuzz-style checks.** Test the combined case (`% 15`) before its parts.
-- **Mistaking `%` in strings for modulo.** `"%s is %d years old" % ("Dana", 30)` is the old string formatting. With a string on the left, `%` formats text. Today, use f-strings instead.
+- **Mistaking `%` in strings for modulo.** `"%s is %d years old" % ("Dana", 30)` is the old string formatting. With a string on the left, `%` formats text; use f-strings instead.
 
 ## What's next
 

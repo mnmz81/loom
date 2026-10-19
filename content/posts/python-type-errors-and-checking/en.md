@@ -6,15 +6,15 @@ tags: [python]
 series: { key: python, order: 20 }
 ---
 
-A `TypeError` means you used a value in a way its type doesn't support. The docs describe it as "an operation or function is applied to an object of inappropriate type". It's one of the most common errors you'll see, and the message almost always tells you exactly what's wrong. This post goes through the usual messages, then covers how to check a type before you use a value.
+A `TypeError` means you used a value in a way its type doesn't support. The docs describe it as "an operation or function is applied to an object of inappropriate type". It's one of the most common errors.
 
-Every example here was run with Python 3.13. The behavior was checked against the [`TypeError` docs](https://docs.python.org/3/library/exceptions.html#TypeError) and the [`isinstance()` docs](https://docs.python.org/3/library/functions.html#isinstance).
+Every example ran with Python 3.13, checked against the [`TypeError` docs](https://docs.python.org/3/library/exceptions.html#TypeError) and the [`isinstance()` docs](https://docs.python.org/3/library/functions.html#isinstance).
 
 ## The common TypeError messages
 
 Read the last line of the error. It names the types involved.
 
-**Mixing text and numbers:**
+**Mixing text and numbers,** often a value from `input()`, which always returns a `str`:
 
 ```python
 "5" + 1
@@ -185,7 +185,7 @@ print(double("ab"))
 abab
 ```
 
-Python happily runs `double("ab")`. The docs say: "The Python runtime does not enforce function and variable type annotations. They can be used by third party tools such as type checkers, IDEs, linters, etc." A checker like mypy would flag the second call before you run the code. At runtime, the hints are only stored:
+The docs say: "The Python runtime does not enforce function and variable type annotations. They can be used by third party tools such as type checkers, IDEs, linters, etc." A checker like mypy would flag the second call before you run the code. At runtime, the hints are only stored:
 
 ```python
 print(double.__annotations__)
@@ -194,13 +194,6 @@ print(double.__annotations__)
 ```text
 {'x': <class 'int'>, 'return': <class 'int'>}
 ```
-
-## Common mistakes
-
-- **Forgetting that `input()` returns text.** `input()` gives a `str`, so convert before you calculate.
-- **Using `type(x) == int` for checks.** Prefer `isinstance(x, int)`, which also accepts subclasses.
-- **Trusting type hints to protect you.** They help editors and checkers, but Python doesn't stop a wrong call.
-- **Printing instead of returning.** A function that only prints returns `None`, and the next operation on it fails with a `TypeError`.
 
 ## What's next
 

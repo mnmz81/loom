@@ -6,13 +6,13 @@ tags: [python]
 series: { key: python, order: 15 }
 ---
 
-The [modulo post](en/posts/python-modulo/) already used a few loops without explaining them. This post does. A loop runs the same block of code again and again: once for every item in a [list](en/posts/python-lists/), once for every number in a range, or for as long as a condition is true. Python has two loops: `for` and `while`.
+A loop runs the same block of code again and again: once for every item in a [list](en/posts/python-lists/), once for every number in a range, or for as long as a condition is true.
 
-Every example here was run with Python 3.13. The behavior was checked against the [control flow tutorial](https://docs.python.org/3/tutorial/controlflow.html#for-statements) and the [`for` statement reference](https://docs.python.org/3/reference/compound_stmts.html#the-for-statement).
+Every example ran with Python 3.13, checked against the [control flow tutorial](https://docs.python.org/3/tutorial/controlflow.html#for-statements) and the [`for` statement reference](https://docs.python.org/3/reference/compound_stmts.html#the-for-statement).
 
 ## for: one item at a time
 
-In Python, `for` goes through the items of a sequence. The tutorial says it "iterates over the items of any sequence (a list or a string), in the order that they appear in the sequence". Each time around, the loop variable holds the next item:
+The tutorial says `for` "iterates over the items of any sequence (a list or a string), in the order that they appear in the sequence". Each time around, the loop variable holds the next item:
 
 ```python
 fruits = ["apple", "banana", "cherry"]
@@ -60,7 +60,7 @@ print(total, passed)
 
 ## range(): looping over numbers
 
-`range()` gives a sequence of whole numbers. With one argument it starts at 0 and stops *before* the end. With two, you choose the start. A third argument is the step:
+`range()` gives a sequence of whole numbers. With one argument it starts at 0 and stops *before* the end, as a slice does. With two, you choose the start. A third argument is the step:
 
 ```python
 print(list(range(5)))
@@ -80,11 +80,9 @@ attempt 2
 attempt 3
 ```
 
-`range(5)` is 0 to 4, five numbers. The end is never included, the same as in a slice.
-
 ## enumerate and zip
 
-When you need the position as well as the item, don't loop over `range(len(items))`. Use `enumerate()`, which gives pairs of index and item. The `start` argument changes where counting begins:
+For the position as well as the item, use `enumerate()` rather than `range(len(items))`. It gives pairs of index and item, and `start` sets where counting begins:
 
 ```python
 fruits = ["apple", "banana", "cherry"]
@@ -113,11 +111,11 @@ Avi 25
 Noa 40
 ```
 
-`zip()` stops at the end of the shortest list. In Python 3.10 and later, `zip(names, ages, strict=True)` raises a `ValueError` instead, when the lengths differ.
+`zip()` stops at the end of the shortest list. Since Python 3.10, `zip(names, ages, strict=True)` raises a `ValueError` instead when the lengths differ.
 
 ## while: loop until a condition changes
 
-`while` repeats as long as its condition is true. It checks the condition before every pass, so it fits when you don't know in advance how many passes you need:
+`while` checks its condition before every pass and repeats while it is true, so it fits when you don't know the number of passes in advance:
 
 ```python
 balance = 100
@@ -132,7 +130,7 @@ print(years, round(balance, 2))
 8 214.36
 ```
 
-Something inside the body has to change the condition. If nothing does, the loop never ends. In a terminal, `Ctrl+C` stops a stuck program.
+Something in the body has to change the condition, or the loop never ends. In a terminal, `Ctrl+C` stops a stuck program.
 
 ## break and continue
 
@@ -153,9 +151,9 @@ for n in [4, 7, -1, 9, 0, 3]:
 9
 ```
 
-`-1` is skipped by `continue`. At `0`, `break` ends the loop, so `3` is never reached. Both work in `while` loops too.
+`3` is never reached because `break` ends the loop at `0`. Both work in `while` loops too.
 
-A loop that stops on a condition in the middle often uses `while True` with a `break`. It's the usual shape for "keep asking until the answer is valid":
+A loop that stops in the middle usually takes the shape `while True` plus `break`, as in "keep asking until the answer is valid":
 
 ```python
 attempts = ["", "abc", "42"]
@@ -177,7 +175,7 @@ In a real program, `answer = input("Number: ")` would take the place of `attempt
 
 ## else on a loop
 
-A loop can have an `else` block. It runs when the loop finishes normally, and is skipped when the loop ends with `break`. The tutorial says: "If the loop finishes without executing the break, the else clause executes." It fits searches:
+A loop can have an `else` block. It runs when the loop finishes normally, and is skipped when the loop ends with `break`. It fits searches:
 
 ```python
 for n in [3, 9, 15]:
@@ -192,14 +190,11 @@ else:
 no even numbers
 ```
 
-Read the `else` as "no break". Many Python programmers find it confusing, so use it when it makes the code shorter, and a flag variable when it doesn't.
+Read the `else` as "no break". Many Python programmers find it confusing, so use it when it shortens the code, and a flag variable when it doesn't.
 
 ## Common mistakes
 
 - **Changing a list while looping over it.** Removing items from the list you're looping over skips items. Loop over a copy (`for x in items[:]`) or build a new list.
-- **`range(len(items))` for everything.** `for item in items` is shorter, and `enumerate()` gives the index when you need it.
-- **Off-by-one with `range`.** `range(1, 10)` stops at 9. To include 10, write `range(1, 11)`.
-- **A `while` that never ends.** Make sure the body changes something the condition checks.
 - **Expecting `for` to make a new scope.** The loop variable still exists after the loop, with its last value. The [code blocks post](en/posts/python-code-blocks-scope/) explains why.
 
 ## What's next

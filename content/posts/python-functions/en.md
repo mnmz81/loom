@@ -6,9 +6,9 @@ tags: [python]
 series: { key: python, order: 17 }
 ---
 
-You've been calling functions since the first post: `print()`, `len()`, `sorted()`. This post is about writing your own. A function gives a name to a block of code. You write it once, then run it as many times as you need, with different values each time. That keeps programs short, and it means a bug gets fixed in one place.
+`print()`, `len()` and `sorted()` are functions someone else wrote. A function gives a name to a block of code: you write it once and run it as often as you need, with different values each time, so programs stay short and a bug gets fixed in one place.
 
-Every example here was run with Python 3.13. The behavior was checked against the [defining functions section of the tutorial](https://docs.python.org/3/tutorial/controlflow.html#defining-functions) and [more on defining functions](https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions).
+Every example ran with Python 3.13, checked against the [defining functions section of the tutorial](https://docs.python.org/3/tutorial/controlflow.html#defining-functions) and [more on defining functions](https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions).
 
 ## Defining and calling a function
 
@@ -27,7 +27,7 @@ Hello, Dana!
 Hello, Avi!
 ```
 
-`def` only defines the function. Nothing in the body runs until you call it with parentheses. `name` is a *parameter*: a variable that gets its value from the call. `"Dana"` is the *argument* passed in. A function can have no parameters, or several, separated by commas:
+`def` only defines the function; the body runs when you call it with parentheses. `name` is a *parameter*: a variable that gets its value from the call. `"Dana"` is the *argument* passed in. A function can have no parameters, or several, separated by commas:
 
 ```python
 def show_line():
@@ -47,7 +47,7 @@ tea costs 12
 
 ## return: getting a value back
 
-`print()` inside a function shows something on the screen, but the caller can't use it. To hand a value back to the caller, use `return`:
+`print()` shows something on the screen, but the caller can't use it. `return` hands a value back:
 
 ```python
 def area(width, height):
@@ -156,7 +156,7 @@ print(add_item("bread"))
 ['milk', 'bread']
 ```
 
-The second call didn't start with an empty cart. The fix is to use `None` as the default and create the list inside the function:
+The fix is to use `None` as the default and create the list inside the function:
 
 ```python
 def add_item(item, cart=None):
@@ -219,9 +219,6 @@ For a function this small, a `lambda` is a one-line version without a name: `sor
 ## Common mistakes
 
 - **Forgetting the parentheses.** `greet` is the function itself. `greet()` calls it. `print(greet)` prints something like `<function greet at 0x...>`.
-- **Printing instead of returning.** A function that prints its result returns `None`, so `total = add(2, 3)` stores `None`.
-- **Code after `return`.** Lines after a `return` in the same block never run.
-- **A list or dict as a default value.** Use `None` and create the object inside the function.
 - **Using a function before it's defined.** The `def` line has to run before the call. Python reads the file top to bottom.
 
 ## What's next

@@ -6,13 +6,13 @@ tags: [python]
 series: { key: python, order: 18 }
 ---
 
-The last few posts were full of indented blocks: under `if` and `else`, loops and `def`. A natural question: if I create a variable inside an `if` block, can I use it after the block? In many languages, no. In Python, yes, because a *block of code* is not a *scope*. This post explains both, and the bugs you get when you confuse them.
+If you create a variable inside an `if` block, can you use it after the block? In many languages, no. In Python, yes, because a *block of code* is not a *scope*.
 
-Every example here was run with Python 3.13. The rules were checked against the [compound statements reference](https://docs.python.org/3/reference/compound_stmts.html) and the [execution model](https://docs.python.org/3/reference/executionmodel.html#naming-and-binding).
+Every example ran with Python 3.13, checked against the [compound statements reference](https://docs.python.org/3/reference/compound_stmts.html) and the [execution model](https://docs.python.org/3/reference/executionmodel.html#naming-and-binding).
 
 ## What a code block is
 
-An `if`, `for`, `while`, `def` or `class` line ends with a colon. The indented lines under it are the statements it controls. The reference calls that group a *suite*: "a group of statements controlled by a clause". Most people just say a block. Blocks can be nested, and indentation shows which block each line belongs to:
+An `if`, `for`, `while`, `def` or `class` line ends with a colon. The indented lines under it are the statements it controls. The reference calls that group a *suite*: "a group of statements controlled by a clause". Blocks can be nested, and indentation shows which block each line belongs to:
 
 ```python
 def check(n):
@@ -67,21 +67,7 @@ set inside if
 2 20
 ```
 
-`message` is still there after the `if`, and after the loop `i` and `last` keep the last iteration's values (the reference: "Names in the target list are not deleted when the loop is finished"). A `while` loop works the same way:
-
-```python
-count = 0
-while count < 3:
-    step = count
-    count += 1
-print(count, step)
-```
-
-```text
-3 2
-```
-
-If you come from C, Java or JavaScript (`let`), this is the biggest surprise: there's no block scope in Python.
+`message` is still there after the `if`, and after the loop `i` and `last` keep the last iteration's values (the reference: "Names in the target list are not deleted when the loop is finished"). `while` works the same way. Unlike C, Java or JavaScript's `let`, Python has no block scope.
 
 ### Watch out: a variable set in only one branch
 
@@ -98,7 +84,7 @@ print(greeting)
 NameError: name 'greeting' is not defined
 ```
 
-The condition is false, so the assignment never ran. Give the variable a value before the `if`, or in every branch:
+Give the variable a value before the `if`, or in every branch:
 
 ```python
 hour = 9
@@ -142,7 +128,7 @@ Hello
 NameError: name 'text' is not defined. Did you mean: 'next'?
 ```
 
-To get a value out of a function, `return` it. Don't try to reach into the function's variables from outside.
+To get a value out of a function, `return` it.
 
 The same goes for a class body. Its names aren't visible inside the methods, so you reach them through `self` or the class name:
 
@@ -176,7 +162,7 @@ print(squares, x)
 [0, 1, 4, 9] outer
 ```
 
-The `x` inside the brackets didn't overwrite the outer `x`. The [comprehensions reference](https://docs.python.org/3/reference/expressions.html#displays-for-lists-sets-and-dictionaries) says the comprehension runs "in a separate implicitly nested scope".
+The [comprehensions reference](https://docs.python.org/3/reference/expressions.html#displays-for-lists-sets-and-dictionaries) says the comprehension runs "in a separate implicitly nested scope".
 
 ## Reading and writing names from outside
 
@@ -218,7 +204,7 @@ inside: 2
 outside: 1
 ```
 
-There are two different `enemies` here. The `global` and `nonlocal` keywords, and the `UnboundLocalError` from mixing reading and assigning, are in the [scope and naming post](en/posts/python-scope-and-naming/). The advice stands: pass values in as arguments and return results, instead of changing globals.
+There are two different `enemies` here. The `global` and `nonlocal` keywords, and the `UnboundLocalError` from mixing reading and assigning, are in the [scope and naming post](en/posts/python-scope-and-naming/). Prefer passing values in as arguments and returning results over changing globals.
 
 ## The one surprise: except ... as
 
@@ -239,15 +225,6 @@ NameError: name 'err' is not defined
 ```
 
 The reference says the exception "must be assigned to a different name to be able to refer to it after the `except` clause". That's what `saved = err` does.
-
-## Common mistakes
-
-- **Expecting block scope.** A variable from inside an `if` or `for` is still visible after it. Reusing a name like `i` after a loop gets the last value, not a fresh one.
-- **Assigning in only one branch.** If the branch doesn't run, the name doesn't exist and you get a `NameError`. Set a default before the `if`.
-- **Using a loop variable after an empty loop.** It was never assigned.
-- **Reading a function's local variable from outside.** Return the value instead.
-- **Thinking a comprehension changes the outer variable.** It has its own scope, unlike a `for` loop.
-- **Using the `except ... as` name after the clause.** Copy it to another name first.
 
 ## What's next
 

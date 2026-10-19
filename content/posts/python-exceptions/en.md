@@ -6,9 +6,9 @@ tags: [python]
 series: { key: python, order: 21 }
 ---
 
-The posts so far showed plenty of errors: `IndexError`, `KeyError`, `ValueError`, `TypeError`. Each stopped the program. The [TypeError post](en/posts/python-type-errors-and-checking/) showed a first `try`/`except` that catches one instead. This post covers the whole mechanism: errors detected during execution are called exceptions and "are not unconditionally fatal".
+`IndexError`, `KeyError`, `ValueError` and `TypeError` all stopped the program in earlier posts, and the [TypeError post](en/posts/python-type-errors-and-checking/) showed a first `try`/`except`. In the tutorial's words, errors detected during execution are called exceptions and "are not unconditionally fatal".
 
-Every example here was run with Python 3.13. The behavior was checked against the [errors and exceptions tutorial](https://docs.python.org/3/tutorial/errors.html) and the [built-in exceptions reference](https://docs.python.org/3/library/exceptions.html).
+Every example ran with Python 3.13, checked against the [errors and exceptions tutorial](https://docs.python.org/3/tutorial/errors.html) and the [built-in exceptions reference](https://docs.python.org/3/library/exceptions.html).
 
 ## Reading a traceback
 
@@ -32,7 +32,7 @@ Traceback (most recent call last):
 ZeroDivisionError: division by zero
 ```
 
-The last line is the exception type and message. The frame above it is the line that failed, inside `average`; the one above that is the call that led there. The `~` and `^` marks point at the exact part of the line.
+The frame just above the last line is the line that failed, inside `average`; the one above it is the call that led there. The `~` and `^` marks point at the exact part of the line.
 
 ## try and except
 
@@ -53,7 +53,7 @@ not a whole number: 12a
 still running
 ```
 
-The rest of the `try` block is skipped once an exception happens, so `print("parsed", ...)` never runs. After the `except` block, the program continues normally.
+The rest of the `try` block is skipped once an exception happens, so `print("parsed", ...)` never runs.
 
 `except ValueError as e` gives the exception object a name. `str(e)` is its message:
 
@@ -128,7 +128,7 @@ For files, `with open(...)` already does `finally`'s cleanup and closes the file
 
 ## Raising your own exceptions
 
-`raise` throws an exception yourself. Use it when a function gets a value it can't work with. Pick the built-in type that fits, and write a message that says what was wrong:
+`raise` throws an exception yourself, for example when a function gets a value it can't work with. Pick the built-in type that fits, so callers can catch exactly that, and write a message that says what was wrong:
 
 ```python
 def set_age(age):
@@ -169,11 +169,8 @@ print(total)
 
 ## Common mistakes
 
-- **A `try` block around half the program.** Wrap only the line that can fail, so you know which error you're handling.
-- **`except: pass`.** Silently ignoring errors turns a clear crash into a wrong result that's hard to trace.
 - **Catching to check what you could test.** `if key in d` is clearer than catching `KeyError` for a simple lookup. Use `try` when checking first would be awkward, like parsing a number.
 - **Wrong order of `except` blocks.** A broad type before a narrow one catches everything first. Put `KeyError` before `LookupError`.
-- **Raising a plain `Exception`.** Use a specific type like `ValueError` or `TypeError`, so callers can catch exactly that.
 
 ## What's next
 

@@ -6,9 +6,9 @@ tags: [python]
 series: { key: python, order: 21 }
 ---
 
-הפוסטים עד עכשיו הראו לא מעט שגיאות: `IndexError`, ‏`KeyError`, ‏`ValueError`, ‏`TypeError`. כל אחת מהן עצרה את התוכנית. ‏[הפוסט על TypeError](he/posts/python-type-errors-and-checking/) הראה `try`/`except` ראשון, שתופס שגיאה במקום לעצור. הפוסט הזה מסביר את כל המנגנון. המדריך הרשמי מנסח את זה כך: "Errors detected during execution are called exceptions and are not unconditionally fatal".
+‏`IndexError`, ‏`KeyError`, ‏`ValueError` ו-`TypeError` עצרו את התוכנית בפוסטים הקודמים, ו[הפוסט על TypeError](he/posts/python-type-errors-and-checking/) הראה `try`/`except` ראשון. המדריך הרשמי מנסח את זה כך: "Errors detected during execution are called exceptions and are not unconditionally fatal".
 
-כל דוגמה כאן הורצה עם Python 3.13. ההתנהגות נבדקה מול [המדריך הרשמי על שגיאות וחריגות](https://docs.python.org/3/tutorial/errors.html) ו[התיעוד של החריגות המובנות](https://docs.python.org/3/library/exceptions.html).
+כל הדוגמאות הורצו עם Python 3.13 ונבדקו מול [המדריך הרשמי על שגיאות וחריגות](https://docs.python.org/3/tutorial/errors.html) ו[התיעוד של החריגות המובנות](https://docs.python.org/3/library/exceptions.html).
 
 ## קריאת traceback
 
@@ -32,7 +32,7 @@ Traceback (most recent call last):
 ZeroDivisionError: division by zero
 ```
 
-השורה האחרונה היא סוג החריגה וההודעה שלה. המסגרת שממש מעליה היא השורה שנכשלה, בתוך `average`. המסגרת שמעל זה היא הקריאה שהובילה לשם. הסימנים `~` ו-`^` מצביעים על החלק המדויק בשורה.
+המסגרת שממש מעל השורה האחרונה היא השורה שנכשלה, בתוך `average`, ומעליה הקריאה שהובילה לשם. הסימנים `~` ו-`^` מצביעים על החלק המדויק בשורה.
 
 ## ‏try ו-except
 
@@ -53,7 +53,7 @@ not a whole number: 12a
 still running
 ```
 
-שאר בלוק ה-`try` מדולג ברגע שקורית חריגה, אז `print("parsed", ...)` לא רץ אף פעם. אחרי בלוק ה-`except`, התוכנית ממשיכה כרגיל.
+שאר בלוק ה-`try` מדולג ברגע שקורית חריגה, אז `print("parsed", ...)` לא רץ אף פעם.
 
 ‏`except ValueError as e` נותן שם לאובייקט החריגה. ‏`str(e)` הוא ההודעה שלה:
 
@@ -128,7 +128,7 @@ done with 'x'
 
 ## העלאת חריגות משלכם
 
-עם `raise` מעלים חריגה בעצמכם. משתמשים בזה כשפונקציה מקבלת ערך שהיא לא יכולה לעבוד איתו. בוחרים את הסוג המובנה שמתאים, וכותבים הודעה שאומרת מה לא היה בסדר:
+עם `raise` מעלים חריגה בעצמכם, למשל כשפונקציה מקבלת ערך שהיא לא יכולה לעבוד איתו. בוחרים את הסוג המובנה שמתאים, כדי שמי שקורא יוכל לתפוס בדיוק אותו, וכותבים הודעה שאומרת מה לא היה בסדר:
 
 ```python
 def set_age(age):
@@ -169,11 +169,8 @@ print(total)
 
 ## טעויות נפוצות
 
-- **בלוק `try` סביב חצי תוכנית.** עוטפים רק את השורה שעלולה להיכשל, כדי לדעת באיזו שגיאה מטפלים.
-- **‏`except: pass`.** התעלמות שקטה משגיאות הופכת קריסה ברורה לתוצאה שגויה שקשה לאתר.
 - **תפיסה במקום בדיקה פשוטה.** ‏`if key in d` ברור יותר מתפיסת `KeyError` בחיפוש פשוט. משתמשים ב-`try` כשבדיקה מראש מסורבלת, כמו בפענוח מספר.
 - **סדר שגוי של בלוקי `except`.** סוג רחב לפני סוג צר תופס הכול קודם. ‏`KeyError` בא לפני `LookupError`.
-- **העלאה של `Exception` כללי.** משתמשים בסוג ספציפי כמו `ValueError` או `TypeError`, כדי שמי שקורא יוכל לתפוס בדיוק אותו.
 
 ## מה הלאה
 

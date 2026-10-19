@@ -6,9 +6,9 @@ tags: [python]
 series: { key: python, order: 19 }
 ---
 
-A variable exists in a specific place in your code. The *scope* of a variable is the part of the program where its name can be used. Scope is the reason a variable can be "missing" in one function and work fine in another. This post covers how Python decides which name you mean, and how to choose names that make the code easier to read.
+The *scope* of a variable is the part of the program where its name can be used. It is the reason a variable can be "missing" in one function and work fine in another.
 
-Every example here was run with Python 3.13. The rules were checked against the [official tutorial on scopes](https://docs.python.org/3/tutorial/classes.html#python-scopes-and-namespaces), the [`global` statement reference](https://docs.python.org/3/reference/simple_stmts.html#the-global-statement), and [PEP 8](https://peps.python.org/pep-0008/#naming-conventions).
+Every example ran with Python 3.13, checked against the [official tutorial on scopes](https://docs.python.org/3/tutorial/classes.html#python-scopes-and-namespaces), the [`global` statement reference](https://docs.python.org/3/reference/simple_stmts.html#the-global-statement), and [PEP 8](https://peps.python.org/pep-0008/#naming-conventions).
 
 ## Where Python looks for a name
 
@@ -30,7 +30,7 @@ inside: local
 outside: global
 ```
 
-Inside the function, `x = "local"` creates a new local variable. The global `x` is not touched. The docs say that without a `global` or `nonlocal` statement, "assignments to names always go into the innermost scope".
+Inside the function, `x = "local"` creates a new local variable and leaves the global `x` alone. The docs say that without a `global` or `nonlocal` statement, "assignments to names always go into the innermost scope".
 
 ## Reading a global is fine
 
@@ -47,21 +47,7 @@ read_only()
 read: global
 ```
 
-The problem only starts when you *assign* to the name inside the function. Python then treats it as local, which is why this code is confusing:
-
-```python
-def try_change():
-    x = "changed"
-    print("inside:", x)
-
-try_change()
-print("still:", x)
-```
-
-```text
-inside: changed
-still: global
-```
+Only *assigning* to the name inside the function makes it local.
 
 ## The global keyword
 
@@ -80,7 +66,7 @@ print("now:", x)
 now: changed by global
 ```
 
-The docs say a declared name is "interpreted as globals", and all assignments go to the module-level namespace. Use this sparingly. Functions that change global state are harder to test and to follow. Usually it's better to pass the value in and return the new one.
+The docs say a declared name is "interpreted as globals", and all assignments go to the module-level namespace. Use it sparingly: functions that change global state are harder to test and follow, and passing the value in and returning the new one is usually better.
 
 ## The nonlocal keyword
 
@@ -149,7 +135,7 @@ print(len)
 3
 ```
 
-After `len = 3`, the module-level `len` hides the built-in `len` function. Any later call to `len(...)` in this file fails. This is called shadowing. Avoid it by choosing a different name.
+After `len = 3`, the module-level `len` hides the built-in `len` function. Any later call to `len(...)` in this file fails. This is called shadowing.
 
 ## Choosing good names
 
@@ -170,7 +156,7 @@ def calculate_total_price(unit_price, quantity):
     return unit_price * quantity
 ```
 
-Both do the same thing. The second one tells the next reader what the numbers mean, which is the whole point of a name.
+The second tells the next reader what the numbers mean, which is the whole point of a name. `d` could be a date, a dictionary or a dog.
 
 Python also has reserved words, which you can't use as names. `class` is one of them:
 
@@ -184,12 +170,6 @@ True False
 ```
 
 Trying `class = 1` gives `SyntaxError: invalid syntax`.
-
-## Common mistakes
-
-- **Assuming an assignment changes the outer variable.** Inside a function it creates a new local name unless you use `global` or `nonlocal`.
-- **Using `global` by default.** It works, but it hides where values come from. Pass values in, and return the result.
-- **Short names that hide meaning.** `d` could be a date, a dictionary, or a dog. Name it for what it holds.
 
 ## What's next
 

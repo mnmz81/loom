@@ -6,9 +6,9 @@ tags: [python]
 series: { key: python, order: 13 }
 ---
 
-In Python, indentation is part of the syntax. Other languages use braces `{}` to mark a block of code. Python uses the whitespace at the start of the line. The docs say: "indentation is Python's way of grouping statements". This post covers the rule, the errors you get when it breaks, and how to fix them.
+In Python, indentation is part of the syntax. Other languages use braces `{}` to mark a block of code. Python uses the whitespace at the start of the line. The docs say: "indentation is Python's way of grouping statements".
 
-Every example here was run with Python 3.13, and the rules were checked against the [lexical analysis docs](https://docs.python.org/3/reference/lexical_analysis.html#indentation) and the [exceptions reference](https://docs.python.org/3/library/exceptions.html#IndentationError).
+Every example ran with Python 3.13, checked against the [lexical analysis docs](https://docs.python.org/3/reference/lexical_analysis.html#indentation) and the [exceptions reference](https://docs.python.org/3/library/exceptions.html#IndentationError).
 
 ## The rule
 
@@ -62,7 +62,7 @@ print("five is bigger")
 IndentationError: expected an indented block after 'if' statement on line 1
 ```
 
-The message names the header line, so you can find the missing indentation right away. Indent the body, or use `pass` if you really want an empty block:
+Indent the body, or use `pass` for an empty block:
 
 ```python
 if 5 > 2:
@@ -104,9 +104,9 @@ if True:
 TabError: inconsistent use of tabs and spaces in indentation
 ```
 
-`TabError` is a subclass of `IndentationError`. The docs say the meaning of a line can depend on "the worth of a tab in spaces". Here, a tab counts as 8 columns and the second line's 8 spaces line up with it, but if a tab counts as 1 column, they don't. Python refuses to guess, and the editor's tab setting decides what you see. The fix is to use spaces only. Four spaces per level is the convention.
+`TabError` is a subclass of `IndentationError`. The docs say the meaning of a line can depend on "the worth of a tab in spaces". Here, if a tab counts as 8 columns the second line's 8 spaces line up with it; if it counts as 1, they don't. The fix is to use spaces only. Four spaces per level is the convention.
 
-To find the line, you can run the standard `tabnanny` checker:
+The standard `tabnanny` checker prints the first line where tabs and spaces are ambiguous:
 
 ```bash
 python3 -m tabnanny demo.py
@@ -116,11 +116,9 @@ python3 -m tabnanny demo.py
 demo.py 3 '        y = 2'
 ```
 
-It prints the first line where the tabs and spaces are ambiguous.
-
 ## Catching it in code
 
-`IndentationError` is a subclass of `SyntaxError`, and you can catch it like any other error. The `compile()` function checks source code without running it:
+`IndentationError` is a subclass of `SyntaxError` and can be caught like any error. `compile()` checks source code without running it:
 
 ```python
 try:
@@ -133,15 +131,15 @@ except IndentationError as e:
 IndentationError 2 expected an indented block after 'if' statement on line 1
 ```
 
-In normal scripts you rarely catch it, because the error stops the program before it runs. You'll see it when you edit a file, when a tool like an editor or a linter reads it, or when code is built from a string.
+Normal scripts rarely catch it, because it stops the program before it runs. It matters when a tool such as an editor or a linter reads a file, or when code is built from a string.
 
 ## Common mistakes
 
-- **Copying code from a website.** Some pages turn tabs into spaces, or lose the indentation. Check the lines after pasting.
+- **Copying code from a website.** Some pages turn tabs into spaces or lose the indentation.
 - **Mixing editors.** One editor writes tabs and another writes spaces. Set a single setting for the project.
-- **Off-by-one indentation.** A line with 3 spaces next to lines with 4 gives an "unindent does not match" error. Count the spaces, or let the editor show whitespace.
+- **Off-by-one indentation.** A line with 3 spaces next to lines with 4 gives "unindent does not match".
 
-Most editors can show whitespace characters and convert tabs to spaces, and that's the quickest way to avoid all four errors.
+An editor set to show whitespace and convert tabs to spaces avoids all four errors.
 
 ## What's next
 

@@ -8,7 +8,7 @@ series: { key: python, order: 16 }
 
 A [list](en/posts/python-lists/) finds a value by position: `scores[2]`. Often you want a name instead: the price of "apple", the phone number of "Dana", the setting called "theme". That's a dictionary, `dict` for short: "a set of key: value pairs, with the requirement that the keys are unique", as the tutorial puts it.
 
-Every example here was run with Python 3.13. The behavior was checked against the [dictionaries section of the tutorial](https://docs.python.org/3/tutorial/datastructures.html#dictionaries) and the [mapping types reference](https://docs.python.org/3/library/stdtypes.html#mapping-types-dict).
+Every example ran with Python 3.13, checked against the [dictionaries section of the tutorial](https://docs.python.org/3/tutorial/datastructures.html#dictionaries) and the [mapping types reference](https://docs.python.org/3/library/stdtypes.html#mapping-types-dict).
 
 ## Creating a dictionary
 
@@ -47,7 +47,7 @@ print(prices["cheese"])
 KeyError: 'cheese'
 ```
 
-There are two ways to avoid it. `in` checks if a key exists. `get()` returns the value, or `None` (or a default you choose) when the key is missing:
+`in` checks if a key exists. `get()` returns the value, or `None` (or a default you choose) when the key is missing:
 
 ```python
 print("apple" in prices, "cheese" in prices)
@@ -128,7 +128,7 @@ The format specs `:<6` and `:>5.2f` line up the columns, as in the [f-strings po
 
 ## Counting with a dictionary
 
-One of the most common uses: count how many times each thing appears. `get(key, 0)` gives zero for a key you haven't seen yet:
+To count how many times each thing appears, `get(key, 0)` gives zero for a key not seen yet:
 
 ```python
 words = "the cat and the hat and the bat".split()
@@ -144,7 +144,7 @@ print(max(counts, key=counts.get))
 the
 ```
 
-`max(counts, key=counts.get)` finds the key with the largest value. The standard library's `collections.Counter` does the counting in one line; the loop above is what it does for you.
+`max(counts, key=counts.get)` finds the key with the largest value. The standard library's `collections.Counter` does the same counting in one line.
 
 ## Nested data
 
@@ -185,14 +185,11 @@ treasure
 TypeError: unhashable type: 'list'
 ```
 
-A tuple of coordinates works as a key; a list doesn't, because it could change after being used as one. Values have no such limit.
+A list could change after being used as a key, so it's refused. Values have no such limit.
 
 ## Common mistakes
 
-- **`d[key]` on a key that may be missing.** Use `get()` or check with `in` first.
 - **Expecting `in` to search values.** `"Dana" in user` checks keys. For values, use `"Dana" in user.values()`.
-- **Changing a dictionary while looping over it.** Loop over a copy of the keys: `for key in list(d):`.
-- **`{}` for an empty set.** `{}` is an empty dictionary. An empty set is `set()`.
 - **Copying with `=`.** As with lists, `b = a` gives a second name for the same dictionary. Use `a.copy()` for a separate one.
 
 ## What's next
