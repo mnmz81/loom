@@ -6,7 +6,7 @@ tags: [ai, llmops, security]
 series: { key: ai-production, order: 5 }
 ---
 
-The previous post covered attacks. **Guardrails** are the broader set of checks that keep a system's input and output within bounds, against attacks and also against ordinary mistakes: a hallucinated number, a leaked phone number, a request that is off-topic, an answer in the wrong format. The model itself is one layer; the rest is code you write around it.
+**Guardrails** are the broader set of checks that keep a system's input and output within bounds, against attacks and also against ordinary mistakes: a hallucinated number, a leaked phone number, a request that is off-topic, an answer in the wrong format. The model itself is one layer; the rest is code you write around it.
 
 The redaction example was run with Python 3.9 and its output is real. The screening code follows the official guide to [mitigating jailbreaks and prompt injections](https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks) and the [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs) docs, and was not run.
 
@@ -80,7 +80,7 @@ print(redact(answer))
 Contact [EMAIL] or [PHONE]. Card on file: [CARD].
 ```
 
-Regular expressions miss things and sometimes over-match, so treat them as one layer, not a guarantee. The phone pattern above, for example, only matches one local format. Dedicated PII-detection tools do better, and the best protection is not retrieving data the user may not see in the first place.
+Regular expressions miss things and sometimes over-match (the phone pattern above matches one local format), so treat them as one layer, not a guarantee. Dedicated PII-detection tools do better, and the best protection is not retrieving data the user may not see in the first place.
 
 ## Action checks
 
@@ -100,4 +100,4 @@ A guardrail is only as good as what happens after it fires:
 - **Log it** with the trace, and watch the rates. A sudden rise in blocks means either an attack or a check that is too strict.
 - **Test the guardrails too**: add blocked and allowed examples to the eval set, so you know both that they stop the bad cases and that they do not stop good users.
 
-The next and last post in the series puts everything together: a decision map for choosing between prompting, RAG, tools, agents and fine-tuning.
+The next post puts everything together: a decision map for choosing between prompting, RAG, tools, agents and fine-tuning.

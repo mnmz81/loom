@@ -8,7 +8,7 @@ series: { key: ai-production, order: 3 }
 
 You pay for tokens, and you wait for tokens. Input tokens are cheaper and fast to process; output tokens (including thinking) are more expensive and come one at a time. Almost every cost and latency improvement either sends fewer tokens, generates fewer tokens, or reuses work.
 
-The cost calculation was run with Python 3.9 and its output is real; it uses the prices listed in the [models overview](https://platform.claude.com/docs/en/models/overview) and the multipliers in the [prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) docs at the time of writing, and prices change. The API code follows the [prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) and [batch processing](https://platform.claude.com/docs/en/build-with-claude/batch-processing) docs and was not run.
+The cost calculation ran with Python 3.9 and its output is real; it uses the prices in the [models overview](https://platform.claude.com/docs/en/models/overview) and the multipliers in the [prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) docs at the time of writing, and prices change. The API code follows the prompt caching and [batch processing](https://platform.claude.com/docs/en/build-with-claude/batch-processing) docs and was not run.
 
 ## The biggest levers
 
@@ -21,7 +21,7 @@ In rough order of impact:
 
 ## Prompt caching
 
-Many applications send the same large prefix again and again: a long system prompt, tool definitions, a document the user asks several questions about. **Prompt caching** stores that prefix after the first request, so later requests read it from the cache, which is cheaper and faster. The simplest form is one top-level setting:
+Many applications resend the same large prefix: a long system prompt, tool definitions, a document the user asks several questions about. **Prompt caching** stores that prefix after the first request, so later requests read it from the cache, cheaper and faster. The simplest form is one top-level setting:
 
 ```python
 import anthropic
@@ -44,7 +44,7 @@ print(u.cache_creation_input_tokens, u.cache_read_input_tokens, u.input_tokens)
 0 20000 300
 ```
 
-In this example output, 20,000 tokens were read from the cache and only 300 new tokens were processed at the full price. The docs list the rules: by default the cache lives 5 minutes and every hit refreshes it (a 1-hour option exists); writing to the cache costs 1.25 times the input price, reading costs a fraction of it (10% on most models, 5% on Opus 5.5 and Sonnet 5.5); and the prefix must be **identical**, so a timestamp or user name placed before the cached part breaks it. Put stable content first and changing content last.
+Here 20,000 tokens came from the cache and only 300 were processed at the full price. The docs list the rules: by default the cache lives 5 minutes and every hit refreshes it (a 1-hour option exists); writing to the cache costs 1.25 times the input price, reading costs a fraction of it (10% on most models, 5% on Opus 5.5 and Sonnet 5.5); and the prefix must be **identical**, so a timestamp or user name placed before the cached part breaks it. Put stable content first and changing content last.
 
 ## What caching saves
 
@@ -78,7 +78,7 @@ with caching: $132.10
 batch, no caching: $446.00
 ```
 
-The calculation assumes the cache stays warm, meaning requests arrive often enough. With traffic spread thin, use the 1-hour cache or accept some cache misses.
+This assumes the cache stays warm, meaning requests arrive often enough. With thin traffic, use the 1-hour cache or accept some cache misses.
 
 ## The Batch API
 

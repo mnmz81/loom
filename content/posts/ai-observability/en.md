@@ -23,7 +23,7 @@ For agents, also record every tool call: the tool, its input, a short version of
 
 ## Traces and spans
 
-A user request can trigger many steps: a retrieval, a rerank, several model calls, a few tools. A **trace** groups all of them under one id, and each step is a **span** with its own timing and data. Seeing the whole trace is what lets you answer "why was this request slow?" or "why did it cost $2?".
+A user request can trigger many steps: a retrieval, a rerank, several model calls, a few tools. A **trace** groups all of them under one id, and each step is a **span** with its own timing and data. The whole trace answers "why was this request slow?" or "why did it cost $2?".
 
 A minimal tracer shows the idea: every step logs one JSON line with the trace id:
 
@@ -72,8 +72,6 @@ generate("How many vacation days?", chunks, trace_id=trace_id)
 In a real system, use **OpenTelemetry**, the open standard for traces, metrics and logs, which most monitoring tools understand. It has a set of [semantic conventions for generative AI](https://github.com/open-telemetry/semantic-conventions-genai) that define standard names for model calls, token usage and agent steps; they are still evolving, so check the current version. Many LLM frameworks and dedicated LLM observability tools (open-source and hosted) emit these traces for you, and show them as a timeline per request.
 
 ## Metrics worth watching
-
-From the traces, a few numbers tell you most of what you need:
 
 - **Latency**, especially p95 and p99, not only the average. Agents have long tails.
 - **Tokens and cost per request**, and per user or feature. A prompt change that doubles input tokens shows up here first.

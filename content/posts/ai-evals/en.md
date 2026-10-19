@@ -6,9 +6,9 @@ tags: [ai, llmops]
 series: { key: ai-production, order: 1 }
 ---
 
-Almost every post in this series ended with "measure it". This post explains how. An **eval** is a set of test cases with a way to grade the output, run every time you change the prompt, the model, the retrieval or a setting. Without one, every change is a guess, and you discover regressions from your users.
+An **eval** is a set of test cases with a way to grade the output, run every time you change the prompt, the model, the retrieval or a setting. Without one, every change is a guess, and you discover regressions from your users.
 
-The small harness was run with Python 3.9 and its output is real; the model call in it is a stand-in, so the harness itself can be tested. The LLM-judge code follows the official guide to [developing tests](https://platform.claude.com/docs/en/test-and-evaluate/develop-tests) and was not run.
+The harness ran with Python 3.9 and its output is real; its model call is a stand-in. The LLM-judge code follows the official guide to [developing tests](https://platform.claude.com/docs/en/test-and-evaluate/develop-tests) and was not run.
 
 ## What makes a good eval
 
@@ -23,7 +23,7 @@ Start with real examples: questions users asked, tickets that came in, documents
 
 ## Code-based grading
 
-When the answer can be checked by code, check it by code. It is fast, cheap and exact. A classification eval with exact match:
+When code can check the answer, use code: it is fast, cheap and exact. A classification eval with exact match:
 
 ```python
 # A tiny eval: each case has an input and the expected label
@@ -64,7 +64,7 @@ Other code-based checks from the guide: string contains, valid JSON against a sc
 
 ## LLM-as-judge
 
-Tone, helpfulness and faithfulness to a document cannot be checked with an exact match. For those, a second model grades the output against a **rubric**:
+Tone, helpfulness and faithfulness to a document need a second model that grades the output against a **rubric**:
 
 ```python
 import anthropic
@@ -101,13 +101,11 @@ What makes a judge reliable:
 
 ## Using evals
 
-An eval is a tool for decisions:
-
 - **Before a change**: run it, save the score. After: run again, compare. Look at the cases that flipped, not only the total.
 - **Choosing a model or effort level**: the docs repeatedly recommend an effort sweep, running the same eval at several levels and taking the cheapest that keeps quality.
 - **In CI**: a small, fast eval on every prompt change, like unit tests. A larger one before a release.
 - **From production**: when a user reports a bad answer, add it as a case. The eval grows from real failures.
 
-Remember that LLM outputs vary between runs. For important decisions, run each case more than once and compare averages, not single results.
+LLM outputs vary between runs, so for important decisions run each case more than once and compare averages.
 
 The next post covers observability: seeing what your system actually does in production.
