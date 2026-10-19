@@ -8,6 +8,7 @@ Always prefix commands with `./scripts/with-node.sh` (system Node is 20):
 ```bash
 ./scripts/with-node.sh npm test              # Angular unit tests (vitest)
 ./scripts/with-node.sh npm run test:scripts  # Node script tests (scripts/**/*.test.ts)
+./scripts/with-node.sh npx tsx scripts/check-content.ts  # validate content/** only (no public/ or dist/ writes)
 ./scripts/with-node.sh npm run build         # content → OG → ng build → postbuild
 ./scripts/with-node.sh npm run build:e2e     # same, plus the sample entries in e2e/content (needed before npm run e2e)
 ./scripts/with-node.sh npm run e2e           # Playwright against dist/ (run build:e2e first)
