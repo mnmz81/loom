@@ -177,7 +177,7 @@ function loadEntries(contentDir: string, errors: string[]): RawEntry[] {
 export const MAX_READING_MINUTES = 6;
 /** Entries written before the limit. Remove a slug once it is split or cut; never add one. */
 const OVER_LIMIT_ALLOWED = new Set([
-  'ai-end-to-end-app', 'ai-webmcp', 'aws-zero-to-hero', 'claude-code-mods', 'docker-zero-to-hero', 'git-commands',
+  'ai-end-to-end-app', 'ai-webmcp', 'aws-zero-to-hero', 'docker-zero-to-hero', 'git-commands',
   'git-zero-to-hero', 'github-actions-zero-to-hero', 'github-zero-to-hero', 'kubernetes-zero-to-hero', 'linux-commands',
 ]);
 
