@@ -2,6 +2,7 @@
 title: "רשימות ב-Python"
 summary: "רשימה מחזיקה הרבה ערכים לפי סדר. יצירה, אינדקסים וחיתוך, הוספה והסרה, מיון, העתקה בלי הפתעות, ומילה על tuples."
 date: 2026-10-13
+updated: 2026-10-19
 tags: [python]
 series: { key: python, order: 10 }
 ---
@@ -247,4 +248,4 @@ TypeError: 'tuple' object does not support item assignment
 
 ## מה הלאה
 
-בפוסט הבא: תנאים עם `if`, ‏`elif` ו-`else`, שמחליטים מה להריץ לפי ערכים כמו `"green" in colors`.
+בפוסט הבא: אינדקסים ברשימות לעומק, ה-`IndexError`, ורשימות בתוך רשימות.

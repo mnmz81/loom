@@ -3,7 +3,7 @@ title: "Functions in Python"
 summary: "def, parameters and return values, default and keyword arguments, the mutable default trap, docstrings and type hints, and passing a function as a value."
 date: 2026-10-13
 tags: [python]
-series: { key: python, order: 17 }
+series: { key: python, order: 19 }
 ---
 
 `print()`, `len()` and `sorted()` are functions someone else wrote. A function gives a name to a block of code: you write it once and run it as often as you need, with different values each time, so programs stay short and a bug gets fixed in one place.

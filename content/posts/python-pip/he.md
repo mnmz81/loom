@@ -3,7 +3,7 @@ title: "pip: התקנת חבילות ב-Python"
 summary: "איך pip מתקין חבילות צד שלישי מ-PyPI: התקנה, נעיצת גרסאות, רשימה, הצגת פרטים, שמירה ל-requirements.txt, הסרה, ולמה כדאי להשתמש ב-python -m pip ובסביבה וירטואלית."
 date: 2026-10-11
 tags: [python]
-series: { key: python, order: 22 }
+series: { key: python, order: 27 }
 ---
 
 Python מגיע עם ספרייה סטנדרטית גדולה, אבל רוב הפרויקטים משתמשים גם בחבילות של צד שלישי: לקוח HTTP, מסגרת בדיקות, ספריית נתונים. pip מתקין אותן: הוא מוריד חבילות מ-Python Package Index (pypi.org) ומניח אותן במקום ש-Python יכול לייבא.

@@ -3,7 +3,7 @@ title: "לולאות ב-Python: ‏for ו-while"
 summary: "להריץ קוד שוב ושוב: for על רשימה או על range, ‏enumerate ו-zip, ‏while, ‏break ו-continue, ‏else על לולאה, והבאגים בלולאות שכולם כותבים פעם אחת."
 date: 2026-10-13
 tags: [python]
-series: { key: python, order: 15 }
+series: { key: python, order: 17 }
 ---
 
 לולאה מריצה את אותו בלוק קוד שוב ושוב: פעם אחת לכל פריט ב[רשימה](he/posts/python-lists/), פעם אחת לכל מספר בטווח, או כל עוד תנאי מתקיים.

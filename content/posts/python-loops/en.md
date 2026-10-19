@@ -3,7 +3,7 @@ title: "Loops in Python: for and while"
 summary: "Running code again and again: for over a list or a range, enumerate and zip, while, break and continue, the else clause on a loop, and the loop bugs everyone writes once."
 date: 2026-10-13
 tags: [python]
-series: { key: python, order: 15 }
+series: { key: python, order: 17 }
 ---
 
 A loop runs the same block of code again and again: once for every item in a [list](en/posts/python-lists/), once for every number in a range, or for as long as a condition is true.

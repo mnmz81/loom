@@ -3,7 +3,7 @@ title: "אופרטור השארית % ב-Python"
 summary: "מה % עושה ב-Python ואיפה הוא שימושי: זוגי או אי-זוגי, כל פריט N-י, חזרה להתחלה ברשימה או בשעון, פירוק שניות עם divmod, ספרות, FizzBuzz, ואיך הוא מתנהג עם מספרים שליליים."
 date: 2026-10-13
 tags: [python]
-series: { key: python, order: 14 }
+series: { key: python, order: 16 }
 ---
 
 ‏`%` הוא אופרטור השארית (modulo): מה שנשאר אחרי חילוק. ‏[הפוסט על פעולות על מספרים](he/posts/python-number-operations/) הציג אותו בכמה שורות.

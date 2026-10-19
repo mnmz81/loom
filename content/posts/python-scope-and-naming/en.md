@@ -3,7 +3,7 @@ title: "Variable scope and good variable names in Python"
 summary: "Where a variable can be seen and changed in Python: local, global and nonlocal scope, the global and nonlocal keywords, shadowing, and how to choose clear names that follow PEP 8."
 date: 2026-10-11
 tags: [python]
-series: { key: python, order: 19 }
+series: { key: python, order: 21 }
 ---
 
 The *scope* of a variable is the part of the program where its name can be used. It is the reason a variable can be "missing" in one function and work fine in another.

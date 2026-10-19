@@ -2,8 +2,9 @@
 title: "if, elif, else: conditions in Python"
 summary: "How Python decides which code to run: if, else and elif, the comparison operators, truthy and falsy values, the conditional expression (x if C else y), and a first look at match."
 date: 2026-10-13
+updated: 2026-10-19
 tags: [python]
-series: { key: python, order: 11 }
+series: { key: python, order: 12 }
 ---
 
 So far every line in our programs ran, top to bottom. Real programs make decisions: show a different message to a minor, refuse an empty password, grade a score. In Python that's the `if` statement.
@@ -247,4 +248,4 @@ Only the first matching `case` runs. `|` means "or", and `_` matches anything, l
 
 ## What's next
 
-Next: the logical operators `and`, `or` and `not`, which combine several conditions into one.
+Next: several `if` statements in a row, and how they differ from an `elif` chain.

@@ -3,7 +3,7 @@ title: "Logical operators in Python: and, or, not"
 summary: "How and, or and not combine conditions in Python: truth tables, short-circuit evaluation, why and/or return one of their operands, precedence, and any() and all()."
 date: 2026-10-13
 tags: [python]
-series: { key: python, order: 12 }
+series: { key: python, order: 14 }
 ---
 
 A single comparison answers one question: is the user an adult? Real conditions often ask several at once: is the user an adult **and** do they have a ticket? Python has three logical operators for this: `and`, `or` and `not`. They're words, not symbols like `&&` and `||` in other languages.

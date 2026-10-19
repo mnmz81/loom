@@ -2,8 +2,9 @@
 title: "חריגות ב-Python: ‏try, ‏except, ‏else, ‏finally"
 summary: "מה קורה כש-Python נתקלת בשגיאה בזמן ריצה: קריאת traceback, תפיסת שגיאות עם try/except, ‏else ו-finally, העלאת חריגות משלכם, ולמה except ריק הוא מלכודת."
 date: 2026-10-13
+updated: 2026-10-19
 tags: [python]
-series: { key: python, order: 21 }
+series: { key: python, order: 23 }
 ---
 
 ‏`IndexError`, ‏`KeyError`, ‏`ValueError` ו-`TypeError` עצרו את התוכנית בפוסטים הקודמים, ו[הפוסט על TypeError](he/posts/python-type-errors-and-checking/) הראה `try`/`except` ראשון. המדריך הרשמי מנסח את זה כך: "Errors detected during execution are called exceptions and are not unconditionally fatal".
@@ -174,4 +175,4 @@ print(total)
 
 ## מה הלאה
 
-הצעד הבא בסדרה: pip, הכלי שמתקין חבילות שאנשים אחרים כתבו.
+הצעד הבא בסדרה: המודול `random`, למספרים אקראיים ולבחירת פריטים.

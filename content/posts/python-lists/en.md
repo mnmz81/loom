@@ -2,6 +2,7 @@
 title: "Lists in Python"
 summary: "A list holds many values in order. Creating one, indexing and slicing, adding and removing items, sorting, copying without surprises, and a word on tuples."
 date: 2026-10-13
+updated: 2026-10-19
 tags: [python]
 series: { key: python, order: 10 }
 ---
@@ -247,4 +248,4 @@ TypeError: 'tuple' object does not support item assignment
 
 ## What's next
 
-Next: conditions with `if`, `elif` and `else`, which decide what to run based on values like `"green" in colors`.
+Next: list indexes in depth, the `IndexError`, and lists inside lists.

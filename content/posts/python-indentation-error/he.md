@@ -3,7 +3,7 @@ title: "הזחה ב-Python ושגיאת IndentationError"
 summary: "איך Python משתמש בהזחה כדי לקבץ קוד, ארבע הודעות IndentationError שתפגשו, למה ערבוב טאבים ורווחים גורם ל-TabError, ואיך מוצאים ומתקנים."
 date: 2026-10-11
 tags: [python]
-series: { key: python, order: 13 }
+series: { key: python, order: 15 }
 ---
 
 ב-Python ההזחה היא חלק מהתחביר. בשפות אחרות משתמשים בסוגריים מסולסלים `{}` כדי לסמן בלוק קוד. ב-Python משתמשים ברווחים בתחילת השורה. התיעוד מתאר את זה כך: "הזחה היא הדרך של Python לקבץ הצהרות".
