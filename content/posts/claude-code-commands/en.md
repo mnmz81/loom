@@ -2,16 +2,16 @@
 title: "Claude Code slash commands: my cheat sheet, rechecked"
 summary: "The Claude Code slash commands worth knowing, grouped by what you're doing. Checked against the official docs for v2.1.294."
 date: 2026-10-08
-updated: 2026-10-14
+updated: 2026-10-19
 tags: [claude-code, cli, cheatsheet]
 ---
 
-I keep a list of Claude Code commands in Notion so I don't have to remember them. This is that list, checked line by line against the official docs and current as of v2.1.294. The date it was last updated is at the top of the page.
+My Notion list of Claude Code commands, checked line by line against the official docs for v2.1.294.
 
 ## If you only learn six
 
 - `/init` creates a starter `CLAUDE.md` for the project. Once per project is enough.
-- `/plan` shows what Claude intends to touch before it touches anything. Worth it before any big edit.
+- `/plan` shows what Claude intends to touch before it touches anything.
 - `/compact` summarizes the conversation to free up context. It costs tokens itself, so don't wait until you're out of room.
 - `/clear` starts fresh. The old session isn't lost; `/resume` brings it back.
 - `/rewind` rolls code and conversation back to an earlier checkpoint. It can even restore what was there before a `/clear`.
@@ -19,7 +19,7 @@ I keep a list of Claude Code commands in Notion so I don't have to remember them
 
 ## Context and conversation
 
-- `/context [all]` draws your context usage as a colored grid. It's the quickest way to decide when to compact.
+- `/context [all]` draws your context usage as a colored grid, the quickest way to decide when to compact.
 - `/btw [question]` asks a side question without adding it to the conversation. With no question, it shows your earlier ones.
 - `/recap` gives a one-line summary of the session.
 - `/export [file]` saves the conversation as plain text.
@@ -58,7 +58,7 @@ I keep a list of Claude Code commands in Notion so I don't have to remember them
 
 - `/diff` is an interactive viewer for uncommitted changes and per-turn diffs.
 - `/code-review [level] [--fix] [--comment] [--max-findings n|all|default] [target]` looks for bugs and cleanups. `--fix` applies what it finds, `--comment` posts to the PR, and `ultra` runs the deep cloud review. Your `--max-findings` choice sticks until you set it back to `default`. `/review` is an alias.
-- `/simplify [target]` cleans up changed code for reuse, simplicity and efficiency. It doesn't hunt bugs; that's `/code-review`'s job.
+- `/simplify [target]` cleans up changed code for reuse, simplicity and efficiency. It doesn't hunt bugs.
 - `/security-review` is a read-only security pass over the pending changes.
 - `/ultrareview [PR]` is the same as `/code-review ultra`. Pro and Max get three free runs.
 
@@ -94,7 +94,7 @@ Custom commands are written as skills (`.claude/skills/`). Old files in `.claude
 
 ## Account and limits
 
-- `/login` and `/logout` do what they say.
+- `/login`, `/logout`.
 - `/rate-limit-options` is what you open when a usage limit blocks you: wait for the reset, add credits, or upgrade.
 - `/usage-credits` sets up credits (or requests them from your admin), and `/upgrade` opens the plan page.
 - `/privacy-settings` is for your privacy options on Pro and Max.
@@ -105,8 +105,8 @@ Custom commands are written as skills (`.claude/skills/`). Old files in `.claude
 - Terminal and looks: `/terminal-setup` (Shift+Enter), `/theme`, `/statusline`, `/keybindings`, `/color`, `/voice` for dictation, and `/tui fullscreen` for the flicker-free renderer.
 - Setup and diagnosis: `/doctor` checks your setup and proposes fixes you confirm first (`/doctor prompt-audit` checks your instructions instead). `/debug` turns on debug logging. `/heapdump` writes a memory snapshot, and only the `-diagnostics.json` file is safe to share. The snapshot holds your whole conversation.
 - Cloud and apps: `/setup-bedrock`, `/setup-vertex`, `/install-github-app`, `/install-slack-app`, `/web-setup`, `/remote-env`.
-- Bundled skills: `/claude-api`, `/dataviz`, `/design`, `/design-sync`, `/slides`, `/workflow-authoring`, `/plugin-authoring`.
+- Bundled skills: `/claude-api`, `/dataviz`, `/design`, `/design-sync`, `/slides`, `/workflow-authoring`.
 - Discovery: `/insights` builds a report on how you use Claude Code, `/powerup` has short interactive lessons, `/release-notes` and `/status` do what they say, and `/artifacts` lists your artifacts.
 - Odds and ends: `/bug` and `/feedback`, `/radio`, `/stickers`, `/passes`.
 
-If a command misbehaves, `/help` shows what your version actually has, and the [official reference](https://code.claude.com/docs/en/commands) is the source of truth. Commands change almost every release, so treat any list, this one included, as a snapshot.
+If a command misbehaves, `/help` shows what your version actually has, and the [official reference](https://code.claude.com/docs/en/commands) is the source of truth. Commands change almost every release.
