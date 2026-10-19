@@ -45,8 +45,6 @@ False True False True
 False False False False
 ```
 
-`and` is `True` only on the first row. `or` is `False` only on the last row.
-
 They make nested `if` statements flatter. The ticket check from the [previous post](en/posts/python-if-else/) becomes:
 
 ```python
@@ -80,7 +78,7 @@ checking c
 True
 ```
 
-`b` and `d` were never checked. This is useful as a guard: put the safe check first, and the risky one runs only when it's safe:
+This works as a guard: put the safe check first, and the risky one runs only when it's safe:
 
 ```python
 items = []
@@ -185,9 +183,9 @@ True
 True
 ```
 
-Both lines mean the same thing. The chained one is shorter and reads like math.
+The chained form is shorter and reads like math.
 
-A real example that uses everything so far: the leap year rule. A year is a leap year if it divides by 4, except years that divide by 100, unless they also divide by 400:
+An example that combines them: the leap year rule. A year is a leap year if it divides by 4, except years that divide by 100, unless they also divide by 400:
 
 ```python
 def is_leap(year):
@@ -223,10 +221,7 @@ True False
 
 - **Writing `&&`, `||` or `!`.** Those are other languages. Python uses `and`, `or` and `not`. `!x` is a `SyntaxError`.
 - **Using `&` and `|` instead of `and` and `or`.** `&` and `|` are bitwise operators. `1 & 2` is `0`, while `1 and 2` is `2`. They also don't short-circuit.
-- **`x == 3 or 4`.** That's always truthy. Write `x == 3 or x == 4`, or `x in (3, 4)`.
-- **Putting the risky check first.** `items[0] == "x" and items` fails on an empty list. Order the guard before the check.
-- **Using `or` for a default when `0` or `""` is valid.** `or` replaces every falsy value, not just `None`.
 
 ## What's next
 
-Next in the series: indentation, and the `IndentationError` you get when the blocks under your conditions are off.
+Next: indentation, and the `IndentationError` you get when the blocks under your conditions are off.

@@ -19,7 +19,7 @@ print(f"Hello, {name}!")
 
 The text in the parentheses is the prompt. It's written to the screen without a newline, so the cursor waits right after it. The docs say the line is read, "converts it to a string (stripping a trailing newline)", and returned.
 
-The example above is interactive, so the output depends on what you type. If you type `Ada`, the screen shows:
+If you type `Ada`, the screen shows:
 
 ```text
 What is your name? Ada
@@ -51,7 +51,7 @@ years = int(age) + 1
 print(f"Next year: {years}")
 ```
 
-For decimals use `float()`. The conversion functions are covered in the variables post.
+For decimals use `float()`. The conversion functions are covered in the type conversion post.
 
 ## Spaces are kept
 
@@ -109,10 +109,8 @@ The docs say: "When EOF is read, EOFError is raised." An empty line (just pressi
 
 ## Common mistakes
 
-- **Doing math on the result.** `input()` returns a str, so convert it with `int()` or `float()` first.
 - **Forgetting the space in the prompt.** `input("Name?")` puts the cursor right after the question mark. Add a space at the end of the prompt if you want a gap.
-- **Assuming the input is valid.** Users make typos. Check or catch the error before you use the value.
 
 ## What's next
 
-Next in the series: the `date` type, for values that are days on a calendar.
+Next: the `date` type, for days on a calendar.

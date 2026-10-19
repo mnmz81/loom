@@ -6,7 +6,7 @@ tags: [python]
 series: { key: python, order: 11 }
 ---
 
-So far every line in our programs ran, top to bottom. Real programs make decisions: show a different message to a minor, refuse an empty password, grade a score. In Python that's the `if` statement. This post covers `if`, `else` and `elif`, the comparison operators, and the one-line conditional expression.
+So far every line in our programs ran, top to bottom. Real programs make decisions: show a different message to a minor, refuse an empty password, grade a score. In Python that's the `if` statement.
 
 Every example here was run with Python 3.13. The behavior was checked against the [tutorial section on `if` statements](https://docs.python.org/3/tutorial/controlflow.html#if-statements), the [comparisons reference](https://docs.python.org/3/reference/expressions.html#comparisons) and the [conditional expressions reference](https://docs.python.org/3/reference/expressions.html#conditional-expressions).
 
@@ -83,7 +83,7 @@ elif score >= 90:
 B
 ```
 
-95 is at least 80, so the first branch wins and `score >= 90` is never checked. Put the narrowest condition first.
+`score >= 90` is never checked. Put the narrowest condition first.
 
 The docs point out that an `if`/`elif`/`elif` chain is Python's substitute for the `switch` or `case` statements of other languages.
 
@@ -245,10 +245,9 @@ Only the first matching `case` runs. `|` means "or", and `_` matches anything, l
 - **`=` instead of `==`.** `if x = 5:` is a `SyntaxError`. Python even suggests the fix: `Maybe you meant '==' or ':=' instead of '='?`
 - **Forgetting the colon.** `if x == 5` without `:` gives `SyntaxError: expected ':'`.
 - **An empty block.** An `if` with nothing indented under it gives `IndentationError: expected an indented block after 'if' statement`. Use `pass` as a placeholder.
-- **Wrong order in an `elif` chain.** Only the first true branch runs, so put specific conditions before general ones.
 - **Comparing text to a number.** `5 == "5"` is `False`, not an error. Convert the value from `input()` before comparing.
 - **Comparing floats with `==`.** `0.1 + 0.2 == 0.3` is `False`. Use `math.isclose()` instead.
 
 ## What's next
 
-Next in the series: the logical operators `and`, `or` and `not`, which combine several conditions into one.
+Next: the logical operators `and`, `or` and `not`, which combine several conditions into one.

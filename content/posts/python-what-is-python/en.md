@@ -8,7 +8,7 @@ series: { key: python, order: 1 }
 
 Python is a high-level, general-purpose programming language. The official FAQ describes it as "an interpreted, interactive, object-oriented programming language" that also supports procedural and functional styles. It runs on Windows, macOS and Linux, and it's used for web backends, automation scripts, data analysis, games, teaching and a lot more.
 
-This is the first post in a series where each post covers one Python topic. Every example was run, and the claims were checked against the official docs.
+Every example in this series was run, and the claims were checked against the official docs.
 
 ## A short history
 
@@ -113,7 +113,7 @@ print(total({10, 20}))
 30
 ```
 
-One function, three kinds of collections. You can add **type hints** (`def total(items: list[int]) -> int:`), but they're optional, not enforced by Python, and meant for editors and checkers like mypy.
+You can add **type hints** (`def total(items: list[int]) -> int:`), but they're optional, not enforced by Python, and meant for editors and checkers like mypy.
 
 ### 4. Big built-in data types
 
@@ -149,8 +149,7 @@ It's a weaker fit when every microsecond counts, such as operating-system kernel
 
 - **Mixing tabs and spaces.** Pick spaces (four is the convention) and let your editor do it.
 - **Typing `python` and getting a different version.** On many systems the command is `python3`. Check with `python3 --version`.
-- **Expecting types to be checked before running.** Mistakes like `"5" + 1` only show up when that line runs.
 
 ## What's next
 
-Next in the series: `print()`, the function that shows output, and the first one you'll use in every program.
+Next: `print()`, the function that shows output.

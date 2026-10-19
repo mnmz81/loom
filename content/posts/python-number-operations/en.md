@@ -6,7 +6,7 @@ tags: [python]
 series: { key: python, order: 6 }
 ---
 
-Python does arithmetic the way you'd expect, with a few details that matter: `/` and `//` are different operations, `%` works with negative numbers in a specific way, and `round()` doesn't always round halves up. This post covers the operators, the common functions, and the surprises.
+Python does arithmetic the way you'd expect, with a few details that matter: `/` and `//` are different operations, `%` works with negative numbers in a specific way, and `round()` doesn't always round halves up.
 
 Every example here was run with Python 3.13. The rules were checked against the [official numeric types docs](https://docs.python.org/3/library/stdtypes.html#numeric-types-int-float).
 
@@ -129,7 +129,7 @@ print(round(2.675, 2))
 2.67
 ```
 
-`round(2.5)` is 2 and `round(3.5)` is 4. Python rounds halves to the nearest even number. `round(2.675, 2)` gives 2.67, because 2.675 is stored as a float slightly below 2.675.
+Python rounds halves to the nearest even number. `round(2.675, 2)` gives 2.67, because 2.675 is stored as a float slightly below 2.675.
 
 ## The math module
 
@@ -161,13 +161,6 @@ print(0.1 + 0.2)
 
 This isn't a Python bug. It's how binary floats work. For money or exact comparisons, use the `decimal` module, or compare with a tolerance instead of `==`.
 
-## Common mistakes
-
-- **Expecting `//` to round toward zero.** `-7 // 2` is -4, not -3.
-- **Comparing floats with `==`.** `0.1 + 0.2 == 0.3` is `False`.
-- **Relying on `round` for "normal" rounding.** Halves go to the even number, so `round(2.5)` is 2.
-- **Mixing up `/` and `//`.** `/` returns a float even for whole results, such as `10 / 2`, which is `5.0`.
-
 ## What's next
 
-Next in the series: type conversion, which is how you turn text into numbers and back.
+Next: type conversion, turning text into numbers and back.

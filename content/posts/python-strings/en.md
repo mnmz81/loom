@@ -6,7 +6,7 @@ tags: [python]
 series: { key: python, order: 4 }
 ---
 
-A string (`str`) is text. Python has a lot of tools for working with it, and most of them come built in as methods on the string itself. This post covers how to write strings, how to take them apart, and the methods you'll use most.
+A string (`str`) is text. Python has a lot of tools for working with it, and most of them come built in as methods on the string itself.
 
 Every code example here was run with Python 3.13, and the behavior was checked against the [official tutorial](https://docs.python.org/3/tutorial/introduction.html) and the [string methods reference](https://docs.python.org/3/library/stdtypes.html#string-methods).
 
@@ -102,7 +102,7 @@ t[0] = "I"
 TypeError: 'str' object does not support item assignment
 ```
 
-Methods don't change the original string either. They return a new one, so you have to keep the result:
+Methods don't change the original string either. They return a new one, so you have to keep the result (`s = s.upper()`):
 
 ```python
 s = "Hello, World"
@@ -206,10 +206,6 @@ print(f"{3.14159:.2f}")
 
 `.2f` means two digits after the decimal point.
 
-## Common mistake: forgetting the result
-
-The most common string bug is calling a method and not using its return value. Methods like `upper()` and `replace()` don't change the original. Write `s = s.upper()` if you want to keep the change.
-
 ## What's next
 
-Next in the series: f-strings, the clean way to put values into text.
+Next: f-strings in full.

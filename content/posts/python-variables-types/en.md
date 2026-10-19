@@ -6,7 +6,7 @@ tags: [python]
 series: { key: python, order: 3 }
 ---
 
-A variable in Python is a name that points to a value. You don't declare it or give it a type: you assign it, and the type comes with the value. This post covers the basic types, how to check them, and how to convert between them.
+A variable in Python is a name that points to a value. You don't declare it or give it a type: you assign it, and the type comes with the value.
 
 Every example here was run with Python 3.13 and checked against the [official tutorial](https://docs.python.org/3/tutorial/introduction.html) and the [`type()` docs](https://docs.python.org/3/library/functions.html#type).
 
@@ -68,8 +68,6 @@ True <class 'bool'>
 - `bool`: `True` or `False`.
 - `None`: the value for "nothing". Its type is `NoneType`.
 
-`print(type(None))` shows `<class 'NoneType'>`.
-
 ## Division returns a float
 
 `/` always returns a float, even when the result is whole. `//` returns an int:
@@ -86,7 +84,7 @@ print(7 % 3)
 1
 ```
 
-`%` is the remainder: 7 divided by 3 leaves 1.
+`%` gives the remainder.
 
 ## Checking types
 
@@ -150,8 +148,6 @@ Assign the name first, and check you spelled it the same way everywhere.
 
 **Mixing `=` and `==`.** `=` assigns, `==` compares: `if x = 5:` is a syntax error, `if x == 5:` is the check.
 
-**Adding a string and a number.** `"5" + 1` raises `TypeError`. Convert one side first: `int("5") + 1` gives `6`.
-
 ## What's next
 
-Next in the series: strings, including the common methods for changing and searching text.
+Next: strings and the common methods for changing and searching text.

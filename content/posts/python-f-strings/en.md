@@ -26,7 +26,7 @@ Ada is 36 years old
 ADA
 ```
 
-The expression can be anything: a variable, arithmetic, or a method call. The docs say "expressions in formatted string literals are treated like regular Python expressions".
+The docs say "expressions in formatted string literals are treated like regular Python expressions".
 
 Use quotes of the other kind inside the braces if the expression needs quotes. Since Python 3.12 you can reuse the same kind, but it's clearer not to:
 
@@ -151,8 +151,6 @@ print(f"{age=}")
 age=36
 ```
 
-It's handy for quick debugging, because you don't have to type the name twice.
-
 ## Conversions: !r
 
 `!r` shows the value the way `repr()` does, which is useful for strings with quotes or spaces. The docs list `!s` (`str()`) and `!a` (`ascii()`) too:
@@ -175,4 +173,4 @@ print(f"{name!r}")
 
 ## What's next
 
-Next in the series: number operations, including `/`, `//`, `%` and `**`.
+Next: number operations: `/`, `//`, `%` and `**`.

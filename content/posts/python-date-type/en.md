@@ -83,7 +83,7 @@ print(date.fromisoformat("2026-01-01"))
 2026-01-01
 ```
 
-For other formats, such as `11/10/2026`, use `datetime.strptime`, which is a topic for a later post.
+For other formats, such as `11/10/2026`, use `datetime.strptime`.
 
 ## Date arithmetic
 
@@ -111,7 +111,7 @@ print((d - date(2026, 1, 1)).days)
 283
 ```
 
-`.days` returns the number of days as an integer, usually what a calculation needs.
+`.days` returns the number of days as an integer.
 
 Dates can be compared with `<`, `>` and `==`:
 
@@ -126,9 +126,7 @@ True
 ## Common mistakes
 
 - **Using a string where a date is needed.** `"2026-10-11" > "2026-01-01"` compares text. It only works by accident for ISO format. Convert with `fromisoformat` first.
-- **Expecting time in a `date`.** A `date` has no hours, minutes or time zone. If you need them, use `datetime`.
-- **Confusing the two `weekday` methods.** `weekday()` starts at 0 for Monday. `isoweekday()` starts at 1.
 
 ## What's next
 
-Next in the series: lists, which hold many values in one variable.
+Next: lists, which hold many values in one variable.

@@ -6,7 +6,7 @@ tags: [python]
 series: { key: python, order: 7 }
 ---
 
-Python rarely converts types for you. `"5" + 1` is an error, not `6`. When you need a number from text, or text from a number, you call a conversion function yourself. The functions have the same names as the types, so `int("5")` builds an int from the string "5". This post covers what each conversion does, and what goes wrong when it can't.
+Python rarely converts types for you. `"5" + 1` is an error, not `6`. When you need a number from text, or text from a number, you call a conversion function yourself. The functions have the same names as the types, so `int("5")` builds an int from the string "5".
 
 Every example here was run with Python 3.13. The behavior was checked against the [official `int()` and related docs](https://docs.python.org/3/library/functions.html#int).
 
@@ -64,7 +64,7 @@ print(int(3.9), int(-3.9))
 3 -3
 ```
 
-This is not rounding. `int(3.9)` is 3, not 4. To round, use `round()` first, and then convert if you need an int. `round()` is covered in the number operations post.
+This is not rounding. To round, use `round()` first, and then convert if you need an int. `round()` is covered in the number operations post.
 
 ## True and False as numbers
 
@@ -92,7 +92,7 @@ False False False False False
 True
 ```
 
-`"0"` is a non-empty string, so it's true. The check is about the text being empty, not about its value.
+`"0"` is a non-empty string, so it's true, and so is `"False"`. The check is about the text being empty, not about its value.
 
 ## Between sequence types
 
@@ -108,7 +108,7 @@ print(tuple([1, 2]), set([1, 1, 2]))
 (1, 2) {1, 2}
 ```
 
-A string becomes a list of its characters. A set drops duplicates, so `[1, 1, 2]` becomes `{1, 2}`.
+A set drops duplicates.
 
 ## When conversion fails
 
@@ -144,13 +144,6 @@ TypeError: int() argument must be a string, a bytes-like object or a real number
 
 Check user input, or catch the error with `try` and `except`, as described in the input() post.
 
-## Common mistakes
-
-- **Expecting `int()` to round.** `int(3.9)` is 3.
-- **Converting `"3.5"` with `int`.** Use `float("3.5")`.
-- **Assuming `"0"` is false.** Any non-empty string is true, including `"0"` and `"False"`.
-- **Mixing text and numbers with `+`.** `"5" + 1` raises `TypeError`. Convert one side, for example `int("5") + 1`.
-
 ## What's next
 
-Next in the series: `input()`, which reads text from the user, and where type conversion comes in right away.
+Next: `input()`, which reads text from the user and needs type conversion right away.

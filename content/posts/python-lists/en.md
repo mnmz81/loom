@@ -6,7 +6,7 @@ tags: [python]
 series: { key: python, order: 10 }
 ---
 
-So far every variable held one value: a number, a string, a date. Real programs work with many values at once: the items in a cart, the lines of a file, the scores of a class. The basic tool is the list, which the docs call the most versatile of Python's compound data types: values in square brackets, in a fixed order, that you can change.
+Real programs work with many values at once: the items in a cart, the lines of a file, the scores of a class. The basic tool is the list, which the docs call the most versatile of Python's compound data types: values in square brackets, in a fixed order, that you can change.
 
 Every example here was run with Python 3.13. The behavior was checked against the [lists section of the tutorial](https://docs.python.org/3/tutorial/introduction.html#lists), [more on lists](https://docs.python.org/3/tutorial/datastructures.html#more-on-lists) and the [`list` type reference](https://docs.python.org/3/library/stdtypes.html#lists).
 
@@ -61,7 +61,7 @@ apple date
 ['date', 'cherry', 'banana', 'apple']
 ```
 
-An index past the end is an error, but a slice past the end just returns what exists:
+An index past the end is an error, but a slice past the end returns what exists:
 
 ```python
 print(fruits[1:100])
@@ -252,10 +252,9 @@ TypeError: 'tuple' object does not support item assignment
 
 - **Using the result of `sort()`.** `numbers = numbers.sort()` sets `numbers` to `None`. Use `numbers.sort()` alone, or `numbers = sorted(numbers)`.
 - **`append()` with a list.** `cart.append(["tea", "rice"])` adds one item, a list inside the list. To add each item, use `extend()`.
-- **Copying with `=`.** `b = a` gives a second name for the same list. Use `a.copy()` when you need a separate one.
 - **Off-by-one indexes.** The last item is `items[len(items) - 1]`, or simply `items[-1]`. `items[len(items)]` is an `IndexError`.
 - **Calling a variable `list`.** `list = [1, 2]` hides the built-in `list()` until the end of the program.
 
 ## What's next
 
-Next in the series: conditions with `if`, `elif` and `else`, which decide what to run based on values like `"green" in colors`.
+Next: conditions with `if`, `elif` and `else`, which decide what to run based on values like `"green" in colors`.

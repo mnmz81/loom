@@ -6,7 +6,7 @@ tags: [python]
 series: { key: python, order: 2 }
 ---
 
-`print()` is the most used function in Python. It writes text to the screen, usually for debugging or to show a result. In the previous post it showed up in the first program. This post covers what it does with more than one value and which arguments change its output.
+`print()` is the most used function in Python. It writes text to the screen, usually for debugging or to show a result.
 
 Every code example here was run with Python 3.13, and the behavior was checked against the [official `print()` docs](https://docs.python.org/3/library/functions.html#print).
 
@@ -46,8 +46,6 @@ no newline continues here
 
 ```
 
-The `end=" "` argument stays on the same line, so the next `print()` continues there. The empty `print()` at the end adds the blank line in the output.
-
 The docs say `sep`, `end`, `file` and `flush` "must be given as keyword arguments", so `print("a", "b", "-")` is not a separator. It's a third value, and it prints `a b -`.
 
 ## Printing values with f-strings
@@ -64,7 +62,7 @@ print(f"{name} is {age}")
 Ada is 36
 ```
 
-The full string syntax is in the next posts. For now, know that it's the cleanest way to print a mix of text and values.
+f-strings get their own post later in the series.
 
 ## Where the output goes
 
@@ -96,4 +94,4 @@ If you want the value to stay in a variable, assign it first and print the varia
 
 ## What's next
 
-Next in the series: variables and types, which are the values `print()` shows.
+Next: variables and types.
