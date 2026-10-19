@@ -1,0 +1,6 @@
+title:
+  he: "סביבת פיתוח ב-Mac"
+  en: "Dev environment on a Mac"
+description:
+  he: כלים שמקימים סביבת פיתוח נוחה ובטוחה, פוסט קצר לכל כלי. Homebrew, Oh My Zsh, GitHub CLI, uv, OrbStack, pre-commit ו-gitleaks. כל פקודה הורצה ונבדקה מול התיעוד הרשמי.
+  en: Tools for a comfortable and safe dev environment, one short post per tool. Homebrew, Oh My Zsh, GitHub CLI, uv, OrbStack, pre-commit and gitleaks. Every command was run and checked against the official docs.

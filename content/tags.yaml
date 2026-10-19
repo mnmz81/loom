@@ -20,3 +20,5 @@ kubernetes: { he: Kubernetes, en: Kubernetes }
 ci-cd: { he: CI/CD, en: CI/CD }
 llmops: { he: LLMOps, en: LLMOps }
 security: { he: אבטחה, en: Security }
+macos: { he: macOS, en: macOS }
+dev-tools: { he: כלי פיתוח, en: Dev tools }
