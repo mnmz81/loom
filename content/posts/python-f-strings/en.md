@@ -168,7 +168,7 @@ print(f"{name!r}")
 
 - **Forgetting the `f`.** `"{name} is {age}"` prints the braces as they are.
 - **Putting a format spec where a conversion goes.** The conversion is `!r`, and the spec is `:` followed by the format.
-- **Relying on rounding in the display.** `f"{2.675:.2f}"` shows 2.67 for the same reason `round(2.675, 2)` does. Formatting rounds the stored float, and floats are approximate.
+- **Relying on rounding in the display.** `f"{2.675:.2f}"` shows 2.67, for the same reason as `round(2.675, 2)` in the [number operations post](en/posts/python-number-operations/).
 - **Formatting user input directly.** Only use f-strings with trusted text in the template. Don't build the template from user input.
 
 ## What's next

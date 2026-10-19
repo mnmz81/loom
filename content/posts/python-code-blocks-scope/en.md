@@ -12,28 +12,7 @@ Every example ran with Python 3.13, checked against the [compound statements ref
 
 ## What a code block is
 
-An `if`, `for`, `while`, `def` or `class` line ends with a colon. The indented lines under it are the statements it controls. The reference calls that group a *suite*: "a group of statements controlled by a clause". Blocks can be nested, and indentation shows which block each line belongs to:
-
-```python
-def check(n):
-    if n > 0:
-        print("positive")
-        if n > 100:
-            print("big")
-    print("checked", n)
-
-check(150)
-check(-1)
-```
-
-```text
-positive
-big
-checked 150
-checked -1
-```
-
-`print("checked", n)` is at the function's level, so it runs every time; the two prints above it belong to the `if`. The [indentation post](en/posts/python-indentation-error/) covers indentation errors.
+An `if`, `for`, `while`, `def` or `class` line ends with a colon. The indented lines under it are the statements it controls. The reference calls that group a *suite*: "a group of statements controlled by a clause". Blocks can be nested; the [indentation post](en/posts/python-indentation-error/) shows how indentation marks where each one ends.
 
 A block can also sit on the same line as its header, separated by semicolons:
 
@@ -128,7 +107,7 @@ Hello
 NameError: name 'text' is not defined. Did you mean: 'next'?
 ```
 
-To get a value out of a function, `return` it.
+To get a value out of a function, `return` it. How a function reads names from outside it, and why assigning one creates a new local instead, is in the [scope and naming post](en/posts/python-scope-and-naming/).
 
 The same goes for a class body. Its names aren't visible inside the methods, so you reach them through `self` or the class name:
 
@@ -163,48 +142,6 @@ print(squares, x)
 ```
 
 The [comprehensions reference](https://docs.python.org/3/reference/expressions.html#displays-for-lists-sets-and-dictionaries) says the comprehension runs "in a separate implicitly nested scope".
-
-## Reading and writing names from outside
-
-An inner scope can **read** names from the scopes around it:
-
-```python
-x = 10
-
-def outer():
-    y = 20
-
-    def inner():
-        print(x, y)
-
-    inner()
-
-outer()
-```
-
-```text
-10 20
-```
-
-**Assigning** a name inside a function creates a new local variable instead of changing the outer one:
-
-```python
-enemies = 1
-
-def increase_enemies():
-    enemies = 2
-    print("inside:", enemies)
-
-increase_enemies()
-print("outside:", enemies)
-```
-
-```text
-inside: 2
-outside: 1
-```
-
-There are two different `enemies` here. The `global` and `nonlocal` keywords, and the `UnboundLocalError` from mixing reading and assigning, are in the [scope and naming post](en/posts/python-scope-and-naming/). Prefer passing values in as arguments and returning results over changing globals.
 
 ## The one surprise: except ... as
 

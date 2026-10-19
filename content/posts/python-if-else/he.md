@@ -123,11 +123,10 @@ print(18 <= age < 65)
 True
 ```
 
-עוד שני אופרטורים מופיעים בתנאים כל הזמן. ‏`in` בודק שייכות, ו-`is` בודק זהות. משתמשים ב-`is` רק עם `None`:
+עוד שני אופרטורים מופיעים בתנאים כל הזמן. ‏`in` בודק שייכות, כמו ב[פוסט על רשימות](he/posts/python-lists/), ובמחרוזת הוא מחפש תת-מחרוזת. ‏`is` בודק זהות, ומשתמשים בו רק עם `None`:
 
 ```python
-fruit = "apple"
-print(fruit in ["apple", "pear"], "z" in "pizza", "x" not in "pizza")
+print("z" in "pizza", "x" not in "pizza")
 
 value = None
 if value is None:
@@ -135,13 +134,13 @@ if value is None:
 ```
 
 ```text
-True True True
+True True
 no value
 ```
 
 ## ערכים אמיתיים ושקריים
 
-תנאי לא חייב להיות `True` או `False`. Python מקבלת כל ערך. התיעוד מפרט מה נחשב שקרי: `False`, `None`, אפס מכל טיפוס מספרי, ומחרוזות ואוספים ריקים. כל השאר נחשב אמיתי:
+תנאי לא חייב להיות `True` או `False`. ‏Python מקבלת כל ערך ובודקת אם הוא אמיתי, באותה בדיקה ש-`bool()` עושה ב[פוסט על המרת טיפוסים](he/posts/python-type-conversion/):
 
 ```python
 name = ""
@@ -160,7 +159,7 @@ No name given
 2 items
 ```
 
-את `if name:` קוראים "אם יש שם". זה קצר יותר מ-`if name != "":`, וזה הסגנון המקובל ב-Python. ‏[הפוסט על המרת טיפוסים](he/posts/python-type-conversion/) מרחיב על `bool()` ועל אמיתיות של ערכים.
+את `if name:` קוראים "אם יש שם". זה קצר יותר מ-`if name != "":`, וזה הסגנון המקובל ב-Python.
 
 ## תנאים מקוננים
 
@@ -244,9 +243,7 @@ Starting Stopping Unknown command
 
 - **`=` במקום `==`.** ‏`if x = 5:` הוא `SyntaxError`. ‏Python אפילו מציעה את התיקון: `Maybe you meant '==' or ':=' instead of '='?`
 - **שכחת הנקודתיים.** ‏`if x == 5` בלי `:` נותן `SyntaxError: expected ':'`.
-- **בלוק ריק.** ‏`if` בלי שום דבר מוזח מתחתיו נותן `IndentationError: expected an indented block after 'if' statement`. משתמשים ב-`pass` כשומר מקום.
 - **השוואה של טקסט למספר.** ‏`5 == "5"` הוא `False`, לא שגיאה. ממירים את הערך מ-`input()` לפני ההשוואה.
-- **השוואת float עם `==`.** ‏`0.1 + 0.2 == 0.3` הוא `False`. משתמשים ב-`math.isclose()` במקום.
 
 ## מה הלאה
 

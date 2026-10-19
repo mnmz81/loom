@@ -62,12 +62,7 @@ print("five is bigger")
 IndentationError: expected an indented block after 'if' statement on line 1
 ```
 
-מזיחים את גוף הבלוק, או כותבים `pass` כשרוצים בלוק ריק:
-
-```python
-if 5 > 2:
-    pass
-```
+מזיחים את גוף הבלוק, או כותבים [`pass`](he/posts/python-if-else/) כשרוצים בלוק ריק.
 
 ## שגיאה 3: unindent does not match
 

@@ -1,12 +1,12 @@
 ---
 title: "Number operations in Python"
-summary: "The arithmetic operators in Python: + - * / // % and **, the difference between true and floor division, negative numbers, divmod, round, and the math module."
+summary: "The arithmetic operators in Python: + - * / // % and **, the difference between true and floor division, round, the math module, and why floats aren't exact."
 date: 2026-10-11
 tags: [python]
 series: { key: python, order: 6 }
 ---
 
-Python does arithmetic the way you'd expect, with a few details that matter: `/` and `//` are different operations, `%` works with negative numbers in a specific way, and `round()` doesn't always round halves up.
+Python does arithmetic the way you'd expect, with a few details that matter: `/` and `//` are different operations, and `round()` doesn't always round halves up.
 
 Every example here was run with Python 3.13. The rules were checked against the [official numeric types docs](https://docs.python.org/3/library/stdtypes.html#numeric-types-int-float).
 
@@ -55,52 +55,20 @@ print(10 / 4 * 2)
 `//` rounds toward minus infinity, not toward zero. The docs give the examples `1//2` is `0`, `(-1)//2` is `-1`, and `1//(-2)` is `-1`. The same rule applies to floats:
 
 ```python
-print(1 // 0.5, 7.5 % 2)
+print(1 // 0.5, -7.5 // 2)
 ```
 
 ```text
-2.0 1.5
+2.0 -4.0
 ```
 
 ## The remainder: %
 
-`%` gives the remainder after division:
-
-```python
-print(7 % 2)
-print(10 % 3 == 1)
-```
-
-```text
-1
-True
-```
-
-With negative numbers, the result takes the sign of the divisor:
-
-```python
-print(-7 // 2, -7 % 2)
-```
-
-```text
--4 1
-```
-
-`-7 // 2` is -4, because it rounds down. `-7 % 2` is 1, because `(-4) * 2 + 1` is -7. Keep this in mind when you use `%` to wrap around a list index.
-
-`divmod` returns both results at once, as the pair `(x // y, x % y)`:
-
-```python
-print(divmod(17, 5))
-```
-
-```text
-(3, 2)
-```
+`%` gives the remainder after division: `7 % 2` is `1`. It has its own [post](en/posts/python-modulo/): what it's useful for, how it treats negative numbers, and `divmod()`.
 
 ## Assignment operators
 
-`+=`, `*=` and the others update a variable in place:
+`+=` from the [variables post](en/posts/python-variables-types/) works with every operator here: `-=`, `*=`, `/=`, `//=`, `%=` and `**=`:
 
 ```python
 x = 5
@@ -159,7 +127,7 @@ print(0.1 + 0.2)
 0.30000000000000004
 ```
 
-This isn't a Python bug. It's how binary floats work. For money or exact comparisons, use the `decimal` module, or compare with a tolerance instead of `==`.
+This isn't a Python bug. It's how binary floats work. For money or exact comparisons, use the `decimal` module, or compare with `math.isclose()` instead of `==`.
 
 ## What's next
 

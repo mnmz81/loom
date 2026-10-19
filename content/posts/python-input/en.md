@@ -71,20 +71,7 @@ If you type `  spaced  ` and press Enter, the output is:
 
 ## Common mistake: bad input
 
-The user can type anything, so a conversion can fail:
-
-```python
-age = input("How old are you? ")
-print(int(age))
-```
-
-If the user types `thirty`, the program stops:
-
-```text
-ValueError: invalid literal for int() with base 10: 'thirty'
-```
-
-For a real program, check the input before you convert it, or handle the error with `try` and `except`. A quick check with a string method is often enough:
+The user can type anything, so if they type `thirty`, `int(age)` stops the program with the `ValueError` from the [type conversion post](en/posts/python-type-conversion/). Check the input before you convert it, or handle the error with `try` and `except` ([exceptions post](en/posts/python-exceptions/)). A quick check with a string method is often enough:
 
 ```python
 text = input("How old? ")

@@ -71,20 +71,7 @@ print(repr(input("Anything: ")))
 
 ## טעות נפוצה: קלט לא תקין
 
-המשתמש יכול להקליד כל דבר, ולכן המרה עלולה להיכשל:
-
-```python
-age = input("How old are you? ")
-print(int(age))
-```
-
-אם המשתמש מקליד `thirty`, התוכנית עוצרת:
-
-```text
-ValueError: invalid literal for int() with base 10: 'thirty'
-```
-
-בתוכנית אמיתית בודקים את הקלט לפני ההמרה, או תופסים את השגיאה עם `try` ו-`except`. לעיתים בדיקה מהירה עם מתודת מחרוזת מספיקה:
+המשתמש יכול להקליד כל דבר. אם מקלידים `thirty`, ‏`int(age)` עוצר את התוכנית עם ה-`ValueError` מ[הפוסט על המרת טיפוסים](he/posts/python-type-conversion/). בודקים את הקלט לפני ההמרה, או תופסים את השגיאה עם `try` ו-`except` ([פוסט על חריגות](he/posts/python-exceptions/)). לעיתים בדיקה מהירה עם מתודת מחרוזת מספיקה:
 
 ```python
 text = input("How old? ")

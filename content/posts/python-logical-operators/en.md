@@ -1,6 +1,6 @@
 ---
 title: "Logical operators in Python: and, or, not"
-summary: "How and, or and not combine conditions in Python: truth tables, short-circuit evaluation, why and/or return one of their operands, precedence, chained comparisons, and any() and all()."
+summary: "How and, or and not combine conditions in Python: truth tables, short-circuit evaluation, why and/or return one of their operands, precedence, and any() and all()."
 date: 2026-10-13
 tags: [python]
 series: { key: python, order: 12 }
@@ -166,26 +166,11 @@ False
 False
 ```
 
-`x == 3 or 4` means `(x == 3) or 4`. The comparison is false, so `or` returns `4`, which is truthy. An `if` with that condition would always run. Repeat the comparison, or better, use `in`.
+`x == 3 or 4` means `(x == 3) or 4`. The comparison is false, so `or` returns `4`, which is truthy. An `if` with that condition would always run. Repeat the comparison, or better, use `in`. For a range, a [chained comparison](en/posts/python-if-else/) such as `10 < x < 20` is shorter than two comparisons joined with `and`.
 
-## Chained comparisons
+## Putting it together: leap years
 
-For a range, Python lets you chain comparisons instead of joining them with `and`:
-
-```python
-x = 15
-print(10 < x < 20)
-print(10 < x and x < 20)
-```
-
-```text
-True
-True
-```
-
-The chained form is shorter and reads like math.
-
-An example that combines them: the leap year rule. A year is a leap year if it divides by 4, except years that divide by 100, unless they also divide by 400:
+A year is a leap year if it divides by 4, except years that divide by 100, unless they also divide by 400:
 
 ```python
 def is_leap(year):

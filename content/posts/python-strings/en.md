@@ -1,6 +1,6 @@
 ---
 title: "Strings in Python: slicing, methods and manipulation"
-summary: "Python strings: quotes and escapes, raw and triple-quoted strings, indexing and slicing, immutability, the common str methods for changing, splitting and searching text, and f-string formatting."
+summary: "Python strings: quotes and escapes, raw and triple-quoted strings, indexing and slicing, immutability, the common str methods for changing, splitting and searching text."
 date: 2026-10-11
 tags: [python]
 series: { key: python, order: 4 }
@@ -192,20 +192,6 @@ True True
 
 `zfill()` and `rjust()` pad to a width. Pass a fill character as the second argument of `rjust()` if you don't want spaces.
 
-## Formatting values into text
-
-An f-string can format a number inside the braces. After the colon, you give a format:
-
-```python
-print(f"{3.14159:.2f}")
-```
-
-```text
-3.14
-```
-
-`.2f` means two digits after the decimal point.
-
 ## What's next
 
-Next: f-strings in full.
+Next: f-strings, which put values and number formats inside a string.

@@ -62,11 +62,7 @@ is is short
 readable is longer than 2
 ```
 
-This is the layout you'd write anyway for readability, now enforced. An accidental indent is an error, not a silent change in meaning:
-
-```text
-IndentationError: unexpected indent
-```
+This is the layout you'd write anyway for readability, now enforced. An accidental indent is an error, not a silent change in meaning ([indentation post](en/posts/python-indentation-error/)).
 
 ### 3. No type declarations, but types still exist
 
@@ -84,17 +80,7 @@ print(x, type(x))
 five <class 'str'>
 ```
 
-Python is **dynamically typed** (types belong to values, and are checked as the program runs) but not loosely typed. It won't quietly turn a string into a number:
-
-```python
-"5" + 1
-```
-
-```text
-TypeError: can only concatenate str (not "int") to str
-```
-
-Error message wording changes between versions, but the error doesn't.
+Python is **dynamically typed** (types belong to values, and are checked as the program runs) but not loosely typed: `"5" + 1` raises a [`TypeError`](en/posts/python-type-errors-and-checking/) instead of quietly turning the string into a number.
 
 Python looks at what an object can do rather than what it's called, so code works with anything that fits. The docs call this duck typing: "If it looks like a duck and quacks like a duck, it must be a duck."
 
@@ -113,7 +99,7 @@ print(total({10, 20}))
 30
 ```
 
-You can add **type hints** (`def total(items: list[int]) -> int:`), but they're optional, not enforced by Python, and meant for editors and checkers like mypy.
+You can add **type hints** (`def total(items: list[int]) -> int:`), but they're optional, [not enforced by Python](en/posts/python-type-errors-and-checking/), and meant for editors and checkers like mypy.
 
 ### 4. Big built-in data types
 
@@ -133,7 +119,7 @@ You never free memory by hand. CPython uses reference counting plus a cyclic gar
 
 ### 6. Batteries included
 
-Python "comes with a large collection of standard modules" for files, system calls, sockets and more. Beyond that, the Python Package Index (pypi.org) holds third-party packages you install with `pip`. Your code is split into modules, so it's easy to reuse.
+Python "comes with a large collection of standard modules" for files, system calls, sockets and more. Beyond that, the Python Package Index (pypi.org) holds third-party packages you install with [`pip`](en/posts/python-pip/). Your code is split into modules, so it's easy to reuse.
 
 ## So what is it good for?
 
@@ -147,7 +133,7 @@ It's a weaker fit when every microsecond counts, such as operating-system kernel
 
 ## Mistakes beginners make
 
-- **Mixing tabs and spaces.** Pick spaces (four is the convention) and let your editor do it.
+- **Mixing tabs and spaces.** Python 3 rejects it with a `TabError`; the [indentation post](en/posts/python-indentation-error/) shows the fix.
 - **Typing `python` and getting a different version.** On many systems the command is `python3`. Check with `python3 --version`.
 
 ## What's next

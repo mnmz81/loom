@@ -223,4 +223,4 @@ For a function this small, a `lambda` is a one-line version without a name: `sor
 
 ## What's next
 
-Next in the series: code blocks and scope, which explains which variables a function can see, and why a variable created inside `if` is still there after it.
+Next in the series: code blocks and scope: why a variable created inside an `if` is still there after it, and which blocks do create a scope.

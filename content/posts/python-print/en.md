@@ -24,7 +24,7 @@ Hello
 a b c
 ```
 
-Each `print()` call ends with a newline, so the next call starts on a new line. With no arguments, `print()` prints just an empty line.
+Each `print()` call ends with a newline, so the next call starts on a new line. With no arguments, `print()` prints just an empty line. To mix text and variables in one string, use an [f-string](en/posts/python-f-strings/).
 
 ## sep and end
 
@@ -47,22 +47,6 @@ no newline continues here
 ```
 
 The docs say `sep`, `end`, `file` and `flush` "must be given as keyword arguments", so `print("a", "b", "-")` is not a separator. It's a third value, and it prints `a b -`.
-
-## Printing values with f-strings
-
-Most of the time you want to mix text and variables. An f-string (a string with an `f` before the quotes) puts the variable inside braces:
-
-```python
-name = "Ada"
-age = 36
-print(f"{name} is {age}")
-```
-
-```text
-Ada is 36
-```
-
-f-strings get their own post later in the series.
 
 ## Where the output goes
 

@@ -123,11 +123,10 @@ print(18 <= age < 65)
 True
 ```
 
-Two more operators show up in conditions all the time. `in` checks membership, and `is` checks identity. Use `is` only with `None`:
+Two more operators show up in conditions all the time. `in` checks membership, as in the [lists post](en/posts/python-lists/), and on a string it finds a substring. `is` checks identity; use it only with `None`:
 
 ```python
-fruit = "apple"
-print(fruit in ["apple", "pear"], "z" in "pizza", "x" not in "pizza")
+print("z" in "pizza", "x" not in "pizza")
 
 value = None
 if value is None:
@@ -135,13 +134,13 @@ if value is None:
 ```
 
 ```text
-True True True
+True True
 no value
 ```
 
 ## Truthy and falsy values
 
-A condition doesn't have to be `True` or `False`. Python accepts any value. The docs list what counts as false: `False`, `None`, zero of any numeric type, and empty strings and containers. Everything else is true:
+A condition doesn't have to be `True` or `False`. Python accepts any value and tests its truthiness, the same test `bool()` runs in the [type conversion post](en/posts/python-type-conversion/):
 
 ```python
 name = ""
@@ -160,7 +159,7 @@ No name given
 2 items
 ```
 
-`if name:` reads as "if there is a name". It's shorter than `if name != "":` and is the usual Python style. The [type conversion post](en/posts/python-type-conversion/) covers `bool()` and truthiness.
+`if name:` reads as "if there is a name". It's shorter than `if name != "":` and is the usual Python style.
 
 ## Nested conditions
 
@@ -244,9 +243,7 @@ Only the first matching `case` runs. `|` means "or", and `_` matches anything, l
 
 - **`=` instead of `==`.** `if x = 5:` is a `SyntaxError`. Python even suggests the fix: `Maybe you meant '==' or ':=' instead of '='?`
 - **Forgetting the colon.** `if x == 5` without `:` gives `SyntaxError: expected ':'`.
-- **An empty block.** An `if` with nothing indented under it gives `IndentationError: expected an indented block after 'if' statement`. Use `pass` as a placeholder.
 - **Comparing text to a number.** `5 == "5"` is `False`, not an error. Convert the value from `input()` before comparing.
-- **Comparing floats with `==`.** `0.1 + 0.2 == 0.3` is `False`. Use `math.isclose()` instead.
 
 ## What's next
 

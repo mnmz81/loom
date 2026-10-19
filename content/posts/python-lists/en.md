@@ -32,17 +32,7 @@ print(type(scores))
 
 A list can mix types, like `mixed`, but usually all items share one type. `len()` gives the number of items, as for a string.
 
-`list()` builds a list from anything you can go through item by item, like a string or a `range`:
-
-```python
-print(list("abc"))
-print(list(range(5)))
-```
-
-```text
-['a', 'b', 'c']
-[0, 1, 2, 3, 4]
-```
+`list()` builds a list from anything you can go through item by item, like a string ([type conversion post](en/posts/python-type-conversion/)) or a `range` ([loops post](en/posts/python-loops/)).
 
 ## Indexing and slicing
 
@@ -246,14 +236,14 @@ point[0] = 10
 TypeError: 'tuple' object does not support item assignment
 ```
 
-`x, y = point` is *unpacking*: one name per item, as with the pair `divmod()` returns in the [number operations post](en/posts/python-number-operations/). Use a tuple for a fixed group that belongs together, like coordinates, and a list for a collection that grows and shrinks.
+`x, y = point` is *unpacking*: one name per item, as in `x, y = 1, 2` from the [variables post](en/posts/python-variables-types/). Use a tuple for a fixed group that belongs together, like coordinates, and a list for a collection that grows and shrinks.
 
 ## Common mistakes
 
 - **Using the result of `sort()`.** `numbers = numbers.sort()` sets `numbers` to `None`. Use `numbers.sort()` alone, or `numbers = sorted(numbers)`.
 - **`append()` with a list.** `cart.append(["tea", "rice"])` adds one item, a list inside the list. To add each item, use `extend()`.
 - **Off-by-one indexes.** The last item is `items[len(items) - 1]`, or simply `items[-1]`. `items[len(items)]` is an `IndexError`.
-- **Calling a variable `list`.** `list = [1, 2]` hides the built-in `list()` until the end of the program.
+- **Calling a variable `list`.** `list = [1, 2]` hides the built-in `list()` ([shadowing](en/posts/python-scope-and-naming/)).
 
 ## What's next
 

@@ -1,6 +1,6 @@
 ---
 title: "Variables and types in Python"
-summary: "How variables work in Python: assignment, names, the basic types int, float, str, bool and None, type() and isinstance(), converting between types, and the NameError."
+summary: "How variables work in Python: assignment, names, the basic types int, float, str, bool and None, type(), and the NameError."
 date: 2026-10-11
 tags: [python]
 series: { key: python, order: 3 }
@@ -68,69 +68,7 @@ True <class 'bool'>
 - `bool`: `True` or `False`.
 - `None`: the value for "nothing". Its type is `NoneType`.
 
-## Division returns a float
-
-`/` always returns a float, even when the result is whole. `//` returns an int:
-
-```python
-print(10 / 2, type(10 / 2))
-print(10 // 2, type(10 // 2))
-print(7 % 3)
-```
-
-```text
-5.0 <class 'float'>
-5 <class 'int'>
-1
-```
-
-`%` gives the remainder.
-
-## Checking types
-
-`type(x) == int` works, but the docs recommend `isinstance()` because it also accepts subclasses:
-
-```python
-print(isinstance(3, int))
-print(isinstance(True, int))
-```
-
-```text
-True
-True
-```
-
-`bool` is a subclass of `int`, so `True` is an int too.
-
-## Converting between types
-
-Python rarely converts types on its own, so you do it explicitly with the type name:
-
-```python
-print(int("42") + 1)
-print(float("3.5") * 2)
-print(str(7) + "7")
-print(bool(""), bool("0"))
-```
-
-```text
-43
-7.0
-77
-False True
-```
-
-`bool("0")` is `True`, because it's a non-empty string. Only empty values such as `""`, `0` and `None` count as `False`.
-
-Conversion fails when the text doesn't match the type:
-
-```python
-int("3.5")
-```
-
-```text
-ValueError: invalid literal for int() with base 10: '3.5'
-```
+Converting between these types has its own [post](en/posts/python-type-conversion/), and checking a type with `isinstance()` is in the [TypeError post](en/posts/python-type-errors-and-checking/).
 
 ## Common mistakes
 
@@ -145,8 +83,6 @@ NameError: name 'n' is not defined
 ```
 
 Assign the name first, and check you spelled it the same way everywhere.
-
-**Mixing `=` and `==`.** `=` assigns, `==` compares: `if x = 5:` is a syntax error, `if x == 5:` is the check.
 
 ## What's next
 

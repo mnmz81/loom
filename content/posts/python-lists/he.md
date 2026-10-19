@@ -32,17 +32,7 @@ print(type(scores))
 
 רשימה יכולה להחזיק ערכים מטיפוסים שונים, כמו `mixed`, אבל בדרך כלל כל הפריטים מאותו טיפוס. ‏`len()` נותן את מספר הפריטים, בדיוק כמו במחרוזת.
 
-‏`list()` בונה רשימה מכל דבר שאפשר לעבור עליו פריט אחרי פריט, כמו מחרוזת או `range`:
-
-```python
-print(list("abc"))
-print(list(range(5)))
-```
-
-```text
-['a', 'b', 'c']
-[0, 1, 2, 3, 4]
-```
+‏`list()` בונה רשימה מכל דבר שאפשר לעבור עליו פריט אחרי פריט, כמו מחרוזת ([פוסט על המרת טיפוסים](he/posts/python-type-conversion/)) או `range` ([פוסט על לולאות](he/posts/python-loops/)).
 
 ## אינדקסים וחיתוך
 
@@ -246,14 +236,14 @@ point[0] = 10
 TypeError: 'tuple' object does not support item assignment
 ```
 
-‏`x, y = point` הוא *פירוק* (unpacking): שם אחד לכל פריט. ככה מפרקים את הזוג ש-`divmod()` מחזיר ב[פוסט על פעולות על מספרים](he/posts/python-number-operations/). משתמשים ב-tuple לקבוצה קבועה של ערכים ששייכים יחד, כמו קואורדינטות, וברשימה לאוסף שגדל וקטן.
+‏`x, y = point` הוא *פירוק* (unpacking): שם אחד לכל פריט, כמו ב-`x, y = 1, 2` מ[הפוסט על משתנים](he/posts/python-variables-types/). משתמשים ב-tuple לקבוצה קבועה של ערכים ששייכים יחד, כמו קואורדינטות, וברשימה לאוסף שגדל וקטן.
 
 ## טעויות נפוצות
 
 - **שימוש בתוצאה של `sort()`.** ‏`numbers = numbers.sort()` שם ב-`numbers` את `None`. כותבים `numbers.sort()` לבד, או `numbers = sorted(numbers)`.
 - **‏`append()` עם רשימה.** ‏`cart.append(["tea", "rice"])` מוסיף פריט אחד, רשימה בתוך הרשימה. כדי להוסיף כל פריט בנפרד משתמשים ב-`extend()`.
 - **טעות של אחד באינדקס.** הפריט האחרון הוא `items[len(items) - 1]`, או פשוט `items[-1]`. ‏`items[len(items)]` הוא `IndexError`.
-- **משתנה בשם `list`.** ‏`list = [1, 2]` מסתיר את `list()` המובנה עד סוף התוכנית.
+- **משתנה בשם `list`.** ‏`list = [1, 2]` מסתיר את `list()` המובנה ([הסתרת שם מובנה](he/posts/python-scope-and-naming/)).
 
 ## מה הלאה
 

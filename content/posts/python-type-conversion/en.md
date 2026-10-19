@@ -142,7 +142,7 @@ int(None)
 TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
 ```
 
-Check user input, or catch the error with `try` and `except`, as described in the input() post.
+Check user input first, or catch the error with `try` and `except` ([exceptions post](en/posts/python-exceptions/)).
 
 ## What's next
 

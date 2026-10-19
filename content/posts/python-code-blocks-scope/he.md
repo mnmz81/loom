@@ -12,28 +12,7 @@ series: { key: python, order: 18 }
 
 ## מה זה בלוק של קוד
 
-שורה של `if`, `for`, `while`, `def` או `class` נגמרת בנקודתיים. השורות המוזחות מתחתיה הן המשפטים שהיא שולטת בהם. התיעוד קורא לקבוצה הזו *suite*: "קבוצת משפטים שנשלטת על ידי פסוקית". אפשר לקנן בלוקים, וההזחה מראה לאיזה בלוק שייכת כל שורה:
-
-```python
-def check(n):
-    if n > 0:
-        print("positive")
-        if n > 100:
-            print("big")
-    print("checked", n)
-
-check(150)
-check(-1)
-```
-
-```text
-positive
-big
-checked 150
-checked -1
-```
-
-‏`print("checked", n)` נמצאת ברמה של הפונקציה, ולכן היא רצה בכל פעם. שתי ההדפסות שמעליה שייכות ל-`if`. ‏[הפוסט על הזחה](he/posts/python-indentation-error/) מכסה את השגיאות שמקבלים כשההזחה לא נכונה.
+שורה של `if`, `for`, `while`, `def` או `class` נגמרת בנקודתיים. השורות המוזחות מתחתיה הן המשפטים שהיא שולטת בהם. התיעוד קורא לקבוצה הזו *suite*: "קבוצת משפטים שנשלטת על ידי פסוקית". אפשר לקנן בלוקים, ו[הפוסט על הזחה](he/posts/python-indentation-error/) מראה איך ההזחה קובעת איפה כל אחד מהם נגמר.
 
 בלוק יכול גם לשבת באותה שורה עם הכותרת שלו, מופרד בנקודה-פסיק:
 
@@ -128,7 +107,7 @@ Hello
 NameError: name 'text' is not defined. Did you mean: 'next'?
 ```
 
-כדי להוציא ערך מפונקציה, מחזירים אותו עם `return`.
+כדי להוציא ערך מפונקציה, מחזירים אותו עם `return`. איך פונקציה קוראת שמות מבחוץ, ולמה השמה לשם כזה יוצרת משתנה מקומי חדש, מוסבר ב[פוסט על scope ושמות](he/posts/python-scope-and-naming/).
 
 אותו דבר נכון לגוף של מחלקה. השמות שלו לא מוכרים בתוך המתודות, ולכן ניגשים אליהם דרך `self` או דרך שם המחלקה:
 
@@ -163,48 +142,6 @@ print(squares, x)
 ```
 
 ‏[התיעוד של comprehensions](https://docs.python.org/3/reference/expressions.html#displays-for-lists-sets-and-dictionaries) אומר שה-comprehension רץ "ב-scope מקונן נפרד".
-
-## קריאה וכתיבה של שמות מבחוץ
-
-‏scope פנימי יכול **לקרוא** שמות מה-scopes שמסביבו:
-
-```python
-x = 10
-
-def outer():
-    y = 20
-
-    def inner():
-        print(x, y)
-
-    inner()
-
-outer()
-```
-
-```text
-10 20
-```
-
-**השמה** לשם בתוך פונקציה יוצרת משתנה מקומי חדש, במקום לשנות את החיצוני:
-
-```python
-enemies = 1
-
-def increase_enemies():
-    enemies = 2
-    print("inside:", enemies)
-
-increase_enemies()
-print("outside:", enemies)
-```
-
-```text
-inside: 2
-outside: 1
-```
-
-יש כאן שני משתנים שונים בשם `enemies`. מילות המפתח `global` ו-`nonlocal`, וה-`UnboundLocalError` שמקבלים כשמערבבים קריאה והשמה, מוסברים ב[פוסט על scope ושמות](he/posts/python-scope-and-naming/). עדיף להעביר ערכים כארגומנטים ולהחזיר תוצאות, במקום לשנות משתנים גלובליים.
 
 ## ההפתעה היחידה: except ... as
 

@@ -62,12 +62,7 @@ print("five is bigger")
 IndentationError: expected an indented block after 'if' statement on line 1
 ```
 
-Indent the body, or use `pass` for an empty block:
-
-```python
-if 5 > 2:
-    pass
-```
+Indent the body, or write [`pass`](en/posts/python-if-else/) for an empty block.
 
 ## Error 3: unindent does not match
 

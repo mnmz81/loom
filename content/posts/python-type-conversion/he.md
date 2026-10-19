@@ -142,7 +142,7 @@ int(None)
 TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'
 ```
 
-בודקים את קלט המשתמש, או תופסים את השגיאה עם `try` ו-`except`, כמו שמתואר בפוסט על input().
+בודקים את קלט המשתמש קודם, או תופסים את השגיאה עם `try` ו-`except` ([פוסט על חריגות](he/posts/python-exceptions/)).
 
 ## מה הלאה
 
