@@ -6,7 +6,7 @@ tags: [ai, agents]
 series: { key: ai-agents, order: 3 }
 ---
 
-"Agent" is the most overloaded word in AI right now. This post uses the definition from Anthropic's [Building effective agents](https://www.anthropic.com/research/building-effective-agents): an agent is a system where the model "dynamically directs its own processes and tool usage". In practice that is the tool loop from two posts ago, running until the task is done, with the model choosing every step.
+Anthropic's [Building effective agents](https://www.anthropic.com/research/building-effective-agents) defines an agent as a system where the model "dynamically directs its own processes and tool usage": the tool loop from two posts ago, running until the task is done, with the model choosing every step.
 
 The code follows the official docs and was not run for this post, so the output block is **example output**. The Agent SDK example follows the [Agent SDK quickstart](https://code.claude.com/docs/en/agent-sdk/quickstart).
 
@@ -19,7 +19,7 @@ The article starts from the **augmented LLM**: a model with retrieval, tools and
 3. Your code runs the tool and returns the result, the "ground truth from the environment".
 4. Back to step 1.
 
-The model sees the real result of each action, such as a test that failed or a file that does not exist, and adjusts. That feedback loop is what lets an agent handle tasks whose steps cannot be planned in advance.
+The model sees the real result of each action, such as a failed test or a missing file, and adjusts. That feedback lets an agent handle tasks whose steps cannot be planned in advance.
 
 ## Workflow or agent
 
@@ -34,7 +34,7 @@ Both are useful. A workflow is predictable, cheaper and easier to test. An agent
 
 ## When to build an agent
 
-The article's main advice is to find "the simplest solution possible" and add complexity only when needed, which "might mean not building agentic systems at all". A good rule of thumb:
+The article's main advice is to find "the simplest solution possible" and add complexity only when needed, which "might mean not building agentic systems at all":
 
 - **A single call** with good retrieval and examples is enough for most tasks: answering, summarizing, extracting.
 - **A workflow** fits when the task splits into known steps. The next post shows the common patterns.
@@ -105,7 +105,7 @@ Notice what the code controls and the model does not: which tools exist, which f
 
 ## Agent frameworks
 
-You do not have to write the loop yourself. The **Claude Agent SDK** gives you the same agent loop, built-in tools (read, edit, search, run commands, web search), permissions and context management that power Claude Code, as a Python or TypeScript library:
+The **Claude Agent SDK** gives you the same agent loop, built-in tools (read, edit, search, run commands, web search), permissions and context management that power Claude Code, as a Python or TypeScript library:
 
 ```python
 import asyncio
@@ -125,16 +125,16 @@ async def main():
 asyncio.run(main())
 ```
 
-`allowed_tools` decides what the agent may do without asking, and `permission_mode` how much it must ask. The article's advice on frameworks still applies: they help you start, but they hide the prompts and responses underneath, so understand what runs below before you rely on one.
+`allowed_tools` decides what the agent may do without asking, and `permission_mode` how much it must ask. The article's advice on frameworks: they help you start, but they hide the prompts and responses underneath, so understand what runs below before you rely on one.
 
 ## Guardrails for agents
 
 Because an agent acts on its own, the limits are your job:
 
-- **Step and cost limits**: a maximum number of turns and a budget. An agent stuck in a loop otherwise burns money.
+- **Step and cost limits**: a maximum number of turns and a budget, or an agent stuck in a loop burns money.
 - **Least privilege**: only the tools the task needs, with the narrowest access (one folder, read-only where possible).
 - **Human checkpoints** before irreversible actions: deleting, sending, paying, deploying.
 - **A sandbox** for anything that runs code: a container or a VM, not your laptop or production.
-- **Logs** of every step, so you can see what the agent did and why. The observability post covers this.
+- **Logs** of every step, so you can see what the agent did and why (see the observability post).
 
 The next post covers the five workflow patterns from the same article, which solve many problems without a full agent.

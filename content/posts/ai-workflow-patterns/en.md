@@ -6,7 +6,7 @@ tags: [ai, agents]
 series: { key: ai-agents, order: 4 }
 ---
 
-The previous post argued for the simplest solution that works. Between a single call and a full agent there is a middle ground: **workflows**, where your code fixes the structure and the model fills in each step. Anthropic's [Building effective agents](https://www.anthropic.com/research/building-effective-agents) names five patterns that cover most cases.
+Between a single call and a full agent there is a middle ground: **workflows**, where your code fixes the structure and the model fills in each step. Anthropic's [Building effective agents](https://www.anthropic.com/research/building-effective-agents) names five patterns that cover most cases.
 
 The code was not run for this post, so the output block is **example output**. All examples use this small helper:
 
@@ -30,7 +30,7 @@ def llm(prompt, system="", effort="low"):
 
 ## 1. Prompt chaining
 
-Split the task into fixed steps, where each call gets the previous output. Between steps, your code can check the result and stop early. The article's example: write an outline, check it, then write the document. You trade latency for accuracy, because each call has a simpler job.
+Split the task into fixed steps, each call getting the previous output; between steps, your code can check the result and stop early. The article's example: write an outline, check it, then write the document. You trade latency for accuracy, because each call has a simpler job.
 
 ```python
 outline = llm(f"Write a 5-point outline for a blog post about: {topic}")
@@ -91,7 +91,7 @@ problems = {name: r for name, r in reports.items() if r.strip() != "NONE"}
 
 ## 4. Orchestrator-workers
 
-A lead model reads the task, decides which subtasks are needed, hands them to worker calls, and combines the results. Unlike parallelization, the subtasks are not known in advance. The article's example is a code change that touches an unknown number of files. In code, the orchestrator returns a list of subtasks (ideally as structured output), your code runs a worker for each, and a final call merges the results. It sits close to an agent, and the multi-agent post builds on it.
+A lead model reads the task, decides which subtasks are needed, hands them to worker calls, and combines the results. Unlike parallelization, the subtasks are not known in advance. The article's example is a code change that touches an unknown number of files. In code, the orchestrator returns a list of subtasks (ideally as structured output), your code runs a worker for each, and a final call merges the results. The multi-agent post builds on it.
 
 ## 5. Evaluator-optimizer
 
@@ -119,6 +119,6 @@ for attempt in range(3):
 - Subtasks unknown until you read the task → **orchestrator-workers**.
 - Quality improves with feedback and you can state the criteria → **evaluator-optimizer**.
 
-The patterns combine: a router can send hard cases to a chain, and a chain step can be an evaluator loop. Start with the simplest one, measure, and add structure only where the measurements show a gain.
+The patterns combine: a router can send hard cases to a chain, and a chain step can be an evaluator loop. Add structure only where measurements show a gain.
 
 The next post covers memory and context management: how agents keep working when a task outgrows the context window.

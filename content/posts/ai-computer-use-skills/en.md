@@ -6,13 +6,13 @@ tags: [ai, agents]
 series: { key: ai-agents, order: 7 }
 ---
 
-This last post in the agents series covers two capabilities that extend what an agent can do. **Computer use** lets a model operate a graphical desktop, for programs that have no API. **Agent Skills** package expertise (instructions, scripts and reference files) so an agent loads it only when a task needs it.
+Two capabilities extend what an agent can do. **Computer use** lets a model operate a graphical desktop, for programs that have no API. **Agent Skills** package expertise (instructions, scripts and reference files) so an agent loads it only when a task needs it.
 
 The facts follow the official [computer use tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool) and [Agent Skills](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview) docs. The code was not run for this post.
 
 ## Computer use: a desktop as a tool
 
-Computer use is the tool loop again, with a screen as the environment. The model asks for an action, such as a screenshot, a click at a position, typing text or pressing a key. Your application performs it in a desktop environment you control and returns the result, usually a new screenshot. The model looks at the screenshot and picks the next action.
+Computer use is the tool loop again, with a screen as the environment. The model asks for an action, your application performs it in a desktop environment you control, and returns the result, usually a new screenshot, from which the model picks the next action.
 
 The docs list the actions the current toolset offers: screenshot and zoom, mouse actions (clicks, drag, move, scroll), keyboard actions (type, key, hold key) and wait. On the current models the tool type is `computer_toolset_20260801` and needs no beta header:
 
@@ -29,7 +29,7 @@ response = client.messages.create(
 )
 ```
 
-From here, your code runs the standard loop: perform each requested action, return one result per action (an image for screenshots), and call the model again. Coordinates refer to the pixels of the screenshots you send, so if you resize screenshots, scale the coordinates back to the real screen.
+Your code returns one result per requested action (an image for screenshots) and calls the model again. Coordinates refer to the pixels of the screenshots you send, so if you resize screenshots, scale the coordinates back to the real screen.
 
 ## Computer use is risky
 
@@ -46,7 +46,7 @@ Use computer use when there is no API. When there is one, a normal tool is faste
 
 ## Agent Skills
 
-A system prompt has to hold everything up front, and the context budget from the previous posts limits how much that can be. **Skills** solve this with folders. A skill is a directory with a `SKILL.md` file, and optionally more instructions, scripts and reference files:
+A system prompt has to hold everything up front, and the context budget from the previous posts limits how much that can be. A **skill** is a directory with a `SKILL.md` file, and optionally more instructions, scripts and reference files:
 
 ```text
 pdf-processing/
@@ -80,7 +80,7 @@ Skills load in three levels, so installing many costs little:
 2. **Instructions** (the body of `SKILL.md`, under 5k tokens per the docs) load only when a request matches the skill.
 3. **Resources** load only when the instructions point to them. Scripts are run, and only their output enters the context, never their code.
 
-This is the just-in-time retrieval idea from the memory post, applied to know-how instead of data.
+It's the just-in-time retrieval from the memory post, applied to know-how instead of data.
 
 ## Where skills run
 

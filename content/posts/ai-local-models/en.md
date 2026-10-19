@@ -6,7 +6,7 @@ tags: [ai, llm]
 series: { key: ai-tuning, order: 3 }
 ---
 
-Hosted models run on the provider's servers. **Open-weight** models publish their weights, so you can download them and run them yourself: on a laptop, a server or a phone. This post covers why you might, what hardware it needs, and how to do it with Ollama.
+Hosted models run on the provider's servers. **Open-weight** models publish their weights, so you can download them and run them yourself: on a laptop, a server or a phone.
 
 The memory and quantization examples were run with Python 3.9 and their output is real. The Ollama commands follow the official [quickstart](https://docs.ollama.com/quickstart), [chat API](https://docs.ollama.com/api/chat) and [Anthropic compatibility](https://docs.ollama.com/api/anthropic-compatibility) docs and were not run, so their output is **example output**.
 
@@ -37,7 +37,7 @@ for name, bits in [("16-bit", 16), ("8-bit", 8), ("4-bit", 4)]:
 4-bit: 3.5 GB for the weights alone
 ```
 
-On top of the weights, the model needs memory for the context it is processing, which grows with the context length. So a model that "fits" with a short prompt may not fit with a long document.
+On top of the weights, the model needs memory for the context it is processing, which grows with the context length: a model that "fits" with a short prompt may not fit with a long document.
 
 ## Quantization
 

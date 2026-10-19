@@ -49,7 +49,7 @@ Classic distillation needs the teacher's raw scores (logits). With a hosted LLM 
 4. **Fine-tune the student** on the remaining pairs, using the method from the previous post (LoRA works well here).
 5. **Evaluate** the student against the teacher on a held-out test set.
 
-Generating teacher data is a plain loop that writes JSONL in the fine-tuning format:
+Generating teacher data is a loop that writes JSONL in the fine-tuning format:
 
 ```python
 import json
@@ -79,7 +79,7 @@ For thousands of inputs, send them as a batch: the models overview lists Message
 
 ## Before you distill
 
-- **Check the terms of use.** Providers often restrict using a model's outputs to train other models, especially competing ones. Read your teacher's terms.
+- **Check the teacher's terms of use.** Providers often restrict using a model's outputs to train other models, especially competing ones.
 - **Distill a narrow job.** A small student can match a large teacher on one task with a clear format, not on everything.
 - **Count the cost.** Teacher calls, filtering and training cost money and time. It pays off when the student handles a large volume, or must run where the large model cannot (on a device, offline, on your own servers).
 - **Compare with a plain small model first:** a current small model with a good prompt is sometimes enough.

@@ -6,13 +6,13 @@ tags: [ai, fine-tuning]
 series: { key: ai-tuning, order: 1 }
 ---
 
-**Fine-tuning** means continuing to train a model on your own examples, so that its weights change. It is the most powerful way to adapt a model, and the most expensive one to do right. This post covers when it is worth it, and how LoRA makes it cheap enough to try.
+**Fine-tuning** means continuing to train a model on your own examples, so that its weights change. It is the most powerful way to adapt a model, and the most expensive one to do right.
 
 The LoRA arithmetic was run with Python 3.9 and its output is real. The PEFT code and its output line follow the [Hugging Face PEFT quicktour](https://huggingface.co/docs/peft/quicktour). Fine-tuning requires a model whose weights you can train: open-weight, or hosted with fine-tuning offered.
 
 ## Try the cheaper options first
 
-Practitioner guides agree on an order: **prompting first, RAG second, fine-tuning last**. The reason is what each method changes:
+Practitioner guides agree on an order, **prompting first, RAG second, fine-tuning last**, because of what each method changes:
 
 - **Prompting** changes the instructions. Instant to try, easy to change.
 - **RAG** changes what the model can read. Use it when the model is missing **knowledge**, especially knowledge that changes. Fine-tuning facts into weights means retraining every time they change, and the model can still mix them up.
@@ -22,7 +22,7 @@ Fine-tuning tends to pay off when the model understands the task but does not pe
 
 ## What the training data looks like
 
-Supervised fine-tuning data is a set of example conversations: the input and the exact output you want. It is usually stored as JSONL, one example per line:
+Supervised fine-tuning data is a set of example conversations, the input and the exact output you want, usually stored as JSONL, one example per line:
 
 ```json
 {"messages": [{"role": "system", "content": "Classify the ticket. Answer with one label."}, {"role": "user", "content": "I was charged twice this month"}, {"role": "assistant", "content": "billing"}]}
@@ -79,7 +79,7 @@ The 524,288 matches the arithmetic above. From here you train with any normal tr
 
 ## QLoRA: when memory is the limit
 
-**QLoRA** ([Dettmers et al., 2023](https://arxiv.org/abs/2305.14314)) loads the frozen base model in 4-bit precision and trains LoRA adapters on top. The paper fine-tuned a 65B-parameter model on a single 48 GB GPU. The local models post explains quantization; the short version is that 4-bit weights take a quarter of the memory of 16-bit ones, with a small loss in quality. Choose QLoRA when GPU memory, not time, is what stops you.
+**QLoRA** ([Dettmers et al., 2023](https://arxiv.org/abs/2305.14314)) loads the frozen base model in 4-bit precision and trains LoRA adapters on top. The paper fine-tuned a 65B-parameter model on a single 48 GB GPU. Quantization is explained in the local models post: 4-bit weights take a quarter of the memory of 16-bit ones, with a small loss in quality. Choose QLoRA when GPU memory, not time, is what stops you.
 
 ## Check the result
 

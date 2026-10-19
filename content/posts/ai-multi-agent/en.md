@@ -24,7 +24,7 @@ The key benefit is **context isolation**. A subagent may read dozens of pages, b
 
 The article reports that a system with Claude Opus 4 as lead and Claude Sonnet 4 subagents "outperformed single-agent Claude Opus 4 by 90.2%" on its internal research evaluation.
 
-The cost side is just as clear. In their data, agents used about 4 times the tokens of a chat, and multi-agent systems about **15 times**. On one benchmark, token usage alone explained 80% of the difference in performance. Multi-agent systems win largely by spending more tokens, in parallel, across separate context windows.
+In their data, agents used about 4 times the tokens of a chat, and multi-agent systems about **15 times**. On one benchmark, token usage alone explained 80% of the difference in performance. Multi-agent systems win largely by spending more tokens, in parallel, across separate context windows.
 
 ## When it fits, and when it does not
 
@@ -38,7 +38,7 @@ They fit broad, parallel work: research across many sources, reviewing a code ba
 
 ## Lessons from building one
 
-The article's engineering lessons apply to any multi-agent setup:
+The article's engineering lessons:
 
 - **Write detailed task briefs** for subagents: the goal, the output format, the tools to use and the limits. Vague briefs led to duplicated work.
 - **Scale effort to the question.** Early versions started many subagents for simple questions; explicit rules fixed it.
@@ -48,7 +48,7 @@ The article's engineering lessons apply to any multi-agent setup:
 
 ## Subagents in the Claude Agent SDK
 
-The Agent SDK lets you define subagents in code. Each one has a `description` (when to use it), a `prompt` (its system prompt), and optionally a restricted list of `tools` and a `model`:
+In the Agent SDK, each subagent defined in code has a `description` (when to use it), a `prompt` (its system prompt), and optionally a restricted list of `tools` and a `model`:
 
 ```python
 import asyncio

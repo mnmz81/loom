@@ -6,13 +6,13 @@ tags: [ai, agents, mcp]
 series: { key: ai-agents, order: 2 }
 ---
 
-The previous post defined a tool inside one application. If you want the same tool in your IDE, your chat app and your agent, you would write the glue three times. **MCP** (Model Context Protocol) is an open standard that fixes this: you write a tool once as an MCP server, and any application that speaks MCP can use it.
+The previous post defined a tool inside one application. To use it in your IDE, your chat app and your agent, you would write the glue three times. With **MCP** (Model Context Protocol), an open standard, you write the tool once as an MCP server, and any application that speaks MCP can use it.
 
 The facts follow the [MCP specification](https://modelcontextprotocol.io/specification/latest) (revision 2026-07-28 at the time of writing) and the official [build a server](https://modelcontextprotocol.io/docs/develop/build-server) guide. The code was not run for this post.
 
 ## Why a protocol
 
-Without a standard, every pair of (application, data source) needs its own integration. With N applications and M sources, that is N × M pieces of glue. With a shared protocol, each application implements MCP once and each source implements it once.
+Without a standard, N applications and M data sources need N × M integrations. With a shared protocol, each application and each source implements MCP once.
 
 The spec describes its inspiration as the Language Server Protocol, which did the same for programming languages and editors: one language server works in every editor that speaks LSP.
 
@@ -26,7 +26,7 @@ The spec defines three roles:
 
 ![A host runs one client per server; servers can be local over stdio or remote over Streamable HTTP](/images/ai-mcp/mcp-architecture.svg)
 
-One design principle in the spec is worth noting: a server should not be able to read the whole conversation or "see into" other servers. The host decides what each server receives.
+By design, a server should not be able to read the whole conversation or "see into" other servers: the host decides what each server receives.
 
 ## What a server offers
 
@@ -75,7 +75,7 @@ if __name__ == "__main__":
     mcp.run(transport="stdio")
 ```
 
-One warning from the guide matters a lot: in a stdio server, **never write to stdout**. stdout carries the JSON-RPC messages, and a stray `print()` corrupts them. Use the `logging` module, which writes to stderr.
+The guide's key warning: in a stdio server, **never write to stdout**. stdout carries the JSON-RPC messages, and a stray `print()` corrupts them. Use `logging`, which writes to stderr.
 
 ## Connecting it to a host
 
@@ -96,12 +96,12 @@ After a restart, the host starts the server, lists its tools, and offers them to
 
 ## Security
 
-The spec is direct about the risk: tools "represent arbitrary code execution and must be treated with appropriate caution". Its key principles:
+The spec says tools "represent arbitrary code execution and must be treated with appropriate caution". Its key principles:
 
 - The user must explicitly consent before a tool runs or data is shared with a server.
 - Tool descriptions and annotations from a server you do not trust should be treated as untrusted.
 - Implementors should build clear consent and authorization flows.
 
-In practice: install MCP servers only from sources you trust, read what their tools can do, and give them the narrowest access that works. A malicious server, or a malicious document that a server returns, can try to steer the model. The security post covers this attack, prompt injection, in detail.
+In practice: install MCP servers only from sources you trust, read what their tools can do, and give them the narrowest access that works. A malicious server, or a malicious document that a server returns, can try to steer the model: prompt injection, covered in the security post.
 
 The next post is about agents: what turns a model with tools into one.

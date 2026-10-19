@@ -6,13 +6,13 @@ tags: [ai, agents]
 series: { key: ai-agents, order: 5 }
 ---
 
-A model has no memory between requests. Everything it "remembers" in a conversation is the history your code sends again every turn. For a short chat that is fine. An agent that runs for an hour, reading files and calling tools, fills even a 1M-token window, and gets worse well before it is full. This post covers the techniques for both problems.
+A model has no memory between requests. Everything it "remembers" in a conversation is the history your code sends again every turn. An agent that runs for an hour, reading files and calling tools, fills even a 1M-token window, and gets worse well before it is full.
 
 The facts follow Anthropic's [Effective context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) article and the official [memory tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool), [compaction](https://platform.claude.com/docs/en/build-with-claude/compaction) and [context editing](https://platform.claude.com/docs/en/build-with-claude/context-editing) docs. The path check was run with Python 3.9 and its output is real; the API code was not run.
 
 ## Context is a budget
 
-The tokens post introduced context rot: recall gets worse as the context grows. The context engineering article draws the practical conclusion: treat context as a "finite resource with diminishing returns", and aim for the "smallest possible set of high-signal tokens" that gets the job done.
+The tokens post introduced context rot: recall gets worse as the context grows. The context engineering article concludes: treat context as a "finite resource with diminishing returns", and aim for the "smallest possible set of high-signal tokens" that gets the job done.
 
 It calls this **context engineering**: not only writing the prompt, but deciding on every turn of an agent what is in the window, from the system prompt and tools to retrieved data and history. Some of its advice:
 
@@ -24,7 +24,7 @@ It calls this **context engineering**: not only writing the prompt, but deciding
 
 When a conversation gets long, replace the older turns with a summary and continue. The article calls this **compaction** and suggests tuning the summary "for recall first": better to keep a detail that turns out unneeded than to lose one that matters.
 
-You can write it yourself: ask the model to summarize the history so far, then start a new conversation with that summary as the first message. The Claude API also offers server-side compaction, in beta at the time of writing, where the API writes the summary and replaces the old turns for you. The details change, so follow the [compaction docs](https://platform.claude.com/docs/en/build-with-claude/compaction) for the current parameters.
+To do it yourself, ask the model to summarize the history, then start a new conversation with that summary as the first message. The Claude API also offers server-side compaction, in beta at the time of writing, where the API writes the summary and replaces the old turns for you. Follow the [compaction docs](https://platform.claude.com/docs/en/build-with-claude/compaction) for the current parameters.
 
 ## Clearing old tool results
 
@@ -34,7 +34,7 @@ In an agent, most of the context is usually tool results: file contents, search 
 
 The third technique keeps information **outside** the window. The agent writes notes as it works (a progress log, a to-do list, decisions made) and reads them back later, even in a new session. The article calls this structured note-taking.
 
-The **memory tool** is Claude's built-in form of this. The model asks to view, create, edit, rename or delete files under `/memories`, and your code carries out each operation on storage you control. The Python SDK includes a ready local-filesystem implementation:
+Claude's built-in form of this is the **memory tool**: the model asks to view, create, edit, rename or delete files under `/memories`, and your code carries out each operation on storage you control. The Python SDK includes a ready local-filesystem implementation:
 
 ```python
 import anthropic

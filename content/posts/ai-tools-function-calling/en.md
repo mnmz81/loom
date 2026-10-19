@@ -6,7 +6,7 @@ tags: [ai, agents]
 series: { key: ai-agents, order: 1 }
 ---
 
-A model on its own can only write text. **Tools** (also called function calling) let it act: look up the weather, query a database, create a ticket. The model never runs anything itself. It asks your code to run a function, and your code decides whether and how. This loop is the foundation of every agent in this series.
+A model on its own can only write text. **Tools** (also called function calling) let it act: look up the weather, query a database, create a ticket. The model never runs anything itself: it asks your code to run a function, and your code decides whether and how. Every agent in this series is built on this loop.
 
 The code follows the official [tool use docs](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) and [tool runner docs](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-runner). It was not run for this post, so the output blocks are **example output**.
 
@@ -33,7 +33,7 @@ tools = [
 ]
 ```
 
-The model sees the tool definitions as part of the prompt, so they cost input tokens and count toward the context window. The description matters more than anything else here: it is how the model decides to call the tool.
+Tool definitions are part of the prompt, so they cost input tokens and fill the context window. The description matters most: the model decides from it whether to call the tool.
 
 ## The tool use loop
 
@@ -41,7 +41,7 @@ When the model wants a tool, it stops and answers with `stop_reason: "tool_use"`
 
 ![The tool use loop: the app sends messages and tools, the model answers with tool_use, the app runs the tool and sends tool_result, until end_turn](/images/ai-tools-function-calling/tool-loop.svg)
 
-A complete loop that handles several tool calls per turn and reports errors back to the model:
+A complete loop:
 
 ```python
 import anthropic
@@ -96,7 +96,7 @@ Three details make this loop correct:
 
 ## What travels over the wire
 
-Under the SDK, the model's request for a tool is plain JSON in the response body. This is what the `tool_use` part of the response looks like:
+Under the SDK, the `tool_use` part of the response is plain JSON:
 
 ```json
 {
@@ -112,7 +112,7 @@ Under the SDK, the model's request for a tool is plain JSON in the response body
 }
 ```
 
-Any language that can send an HTTP POST and parse JSON can run this loop. The SDK only saves typing.
+Any language that can send an HTTP POST and parse JSON can run the loop; the SDK only saves typing.
 
 ## Controlling when tools are called
 
@@ -122,7 +122,7 @@ Adding `"strict": True` to a tool definition guarantees that the model's input m
 
 ## The tool runner
 
-The Python SDK has a beta helper that runs the loop for you. The `@beta_tool` decorator builds the schema from type hints and the docstring:
+A beta helper in the Python SDK runs the loop for you; `@beta_tool` builds the schema from type hints and the docstring:
 
 ```python
 from anthropic import Anthropic, beta_tool
@@ -158,6 +158,6 @@ Anthropic's [Building effective agents](https://www.anthropic.com/research/build
 - Make mistakes hard. The article's example: requiring absolute file paths removed a whole class of errors with relative paths.
 - Return useful, short results. A 5,000-line JSON dump fills the context window; return what the model needs and an error message that says how to fix the call.
 - Keep the set small and distinct. Two tools with overlapping descriptions confuse the model.
-- Never trust a tool's input blindly. The model can be wrong or manipulated, so validate and limit what a tool can do. The security post covers this.
+- Never trust a tool's input blindly: the model can be wrong or manipulated, so validate and limit what a tool can do (more in the security post).
 
 The next post covers MCP: a standard way to package tools so that any application can use them.
