@@ -22,7 +22,7 @@ RAG has two paths. **Indexing** runs once, and again whenever documents change. 
 
 ![Indexing: documents, chunks, embeddings, vector store. Answering: question, embedding, top-k chunks, prompt to the LLM](/images/ai-rag-pipeline/rag-pipeline.svg)
 
-The previous post covered embeddings and vector stores. This one covers the two parts that decide most of the quality: chunking and the prompt.
+Of these steps, chunking and the prompt decide most of the quality.
 
 ## Chunking
 
@@ -102,5 +102,3 @@ There are two different failures, and they have different fixes:
 - **Generation failed**: the right chunk was there, but the model ignored it or added things. Fix the prompt.
 
 To tell them apart, log the retrieved chunks with every answer. The post on evals shows how to measure both.
-
-The next post improves retrieval with keyword search, reranking and contextual chunks.

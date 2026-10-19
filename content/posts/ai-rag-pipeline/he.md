@@ -22,7 +22,7 @@ series: { key: ai-rag, order: 2 }
 
 ![אינדוקס: מסמכים, chunks, embeddings, מאגר וקטורים. מענה: שאלה, embedding, ה-chunks הקרובים ביותר, prompt ל-LLM](/images/ai-rag-pipeline/rag-pipeline.svg)
 
-הפוסט הקודם הסביר embeddings ומאגרי וקטורים. הפוסט הזה מסביר את שני החלקים שקובעים את רוב האיכות: הפיצול וה-prompt.
+מבין השלבים האלה, הפיצול וה-prompt קובעים את רוב האיכות.
 
 ## פיצול ל-chunks
 
@@ -102,5 +102,3 @@ You get 20 vacation days per year [1]. Sick days are counted separately [2].
 - **הכתיבה נכשלה**: ה-chunk הנכון היה שם, אבל המודל התעלם ממנו או הוסיף דברים. מתקנים את ה-prompt.
 
 כדי להבחין ביניהם, שמרו בלוג את ה-chunks שנשלפו עם כל תשובה. הפוסט על evals מראה איך מודדים את שניהם.
-
-הפוסט הבא משפר את השליפה עם חיפוש מילות מפתח, reranking ו-chunks עם הקשר.

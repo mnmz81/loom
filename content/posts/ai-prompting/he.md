@@ -6,7 +6,7 @@ tags: [ai, llm]
 series: { key: ai-basics, order: 5 }
 ---
 
-ה-prompt הוא הדרך העיקרית לכוון מודל, ובמודלי Claude הנוכחיים הוא מרכזי עוד יותר, כי כפתורי הדגימה מהפוסט הקודם כבר לא זמינים. הפוסט מסביר את הטכניקות שהמדריך [Prompting best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices) ממליץ עליהן לכל המודלים הנוכחיים.
+ה-prompt הוא הדרך העיקרית לכוון מודל. הטכניקות כאן הן אלה שהמדריך [Prompting best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices) ממליץ עליהן לכל המודלים הנוכחיים.
 
 הקוד לא הורץ בשביל הפוסט, ולכן בלוקי הפלט הם **פלט לדוגמה**.
 
@@ -100,5 +100,3 @@ Using only the report above, list the three biggest risks it mentions.
 
 - **Prefill.** סיום רשימת `messages` בהודעת assistant חלקית, כדי לכפות את תחילת התשובה, נדחה ב-Claude Opus 4.6 ובמודלי Opus שאחריו, לפי מדריך המעבר. במקום זה השתמשו בפלט מובנה או בהוראות ב-system prompt.
 - **פרמטרי דגימה**, שהוסברו בפוסט הקודם.
-
-הפוסט הבא עוסק בפלט מובנה, הדרך האמינה לקבל JSON, וב-streaming.

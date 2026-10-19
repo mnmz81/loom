@@ -6,7 +6,7 @@ tags: [ai, rag]
 series: { key: ai-rag, order: 3 }
 ---
 
-The previous post ended with two kinds of RAG failure. This post is about the first one: the right chunk was never retrieved. Three techniques fix most of these cases, and they stack.
+When a RAG answer is bad because the right chunk was never retrieved, three techniques fix most cases, and they stack.
 
 The rank-fusion example was run with Python 3.9 and its output is real. The reranking code follows the [Voyage AI quick start](https://www.mongodb.com/docs/voyageai/quickstart/) and was not run, so its output is **example output**. The numbers come from Anthropic's [Contextual Retrieval](https://www.anthropic.com/engineering/contextual-retrieval) article.
 
@@ -102,5 +102,3 @@ Anthropic measured how often the right chunk was missing from the top 20 results
 | The above + reranking | 1.9% (67% fewer) |
 
 These numbers come from their datasets and models; what transfers is the direction. Measure on your own questions before and after each change.
-
-The next post covers the last step: letting the model decide how and when to search, and graph-based retrieval.

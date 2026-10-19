@@ -6,7 +6,7 @@ tags: [ai, llm]
 series: { key: ai-basics, order: 8 }
 ---
 
-Current models read more than text. All current Claude models accept images, and PDFs are read page by page, with both the text and a picture of each page. This post shows how to send them, what they cost, and where the limits are.
+Current models read more than text. All current Claude models accept images, and PDFs are read page by page, with both the text and a picture of each page.
 
 The API code follows the official [vision](https://platform.claude.com/docs/en/build-with-claude/vision) and [PDF support](https://platform.claude.com/docs/en/build-with-claude/pdf-support) docs and was not run, so its output is **example output**. The token calculation was run with Python 3.9 and its output is real.
 
@@ -88,8 +88,7 @@ At the time of writing the docs list a limit of 600 pages and 32 MB per request 
 The docs list limitations worth knowing before you build on images:
 
 - Small, blurry or rotated images (under about 200 pixels) cause mistakes.
-- Counting many small objects is approximate.
-- Coordinates and positions are approximate.
+- Counts of many small objects, and coordinates and positions, are approximate.
 - It cannot tell whether an image is AI-generated.
 - It will not identify people by face.
 - It only **understands** images. It does not create or edit them.
@@ -97,5 +96,3 @@ The docs list limitations worth knowing before you build on images:
 ## Audio
 
 The current Claude models take text and images as input; they do not accept audio. To work with recordings, first convert speech to text with a speech-to-text model or service, then send the transcript. The same applies to video: extract frames as images, or a transcript.
-
-The next series is about knowledge: how to give a model access to your own documents with embeddings and RAG.

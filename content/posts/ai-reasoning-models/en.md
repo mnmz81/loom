@@ -6,7 +6,7 @@ tags: [ai, llm]
 series: { key: ai-basics, order: 7 }
 ---
 
-A model that answers in a single pass has to get everything right on the first token. **Reasoning models** first work through the problem, and only then write the answer. This post explains how that works on current Claude models and which settings control it.
+A model that answers in a single pass has to get everything right on the first token. **Reasoning models** first work through the problem, and only then write the answer.
 
 The facts and code follow the official [thinking](https://platform.claude.com/docs/en/build-with-claude/thinking) and [effort](https://platform.claude.com/docs/en/build-with-claude/effort) docs. The code was not run for this post, so the output block is **example output**.
 
@@ -54,7 +54,7 @@ THINKING: Check small divisors. 1001 / 7 = 143, and 143 = 11 x 13, so 1001 = 7 x
 ANSWER: No. 1001 = 7 x 11 x 13.
 ```
 
-What you see is a **summary** of the reasoning, written by a different model; the docs say no setting returns the raw chain of thought. Even with `display: "omitted"` you still pay for the thinking.
+What you see is a **summary** of the reasoning, written by a different model; the docs say no setting returns the raw chain of thought.
 
 ## Thinking and tools
 
@@ -62,8 +62,6 @@ When a model thinks and then calls a tool, you must send the thinking block back
 
 ## When to raise or lower effort
 
-- Simple tasks such as classification, extraction or short chat: `low` or `medium`. Faster and cheaper.
+- Simple tasks such as classification, extraction or short chat: `low` or `medium`.
 - Hard reasoning, tricky bugs, long agent tasks: `high` or above, with a large `max_tokens`.
-- Do not guess. The docs repeatedly recommend running an "effort sweep" on your own evaluation set and picking the lowest level that keeps quality. The post on evals later in the series shows how.
-
-The next post covers multimodal input: images and PDFs.
+- Do not guess: the docs recommend running an "effort sweep" on your own evaluation set and picking the lowest level that keeps quality. The post on evals later in the series shows how.

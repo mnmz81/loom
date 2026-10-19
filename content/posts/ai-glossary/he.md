@@ -5,7 +5,7 @@ date: 2026-10-13
 tags: [ai, llm, cheatsheet]
 ---
 
-כל מונח מסדרת ה-AI במקום אחד, עם הגדרה של שורה וקישור לפוסט שמסביר אותו. לסדרה חמישה חלקים: [יסודות](he/posts/ai-what-is-llm/), [ידע ו-RAG](he/posts/ai-embeddings/), [כלים וסוכנים](he/posts/ai-tools-function-calling/), [התאמת מודל](he/posts/ai-fine-tuning/) ו[ייצור](he/posts/ai-evals/).
+לסדרת ה-AI חמישה חלקים: [יסודות](he/posts/ai-what-is-llm/), [ידע ו-RAG](he/posts/ai-embeddings/), [כלים וסוכנים](he/posts/ai-tools-function-calling/), [התאמת מודל](he/posts/ai-fine-tuning/) ו[ייצור](he/posts/ai-evals/).
 
 ## מודלים וטוקנים
 
@@ -15,7 +15,7 @@ tags: [ai, llm, cheatsheet]
 - **חלון הקשר** (context window): כל מה שהמודל רואה בבקשה אחת, כולל התשובה שלו. [טוקנים וחלון ההקשר](he/posts/ai-tokens-context-window/)
 - **Context rot**: הדיוק והשליפה יורדים ככל שההקשר גדל. [טוקנים וחלון ההקשר](he/posts/ai-tokens-context-window/)
 - **Transformer ו-attention**: הארכיטקטורה של LLM. ה-attention מאפשר לכל טוקן להישען על הטוקנים שלפניו. [איך בונים מודל שפה](he/posts/ai-how-models-are-built/)
-- **אימון מקדים** (pretraining): אימון על כמות עצומה של טקסט לניבוי הטוקן הבא. יוצר מודל בסיס. [איך בונים מודל שפה](he/posts/ai-how-models-are-built/)
+- **אימון מקדים** (pretraining): שלב האימון הראשון, על כמות עצומה של טקסט. יוצר מודל בסיס. [איך בונים מודל שפה](he/posts/ai-how-models-are-built/)
 - **SFT, RLHF, DPO**: fine-tuning מפוקח על שיחות לדוגמה, ואחריו אימון לפי העדפות של אנשים או של AI. [איך בונים מודל שפה](he/posts/ai-how-models-are-built/)
 - **תאריך ידע** (knowledge cutoff): התאריך שאחריו המודל לא יודע כלום. [איך בונים מודל שפה](he/posts/ai-how-models-are-built/)
 - **מודל עם משקלות פתוחים**: מודל שהמשקלות שלו פורסמו, כך שאפשר להריץ אותו בעצמכם. [הרצת מודלים מקומית](he/posts/ai-local-models/)

@@ -6,7 +6,7 @@ tags: [ai, llm]
 series: { key: ai-basics, order: 5 }
 ---
 
-The prompt is the main way to steer a model. On current Claude models it is even more central, because the sampling knobs from the previous post are gone. This post covers the techniques the official [prompting best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices) guide recommends for all current models.
+The prompt is the main way to steer a model. The techniques below are the ones the official [prompting best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices) guide recommends for all current models.
 
 The code was not run for this post, so the output blocks are **example output**.
 
@@ -100,5 +100,3 @@ Two older tricks no longer work on current Claude models:
 
 - **Prefill.** Ending `messages` with a partial assistant message to force the start of the answer is rejected on Claude Opus 4.6 and later Opus models, according to the migration guide. Use structured outputs or system prompt instructions instead.
 - **Sampling parameters**, covered in the previous post.
-
-The next post covers structured outputs, the reliable way to get JSON, and streaming.

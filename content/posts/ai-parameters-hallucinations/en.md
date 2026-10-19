@@ -6,8 +6,6 @@ tags: [ai, llm]
 series: { key: ai-basics, order: 4 }
 ---
 
-The first post said that the model produces a probability for every possible next token and then "one token is picked". This post is about that pick: the knobs that control it, why they matter less than they used to, and how the same mechanism leads to hallucinations.
-
 The two small Python simulations were run with Python 3.9 and their output is real. The API facts follow the [Claude Opus 5.5 migration guide](https://platform.claude.com/docs/en/models/opus-5-5/migration-guide) and the guide to [reducing hallucinations](https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations).
 
 ## Temperature
@@ -85,7 +83,7 @@ What replaces them:
 - **Effort.** `output_config={"effort": "low"}` makes the model spend fewer tokens; higher levels make it more thorough. The post on reasoning models covers it.
 - **Structured outputs**, when you need an exact format. Covered two posts from now.
 
-The concepts still matter: they explain why the same prompt gives different answers, and you will meet them on local models later in the series.
+You will still meet these knobs on local models later in the series.
 
 ## Why models hallucinate
 
@@ -103,6 +101,4 @@ The official guide lists techniques that work today:
 - **Restrict to the given documents**: tell the model to use only the provided text, not its general knowledge.
 - **Compare several runs.** If the same question gives inconsistent answers, treat the answer as suspect.
 
-The guide is clear that these techniques reduce hallucinations but do not eliminate them. For anything important, check the answer. Giving the model the right documents is the strongest fix, and that is what RAG is about.
-
-The next post is about prompting: how to write the instructions that do the steering.
+These techniques reduce hallucinations but do not eliminate them, so check anything important. Giving the model the right documents is the strongest fix, and that is what RAG is about.

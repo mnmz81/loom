@@ -6,8 +6,6 @@ tags: [ai, llm]
 series: { key: ai-basics, order: 2 }
 ---
 
-The previous post described an LLM as a function that predicts the next token. This post opens the box one level: what the function is made of, and the training stages that take it from "continues any text" to "answers like an assistant".
-
 No API is needed here. The small Python example was run with Python 3.9 and its output is real. The claims about training follow the original papers, linked inline.
 
 ## The transformer and attention
@@ -51,7 +49,7 @@ Most of what a model "knows" comes from this stage. It is also where the **knowl
 
 To turn the base model into an assistant, it is trained further on example conversations: a question, and a good answer written or checked by people. This is **supervised fine-tuning** (SFT). The model learns the format of a conversation and the habit of answering what was asked.
 
-The amount of data is tiny compared with pretraining. Fine-tuning changes how the model behaves much more than what it knows, a point that comes back in the post on fine-tuning later in the series.
+The amount of data is tiny compared with pretraining. Fine-tuning changes how the model behaves much more than what it knows, which is why it works for style and format and not for adding knowledge.
 
 ## Stage 3: preference training
 
@@ -65,10 +63,7 @@ An answer can be correct and still unhelpful, too long, or unsafe. The last stag
 
 ## What this explains
 
-The training stages explain several behaviors you will meet in this series:
+Two behaviors follow from these stages:
 
-- The model knows facts up to its cutoff and nothing after. For newer or private information you have to give it the text, which is what RAG does.
+- For information newer than the cutoff, or private, you have to give the model the text, which is what RAG does.
 - It was trained to produce answers people prefer, so it can sound confident even when it is wrong.
-- Its style and format can be changed with relatively little data, which is why fine-tuning works for behavior and not for adding knowledge.
-
-The next post covers tokens and the context window: the units the model reads and writes, and how much it can see at once.

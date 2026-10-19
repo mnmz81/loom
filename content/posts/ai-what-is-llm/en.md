@@ -6,8 +6,7 @@ tags: [ai, llm]
 series: { key: ai-basics, order: 1 }
 ---
 
-An LLM (large language model) is a program that takes text in and produces text out. ChatGPT, Claude and Gemini are products built on top of LLMs. This post explains what happens inside the loop at the simplest level, and then makes a first call from Python.
-
+An LLM (large language model) is a program that takes text in and produces text out. ChatGPT, Claude and Gemini are products built on top of LLMs.
 This is the first post of five AI series. The suggested reading order: [the basics](en/series/ai-basics/), then [knowledge and RAG](en/series/ai-rag/) and [tools and agents](en/series/ai-agents/) (in either order), then [production](en/series/ai-production/), and finally [adapting a model](en/series/ai-tuning/). The [decision map](en/posts/ai-decision-map/) shows which tool fits which problem, and the [glossary](en/posts/ai-glossary/) explains any unfamiliar term.
 
 The code follows the [official Anthropic quickstart](https://platform.claude.com/docs/en/get-started). It was not run for this post, so every output block below is **example output**: the structure matches the docs, but the text of a real answer will differ on every run.
@@ -18,7 +17,7 @@ An LLM is a very large function. It was trained on a huge amount of text, and it
 
 The pieces are called tokens. A token is usually a word or part of a word. The [tokens and context window](en/posts/ai-tokens-context-window/) post covers them in detail; for now, think of a token as a small chunk of text.
 
-Everything else an LLM does, such as answering questions, translating, summarizing or writing code, comes from that one skill. Nobody wrote a rule for translation. The model picked it up because translated text was part of what it learned from.
+Answering questions, translating, summarizing and writing code all come from that one skill. Nobody wrote a rule for translation; the model picked it up because translated text was in its training data.
 
 ## How it generates text
 
@@ -53,14 +52,14 @@ for block in message.content:
         print(block.text)
 ```
 
-The three parameters `model`, `max_tokens` and `messages` are required, according to the [Messages API reference](https://platform.claude.com/docs/en/api/messages). `max_tokens` is a ceiling on the length of the answer, not a target. The response content is a list of blocks, so the code loops over them and prints the text ones.
+The three parameters `model`, `max_tokens` and `messages` are required, according to the [Messages API reference](https://platform.claude.com/docs/en/api/messages). `max_tokens` is a ceiling on the length of the answer, not a target. The response content is a list of blocks, so the code prints the text ones.
 
 ```text
 An LLM is a neural network trained on large amounts of text to predict the next
 token, which lets it generate, summarize and translate language.
 ```
 
-This is example output. Model names change over time, so check the [models overview](https://platform.claude.com/docs/en/models/overview) for the current list before you copy the name above.
+Model names change over time, so check the [models overview](https://platform.claude.com/docs/en/models/overview) for the current list before you copy the name above.
 
 ## What comes back
 
@@ -76,10 +75,8 @@ end_turn
 17 31
 ```
 
-`stop_reason` of `end_turn` means the model finished on its own. A value of `max_tokens` means the answer was cut at your limit. `usage` counts tokens in and out, and that is what you are billed for. The numbers above are example output.
+`stop_reason` of `end_turn` means the model finished on its own. A value of `max_tokens` means the answer was cut at your limit. `usage` counts tokens in and out, and that is what you are billed for.
 
 ## Where this series goes next
 
 Knowing the loop explains most of what comes later: why the context window has a limit, why prompts matter, why a model can sound sure and be wrong, and why giving it tools or documents changes what it can do.
-
-The next posts in this series cover how models are built, tokens and the context window, prompting, structured outputs, reasoning models and multimodal input. After that come RAG, tools and agents, fine-tuning, and what it takes to run all of this in production.

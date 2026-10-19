@@ -6,7 +6,7 @@ tags: [ai, rag]
 series: { key: ai-rag, order: 1 }
 ---
 
-The basics series ended with a problem: a model only knows what was in its training data. To answer questions about your own documents, you first have to find the right pieces of them. Keyword search misses texts that say the same thing in other words. **Embeddings** solve that, and they are the foundation of RAG.
+A model only knows what was in its training data. To answer questions about your own documents, you first have to find the right pieces of them. Keyword search misses texts that say the same thing in other words. **Embeddings** solve that, and they are the foundation of RAG.
 
 The similarity example was run with Python 3.9 and its output is real. The Voyage AI code follows the [embeddings guide](https://platform.claude.com/docs/en/build-with-claude/embeddings) in the Claude docs and was not run, so its output is **example output**.
 
@@ -93,4 +93,4 @@ Embeddings capture meaning, which is also their weak spot:
 - **Lost context.** A short piece of a document ("revenue grew 3%") does not say which company or which quarter.
 - **Domain.** A general model may not separate terms that matter in law, medicine or code. There are domain-specific models for some fields.
 
-The next posts deal with each of these. The next one builds the full RAG pipeline.
+The rest of this series deals with each of these.

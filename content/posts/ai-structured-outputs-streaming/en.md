@@ -6,8 +6,6 @@ tags: [ai, llm]
 series: { key: ai-basics, order: 6 }
 ---
 
-Two features turn a model from a chat toy into a component of an application. **Structured outputs** give you data your code can rely on. **Streaming** lets a user see the answer as it is written, instead of staring at a spinner.
-
 The code follows the official [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs) and [streaming](https://platform.claude.com/docs/en/build-with-claude/streaming) docs. It was not run for this post, so the output blocks are **example output**.
 
 ## Why "answer in JSON" is not enough
@@ -67,7 +65,7 @@ The same mechanism exists for tools: adding `"strict": True` to a tool definitio
 
 ## Streaming
 
-Without streaming, the API returns the whole answer at the end. A long answer can take many seconds. With streaming, the SDK hands you text as it arrives:
+Without streaming, the API returns the whole answer at the end, which for a long answer can take many seconds. With streaming, the SDK hands you text as it arrives:
 
 ```python
 with client.messages.stream(
@@ -106,5 +104,3 @@ message_stop           the end
 ```
 
 Most of the time the SDK handles these events for you. You need them when you stream to a browser yourself, or when you want to show tool calls and thinking as they happen.
-
-The next post covers reasoning models: models that think before they answer.

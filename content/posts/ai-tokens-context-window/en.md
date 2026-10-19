@@ -6,7 +6,7 @@ tags: [ai, llm]
 series: { key: ai-basics, order: 3 }
 ---
 
-Tokens are the unit everything about an LLM is measured in: what it reads, what it writes, what it costs and how much it can handle at once. This post explains what a token is, how to count tokens, and what the context window is.
+Tokens are the unit everything about an LLM is measured in: what it reads, what it writes, what it costs and how much it can handle at once.
 
 The facts and code follow the official [context windows](https://platform.claude.com/docs/en/build-with-claude/context-windows) and [token counting](https://platform.claude.com/docs/en/build-with-claude/token-counting) docs. The code was not run, so the output blocks are **example output**.
 
@@ -37,7 +37,7 @@ print(count.input_tokens)
 14
 ```
 
-According to the docs, token counting is free (it has its own rate limit) and the result is an estimate that can differ slightly from the real call. Count with the model you plan to use, because the tokenizer differs between models.
+According to the docs, token counting is free (it has its own rate limit) and the result is an estimate that can differ slightly from the real call. Count with the model you plan to use.
 
 ## The context window
 
@@ -75,5 +75,3 @@ model_context_window_exceeded
 ```
 
 A `stop_reason` of `max_tokens` is the more common cousin: the answer hit the `max_tokens` limit you set. In both cases the answer is cut, so check `stop_reason` before you trust the text.
-
-The next post covers the parameters that control how the next token is picked, and why models hallucinate.

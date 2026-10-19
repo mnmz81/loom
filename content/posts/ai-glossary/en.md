@@ -5,7 +5,7 @@ date: 2026-10-13
 tags: [ai, llm, cheatsheet]
 ---
 
-Every term from the AI series in one place, with a one-line definition and a link to the post that explains it. The series has five parts: [the basics](en/posts/ai-what-is-llm/), [knowledge and RAG](en/posts/ai-embeddings/), [tools and agents](en/posts/ai-tools-function-calling/), [adapting a model](en/posts/ai-fine-tuning/) and [production](en/posts/ai-evals/).
+The AI series has five parts: [the basics](en/posts/ai-what-is-llm/), [knowledge and RAG](en/posts/ai-embeddings/), [tools and agents](en/posts/ai-tools-function-calling/), [adapting a model](en/posts/ai-fine-tuning/) and [production](en/posts/ai-evals/).
 
 ## Models and tokens
 
@@ -15,7 +15,7 @@ Every term from the AI series in one place, with a one-line definition and a lin
 - **Context window**: everything the model can see in one request, including its answer. [Tokens and the context window](en/posts/ai-tokens-context-window/)
 - **Context rot**: accuracy and recall degrade as the context grows. [Tokens and the context window](en/posts/ai-tokens-context-window/)
 - **Transformer / attention**: the architecture behind LLMs; attention lets each token draw on earlier tokens. [How a language model is built](en/posts/ai-how-models-are-built/)
-- **Pretraining**: training on huge amounts of text to predict the next token; produces a base model. [How a language model is built](en/posts/ai-how-models-are-built/)
+- **Pretraining**: the first training stage, on huge amounts of text; produces a base model. [How a language model is built](en/posts/ai-how-models-are-built/)
 - **SFT, RLHF, DPO**: supervised fine-tuning on example conversations, then training on human or AI preferences. [How a language model is built](en/posts/ai-how-models-are-built/)
 - **Knowledge cutoff**: the date after which the model knows nothing. [How a language model is built](en/posts/ai-how-models-are-built/)
 - **Open-weight model**: a model whose weights are published, so you can run it yourself. [Running models locally](en/posts/ai-local-models/)
