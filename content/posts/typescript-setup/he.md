@@ -15,13 +15,15 @@ series: { key: typescript, order: 2 }
 מתקינים את TypeScript כתלות פיתוח של הפרויקט, ולא גלובלית, כדי שכל מי שעובד עליו יקבל אותה גרסה:
 
 ```bash
-npm install --save-dev typescript
+npm install --save-dev typescript@6
 npx tsc --version
 ```
 
 ```text
 Version 6.0.3
 ```
+
+‏`typescript` בלי גרסה מתקין היום את 7.0 (`Version 7.0.2`), הקומפיילר החדש שכתוב ב-Go. הסדרה עובדת עם 6.0, כי כלים שבנויים על הקומפיילר, כמו Angular 22, עדיין דורשים אותה. כל הדוגמאות נבדקו גם ב-7.0, וההבדלים מפורטים ב[פוסט על TypeScript 7](he/posts/typescript-7-native/).
 
 ## ‏tsconfig.json
 

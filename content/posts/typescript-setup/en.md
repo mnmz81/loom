@@ -15,13 +15,15 @@ Every command ran with TypeScript 6.0.3 and 7.0.2, Node.js 24.21 and tsx 4.23.
 Install TypeScript as a dev dependency of the project, not globally, so everyone working on it gets the same version:
 
 ```bash
-npm install --save-dev typescript
+npm install --save-dev typescript@6
 npx tsc --version
 ```
 
 ```text
 Version 6.0.3
 ```
+
+Plain `typescript` installs 7.0 today (`Version 7.0.2`), the new compiler written in Go. This series uses 6.0, because tools built on the compiler, like Angular 22, still require it. Every example was also checked with 7.0, and the differences are in the [TypeScript 7 post](en/posts/typescript-7-native/).
 
 ## tsconfig.json
 

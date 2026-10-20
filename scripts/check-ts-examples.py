@@ -5,11 +5,12 @@ Usage: ./scripts/with-node.sh python3 scripts/check-ts-examples.py content/posts
        ./scripts/with-node.sh python3 scripts/check-ts-examples.py --fill draft.md   # write the real output in
        TSC7="npx -y -p typescript@7.0.2 tsc" ./scripts/with-node.sh python3 scripts/check-ts-examples.py post.md
 
-Each block is its own file (named by a first-line comment such as `// user.ts`, else `example.ts`), checked with
+Each block is its own file (named by a first-line comment such as `// user.ts`, else `example.ts`; `// user.ts (run
+with tsx)` runs it with tsx instead of node, for syntax Node can't strip), checked with
 the repo's tsc (`--noEmit --ignoreConfig`, so the compiler defaults apply) and then run with `node` (type
 stripping, runs even when tsc reports errors). The real output is the tsc diagnostics, then node's stdout, then
 the last line of node's stderr. A block passes when every line of its ```text block appears in that output.
-With TSC7 set, that compiler must report the same error lines (in any order; explanation lines may differ). Exit code 1 on any mismatch.
+With TSC7 set, that compiler must report the same error lines (in any order, union members in any order; explanation lines may differ). Exit code 1 on any mismatch.
 """
 import os
 import re
@@ -21,7 +22,7 @@ import tempfile
 TSC = os.environ.get("TSC", "node_modules/.bin/tsc")
 TSC7 = os.environ.get("TSC7")
 BLOCK = re.compile(r"^```(\w*)\n(.*?)^```\n", re.S | re.M)
-NAME = re.compile(r"^// ([\w.-]+\.ts)\n")
+NAME = re.compile(r"^// ([\w.-]+\.ts)( \(run with tsx\))?\n")
 
 
 def check(tsc, path):
@@ -38,11 +39,18 @@ def run(code):
         path = os.path.join(tmp, m.group(1) if m else "example.ts")
         open(path, "w", encoding="utf-8").write(code)
         diagnostics = check(TSC, path)
-        node = subprocess.run(["node", path], capture_output=True, text=True, timeout=20, cwd=tmp)
+        runner = [os.path.abspath("node_modules/.bin/tsx")] if m and m.group(2) else ["node"]
+        node = subprocess.run(runner + [path], capture_output=True, text=True, timeout=20, cwd=tmp)
         err = node.stderr.strip().splitlines()
         errors = [l for l in err if re.match(r"^\w*Error\b", l)]
         out = "\n".join(filter(None, [diagnostics, node.stdout.rstrip("\n"), (errors or err or [""])[-1]]))
         return out + "\n" if out else "", check(TSC7, path) if TSC7 else None
+
+
+def errors(output):
+    """Error lines with the members of quoted unions sorted (TS 7 prints unions sorted, TS 6 in declaration order)."""
+    norm = lambda m: "'" + " | ".join(sorted(m.group(1).split(" | "))) + "'"
+    return sorted(re.sub(r"'([^']*? \| [^']*)'", norm, l) for l in output.splitlines() if ": error TS" in l)
 
 
 def blocks(text):
@@ -62,8 +70,8 @@ def main(argv):
         parts, last = [], 0
         for i, (cur, expected) in enumerate(blocks(text), 1):
             actual, seven = run(cur.group(2))
-            six = sorted(l for l in actual.splitlines() if ": error TS" in l)
-            if seven is not None and sorted(l for l in seven.splitlines() if ": error TS" in l) != six:
+            six = errors(actual)
+            if seven is not None and errors(seven) != six:
                 failed = True
                 print(f"{path} block {i}: TSC7 errors differ\n--- repo tsc\n" + "\n".join(six) + f"\n--- TSC7\n{seven}")
             if not expected:
