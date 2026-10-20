@@ -24,7 +24,7 @@ Run every command with `./scripts/with-node.sh` (system Node is 20).
 - Fetch the **official docs** of the topic (docs.python.org, git-scm.com, docs.github.com, the tool's `--help`). Verify every command, flag, setting path and claim. Do not rely on memory.
 - Run every code example locally and paste real output. State the version used ("every example ran with Python 3.13").
 - Python posts: `PYTHON=python3.13 python3 scripts/check-python-examples.py content/posts/<slug>/en.md` runs every block and compares it with the output block after it (`--fill` writes the real output in).
-- TypeScript posts: `TSC7="npx -y -p typescript@7.0.2 tsc" ./scripts/with-node.sh python3 scripts/check-ts-examples.py content/posts/<slug>/en.md` type-checks every ```typescript block with the repo's tsc 6.0 (and TS 7), runs it with Node, and compares with the ```text block after it (`--fill` writes the real output in). Name the file with a first-line comment (`// user.ts`).
+- TypeScript posts: `TSC7="npx -y -p typescript@7.0.2 tsc" ./scripts/with-node.sh python3 scripts/check-ts-examples.py content/posts/<slug>/en.md` type-checks every ```typescript block with the repo's tsc 6.0 (and TS 7), runs it with Node, and compares with the ```text block after it (`--fill` writes the real output in). Name the file with a first-line comment (`// user.ts`). Shell examples (`tsc` with a tsconfig, `npm install`) run in a scratch folder with `./scripts/ts-sandbox.sh <dir> <command...>`.
 - Reordering or retagging: `npx tsx scripts/set-shared.ts` changes `tags` / `series` in both files at once (`--series-order <key> <slug>...` renumbers a series); then fix the "What's next" paragraphs that point at the old order.
 - Prices, plans and UI paths change: hedge or link instead of stating them.
 - Read the previous post in the series and match its structure and tone.
@@ -67,7 +67,7 @@ Check the length: `python3 scripts/reading-time.py <slug>` â€” both languages â‰
 ## 7. Commit
 
 - One commit per post (or per batch of series posts): `content: <series> post <n> - <topic> (en + he)`.
-- Commit and push to `main` (deploys the site).
+- Commit and push to `main` (deploys the site). `./scripts/publish-posts.sh "<message>" <slug>... [-- <extra paths>]` runs the tests and build, commits, pushes and waits for the Deploy run.
 
 ## 8. Notion copy (do it, don't hand it to the user)
 
