@@ -1,9 +1,10 @@
-# Angular series plan (84 posts)
+# Angular series plan (83 posts)
 
 Decisions: he + en, Angular 22 (the current version), beginner to expert. Every claim checked against angular.dev.
 Every post that teaches an API that changed ends with an "In older versions" section (`### In older versions` /
 `### בגרסאות קודמות`) showing the pre-v22 way, so readers of older code and tutorials recognise it.
 Slug prefix `angular-`, series key `angular`, tag `angular`. One commit per post or per batch.
+TypeScript is its own series (`docs/plans/typescript-series.md`); Angular posts link to it instead of teaching TS.
 
 Verified baseline (angular.dev, Oct 2026): OnPush is the default since v22 (old default renamed `Eager`);
 zoneless is the default since v21; v22 needs Node ^22.22.3 / ^24.15.0 / ^26.0.0 and TypeScript 6.0;
@@ -20,49 +21,48 @@ v22 OnPush default, Signal Forms / Aria / `resource` stable, `@Service()`, Fetch
 (Items not listed under "Verified baseline" are from memory: check each one in its post.)
 
 ## Level 0: Before you start
-1 angular-what-is-angular · 2 angular-typescript-for-angular (may become a link to a TypeScript series) ·
-3 angular-install-ng-new · 4 angular-project-structure
+1 angular-what-is-angular · 2 angular-install-ng-new · 3 angular-project-structure
 
 ## Level 1: Components and templates
-5 angular-first-component · 6 angular-bindings · 7 angular-control-flow · 8 angular-template-expressions ·
-9 angular-ng-template · 10 angular-styling · 11 angular-pipes · 12 angular-content-projection
+4 angular-first-component · 5 angular-bindings · 6 angular-control-flow · 7 angular-template-expressions ·
+8 angular-ng-template · 9 angular-styling · 10 angular-pipes · 11 angular-content-projection
 
 ## Level 2: Signals and component communication
-13 angular-signals · 14 angular-effect · 15 angular-linked-signal · 16 angular-inputs · 17 angular-outputs-model ·
-18 angular-queries · 19 angular-lifecycle · 20 angular-component-communication
+12 angular-signals · 13 angular-effect · 14 angular-linked-signal · 15 angular-inputs · 16 angular-outputs-model ·
+17 angular-queries · 18 angular-lifecycle · 19 angular-component-communication
 
 ## Level 3: Change detection, old vs new
-21 angular-change-detection · 22 angular-zone-js · 23 angular-eager-strategy · 24 angular-onpush ·
-25 angular-onpush-default-v22 · 26 angular-zoneless · 27 angular-zoneless-migration · 28 angular-reactivity-model
+20 angular-change-detection · 21 angular-zone-js · 22 angular-eager-strategy · 23 angular-onpush ·
+24 angular-onpush-default-v22 · 25 angular-zoneless · 26 angular-zoneless-migration · 27 angular-reactivity-model
 
 ## Level 4: DI and services
-29 angular-inject · 30 angular-service-decorator · 31 angular-providers · 32 angular-advanced-di
+28 angular-inject · 29 angular-service-decorator · 30 angular-providers · 31 angular-advanced-di
 
 ## Level 5: Routing
-33 angular-routing · 34 angular-nested-routes · 35 angular-route-params · 36 angular-lazy-loading ·
-37 angular-guards-resolvers · 38 angular-router-extras
+32 angular-routing · 33 angular-nested-routes · 34 angular-route-params · 35 angular-lazy-loading ·
+36 angular-guards-resolvers · 37 angular-router-extras
 
 ## Level 6: Data and HTTP
-39 angular-http-client · 40 angular-interceptors · 41 angular-http-errors · 42 angular-resource ·
-43 angular-http-resource · 44 angular-rxjs-basics · 45 angular-rxjs-interop
+38 angular-http-client · 39 angular-interceptors · 40 angular-http-errors · 41 angular-resource ·
+42 angular-http-resource · 43 angular-rxjs-basics · 44 angular-rxjs-interop
 
 ## Level 7: Forms
-46 angular-forms-overview · 47 angular-signal-forms · 48 angular-signal-forms-validation ·
-49 angular-signal-forms-arrays · 50 angular-reactive-forms · 51 angular-custom-form-controls
+45 angular-forms-overview · 46 angular-signal-forms · 47 angular-signal-forms-validation ·
+48 angular-signal-forms-arrays · 49 angular-reactive-forms · 50 angular-custom-form-controls
 
 ## Level 8: Directives and advanced templates
-52 angular-attribute-directives · 53 angular-structural-directives · 54 angular-dynamic-components ·
-55 angular-defer · 56 angular-animations · 57 angular-error-handling
+51 angular-attribute-directives · 52 angular-structural-directives · 53 angular-dynamic-components ·
+54 angular-defer · 55 angular-animations · 56 angular-error-handling
 
 ## Level 9: Quality
-58 angular-testing-components · 59 angular-testing-services · 60 angular-testing-signals · 61 angular-e2e ·
-62 angular-accessibility-aria · 63 angular-cdk · 64 angular-material · 65 angular-tailwind
+57 angular-testing-components · 58 angular-testing-services · 59 angular-testing-signals · 60 angular-e2e ·
+61 angular-accessibility-aria · 62 angular-cdk · 63 angular-material · 64 angular-tailwind
 
 ## Level 10: Rendering and delivery
-66 angular-ssr-hydration · 67 angular-incremental-hydration · 68 angular-ssg · 69 angular-i18n ·
-70 angular-pwa · 71 angular-web-workers · 72 angular-build-config · 73 angular-deploy-github-pages
+65 angular-ssr-hydration · 66 angular-incremental-hydration · 67 angular-ssg · 68 angular-i18n ·
+69 angular-pwa · 70 angular-web-workers · 71 angular-build-config · 72 angular-deploy-github-pages
 
 ## Level 11: Expert
-74 angular-devtools-profiling · 75 angular-bundle-size · 76 angular-security · 77 angular-state-management ·
-78 angular-architecture · 79 angular-nx-monorepo · 80 angular-libraries · 81 angular-ng-update ·
-82 angular-migrate-standalone · 83 angular-migrate-signals · 84 angular-ai-tooling
+73 angular-devtools-profiling · 74 angular-bundle-size · 75 angular-security · 76 angular-state-management ·
+77 angular-architecture · 78 angular-nx-monorepo · 79 angular-libraries · 80 angular-ng-update ·
+81 angular-migrate-standalone · 82 angular-migrate-signals · 83 angular-ai-tooling

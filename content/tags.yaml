@@ -8,6 +8,7 @@ docker: { he: Docker, en: Docker }
 containers: { he: קונטיינרים, en: Containers }
 python: { he: Python, en: Python }
 angular: { he: Angular, en: Angular }
+typescript: { he: TypeScript, en: TypeScript }
 aws: { he: AWS, en: AWS }
 cloud: { he: ענן, en: Cloud }
 linux: { he: Linux, en: Linux }

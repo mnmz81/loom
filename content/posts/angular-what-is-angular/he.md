@@ -118,4 +118,4 @@ Angular 22 [דורש](https://angular.dev/reference/versions) Node.js ‏22.22.3
 
 ## מה הלאה
 
-בפוסט הבא: ה-TypeScript שצריך לדעת כדי לכתוב Angular.
+בפוסט הבא: התקנה ויצירת פרויקט ראשון עם `ng new`. אפליקציות Angular נכתבות ב-TypeScript, ומי שעוד לא מכיר אותה יכול להתחיל בסדרה [TypeScript צעד אחר צעד](he/series/typescript/).

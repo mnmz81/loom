@@ -118,4 +118,4 @@ It's a weaker fit for a small content site or a single widget on a page, where a
 
 ## What's next
 
-Next: the TypeScript you need to write Angular.
+Next: installing Angular and creating a first project with `ng new`. Angular apps are written in TypeScript; if it's new to you, start with the [TypeScript step by step](en/series/typescript/) series.

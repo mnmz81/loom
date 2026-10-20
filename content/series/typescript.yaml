@@ -1,0 +1,6 @@
+title:
+  he: TypeScript צעד אחר צעד
+  en: TypeScript step by step
+description:
+  he: סדרת פוסטים קצרים על TypeScript 6.0, נושא בכל פוסט, מהטיפוס הראשון ועד generics ופרויקטים אמיתיים. מניחה היכרות בסיסית עם JavaScript. כל דוגמה קומפלה והורצה, וכל טענה נבדקה מול התיעוד הרשמי.
+  en: Short posts on TypeScript 6.0, one topic each, from the first type to generics and real projects. Assumes basic JavaScript. Every example was compiled and run, and every claim checked against the official docs.
