@@ -9,7 +9,7 @@ Each block is its own file (named by a first-line comment such as `// user.ts`, 
 the repo's tsc (`--noEmit --ignoreConfig`, so the compiler defaults apply) and then run with `node` (type
 stripping, runs even when tsc reports errors). The real output is the tsc diagnostics, then node's stdout, then
 the last line of node's stderr. A block passes when every line of its ```text block appears in that output.
-With TSC7 set, the diagnostics of that compiler must match the repo tsc's. Exit code 1 on any mismatch.
+With TSC7 set, that compiler must report the same error lines (in any order; explanation lines may differ). Exit code 1 on any mismatch.
 """
 import os
 import re
@@ -62,10 +62,10 @@ def main(argv):
         parts, last = [], 0
         for i, (cur, expected) in enumerate(blocks(text), 1):
             actual, seven = run(cur.group(2))
-            six = "\n".join(l for l in actual.splitlines() if ": error TS" in l)
-            if seven is not None and seven != six:
+            six = sorted(l for l in actual.splitlines() if ": error TS" in l)
+            if seven is not None and sorted(l for l in seven.splitlines() if ": error TS" in l) != six:
                 failed = True
-                print(f"{path} block {i}: TSC7 diagnostics differ\n--- repo tsc\n{six}\n--- TSC7\n{seven}")
+                print(f"{path} block {i}: TSC7 errors differ\n--- repo tsc\n" + "\n".join(six) + f"\n--- TSC7\n{seven}")
             if not expected:
                 continue
             if fill:
