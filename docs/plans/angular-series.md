@@ -9,8 +9,12 @@ TypeScript is its own series (`docs/plans/typescript-series.md`); Angular posts 
 Verified baseline (angular.dev, Oct 2026): OnPush is the default since v22 (old default renamed `Eager`);
 zoneless is the default since v21; v22 needs Node ^22.22.3 / ^24.15.0 / ^26.0.0 and TypeScript 6.0;
 majors every ~12 months since v22 (6 before), 12 months active + 12 months LTS.
-Still to verify before the post that uses them: `@Service()`, `injectAsync`, `chain()`, the v22 template
-additions (InfoQ only, the official v22 blog post blocks fetching) and `@boundary` (announced for Q3 2026).
+Verified while writing the posts (22.2.x): `@Service()` (shorthand for `@Injectable({providedIn: 'root'})`, taught in post 29),
+`injectAsync` + `onIdle` (public API since 22.0), `@boundary` (developer preview), template spread / arrow functions / `@let`,
+`resource` / `rxResource` / `httpResource` stable since 22.0 (options renamed to `params` / `stream` in v20), Signal Forms stable in v22
+(`[formField]`; was `[field]` in 21.0), `paramsInheritanceStrategy` default `'always'` in v22, `?.` in templates returns `undefined` in v22.
+`chain` is not a top-level import: it is passed to the `params` callback (`params: ({ chain }) => chain(this.user)?.teamId`, post 41).
+InfoQ's claim that the v22 update removes `withFetch()` is wrong: the migration adds `withXhr()` where neither is set.
 
 ## Version history (source for "In older versions")
 v14 `inject()`, typed forms · v15 standalone stable, functional guards/interceptors · v16 signals preview ·

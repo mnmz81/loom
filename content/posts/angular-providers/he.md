@@ -6,7 +6,7 @@ tags: [angular]
 series: { key: angular, order: 30 }
 ---
 
-provider הוא הוראה ל-Angular: כשמבקשים את ה-token הזה, תן את הערך הזה. ‏`@Service()` מהפוסט הקודם יוצר provider כזה לבד. כאן כותבים אותם בעצמנו.
+provider הוא הוראה ל-Angular: כשמבקשים את ה-token הזה, מוסרים את הערך הזה. ‏`@Service()` מהפוסט הקודם יוצר provider כזה לבד. כאן כותבים אותם בעצמנו.
 
 כל דוגמה נבדקה עם Angular 22.2 ו-Vitest.
 

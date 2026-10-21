@@ -66,7 +66,7 @@ provideServiceWorker('ngsw-worker.js', {
 }
 ```
 
-ה-`assetGroups` הם ש-`ng add` יצר, ואת `dataGroups` הוספנו. לפי [תיעוד ההגדרות](https://angular.dev/ecosystem/service-workers/config):
+את ה-`assetGroups` יצר `ng add`, ואת `dataGroups` הוספנו. לפי [תיעוד ההגדרות](https://angular.dev/ecosystem/service-workers/config):
 
 - `installMode: "prefetch"` מוריד מראש את כל הקבצים ברשימה, ולכן האפליקציה עובדת בלי רשת כבר מהביקור הראשון. ‏`lazy` שומר קובץ רק כשמבקשים אותו.
 - `dataGroups` מיועדים לבקשות API. ‏`freshness` פונה קודם לרשת, ונופל ל-cache רק אחרי ה-`timeout`. ‏`performance`, ברירת המחדל, עונה מה-cache בלי לפנות לרשת, והתשובה עלולה להיות ישנה עד `maxAge`.

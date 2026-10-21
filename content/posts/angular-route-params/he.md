@@ -88,7 +88,7 @@ export class UserCard {
 
 ### בגרסאות קודמות
 
-בלי `withComponentInputBinding` ‏(נוסף בגרסה 16), קוראים הירשמו ל-`paramMap` ב-`ngOnInit`:
+בלי `withComponentInputBinding` ‏(נוסף בגרסה 16), נרשמים ל-`paramMap` ב-`ngOnInit`:
 
 ```typescript
 import { Component, OnInit } from '@angular/core';

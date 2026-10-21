@@ -135,7 +135,7 @@ export const providers = [
 ];
 ```
 
-בקוד ישן ה-interceptor הוא מחלקה שמממשת `HttpInterceptor`, נרשמת כ-multi provider של `HTTP_INTERCEPTORS` (ראו [providers](he/posts/angular-providers/)), ו-`next.handle(req)` במקום `next(req)`. עם `provideHttpClient` הן רצות רק אם מוסיפים `withInterceptorsFromDi()`. הסדר שלהן הוא סדר רישום ה-providers, ש[לפי המדריך](https://angular.dev/guide/http/interceptors) קשה לצפות אותו. ה-[API](https://angular.dev/api/common/http/withInterceptorsFromDi) ממליץ על interceptors פונקציונליים ומציין שהתמיכה במחלקות עשויה להיעלם בעתיד.
+בקוד ישן ה-interceptor הוא מחלקה שמממשת `HttpInterceptor`, נרשמת כ-multi provider של `HTTP_INTERCEPTORS` (ראו [providers](he/posts/angular-providers/)), ו-`next.handle(req)` במקום `next(req)`. עם `provideHttpClient` הן רצות רק אם מוסיפים `withInterceptorsFromDi()`. הסדר שלהן הוא סדר רישום ה-providers, ש[לפי המדריך](https://angular.dev/guide/http/interceptors) קשה לחזות. ה-[API](https://angular.dev/api/common/http/withInterceptorsFromDi) ממליץ על interceptors פונקציונליים ומציין שהתמיכה במחלקות עשויה להיעלם בעתיד.
 
 ## טעויות נפוצות של מתחילים
 

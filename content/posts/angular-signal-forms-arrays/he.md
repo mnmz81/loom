@@ -208,4 +208,4 @@ export class Register {
 
 ## מה הלאה
 
-בפוסט הבא: ‏Reactive Forms, לקוד קיים. ‏`FormGroup`, ‏`FormControl`, ‏`FormBuilder`, טפסים עם טיפוסים, ומה צריך לשים לב אליו כשהאפליקציה zoneless.
+בפוסט הבא: ‏Reactive Forms, לקוד קיים. ‏`FormGroup`, ‏`FormControl`, ‏`FormBuilder`, טפסים עם טיפוסים, ולמה לשים לב כשהאפליקציה zoneless.

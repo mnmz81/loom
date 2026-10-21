@@ -83,7 +83,7 @@ export class App {
 }
 ```
 
-בגרסה 22 ‏[OnPush הפך לברירת המחדל](he/posts/angular-onpush-default-v22/). קומפוננטה בלי `changeDetection` נבדקה בגרסה 21 בכל סבב, והמיגרציה כותבת לה `Eager` במפורש כדי שההתנהגות לא תשתנה. קומפוננטה אחרת בפרויקט, שכבר הייתה עם `ChangeDetectionStrategy.OnPush`, לא נגעה. את `Eager` מסירים אחר כך קומפוננטה אחרי קומפוננטה, כשבודקים שהיא מתעדכנת נכון ([הפוסט על Eager](he/posts/angular-eager-strategy/)).
+בגרסה 22 ‏[OnPush הפך לברירת המחדל](he/posts/angular-onpush-default-v22/). קומפוננטה בלי `changeDetection` נבדקה בגרסה 21 בכל סבב, והמיגרציה כותבת לה `Eager` במפורש כדי שההתנהגות לא תשתנה. קומפוננטה אחרת בפרויקט, שכבר הייתה עם `ChangeDetectionStrategy.OnPush`, לא שונתה. את `Eager` מסירים אחר כך קומפוננטה אחרי קומפוננטה, כשבודקים שהיא מתעדכנת נכון ([הפוסט על Eager](he/posts/angular-eager-strategy/)).
 
 שינוי שני: ב-`tsconfig.app.json` נוספה הגדרה שמכבה שתי בדיקות מסוג extended diagnostics, `nullishCoalescingNotNullable` ו-`optionalChainNotNullable`. אחרי השדרוג ה-build והבדיקות עברו בלי שינוי נוסף.
 

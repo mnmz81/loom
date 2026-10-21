@@ -102,7 +102,7 @@ rendered 1 messages
 rendered 2 messages
 ```
 
-‏[`afterNextRender`](https://angular.dev/guide/components/lifecycle#aftereveryrender-and-afternextrender) רץ פעם אחת אחרי ש-Angular סיים לרנדר את כל הקומפוננטות ל-DOM, ו-`afterEveryRender` רץ אחרי כל רינדור. אלה פונקציות ולא מתודות, צריך לקרוא להן ב-injection context (בדרך כלל בבנאי), והן לא רצות ב-SSR או ב-prerender. החלוקה לשלבים מונעת layout thrashing: ‏`write` כותב ל-DOM (כאן גלילה לסוף הרשימה), ‏`read` קורא ממנו, ומה ש-`write` מחזיר מגיע ל-`read`. יש גם `earlyRead` ו-`mixedReadWrite`, שמשמש ברירת מחדל כשמעבירים פונקציה בלי שלבים.
+‏[`afterNextRender`](https://angular.dev/guide/components/lifecycle#aftereveryrender-and-afternextrender) רץ פעם אחת אחרי ש-Angular סיים לרנדר את כל הקומפוננטות ל-DOM, ו-`afterEveryRender` רץ אחרי כל רינדור. אלה פונקציות ולא מתודות, צריך לקרוא להן ב-injection context (בדרך כלל בבנאי), והן לא רצות ב-SSR או ב-prerender. החלוקה לשלבים מונעת layout thrashing: ‏`write` כותב ל-DOM (כאן גלילה לסוף הרשימה), ‏`read` קורא ממנו, ומה ש-`write` מחזיר מגיע ל-`read`. יש גם `earlyRead` ו-`mixedReadWrite`, שהוא ברירת המחדל כשמעבירים פונקציה בלי שלבים.
 
 ## מתי עדיין צריך ngOnChanges
 

@@ -15,7 +15,7 @@ series: { key: angular, order: 73 }
 מתקינים את התוסף מחנות התוספים של כרום או מ-Firefox Add-ons, פותחים את כלי המפתחים ובוחרים בלשונית Angular. לפי התיעוד:
 
 - התוסף עובד רק על [build של פיתוח](https://angular.dev/tools/devtools#we-detected-an-application-built-with-production-configuration). האופטימיזציות של build ל-production מסירות את מה שהוא צריך.
-- לפי התיעוד, אפשר להריץ אפליקציה שכבר פרוסה אם בונים אותה עם `"optimization": false`.
+- אפשר להריץ גם אפליקציה שכבר פרוסה, אם בונים אותה עם `"optimization": false`.
 
 ההבדל בין שני סוגי ה-build, כפי שהוא נראה בפרויקט חדש:
 
