@@ -62,9 +62,9 @@ Angular Pipes | ANGUL
 hello
 ```
 
-כל דוגמה נבדקה עם Angular 22.2 בבדיקת Vitest, והפלט מוצג עם רווחים מכווצים. מה שחשוב לדעת:
+כל דוגמה נבדקה עם Angular 22.2 בבדיקת Vitest, והפלט מוצג עם רווחים מכווצים. הנקודות:
 
-- **כל pipe מיובא.** ‏Pipes הם קלאסים מ-`@angular/common` שמופיעים ב-`imports` של הקומפוננטה, כמו קומפוננטות. ‏[הרשימה המלאה](https://angular.dev/guide/templates/pipes) כוללת גם `lowercase`, ‏`keyvalue`, ‏`i18nPlural` ועוד.
+- **כל pipe מיובא.** ‏Pipes הם מחלקות מ-`@angular/common` שמופיעות ב-`imports` של הקומפוננטה, כמו קומפוננטות. ‏[הרשימה המלאה](https://angular.dev/guide/templates/pipes) כוללת גם `lowercase`, ‏`keyvalue`, ‏`i18nPlural` ועוד.
 - **פרמטרים אחרי `:`.** ‏`currency: 'EUR' : 'symbol' : '1.0-0'` הוא מטבע, תצוגה וגודל ספרות (בלי אגורות). ‏`date: 'yyyy-MM-dd' : 'UTC'` הוא תבנית ואזור זמן. השני מבטל תלות באזור הזמן של המחשב, ולכן הפלט למעלה יציב.
 - **שרשור משמאל לימין.** ‏`title | uppercase | slice: 0 : 5` הופך לאותיות גדולות ואז חותך את חמש הראשונות.
 - **הפורמט תלוי ב-locale.** ברירת המחדל היא `en-US` (`$1,234.50`). שפה אחרת מגדירים דרך ה-locale של האפליקציה, ראו [i18n](he/posts/angular-i18n/).
@@ -156,7 +156,7 @@ class ShoutComponent {}
 class ShoutModule {}
 ```
 
-הקוד הזה עובד גם ב-22.2 (הבדיקה הציגה `HEY!`), אבל היום `standalone: false` צריך להיכתב במפורש. בקוד מגרסאות 14 עד 18 מופיע לפעמים `standalone: true` בכל pipe, וניתן להסיר אותו.
+הקוד הזה עובד גם ב-22.2 (הבדיקה הציגה `HEY!`), אבל היום `standalone: false` צריך להיכתב במפורש. בקוד מגרסאות 14 עד 18 מופיע לפעמים `standalone: true` בכל pipe, ואפשר להסיר אותו.
 
 ## טעויות נפוצות של מתחילים
 

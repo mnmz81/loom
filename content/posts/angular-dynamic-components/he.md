@@ -55,7 +55,7 @@ export class Dashboard {
 }
 ```
 
-‏`*ngComponentOutlet` מקבל מחלקת קומפוננטה ומרנדר אותה. בהתחלה מוצג `Info: Disk 80% full`, ואחרי לחיצה `Alert: Disk 80% full`. ‏`inputs` הוא אובייקט של שמות inputs וערכים, והוא מתעדכן כש-`message` משתנה. יש לו גם `injector` להחלפת providers ו-`content` להעברת תוכן ל-`<ng-content>`. ‏outputs הוא לא מחבר; בשבילם יש את הדרך הבאה.
+‏`*ngComponentOutlet` מקבל מחלקת קומפוננטה ומרנדר אותה. בהתחלה מוצג `Info: Disk 80% full`, ואחרי לחיצה `Alert: Disk 80% full`. ‏`inputs` הוא אובייקט של שמות inputs וערכים, והוא מתעדכן כש-`message` משתנה. יש לו גם `injector` להחלפת providers ו-`content` להעברת תוכן ל-`<ng-content>`. את ה-outputs הוא לא מחבר; בשבילם יש את הדרך הבאה.
 
 ## ‏createComponent עם bindings
 
