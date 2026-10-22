@@ -1,5 +1,5 @@
 .container {
-  inline-size: min(100% - 2rem, var(--nb-container-max));
+  inline-size: min(100% - 3rem, var(--nb-container-max));
   margin-inline: auto;
 }
 
@@ -16,33 +16,29 @@
   border: 0;
 }
 
+// Tags: plain text links; the target stays 44px tall.
 .chip {
   display: inline-flex;
   align-items: center;
   min-block-size: 32px;
-  padding: var(--nb-space-1) var(--nb-space-3);
-  border: 1px solid var(--nb-color-border);
-  border-radius: var(--nb-radius-full);
-  background: var(--nb-color-surface);
   color: var(--nb-color-muted);
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   text-decoration: none;
 }
 
 a.chip {
   min-block-size: var(--nb-touch-target);
-  transition:
-    color var(--nb-duration-fast) var(--nb-ease-out),
-    border-color var(--nb-duration-fast) var(--nb-ease-out);
+  transition: color var(--nb-duration-fast) var(--nb-ease-out);
 
   &:hover {
-    color: var(--nb-color-text);
-    border-color: var(--nb-color-accent);
+    color: var(--nb-color-accent);
+    text-decoration: underline;
   }
 }
 
 .chip--active {
+  padding-inline: var(--nb-space-3);
+  border-radius: var(--nb-radius-sm);
   background: var(--nb-color-accent);
-  border-color: var(--nb-color-accent);
   color: var(--nb-color-accent-contrast);
 }

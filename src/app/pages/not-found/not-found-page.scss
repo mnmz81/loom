@@ -4,18 +4,14 @@
 
 .not-found {
   padding-block: var(--nb-space-8);
-  text-align: center;
 }
 
 .not-found__code {
-  margin-block-end: var(--nb-space-2);
-  background: var(--nb-gradient-accent);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  font-size: clamp(4rem, 12vw, 8rem);
+  margin-block-end: var(--nb-space-4);
+  color: var(--nb-color-accent);
+  font-size: clamp(6rem, 22vw, 16rem);
   font-weight: 800;
-  line-height: 1;
+  line-height: 0.9;
 }
 
 .not-found__home {
@@ -23,14 +19,17 @@
   align-items: center;
   min-block-size: var(--nb-touch-target);
   padding-inline: var(--nb-space-5);
-  border-radius: var(--nb-radius-full);
+  border-radius: var(--nb-radius-sm);
   background: var(--nb-color-accent);
   color: var(--nb-color-accent-contrast);
   font-weight: 600;
   text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .not-found__other {
   margin-block-start: var(--nb-space-6);
-  font-size: 0.95rem;
 }

@@ -12,6 +12,7 @@ import { SITE, assetPath } from '../../../core/site.config';
 export class SiteFooter {
   protected readonly locale = inject(LocaleService);
   protected readonly year = new Date().getFullYear();
+  protected readonly siteTitle = computed(() => SITE.title[this.locale.lang()]);
   protected readonly author = SITE.author;
   protected readonly repo = SITE.repo;
   /** Static file: relative href so <base href="/loom/"> applies (not a router link). */

@@ -4,10 +4,8 @@
 
 .series-nav {
   padding: var(--nb-space-4) var(--nb-space-5);
-  border: 1px solid var(--nb-color-border);
-  border-inline-start: 4px solid var(--nb-color-accent);
-  border-radius: var(--nb-radius-md);
-  background: var(--nb-color-surface);
+  border-radius: var(--nb-radius-sm);
+  background: var(--nb-color-surface-2);
 }
 
 .series-nav__header {
@@ -29,7 +27,7 @@
 
 .series-nav__part {
   color: var(--nb-color-muted);
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
 }
 
 .series-nav__links {
@@ -58,7 +56,7 @@
   transition: background-color var(--nb-duration-fast) var(--nb-ease-out);
 
   &:hover {
-    background: var(--nb-color-surface-2);
+    color: var(--nb-color-accent);
   }
 }
 

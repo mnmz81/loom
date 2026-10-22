@@ -5,13 +5,11 @@
 .series__count {
   margin: var(--nb-space-2) 0 0;
   color: var(--nb-color-muted);
-  font-size: 0.875rem;
 }
 
 .series__parts {
   display: grid;
-  gap: var(--nb-space-5);
-  max-inline-size: var(--nb-prose-max);
+  gap: var(--nb-space-6);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -23,18 +21,12 @@
 }
 
 .series__part-label {
-  color: var(--nb-color-muted);
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  color: var(--nb-color-accent);
+  font-size: 0.9375rem;
+  font-weight: 600;
 }
 
 .series__empty {
   margin: 0;
-  padding: var(--nb-space-6) var(--nb-space-5);
-  border: 1px dashed var(--nb-color-border);
-  border-radius: var(--nb-radius-lg);
   color: var(--nb-color-muted);
-  text-align: center;
 }

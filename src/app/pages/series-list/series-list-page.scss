@@ -4,41 +4,47 @@
 
 .series-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
-  gap: var(--nb-space-5);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+  gap: var(--nb-space-3);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .series-cards__item {
-  padding: var(--nb-space-5);
-  border: 1px solid var(--nb-color-border);
-  border-radius: var(--nb-radius-lg);
-  background: var(--nb-color-surface);
-  box-shadow: var(--nb-shadow-sm);
+  display: flex;
+  flex-direction: column;
+  padding: var(--nb-space-6);
+  border-radius: var(--nb-radius-sm);
+  background: var(--nb-color-surface-2);
 }
 
 .series-cards__title {
-  margin-block-end: var(--nb-space-2);
-  font-size: 1.35rem;
+  margin-block-end: var(--nb-space-3);
+  font-size: 1.75rem;
+
+  a {
+    color: var(--nb-color-text);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--nb-color-accent);
+    }
+  }
 }
 
 .series-cards__text {
-  margin-block-end: var(--nb-space-2);
+  flex: 1;
+  margin-block-end: var(--nb-space-4);
 }
 
 .series-cards__meta {
   margin: 0;
   color: var(--nb-color-muted);
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
 }
 
 .series-cards__empty {
   margin: 0;
-  padding: var(--nb-space-6) var(--nb-space-5);
-  border: 1px dashed var(--nb-color-border);
-  border-radius: var(--nb-radius-lg);
   color: var(--nb-color-muted);
-  text-align: center;
 }

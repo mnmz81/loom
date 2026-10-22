@@ -1,64 +1,62 @@
 // Design tokens. Light on :root, dark via [data-theme='dark'] (set by the theme service / inline script),
 // with prefers-color-scheme as the fallback when no theme attribute is set.
+// Surfaces are told apart by a step in tone, not by lines or shadows; --nb-color-border is kept for real
+// form fields, tables and the copy button only.
 @mixin light {
-  --nb-color-bg: #fafafa;
-  --nb-color-surface: #ffffff;
-  --nb-color-surface-2: #f1f5f9;
-  --nb-color-text: #0f172a;
-  --nb-color-muted: #475569;
-  --nb-color-border: #e2e8f0;
-  --nb-color-accent: #4f46e5;
-  --nb-color-accent-2: #0891b2;
+  --nb-color-bg: #f3f3f1;
+  --nb-color-surface: #e9e9e5;
+  --nb-color-surface-2: #e9e9e5;
+  --nb-color-text: #15181a;
+  --nb-color-muted: #4f5559;
+  --nb-color-border: #c9cac5;
+  --nb-color-accent: #0b6b4d;
   --nb-color-accent-contrast: #ffffff;
-  --nb-color-badge-bg: #fef3c7;
-  --nb-color-badge-text: #92400e;
-  --nb-shadow-sm: 0 1px 2px rgb(15 23 42 / 0.06);
-  --nb-shadow-md: 0 12px 32px rgb(15 23 42 / 0.1);
+  --nb-color-badge-bg: #cfe8dc;
+  --nb-color-badge-text: #0a4a35;
+  --nb-shadow-md: 0 8px 24px rgb(21 24 26 / 0.14);
   color-scheme: light;
 }
 
 @mixin dark {
-  --nb-color-bg: #0b0f19;
-  --nb-color-surface: #111827;
-  --nb-color-surface-2: #1f2937;
-  --nb-color-text: #e5e7eb;
-  --nb-color-muted: #9ca3af;
-  --nb-color-border: #1f2937;
-  --nb-color-accent: #818cf8;
-  --nb-color-accent-2: #22d3ee;
-  --nb-color-accent-contrast: #0b0f19;
-  --nb-color-badge-bg: #422006;
-  --nb-color-badge-text: #fde68a;
-  --nb-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
-  --nb-shadow-md: 0 12px 32px rgb(0 0 0 / 0.5);
+  --nb-color-bg: #121512;
+  --nb-color-surface: #1b201b;
+  --nb-color-surface-2: #1b201b;
+  --nb-color-text: #e9ebe6;
+  --nb-color-muted: #a3aaa3;
+  --nb-color-border: #343b34;
+  --nb-color-accent: #6fd1a6;
+  --nb-color-accent-contrast: #0c1410;
+  --nb-color-badge-bg: #23402f;
+  --nb-color-badge-text: #bfeed7;
+  --nb-shadow-md: 0 8px 24px rgb(0 0 0 / 0.5);
   color-scheme: dark;
 }
 
 :root {
   @include light;
-  --nb-gradient-accent: linear-gradient(135deg, var(--nb-color-accent), var(--nb-color-accent-2));
-  // Inter has no Hebrew glyphs: Hebrew text falls through to the platform's Hebrew fonts.
+  // Inter has no Hebrew glyphs: Hebrew text falls through to Heebo, then the platform's Hebrew fonts.
   --nb-font-sans:
-    'Inter Variable', system-ui, -apple-system, 'Segoe UI', 'Arial Hebrew', 'Noto Sans Hebrew',
-    'Noto Sans', Arial, sans-serif;
+    'Inter Variable', 'Heebo Variable', system-ui, -apple-system, 'Segoe UI', 'Arial Hebrew',
+    'Noto Sans Hebrew', 'Noto Sans', Arial, sans-serif;
   --nb-font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --nb-line-height: 1.65;
-  --nb-heading-tracking: -0.02em;
+  --nb-line-height: 1.6;
+  --nb-heading-tracking: -0.035em;
+  --nb-heading-leading: 1.05;
   --nb-space-1: 0.25rem;
   --nb-space-2: 0.5rem;
   --nb-space-3: 0.75rem;
   --nb-space-4: 1rem;
   --nb-space-5: 1.5rem;
   --nb-space-6: 2rem;
-  --nb-space-7: 3rem;
-  --nb-space-8: 4rem;
-  --nb-radius-sm: 6px;
-  --nb-radius-md: 12px;
-  --nb-radius-lg: 20px;
-  --nb-radius-full: 999px;
-  --nb-container-max: 72rem;
-  --nb-prose-max: 46rem;
-  --nb-header-height: 4rem;
+  --nb-space-7: 4rem;
+  --nb-space-8: 7rem;
+  // Square corners everywhere; the three names stay so existing components keep working.
+  --nb-radius-sm: 2px;
+  --nb-radius-md: 2px;
+  --nb-radius-lg: 2px;
+  --nb-container-max: 76rem;
+  --nb-prose-max: 44rem;
+  --nb-header-height: 4.5rem;
   --nb-touch-target: 44px;
   --nb-duration-fast: 150ms;
   --nb-duration-base: 300ms;
@@ -70,6 +68,7 @@
 :root:lang(he) {
   --nb-line-height: 1.75;
   --nb-heading-tracking: 0;
+  --nb-heading-leading: 1.2;
 }
 
 :root[data-theme='dark'] {

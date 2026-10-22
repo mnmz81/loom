@@ -9,22 +9,36 @@
   }
 
   .page__header {
-    margin-block-end: var(--nb-space-6);
+    margin-block-end: var(--nb-space-7);
   }
 
   .page__title {
-    margin-block-end: var(--nb-space-2);
+    margin-block-end: var(--nb-space-5);
+  }
+
+  // Wide screens: the lead answers the title on the far side of the grid instead of leaving it empty.
+  @media (min-width: 64rem) {
+    .page__header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 30rem);
+      gap: var(--nb-space-7);
+      align-items: end;
+    }
+
+    .page__title {
+      margin-block-end: 0;
+    }
   }
 
   .page__lead {
-    max-inline-size: var(--nb-prose-max);
+    max-inline-size: 38rem;
     margin: 0;
-    color: var(--nb-color-muted);
-    font-size: 1.125rem;
+    font-size: clamp(1.25rem, 1vw + 1rem, 1.5rem);
+    line-height: 1.5;
   }
 
   .page__section {
-    margin-block-start: var(--nb-space-7);
+    margin-block-start: var(--nb-space-8);
   }
 
   .page__section-head {
@@ -33,17 +47,21 @@
     align-items: baseline;
     justify-content: space-between;
     gap: var(--nb-space-3);
-    margin-block-end: var(--nb-space-4);
+    margin-block-end: var(--nb-space-6);
 
     > h2 {
       margin: 0;
+    }
+
+    > a {
+      font-weight: 600;
     }
   }
 
   .chips {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--nb-space-2);
+    gap: var(--nb-space-2) var(--nb-space-4);
     margin: var(--nb-space-4) 0 0;
     padding: 0;
     list-style: none;

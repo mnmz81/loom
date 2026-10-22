@@ -2,7 +2,7 @@
 // browser-added copy buttons are outside Angular's view encapsulation.
 .prose {
   max-inline-size: var(--nb-prose-max);
-  font-size: 1.0625rem;
+  font-size: 1.1875rem;
   line-height: calc(var(--nb-line-height) + 0.1);
 
   > :first-child {
@@ -22,6 +22,7 @@
 
   h2 {
     margin-block-start: var(--nb-space-7);
+    font-size: clamp(1.625rem, 2vw + 1rem, 2.25rem);
   }
 
   h3 {
@@ -48,9 +49,13 @@
 
   blockquote {
     margin-inline: 0;
-    padding-inline-start: var(--nb-space-4);
-    border-inline-start: 3px solid var(--nb-color-accent);
-    color: var(--nb-color-muted);
+    padding: var(--nb-space-4) var(--nb-space-5);
+    border-radius: var(--nb-radius-sm);
+    background: var(--nb-color-surface-2);
+
+    > :last-child {
+      margin-block-end: 0;
+    }
   }
 
   :not(pre) > code {
@@ -61,22 +66,16 @@
 
   pre {
     overflow-x: auto;
-    padding: var(--nb-space-4) var(--nb-space-5);
-    border: 1px solid var(--nb-color-border);
-    border-radius: var(--nb-radius-md);
+    padding: var(--nb-space-5);
+    border-radius: var(--nb-radius-sm);
     background: var(--nb-color-surface-2);
     font-size: 0.875rem;
     line-height: 1.65;
   }
 
-  img {
-    border-radius: var(--nb-radius-md);
-  }
-
   hr {
     margin-block: var(--nb-space-7);
     border: 0;
-    border-block-start: 1px solid var(--nb-color-border);
   }
 
   table {
@@ -112,21 +111,18 @@
   min-inline-size: var(--nb-touch-target);
   min-block-size: var(--nb-touch-target);
   padding-inline: var(--nb-space-3);
-  border: 1px solid var(--nb-color-border);
+  border: 0;
   border-radius: var(--nb-radius-sm);
-  background: var(--nb-color-surface);
+  background: var(--nb-color-bg);
   color: var(--nb-color-muted);
   font-family: var(--nb-font-sans);
   font-size: 0.8125rem;
   cursor: pointer;
-  transition:
-    color var(--nb-duration-fast) var(--nb-ease-out),
-    border-color var(--nb-duration-fast) var(--nb-ease-out);
+  transition: color var(--nb-duration-fast) var(--nb-ease-out);
 
   &:hover,
   &:focus-visible,
   &.is-copied {
-    color: var(--nb-color-text);
-    border-color: var(--nb-color-accent);
+    color: var(--nb-color-accent);
   }
 }

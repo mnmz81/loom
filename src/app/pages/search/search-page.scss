@@ -14,14 +14,14 @@
   min-block-size: var(--nb-touch-target);
   padding-inline: var(--nb-space-4);
   border: 1px solid var(--nb-color-border);
-  border-radius: var(--nb-radius-md);
-  background: var(--nb-color-surface);
+  border-radius: var(--nb-radius-sm);
+  background: var(--nb-color-bg);
   color: var(--nb-color-text);
   font: inherit;
 }
 
 .search__input {
-  font-size: 1.125rem;
+  font-size: 1.25rem;
 }
 
 .search__filters {
@@ -37,7 +37,7 @@
 
   label {
     color: var(--nb-color-muted);
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
   }
 }
 
@@ -61,27 +61,18 @@
 
 .results {
   display: grid;
-  gap: var(--nb-space-5);
+  gap: var(--nb-space-6);
   max-inline-size: var(--nb-prose-max);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.result {
-  padding: var(--nb-space-4) var(--nb-space-5);
-  border: 1px solid var(--nb-color-border);
-  border-radius: var(--nb-radius-lg);
-  background: var(--nb-color-surface);
-}
-
 .result__meta {
   margin-block-end: var(--nb-space-1);
-  color: var(--nb-color-muted);
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  color: var(--nb-color-accent);
+  font-size: 0.9375rem;
+  font-weight: 600;
 
   &:empty {
     display: none;
@@ -90,7 +81,7 @@
 
 .result__title {
   margin-block-end: var(--nb-space-2);
-  font-size: 1.25rem;
+  font-size: 1.5rem;
 }
 
 .result__excerpt {
@@ -99,7 +90,7 @@
 
 .result__excerpt mark {
   padding-inline: 0.15em;
-  border-radius: 3px;
+  border-radius: 2px;
   background: var(--nb-color-badge-bg);
   color: var(--nb-color-badge-text);
 }
