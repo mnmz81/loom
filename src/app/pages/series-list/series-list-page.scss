@@ -4,8 +4,8 @@
 
 .series-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
-  gap: var(--nb-space-3);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+  gap: var(--nb-space-4);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -14,34 +14,41 @@
 .series-cards__item {
   display: flex;
   flex-direction: column;
-  padding: var(--nb-space-6);
-  border-radius: var(--nb-radius-sm);
-  background: var(--nb-color-surface-2);
+  padding: var(--nb-space-5);
+  border-radius: var(--nb-radius-lg);
+  border: 1px solid color-mix(in srgb, var(--nb-c, var(--nb-color-border)) 35%, transparent);
+  background: var(--nb-c-bg, var(--nb-color-surface-2));
+  color: var(--nb-c-fg, var(--nb-color-text));
+  transition: transform var(--nb-duration-base) var(--nb-ease-out);
+
+  &:hover {
+    transform: translateY(-2px);
+  }
 }
 
 .series-cards__title {
-  margin-block-end: var(--nb-space-3);
-  font-size: 1.75rem;
+  margin-block-end: var(--nb-space-2);
+  font-size: 1.375rem;
 
   a {
-    color: var(--nb-color-text);
+    color: inherit;
     text-decoration: none;
 
     &:hover {
-      color: var(--nb-color-accent);
+      text-decoration: underline;
     }
   }
 }
 
 .series-cards__text {
   flex: 1;
-  margin-block-end: var(--nb-space-4);
+  margin-block-end: var(--nb-space-3);
 }
 
 .series-cards__meta {
   margin: 0;
-  color: var(--nb-color-muted);
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
+  opacity: 0.85;
 }
 
 .series-cards__empty {

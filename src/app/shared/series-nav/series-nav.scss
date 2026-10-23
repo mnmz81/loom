@@ -4,8 +4,10 @@
 
 .series-nav {
   padding: var(--nb-space-4) var(--nb-space-5);
-  border-radius: var(--nb-radius-sm);
-  background: var(--nb-color-surface-2);
+  border-radius: var(--nb-radius-lg);
+  border: 1px solid var(--nb-color-border);
+  background: var(--nb-color-surface);
+  box-shadow: var(--nb-shadow-sm);
 }
 
 .series-nav__header {
@@ -56,6 +58,7 @@
   transition: background-color var(--nb-duration-fast) var(--nb-ease-out);
 
   &:hover {
+    background: var(--nb-color-surface-2);
     color: var(--nb-color-accent);
   }
 }

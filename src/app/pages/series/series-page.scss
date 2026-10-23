@@ -9,7 +9,8 @@
 
 .series__parts {
   display: grid;
-  gap: var(--nb-space-6);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+  gap: var(--nb-space-4);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -22,7 +23,7 @@
 
 .series__part-label {
   color: var(--nb-color-accent);
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   font-weight: 600;
 }
 

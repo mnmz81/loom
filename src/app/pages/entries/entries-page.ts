@@ -4,6 +4,7 @@ import type { EntryType, LangIndex } from '../../core/content.models';
 import { LocaleService } from '../../core/i18n/locale.service';
 import { PATHS } from '../../core/routes.const';
 import { SeoService } from '../../core/seo.service';
+import { colorIndex } from '../../shared/color-index';
 import { EntryList } from '../../shared/entry-list/entry-list';
 import { allLangPaths } from '../seo-helpers';
 
@@ -24,6 +25,7 @@ export class EntriesPage {
   protected readonly title = computed(() => this.locale.t(this.type() === 'post' ? 'nav.posts' : 'nav.notes'));
   protected readonly entries = computed(() => this.index().entries.filter((e) => e.type === this.type()));
   protected readonly tagLabels = computed(() => Object.fromEntries(this.index().tags.map((t) => [t.tag, t.label])));
+  protected readonly colorOf = colorIndex;
   protected tagPath(tag: string): string {
     return PATHS.tag(this.locale.lang(), tag);
   }

@@ -41,6 +41,7 @@ export interface Dict {
   'code.copied': string;
   'footer.rss': string;
   'footer.source': string;
+  'footer.accessibility': string;
   'notFound.title': string;
   'notFound.body': string;
   'notFound.home': string;

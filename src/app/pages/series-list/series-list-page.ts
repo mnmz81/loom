@@ -4,6 +4,7 @@ import type { SeriesIndex } from '../../core/content.models';
 import { LocaleService } from '../../core/i18n/locale.service';
 import { PATHS } from '../../core/routes.const';
 import { SeoService } from '../../core/seo.service';
+import { colorIndex } from '../../shared/color-index';
 import { pageCount } from '../page-text';
 import { allLangPaths } from '../seo-helpers';
 
@@ -20,6 +21,7 @@ export class SeriesListPage {
   readonly series = input.required<SeriesIndex>();
 
   protected readonly locale = inject(LocaleService);
+  protected readonly colorOf = colorIndex;
   protected readonly cards = computed(() => {
     const lang = this.locale.lang();
     return this.series().map((s) => ({

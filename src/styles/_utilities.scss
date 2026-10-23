@@ -1,5 +1,5 @@
 .container {
-  inline-size: min(100% - 3rem, var(--nb-container-max));
+  inline-size: min(100% - 2.5rem, var(--nb-container-max));
   margin-inline: auto;
 }
 
@@ -16,29 +16,49 @@
   border: 0;
 }
 
-// Tags: plain text links; the target stays 44px tall.
+// data-c (0-5, from colorIndex) picks one of the six tag colors for the element and everything inside it:
+// --nb-c is the vivid hue, --nb-c-bg a tint of it, --nb-c-fg a text color with AA contrast on that tint.
+@for $i from 0 through 5 {
+  [data-c='#{$i}'] {
+    --nb-c: var(--nb-tag-#{$i});
+    --nb-c-bg: var(--nb-tag-#{$i}-bg);
+    --nb-c-fg: var(--nb-tag-#{$i}-fg);
+  }
+}
+
+// Tags: small tinted pills.
 .chip {
   display: inline-flex;
   align-items: center;
-  min-block-size: 32px;
-  color: var(--nb-color-muted);
-  font-size: 0.9375rem;
+  min-block-size: 28px;
+  padding: 0.125rem var(--nb-space-3);
+  border-radius: var(--nb-radius-full);
+  background: var(--nb-c-bg, var(--nb-color-tag-bg));
+  color: var(--nb-c-fg, var(--nb-color-tag-text));
+  font-size: 0.875rem;
+  font-weight: 500;
   text-decoration: none;
 }
 
 a.chip {
-  min-block-size: var(--nb-touch-target);
-  transition: color var(--nb-duration-fast) var(--nb-ease-out);
+  position: relative;
+  transition: filter var(--nb-duration-fast) var(--nb-ease-out);
+
+  // Keeps the touch target at 44px without making the pill itself tall.
+  &::after {
+    content: '';
+    position: absolute;
+    inset-block: -8px;
+    inset-inline: 0;
+  }
 
   &:hover {
-    color: var(--nb-color-accent);
+    filter: brightness(0.94);
     text-decoration: underline;
   }
 }
 
 .chip--active {
-  padding-inline: var(--nb-space-3);
-  border-radius: var(--nb-radius-sm);
   background: var(--nb-color-accent);
   color: var(--nb-color-accent-contrast);
 }

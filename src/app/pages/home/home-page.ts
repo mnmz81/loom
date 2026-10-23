@@ -5,12 +5,14 @@ import { LocaleService } from '../../core/i18n/locale.service';
 import { PATHS } from '../../core/routes.const';
 import { SeoService } from '../../core/seo.service';
 import { SITE } from '../../core/site.config';
+import { colorIndex } from '../../shared/color-index';
 import { EntryList } from '../../shared/entry-list/entry-list';
 import { pageCount } from '../page-text';
 import { allLangPaths } from '../seo-helpers';
 
-const LATEST_POSTS = 4;
-const LATEST_NOTES = 5;
+const LATEST_POSTS = 6;
+const LATEST_NOTES = 6;
+const TOP_TAGS = 10;
 
 /** `/:lang` — latest posts and notes (the notes section is hidden while there are none), plus a teaser of the series. */
 @Component({
@@ -27,6 +29,8 @@ export class HomePage {
 
   protected readonly locale = inject(LocaleService);
   protected readonly paths = PATHS;
+  protected readonly colorOf = colorIndex;
+  protected readonly topTags = computed(() => this.index().tags.slice(0, TOP_TAGS));
   protected readonly title = computed(() => SITE.title[this.locale.lang()]);
   protected readonly description = computed(() => SITE.description[this.locale.lang()]);
   protected readonly tagLabels = computed(() => Object.fromEntries(this.index().tags.map((t) => [t.tag, t.label])));

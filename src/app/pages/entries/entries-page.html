@@ -5,7 +5,7 @@
       <ul class="chips" [attr.aria-label]="locale.t('entry.tags')">
         @for (tag of index().tags; track tag.tag) {
           <li>
-            <a class="chip" [routerLink]="tagPath(tag.tag)">{{ tag.label }}</a>
+            <a class="chip" [attr.data-c]="colorOf(tag.tag)" [routerLink]="tagPath(tag.tag)">{{ tag.label }}</a>
           </li>
         }
       </ul>

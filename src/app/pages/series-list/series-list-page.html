@@ -6,7 +6,7 @@
   @if (cards().length) {
     <ul class="series-cards">
       @for (card of cards(); track card.key) {
-        <li class="series-cards__item">
+        <li class="series-cards__item" [attr.data-c]="colorOf(card.key)">
           <h2 class="series-cards__title">
             <a [routerLink]="card.path">{{ card.title }}</a>
           </h2>

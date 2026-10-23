@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import type { Lang } from '../../../core/content.models';
 import { LocaleService } from '../../../core/i18n/locale.service';
 import { SITE } from '../../../core/site.config';
@@ -12,11 +13,12 @@ async function render(lang: Lang) {
 }
 
 describe('SiteFooter', () => {
+  beforeEach(() => TestBed.configureTestingModule({ providers: [provideRouter([])] }));
   afterEach(() => TestBed.inject(LocaleService).setLang('he'));
 
   it('links the Hebrew RSS feed with a relative href (he)', async () => {
     const { el } = await render('he');
-    const links = [...el.querySelectorAll<HTMLAnchorElement>('.site-footer__link')];
+    const links = [...el.querySelectorAll<HTMLAnchorElement>('.site-footer__link')].slice(1);
     expect(links.map((a) => [a.textContent?.trim(), a.getAttribute('href')])).toEqual([
       ['RSS', 'rss-he.xml'],
       ['קוד מקור', SITE.repo],
@@ -26,9 +28,9 @@ describe('SiteFooter', () => {
 
   it('links the English RSS feed and follows language changes (en)', async () => {
     const { fixture, el } = await render('en');
-    const rss = el.querySelector('.site-footer__link');
+    const rss = el.querySelectorAll('.site-footer__link')[1];
     expect(rss?.getAttribute('href')).toBe('rss-en.xml');
-    expect(el.querySelectorAll('.site-footer__link')[1].textContent?.trim()).toBe('Source');
+    expect(el.querySelectorAll('.site-footer__link')[2].textContent?.trim()).toBe('Source');
 
     TestBed.inject(LocaleService).setLang('he');
     await fixture.whenStable();

@@ -66,6 +66,11 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/search/search-page').then((m) => m.SearchPage),
         resolve: { index: langIndexResolver },
       },
+      {
+        path: 'accessibility',
+        loadComponent: () =>
+          import('./pages/accessibility/accessibility-page').then((m) => m.AccessibilityPage),
+      },
       { path: '**', loadComponent: notFound },
     ],
   },

@@ -4,11 +4,16 @@
 
 .entry-list {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: var(--nb-space-7);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+  gap: var(--nb-space-4);
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.entry-list > li {
+  // Lets every card stretch to the tallest one in its row.
+  display: grid;
 }
 
 .entry-list__empty {
