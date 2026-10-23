@@ -34,7 +34,7 @@ export const serverRoutes: ServerRoute[] = [
     getPrerenderParams: async () => tagParams(readIndexes()),
   },
   // Pages that only need `:lang` filled in.
-  ...['', 'posts', 'notes', 'series', 'search'].map(
+  ...['', 'posts', 'notes', 'series', 'search', 'accessibility'].map(
     (section): ServerRoute => ({
       path: section ? `:lang/${section}` : ':lang',
       renderMode: RenderMode.Prerender,

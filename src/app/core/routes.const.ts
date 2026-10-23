@@ -11,6 +11,7 @@ export const PATHS = {
   series: (lang: Lang, key: string) => `/${lang}/series/${key}`,
   tag: (lang: Lang, tag: string) => `/${lang}/tags/${tag}`,
   search: (lang: Lang) => `/${lang}/search`,
+  accessibility: (lang: Lang) => `/${lang}/accessibility`,
   rss: (lang: Lang) => `/rss-${lang}.xml`,
   notFound: () => '/404',
 } as const;

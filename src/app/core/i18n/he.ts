@@ -41,6 +41,7 @@ export const he: Dict = {
   'code.copied': 'הועתק',
   'footer.rss': 'RSS',
   'footer.source': 'קוד מקור',
+  'footer.accessibility': 'הצהרת נגישות',
   'notFound.title': 'הדף לא נמצא',
   'notFound.body': 'הדף שחיפשתם לא קיים או שהועבר.',
   'notFound.home': 'חזרה לדף הבית',

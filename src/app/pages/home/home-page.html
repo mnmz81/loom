@@ -1,7 +1,16 @@
 <div class="container page">
-  <header class="page__header">
+  <header class="page__header home-hero">
     <h1 class="page__title">{{ title() }}</h1>
     <p class="page__lead">{{ description() }}</p>
+    @if (topTags().length) {
+      <ul class="chips" [attr.aria-label]="locale.t('entry.tags')">
+        @for (tag of topTags(); track tag.tag) {
+          <li>
+            <a class="chip" [attr.data-c]="colorOf(tag.tag)" [routerLink]="paths.tag(locale.lang(), tag.tag)">{{ tag.label }}</a>
+          </li>
+        }
+      </ul>
+    }
   </header>
 
   <section class="page__section" aria-labelledby="home-posts">
@@ -30,7 +39,7 @@
       </div>
       <ul class="series-teaser">
         @for (card of seriesCards(); track card.key) {
-          <li class="series-teaser__item">
+          <li class="series-teaser__item" [attr.data-c]="colorOf(card.key)">
             <h3 class="series-teaser__title">
               <a [routerLink]="paths.series(locale.lang(), card.key)">{{ card.title }}</a>
             </h3>

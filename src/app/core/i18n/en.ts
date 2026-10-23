@@ -41,6 +41,7 @@ export const en: Dict = {
   'code.copied': 'Copied',
   'footer.rss': 'RSS',
   'footer.source': 'Source',
+  'footer.accessibility': 'Accessibility statement',
   'notFound.title': 'Page not found',
   'notFound.body': 'The page you are looking for does not exist or has moved.',
   'notFound.home': 'Back to home',

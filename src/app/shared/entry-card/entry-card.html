@@ -1,4 +1,4 @@
-<article class="entry-card" [class.entry-card--note]="entry().type === 'note'">
+<article class="entry-card" [attr.data-c]="color()" [class.entry-card--note]="entry().type === 'note'">
   <p class="entry-card__meta">
     <span class="entry-card__type">{{ typeLabel() }}</span>
     <span aria-hidden="true">·</span>

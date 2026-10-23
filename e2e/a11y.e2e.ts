@@ -13,6 +13,7 @@ const PAGES: [string, string][] = [
   ['series', 'series/learning-rust'],
   ['tag', 'tags/rust'],
   ['search', 'search'],
+  ['accessibility statement', 'accessibility'],
   ['posts list', 'posts'],
 ];
 

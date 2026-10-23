@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core
 import { RouterLink } from '@angular/router';
 import { LocaleService } from '../../core/i18n/locale.service';
 import { PATHS } from '../../core/routes.const';
+import { colorIndex } from '../color-index';
 
 @Component({
   selector: 'nb-tag-list',
@@ -20,6 +21,10 @@ export class TagList {
 
   protected path(tag: string): string {
     return PATHS.tag(this.locale.lang(), tag);
+  }
+
+  protected color(tag: string): number {
+    return colorIndex(tag);
   }
 
   protected label(tag: string): string {

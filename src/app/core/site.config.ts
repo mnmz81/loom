@@ -15,6 +15,8 @@ export const SITE = {
   ogLocale: { he: 'he_IL', en: 'en_US' } satisfies Record<Lang, string>,
   defaultOgImage: '/og/default.png',
   repo: 'https://github.com/mnmz81/loom',
+  /** Shown on the accessibility statement page; `updated` is the statement's last review (YYYY-MM-DD). */
+  accessibility: { email: 'moriszakay42@gmail.com', updated: '2026-10-22' },
 } as const;
 
 /**

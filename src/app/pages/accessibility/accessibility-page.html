@@ -1,0 +1,29 @@
+<div class="container page">
+  <header class="page__header">
+    <h1 class="page__title">{{ text().title }}</h1>
+    <p class="page__lead">{{ text().lead }}</p>
+  </header>
+
+  <div class="prose">
+    <h2>{{ text().doneTitle }}</h2>
+    <ul>
+      @for (item of text().done; track $index) {
+        <li>{{ item }}</li>
+      }
+    </ul>
+
+    <h2>{{ text().limitsTitle }}</h2>
+    <ul>
+      @for (item of text().limits; track $index) {
+        <li>{{ item }}</li>
+      }
+    </ul>
+
+    <h2>{{ text().contactTitle }}</h2>
+    <p>
+      {{ text().contactBefore }}<span lang="en" dir="ltr">{{ author }}</span>{{ text().contactAfter }}
+    </p>
+    <p><a [href]="'mailto:' + email" dir="ltr">{{ email }}</a></p>
+    <p class="accessibility__updated">{{ text().updated }}<time [attr.datetime]="updatedIso">{{ updated() }}</time>.</p>
+  </div>
+</div>

@@ -7,11 +7,11 @@
 }
 
 .not-found__code {
-  margin-block-end: var(--nb-space-4);
+  margin-block-end: var(--nb-space-3);
   color: var(--nb-color-accent);
-  font-size: clamp(6rem, 22vw, 16rem);
-  font-weight: 800;
-  line-height: 0.9;
+  font-size: clamp(4rem, 14vw, 9rem);
+  font-weight: 700;
+  line-height: 1;
 }
 
 .not-found__home {
@@ -19,14 +19,14 @@
   align-items: center;
   min-block-size: var(--nb-touch-target);
   padding-inline: var(--nb-space-5);
-  border-radius: var(--nb-radius-sm);
+  border-radius: var(--nb-radius-full);
   background: var(--nb-color-accent);
   color: var(--nb-color-accent-contrast);
   font-weight: 600;
   text-decoration: none;
 
   &:hover {
-    text-decoration: underline;
+    filter: brightness(1.1);
   }
 }
 

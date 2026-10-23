@@ -4,11 +4,11 @@
 
 .entry {
   display: block;
-  padding-block: var(--nb-space-7) var(--nb-space-8);
+  padding-block: var(--nb-space-6) var(--nb-space-8);
 }
 
 .entry__header {
-  max-inline-size: 56rem;
+  max-inline-size: var(--nb-prose-max);
   margin-block-end: var(--nb-space-6);
 }
 
@@ -21,11 +21,12 @@
 
 .entry__title {
   margin-block-end: var(--nb-space-4);
-  font-size: clamp(2.25rem, 5vw + 0.5rem, 4rem);
+  font-size: clamp(1.875rem, 3vw + 1rem, 2.75rem);
 }
 
 .entry__summary {
-  font-size: 1.375rem;
+  color: var(--nb-color-muted);
+  font-size: 1.1875rem;
   line-height: 1.5;
 }
 

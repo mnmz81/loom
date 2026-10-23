@@ -5,6 +5,7 @@ import type { EntryMeta, Lang } from '../../core/content.models';
 import { LocaleService } from '../../core/i18n/locale.service';
 import { PATHS } from '../../core/routes.const';
 import { LangBadge } from '../lang-badge/lang-badge';
+import { colorIndex } from '../color-index';
 import { dirOf } from '../lang-dir';
 import { TagList } from '../tag-list/tag-list';
 
@@ -26,6 +27,8 @@ export class EntryCard {
     const e = this.entry();
     return PATHS.entry(e.lang, e.type, e.slug);
   });
+  /** Color slot of the entry's first tag; the card's top bar and type label use it. */
+  protected readonly color = computed(() => colorIndex(this.entry().tags[0] ?? ''));
   protected readonly typeLabel = computed(() => this.locale.t(`type.${this.entry().type}`));
   protected readonly date = computed(() => this.locale.formatDate(this.entry().date));
   /** The entry's language when it differs from the UI language (untranslated fallback), else null. */

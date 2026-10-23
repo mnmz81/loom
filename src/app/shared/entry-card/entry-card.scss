@@ -2,26 +2,36 @@
   display: block;
 }
 
-// A row, not a box: date and type on the reading-start side, title and summary beside them.
 .entry-card {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: var(--nb-space-2) var(--nb-space-6);
-}
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: var(--nb-space-2);
+  block-size: 100%;
+  padding: var(--nb-space-4) var(--nb-space-5) var(--nb-space-5);
+  border-radius: var(--nb-radius-lg);
+  border: 1px solid var(--nb-color-border);
+  background: var(--nb-color-surface);
+  box-shadow: var(--nb-shadow-sm);
+  transition:
+    transform var(--nb-duration-base) var(--nb-ease-out),
+    box-shadow var(--nb-duration-base) var(--nb-ease-out);
 
-@media (min-width: 48rem) {
-  .entry-card {
-    grid-template-columns: 10rem minmax(0, 1fr);
-    align-items: start;
+  &:hover {
+    transform: translateY(-2px);
+    border-color: var(--nb-c, var(--nb-color-accent));
+    box-shadow: var(--nb-shadow-md);
+  }
 
-    > * {
-      grid-column: 2;
-    }
-
-    > .entry-card__meta {
-      grid-column: 1;
-      grid-row: 1 / span 4;
-    }
+  // A colored bar on top, taken from the entry's first tag.
+  &::before {
+    content: '';
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline: 0;
+    block-size: 4px;
+    background: var(--nb-c, var(--nb-color-accent));
   }
 }
 
@@ -29,61 +39,65 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--nb-space-1) var(--nb-space-3);
+  gap: var(--nb-space-1) var(--nb-space-2);
   margin: 0;
-  padding-block-start: 0.45rem;
   color: var(--nb-color-muted);
-  font-size: 0.9375rem;
-
-  [aria-hidden='true'] {
-    display: none;
-  }
-}
-
-@media (min-width: 48rem) {
-  .entry-card__meta {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+  font-size: 0.8125rem;
 }
 
 .entry-card__type {
-  color: var(--nb-color-accent);
-  font-weight: 600;
+  color: var(--nb-c-fg, var(--nb-color-accent));
+  font-size: 0.8125rem;
+  font-weight: 700;
 }
 
 .entry-card__title {
   margin: 0;
-  font-size: clamp(1.5rem, 1.5vw + 1rem, 2rem);
-  line-height: 1.2;
+  font-size: 1.1875rem;
+  line-height: 1.3;
 }
 
 .entry-card--note .entry-card__title {
-  font-size: 1.375rem;
-  font-weight: 700;
+  font-size: 1.0625rem;
 }
 
 .entry-card__link {
   display: inline-block;
-  overflow-wrap: anywhere;
+  padding-block: var(--nb-space-1);
   color: var(--nb-color-text);
+  overflow-wrap: anywhere;
   text-decoration: none;
-  transition: color var(--nb-duration-fast) var(--nb-ease-out);
+
+  &::after {
+    // The whole card is the click target.
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--nb-radius-lg);
+  }
 
   &:hover {
     color: var(--nb-color-accent);
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
-    text-underline-offset: 0.2em;
+  }
+
+  &:focus-visible {
+    outline-offset: -3px;
+  }
+
+  &:focus-visible::after {
+    outline: 2px solid var(--nb-color-accent);
   }
 }
 
 .entry-card__summary {
+  flex: 1;
   margin: 0;
-  max-inline-size: 42rem;
-  font-size: 1.0625rem;
+  color: var(--nb-color-muted);
+  font-size: 0.9375rem;
+  line-height: 1.55;
 }
 
 .entry-card__tags {
-  margin-block-start: var(--nb-space-1);
+  position: relative; // above the card-wide link so tag pills stay clickable
+  margin-block-start: var(--nb-space-2);
 }
