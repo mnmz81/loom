@@ -2,6 +2,7 @@
 title: "Temperature, top-p and hallucinations"
 summary: "How the next token is picked, what temperature and top-p do, why current Claude models no longer accept them, and why models hallucinate."
 date: 2026-10-13
+updated: 2026-10-23
 tags: [ai, llm]
 series: { key: ai-basics, order: 4 }
 ---
@@ -75,7 +76,7 @@ With `p=0.8`, "Nice" and "banana" can never be picked, no matter how high the te
 
 ## Current Claude models: steer with the prompt
 
-On many other models and APIs, and on older Claude models, you still set these parameters per request. On current Claude models you mostly do not. The migration guide says that setting `temperature`, `top_p` or `top_k` to any non-default value on Claude Opus 4.7 and later models returns a 400 error, and that the Python SDK v1.0 and later does not even accept them. The guide also notes that `temperature = 0` "never guaranteed identical outputs" on earlier models.
+On many other models and APIs, and on older Claude models, you still set these parameters per request. On current Claude models you mostly do not. The migration guide says that setting `temperature`, `top_p` or `top_k` to any non-default value on Claude Opus 4.7 and later models returns a 400 error, and that the Python SDK v1.0 and later does not even accept them. The guide also notes that `temperature = 0` "never guaranteed identical outputs" on earlier models. From API version `2026-10-21` the three parameters are removed entirely: a request that sends any of them returns a 400 error on every model, even at its default value.
 
 What replaces them:
 
