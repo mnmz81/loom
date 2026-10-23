@@ -5,7 +5,7 @@ import { expectLang, gotoReady, langSwitch, navLink, SEARCH_TEXT, t, type Lang }
 // [lang, query, expected result title]
 const CASES: [Lang, string, string][] = [
   ['he', 'Ownership', 'ראסט: בעלות (Ownership)'],
-  ['en', 'zsh','Search zsh history with Ctrl+R'],
+  ['en', 'HISTSIZE', 'Search zsh history with Ctrl+R'],
 ];
 
 for (const [lang, query, title] of CASES) {
