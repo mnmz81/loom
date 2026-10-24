@@ -1,20 +1,12 @@
 ---
-title: "Wrangler: לפתח ולפרוס Cloudflare Workers משורת הפקודה"
-summary: "פרויקט Worker חדש, wrangler.jsonc, פיתוח מקומי עם KV וסודות ב-.dev.vars, טיפוסים עם wrangler types, ופריסה, לוגים חיים ו-rollback עם Wrangler 4."
+title: "Cloudflare מאפס לגיבור: Wrangler, משתנים, סודות ו-KV"
+summary: "wrangler.jsonc, פיתוח מקומי עם KV וסודות ב-.dev.vars, טיפוסים עם wrangler types, ופריסה, לוגים חיים ו-rollback עם Wrangler 4."
 date: 2026-10-24
 tags: [cloudflare, cloud, cli]
+series: { key: devops, order: 30 }
 ---
 
-[Wrangler](https://developers.cloudflare.com/workers/wrangler/) הוא ה-CLI של Cloudflare ל-Workers: קוד שרץ בשרתי הקצה של Cloudflare בלי שרת לנהל. הוא מריץ את ה-Worker מקומית, יוצר משאבים כמו KV, מנהל סודות ופורס. כל הדוגמאות המקומיות הורצו עם Wrangler 4.152.
-
-## פרויקט חדש
-
-```bash
-npm create cloudflare@latest -- my-worker
-cd my-worker
-```
-
-האשף (C3) יוצר `wrangler.jsonc`, קובץ כניסה ב-`src/`, ו-`package.json` עם Wrangler כתלות של הפרויקט. Cloudflare ממליצים על התקנה מקומית לכל פרויקט ולא גלובלית, ולכן מריצים `npx wrangler`.
+[Wrangler](https://developers.cloudflare.com/workers/wrangler/) הוא ה-CLI שכבר הריץ ופרס את [ה-Worker הראשון](he/posts/cloudflare-zero-to-hero-first-worker/). הוא גם יוצר משאבים כמו KV, מנהל סודות וחוזר לגרסאות קודמות. C3 מתקין אותו כתלות של הפרויקט, ולא גלובלית, ולכן מריצים `npx wrangler`. כל הדוגמאות המקומיות הורצו עם Wrangler 4.152.
 
 ## wrangler.jsonc
 
@@ -28,7 +20,7 @@ cd my-worker
 }
 ```
 
-`compatibility_date` נועל את התנהגות סביבת הריצה לתאריך מסוים, כך ששינויים של Cloudflare לא שוברים Worker קיים. כל binding, כמו `VISITS` כאן, מגיע לקוד דרך `env`. בפיתוח מקומי ה-`id` של KV יכול להיות כל מחרוזת; את האמיתי יוצרים לפני הפריסה:
+`compatibility_date` נועל את התנהגות סביבת הריצה לתאריך מסוים, כך ששינויים של Cloudflare לא שוברים Worker קיים. `vars` הם משתנים רגילים. **binding** מחבר את ה-Worker למשאב של Cloudflare, כאן namespace של KV: אחסון מפתח-ערך, מעין מילון גלובלי שמהיר מאוד לקריאה. כל binding, כמו `VISITS`, מגיע לקוד דרך `env`. בפיתוח מקומי ה-`id` של KV יכול להיות כל מחרוזת; את האמיתי יוצרים לפני הפריסה:
 
 ```typescript
 export default {

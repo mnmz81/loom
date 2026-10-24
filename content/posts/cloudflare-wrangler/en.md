@@ -1,20 +1,12 @@
 ---
-title: "Wrangler: build and deploy Cloudflare Workers from the command line"
-summary: "A new Worker project, wrangler.jsonc, local dev with KV and secrets in .dev.vars, types with wrangler types, then deploys, live logs and rollback with Wrangler 4."
+title: "Cloudflare from zero to hero: Wrangler, variables, secrets and KV"
+summary: "wrangler.jsonc, local dev with KV and secrets in .dev.vars, types with wrangler types, then deploys, live logs and rollback with Wrangler 4."
 date: 2026-10-24
 tags: [cloudflare, cloud, cli]
+series: { key: devops, order: 30 }
 ---
 
-[Wrangler](https://developers.cloudflare.com/workers/wrangler/) is Cloudflare's CLI for Workers: code that runs on Cloudflare's edge servers with no server to manage. It runs the Worker locally, creates resources such as KV, manages secrets and deploys. Every local example ran with Wrangler 4.152.
-
-## A new project
-
-```bash
-npm create cloudflare@latest -- my-worker
-cd my-worker
-```
-
-The wizard (C3) creates `wrangler.jsonc`, an entry file in `src/`, and a `package.json` with Wrangler as a project dependency. Cloudflare recommends a local install per project rather than a global one, so you run `npx wrangler`.
+[Wrangler](https://developers.cloudflare.com/workers/wrangler/) is the CLI that already ran and deployed [your first Worker](en/posts/cloudflare-zero-to-hero-first-worker/). It also creates resources such as KV, manages secrets and rolls back to earlier versions. C3 installs it as a project dependency, not globally, so you run `npx wrangler`. Every local example ran with Wrangler 4.152.
 
 ## wrangler.jsonc
 
@@ -28,7 +20,7 @@ The wizard (C3) creates `wrangler.jsonc`, an entry file in `src/`, and a `packag
 }
 ```
 
-`compatibility_date` pins runtime behavior to a date, so Cloudflare's changes don't break an existing Worker. Every binding, like `VISITS` here, reaches the code through `env`. In local dev the KV `id` can be any string; you create the real one before deploying:
+`compatibility_date` pins runtime behavior to a date, so Cloudflare's changes don't break an existing Worker. `vars` are plain variables. A **binding** connects the Worker to a Cloudflare resource, here a KV namespace: key-value storage, a kind of global dictionary that is very fast to read. Every binding, like `VISITS`, reaches the code through `env`. In local dev the KV `id` can be any string; you create the real one before deploying:
 
 ```typescript
 export default {
