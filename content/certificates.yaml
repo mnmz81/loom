@@ -1,0 +1,21 @@
+- key: claude-101
+  title: Claude 101
+  issuer: Anthropic Academy
+  date: 2026-06-22
+  image: /certificates/claude-101.png
+  file: /certificates/claude-101.pdf
+  url: https://verify.skilljar.com/c/m6h65t7eh8wi
+  tags:
+    - ai
+    - llm
+- key: introduction-to-agent-skills
+  title: Introduction to agent skills
+  issuer: Anthropic Academy
+  date: 2026-06-17
+  image: /certificates/introduction-to-agent-skills.png
+  file: /certificates/introduction-to-agent-skills.pdf
+  url: https://verify.skilljar.com/c/3m97waa2pgyd
+  tags:
+    - ai
+    - agents
+    - claude-code
