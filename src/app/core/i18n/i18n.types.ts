@@ -6,6 +6,7 @@ export interface Dict {
   'nav.posts': string;
   'nav.notes': string;
   'nav.series': string;
+  'nav.certificates': string;
   'nav.search': string;
   'nav.main': string;            // aria-label of the main <nav>
   'nav.menu': string;            // aria-label of the mobile menu button
@@ -28,6 +29,10 @@ export interface Dict {
   'series.prev': string;
   'series.next': string;
   'series.empty': string;
+  'certificates.title': string;
+  'certificates.empty': string;
+  'certificates.image': string;   // {title} — alt text of the certificate picture
+  'certificates.verify': string;  // link to the issuer's verify page
   'list.empty': string;
   'list.latestPosts': string;
   'list.latestNotes': string;

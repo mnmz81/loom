@@ -1,6 +1,6 @@
 import { CanMatchFn, Routes } from '@angular/router';
 import { DEFAULT_LANG, LANGS } from './core/content.models';
-import { entryResolver, langIndexResolver, seriesIndexResolver } from './core/content.resolvers';
+import { certificatesResolver, entryResolver, langIndexResolver, seriesIndexResolver } from './core/content.resolvers';
 import { langGuard } from './core/i18n/lang.guard';
 import { seriesResolver, tagResolver } from './pages/page.resolvers';
 
@@ -55,6 +55,12 @@ export const routes: Routes = [
         path: 'series/:key',
         loadComponent: () => import('./pages/series/series-page').then((m) => m.SeriesPage),
         resolve: { series: seriesResolver, index: langIndexResolver },
+      },
+      {
+        path: 'certificates',
+        loadComponent: () =>
+          import('./pages/certificates/certificates-page').then((m) => m.CertificatesPage),
+        resolve: { certificates: certificatesResolver, index: langIndexResolver },
       },
       {
         path: 'tags/:tag',

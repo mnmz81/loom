@@ -54,8 +54,8 @@ export class SiteHeader {
     return [
       { key: 'nav.home', path: PATHS.home(lang), exact: true },
       { key: 'nav.posts', path: PATHS.posts(lang), exact: false },
-      { key: 'nav.notes', path: PATHS.notes(lang), exact: false },
       { key: 'nav.series', path: PATHS.seriesList(lang), exact: false },
+      { key: 'nav.certificates', path: PATHS.certificates(lang), exact: false },
       { key: 'nav.search', path: PATHS.search(lang), exact: false },
     ];
   });

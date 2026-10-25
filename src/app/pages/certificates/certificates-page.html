@@ -1,0 +1,33 @@
+<div class="container page">
+  <header class="page__header">
+    <h1 class="page__title">{{ locale.t('certificates.title') }}</h1>
+  </header>
+
+  @if (cards().length) {
+    <ul class="certificates">
+      @for (card of cards(); track card.key) {
+        <li class="certificates__item">
+          <a class="certificates__image" [href]="card.href">
+            <img [src]="card.src" [alt]="card.alt" loading="lazy" decoding="async" />
+          </a>
+          <div class="certificates__body">
+            <h2 class="certificates__title" dir="auto">{{ card.title }}</h2>
+            <p class="certificates__meta">
+              <bdi>{{ card.issuer }}</bdi>
+              <span aria-hidden="true">·</span>
+              <time [attr.datetime]="card.date">{{ card.dateText }}</time>
+            </p>
+            <nb-tag-list [tags]="card.tags" [labels]="tagLabels()" />
+            @if (card.url) {
+              <a class="certificates__verify" [href]="card.url" rel="noopener">{{
+                locale.t('certificates.verify')
+              }}</a>
+            }
+          </div>
+        </li>
+      }
+    </ul>
+  } @else {
+    <p class="certificates__empty">{{ locale.t('certificates.empty') }}</p>
+  }
+</div>

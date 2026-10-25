@@ -24,6 +24,9 @@ Always prefix commands with `./scripts/with-node.sh` (system Node is 20):
 - `src/app/core/i18n/` — `Dict` keys, `LocaleService`, `langGuard`
 - `src/testing/fixtures/content/` — sample pipeline output matching the models
 
+## Adding a certificate
+`./scripts/with-node.sh npm run add-certificate -- <file.pdf|png> --title "..." --issuer "..." --date YYYY-MM-DD --url <verify link> --tags <existing tags>`, then `check-content`. Read the title, issuer, date and verify link off the certificate itself. Format: `docs/contracts/content-format.md`.
+
 ## Writing a new post
 Use the project skill **`new-post`** (`.claude/skills/new-post/SKILL.md`) for every new post or substantial edit: scaffold (`npm run new-post`), check the official docs, both languages, images, tags, cross-links, verify, commit, Notion copy. The build rejects he/en pairs whose shared facts or body structure differ.
 

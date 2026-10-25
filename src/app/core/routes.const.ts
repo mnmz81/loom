@@ -9,6 +9,7 @@ export const PATHS = {
   entry: (lang: Lang, type: EntryType, slug: string) => `/${lang}/${TYPE_SEGMENT[type]}/${slug}`,
   seriesList: (lang: Lang) => `/${lang}/series`,
   series: (lang: Lang, key: string) => `/${lang}/series/${key}`,
+  certificates: (lang: Lang) => `/${lang}/certificates`,
   tag: (lang: Lang, tag: string) => `/${lang}/tags/${tag}`,
   search: (lang: Lang) => `/${lang}/search`,
   accessibility: (lang: Lang) => `/${lang}/accessibility`,

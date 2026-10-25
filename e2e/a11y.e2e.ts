@@ -15,6 +15,7 @@ const PAGES: [string, string][] = [
   ['search', 'search'],
   ['accessibility statement', 'accessibility'],
   ['posts list', 'posts'],
+  ['certificates', 'certificates'],
 ];
 
 for (const lang of LANGS) {

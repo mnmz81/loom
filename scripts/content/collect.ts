@@ -1,4 +1,4 @@
-// Reads content/{posts,notes}/<slug>/{he,en}.md, content/series/*.yaml and content/tags.yaml,
+// Reads content/{posts,notes}/<slug>/{he,en}.md, content/series/*.yaml, content/tags.yaml and content/certificates.yaml,
 // validates them per docs/contracts/content-format.md and writes the JSON described in
 // src/app/core/content.models.ts. All validation errors are collected and thrown together.
 import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
@@ -6,6 +6,7 @@ import { join } from 'node:path';
 import matter from 'gray-matter';
 import YAML from 'yaml';
 import {
+  type CertificateIndex,
   type Entry,
   type EntryMeta,
   type EntryRef,
@@ -21,7 +22,7 @@ import {
 } from '../../src/app/core/content.models';
 import { createRenderer, readingMinutes, type RenderedMarkdown } from './markdown';
 import { bodyShape, shapeDiff } from './parity';
-import { formatZodError, isKebab, noteFrontmatter, postFrontmatter, type SeriesFile, seriesFile, type TagsFile, tagsFile } from './schema';
+import { certificatesFile, type CertificatesFile, formatZodError, isKebab, noteFrontmatter, postFrontmatter, type SeriesFile, seriesFile, type TagsFile, tagsFile } from './schema';
 
 export interface BuildOptions {
   contentDir: string;
@@ -37,6 +38,7 @@ export interface BuildResult {
   /** Every written entry JSON, grouped by language (LANGS order), then index order. */
   entries: Entry[];
   series: SeriesIndex;
+  certificates: CertificateIndex;
 }
 
 /** Normalized frontmatter of a post or a note (notes never have summary/cover/series). */
@@ -100,6 +102,24 @@ function loadTags(contentDir: string, errors: string[]): TagsFile {
     errors.push(`${file}: ${message(error)}`);
   }
   return {};
+}
+
+function loadCertificates(contentDir: string, errors: string[]): CertificatesFile {
+  const file = join(contentDir, 'certificates.yaml');
+  if (!existsSync(file)) return [];
+  try {
+    const parsed = certificatesFile.safeParse(YAML.parse(readFileSync(file, 'utf8')));
+    if (!parsed.success) {
+      errors.push(`${file}: ${formatZodError(parsed.error)}`);
+      return [];
+    }
+    const keys = parsed.data.map((c) => c.key);
+    for (const key of new Set(keys.filter((k, i) => keys.indexOf(k) !== i))) errors.push(`${file}: key "${key}" is used more than once`);
+    return parsed.data;
+  } catch (error) {
+    errors.push(`${file}: ${message(error)}`);
+  }
+  return [];
 }
 
 function loadSeries(contentDir: string, errors: string[]): Map<string, SeriesFile> {
@@ -227,6 +247,7 @@ export async function buildContent({ contentDir, outDir, includeDrafts, now = ()
   const errors: string[] = [];
   const tagLabels = loadTags(contentDir, errors);
   const seriesFiles = loadSeries(contentDir, errors);
+  const certificateFiles = loadCertificates(contentDir, errors);
   const raw = loadEntries(contentDir, errors);
   validate(raw, seriesFiles, contentDir, errors);
   if (errors.length) throw new Error(`Invalid content:\n${errors.join('\n')}`);
@@ -305,6 +326,15 @@ export async function buildContent({ contentDir, outDir, includeDrafts, now = ()
   for (const item of items) for (const tag of item.tags) tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1);
   const sortedTags = [...tagCounts].sort(([a, x], [b, y]) => y - x || compare(a, b));
 
+  // A certificate tag links to /tags/<tag>, which exists only for tags of published entries.
+  for (const { key, tags } of certificateFiles) {
+    for (const tag of tags) {
+      if (!tagCounts.has(tag)) errors.push(`${join(contentDir, 'certificates.yaml')}: certificate "${key}" has tag "${tag}", which no published entry uses`);
+    }
+  }
+  if (errors.length) throw new Error(`Invalid content:\n${errors.join('\n')}`);
+  const certificates: CertificateIndex = [...certificateFiles].sort((a, b) => compare(b.date, a.date) || compare(a.key, b.key));
+
   const generatedAt = now().toISOString();
   const indexes = Object.fromEntries(
     LANGS.map((lang) => {
@@ -338,6 +368,7 @@ export async function buildContent({ contentDir, outDir, includeDrafts, now = ()
     writeFileSync(join(outDir, entry.lang, TYPE_SEGMENT[entry.type], `${entry.slug}.json`), JSON.stringify(entry));
   }
   writeFileSync(join(outDir, 'series.json'), JSON.stringify(series, null, 2));
+  writeFileSync(join(outDir, 'certificates.json'), JSON.stringify(certificates, null, 2));
 
-  return { indexes, entries, series };
+  return { indexes, entries, series, certificates };
 }

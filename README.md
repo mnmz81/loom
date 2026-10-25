@@ -14,6 +14,7 @@ A personal, bilingual learning blog / knowledge base — long **posts** and shor
   ```bash
   nvm install                       # once, installs the version in .nvmrc
   ./scripts/with-node.sh npm ci     # install dependencies
+  git config core.hooksPath .githooks   # once per clone: blocks commits that look like secrets
   ```
 
 ## Commands
@@ -155,6 +156,14 @@ Put files in `public/images/<slug>/` and reference them from the site root (no `
 
 ```markdown
 ![Borrow checker error](/images/rust-borrowing/error.png)
+```
+
+### Certificates
+
+Course certificates live in `content/certificates.yaml` and `public/certificates/`. Add one from its PDF or picture (a PDF also gets a PNG preview):
+
+```bash
+./scripts/with-node.sh npm run add-certificate -- ~/Downloads/cert.pdf --title "Claude 101" --issuer "Anthropic Academy" --date 2026-06-22 --url https://verify.skilljar.com/c/... --tags ai,llm
 ```
 
 ## Deploy
