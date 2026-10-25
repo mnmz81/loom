@@ -14,6 +14,7 @@ A personal, bilingual learning blog / knowledge base — long **posts** and shor
   ```bash
   nvm install                       # once, installs the version in .nvmrc
   ./scripts/with-node.sh npm ci     # install dependencies
+  git config core.hooksPath .githooks   # once per clone: blocks commits that look like secrets
   ```
 
 ## Commands
