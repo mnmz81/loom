@@ -68,6 +68,7 @@ export function sitemapPages(index: LangIndex, series: SeriesIndex): SitemapPage
     everyLang(PATHS.posts),
     everyLang(PATHS.notes),
     everyLang(PATHS.seriesList),
+    everyLang(PATHS.certificates),
     everyLang(PATHS.search),
     everyLang(PATHS.accessibility),
     ...series.map(({ key }) => everyLang((lang) => PATHS.series(lang, key))),

@@ -1,6 +1,6 @@
 import { Injectable, TransferState, inject, makeStateKey } from '@angular/core';
 import { CONTENT_LOADER } from './content-loader';
-import { type Entry, type EntryType, type Lang, type LangIndex, type SeriesIndex, TYPE_SEGMENT } from './content.models';
+import { type CertificateIndex, type Entry, type EntryType, type Lang, type LangIndex, type SeriesIndex, TYPE_SEGMENT } from './content.models';
 
 /**
  * Reads the generated content JSON (paths per content.models.ts). Every file is cached in TransferState,
@@ -24,6 +24,11 @@ export class ContentService {
   /** `series.json` — all series, sorted by key. */
   getSeries(): Promise<SeriesIndex> {
     return this.get<SeriesIndex>('series.json');
+  }
+
+  /** `certificates.json` — all certificates, newest first. */
+  getCertificates(): Promise<CertificateIndex> {
+    return this.get<CertificateIndex>('certificates.json');
   }
 
   private async get<T>(path: string): Promise<T> {

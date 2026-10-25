@@ -99,6 +99,7 @@ describe('sitemapPages', () => {
       { he: '/he/posts', en: '/en/posts' },
       { he: '/he/notes', en: '/en/notes' },
       { he: '/he/series', en: '/en/series' },
+      { he: '/he/certificates', en: '/en/certificates' },
       { he: '/he/search', en: '/en/search' },
       { he: '/he/accessibility', en: '/en/accessibility' },
       { he: '/he/series/learning-rust', en: '/en/series/learning-rust' },
@@ -120,7 +121,7 @@ describe('buildSitemap', () => {
   });
 
   it('writes one <url> per page and language with absolute trailing-slash URLs', () => {
-    expect(xml.match(/<url>/g)).toHaveLength(2 * 10 + 2);
+    expect(xml.match(/<url>/g)).toHaveLength(2 * 11 + 2);
     expect(xml).toContain('<loc>https://example.dev/nb/he/</loc>');
     expect(xml).toContain('<loc>https://example.dev/nb/en/posts/both/</loc>');
     expect(xml).toContain('<loc>https://example.dev/nb/he/posts/he-only/</loc>');
@@ -135,6 +136,6 @@ describe('buildSitemap', () => {
     expect(enBoth).toContain('<xhtml:link rel="alternate" hreflang="x-default" href="https://example.dev/nb/he/posts/both/"/>');
     const heOnly = urls.find((u) => u.includes('he-only'))!;
     expect(heOnly).not.toContain('xhtml:link');
-    expect(urls.filter((u) => u.includes('xhtml:link'))).toHaveLength(20);
+    expect(urls.filter((u) => u.includes('xhtml:link'))).toHaveLength(22);
   });
 });

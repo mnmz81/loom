@@ -12,7 +12,9 @@ content/
   notes/<slug>/he.md|en.md  # short notes / TIL
   series/<key>.yaml         # one file per series
   tags.yaml                 # optional display labels per tag
+  certificates.yaml         # optional course certificates
 public/images/<slug>/...    # images, referenced as /images/<slug>/file.png
+public/certificates/<key>.* # certificate files, referenced as /certificates/<key>.png
 ```
 
 - `<slug>` and `<key>`: lowercase Latin kebab-case `^[a-z0-9]+(-[a-z0-9]+)*$`. The slug is the URL and the translation key (Hebrew titles still get a Latin slug).
@@ -64,6 +66,20 @@ rust: { he: ראסט, en: Rust }
 angular: { he: אנגולר, en: Angular }
 ```
 Keys must be kebab-case. Missing tag or language → label = the key.
+
+## `content/certificates.yaml` (optional)
+Add entries with `npm run add-certificate -- <file> --title "..." --issuer "..." --date YYYY-MM-DD [--key k] [--url https://...] [--tags a,b]`: it copies the file to `public/certificates/<key>.<ext>` and, for a PDF, writes a PNG of the first page next to it.
+```yaml
+- key: claude-code-in-action        # required, kebab-case, unique
+  title: Claude Code in Action      # required, course name in its original language
+  issuer: Anthropic                 # required
+  date: 2026-10-25                  # required
+  image: /certificates/claude-code-in-action.png   # required, a picture (png/jpg/webp), shown on the card
+  file: /certificates/claude-code-in-action.pdf    # optional, the original; the card links to it instead of the image
+  url: https://verify.skilljar.com/c/...           # optional, https verify link
+  tags: [ai]                        # optional; each must be a tag of a published entry
+```
+Output: `public/content/certificates.json`, newest first. The page is `/<lang>/certificates`.
 
 ## Body
 CommonMark + GFM tables/linkify; raw HTML disabled. Fenced code with a language gets Shiki highlighting (light + dark). `##` and `###` headings form the TOC. Images: `![alt](/images/<slug>/x.png)`. Code blocks always render left-to-right.

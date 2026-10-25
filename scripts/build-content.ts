@@ -12,7 +12,7 @@ import { buildRss, buildSitemap, sitemapPages } from './content/feeds';
 async function main(): Promise<void> {
   const includeDrafts = process.env['INCLUDE_DRAFTS'] === '1';
   const contentDir = process.env['CONTENT_DIR'] ?? 'content';
-  const { indexes, entries, series } = await buildContent({ contentDir, outDir: 'public/content', includeDrafts });
+  const { indexes, entries, series, certificates } = await buildContent({ contentDir, outDir: 'public/content', includeDrafts });
 
   mkdirSync('public', { recursive: true });
   for (const lang of LANGS) writeFileSync(`public${PATHS.rss(lang)}`, buildRss(indexes[lang], SITE));
@@ -24,7 +24,7 @@ async function main(): Promise<void> {
   const perLang = LANGS.map((lang) => `${lang} ${entries.filter((e) => e.lang === lang).length}`).join(', ');
   console.log(
     `[content] ${count('post')} posts, ${count('note')} notes (${perLang}), ${indexes[LANGS[0]].tags.length} tags, ` +
-      `${series.length} series, ${pages.length} sitemap pages${includeDrafts ? ' (drafts included)' : ''}`,
+      `${series.length} series, ${certificates.length} certificates, ${pages.length} sitemap pages${includeDrafts ? ' (drafts included)' : ''}`,
   );
 }
 

@@ -3,7 +3,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import YAML from 'yaml';
-import type { Entry, LangIndex, SeriesIndex } from '../../src/app/core/content.models';
+import type { CertificateIndex, Entry, LangIndex, SeriesIndex } from '../../src/app/core/content.models';
 import { buildContent } from './collect';
 
 type Files = Record<string, string>;
@@ -149,6 +149,7 @@ describe('buildContent — output', () => {
       expect(readdirSync(join(dirs.outDir, lang, 'notes'))).toEqual([]);
     }
     expect(readJson(join(dirs.outDir, 'series.json'))).toEqual([]);
+    expect(readJson(join(dirs.outDir, 'certificates.json'))).toEqual([]);
     expect(result.entries).toEqual([]);
   });
 
@@ -513,5 +514,48 @@ describe('buildContent — validation', () => {
     });
     expect(message).toMatch(/^Invalid content/);
     expect(message).toMatch(/bad-one\/he\.md[\s\S]*bad-two\/en\.md/);
+  });
+});
+
+describe('buildContent — certificates', () => {
+  const cert = (key: string, date: string, extra: Record<string, unknown> = {}) => ({
+    key,
+    title: `Course ${key}`,
+    issuer: 'Udemy',
+    date,
+    image: `/certificates/${key}.png`,
+    ...extra,
+  });
+  const files = (certs: unknown): Files => ({
+    'posts/a/he.md': post('א', '2026-01-01', ['ai']),
+    'certificates.yaml': YAML.stringify(certs),
+  });
+
+  it('writes certificates.json sorted by date desc then key, with tags defaulting to []', async () => {
+    const dirs = makeContent(
+      files([
+        cert('old', '2025-01-01'),
+        cert('b', '2026-02-01', { tags: ['ai'], url: 'https://ude.my/UC-1', file: '/certificates/b.pdf' }),
+        cert('a', '2026-02-01'),
+      ]),
+    );
+    const result = await build(dirs);
+    const written = readJson<CertificateIndex>(join(dirs.outDir, 'certificates.json'));
+    expect(written.map((c) => c.key)).toEqual(['a', 'b', 'old']);
+    expect(written[0].tags).toEqual([]);
+    expect(written[1]).toEqual({ ...cert('b', '2026-02-01'), tags: ['ai'], url: 'https://ude.my/UC-1', file: '/certificates/b.pdf' });
+    expect(result.certificates).toEqual(written);
+  });
+
+  it('rejects duplicate keys, a PDF image, a non-https url and tags no published entry uses', async () => {
+    const dirs = makeContent(files([cert('a', '2026-01-01'), cert('a', '2026-01-02', { tags: ['nope'] })]));
+    await expect(build(dirs)).rejects.toThrow(/key "a" is used more than once/);
+
+    const tagged = makeContent(files([cert('a', '2026-01-01', { tags: ['nope'] })]));
+    await expect(build(tagged)).rejects.toThrow(/certificate "a" has tag "nope", which no published entry uses/);
+
+    for (const bad of [{ image: '/certificates/a.pdf' }, { url: 'http://x.com' }, { image: '/images/a.png' }]) {
+      await expect(build(makeContent(files([cert('a', '2026-01-01', bad)])))).rejects.toThrow(/certificates\.yaml: 0\./);
+    }
   });
 });

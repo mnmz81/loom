@@ -1,6 +1,7 @@
 // TEST-ONLY. A ContentLoader backed by src/testing/fixtures/content (same paths as public/content).
 // Usage: providers: [{ provide: CONTENT_LOADER, useValue: fixtureContentLoader }]
 import type { ContentLoader } from '../content-loader';
+import certificates from '../../../testing/fixtures/content/certificates.json';
 import enGitUndo from '../../../testing/fixtures/content/en/notes/git-undo-last-commit.json';
 import enZsh from '../../../testing/fixtures/content/en/notes/zsh-history-search.json';
 import enIndex from '../../../testing/fixtures/content/en/index.json';
@@ -16,6 +17,7 @@ import series from '../../../testing/fixtures/content/series.json';
 /** Fixture JSON keyed by content path, e.g. 'he/index.json', 'en/posts/rust-borrowing.json'. */
 export const CONTENT_FIXTURES: Readonly<Record<string, unknown>> = {
   'series.json': series,
+  'certificates.json': certificates,
   'he/index.json': heIndex,
   'en/index.json': enIndex,
   'he/posts/rust-ownership.json': heOwnership,

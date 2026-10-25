@@ -158,6 +158,14 @@ Put files in `public/images/<slug>/` and reference them from the site root (no `
 ![Borrow checker error](/images/rust-borrowing/error.png)
 ```
 
+### Certificates
+
+Course certificates live in `content/certificates.yaml` and `public/certificates/`. Add one from its PDF or picture (a PDF also gets a PNG preview):
+
+```bash
+./scripts/with-node.sh npm run add-certificate -- ~/Downloads/cert.pdf --title "Claude 101" --issuer "Anthropic Academy" --date 2026-06-22 --url https://verify.skilljar.com/c/... --tags ai,llm
+```
+
 ## Deploy
 
 A GitHub Actions workflow (`.github/workflows/`) builds the site and deploys it to **GitHub Pages** (Settings → Pages → Source: GitHub Actions). The site is served under the base path **`/loom/`** (`baseHref: /loom/`); `/` redirects to `/he/`.

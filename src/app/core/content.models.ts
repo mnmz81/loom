@@ -87,3 +87,18 @@ export interface SeriesSummary {
 
 /** public/content/series.json — sorted by key. */
 export type SeriesIndex = SeriesSummary[];
+
+/** A course certificate, from content/certificates.yaml. Files are under public/certificates/. */
+export interface Certificate {
+  key: string;             // kebab-case, unique
+  title: string;           // course name in its original language
+  issuer: string;          // 'Udemy', 'Anthropic', ...
+  date: string;            // 'YYYY-MM-DD'
+  image: string;           // '/certificates/<key>.png' (site-root relative, see assetPath())
+  file?: string;           // '/certificates/<key>.pdf' — the original, when it is not the image
+  url?: string;            // https verify link from the issuer
+  tags: string[];          // tag keys used by at least one published entry (links to /tags/<tag>)
+}
+
+/** public/content/certificates.json — sorted by date desc, then key. */
+export type CertificateIndex = Certificate[];

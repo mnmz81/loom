@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { RedirectCommand, ResolveFn, Router } from '@angular/router';
-import type { Entry, EntryType, LangIndex, SeriesIndex } from './content.models';
+import type { CertificateIndex, Entry, EntryType, LangIndex, SeriesIndex } from './content.models';
 import { ContentService } from './content.service';
 import { routeLang } from './route-lang';
 import { PATHS } from './routes.const';
@@ -10,6 +10,9 @@ export const langIndexResolver: ResolveFn<LangIndex> = (route) => inject(Content
 
 /** All series (language-independent). */
 export const seriesIndexResolver: ResolveFn<SeriesIndex> = () => inject(ContentService).getSeries();
+
+/** All certificates (language-independent). */
+export const certificatesResolver: ResolveFn<CertificateIndex> = () => inject(ContentService).getCertificates();
 
 /**
  * Entry of `type` for the route's `:lang` and `:slug`:
