@@ -412,3 +412,41 @@ e2e(
     text(380, 246, 'Evals run on every change to the prompt or the code.', { size: 12.5, color: C.muted }),
   ],
 );
+
+// ai-agent-harness: frozen model, editable harness, and the loop that improves it ---------------------------------------
+const harness = svgWriter(outDir('ai-agent-harness'));
+const harnessLayers = [
+  'Context: prompt, tool docs, skills',
+  'State: memory, progress files',
+  'Control: loop, limits, subagents',
+  'Checks: guardrails, tests, sandbox',
+  'Extensions: tools, MCP, plugins',
+];
+const improve = ['Eval set', 'Run the agent', 'Read the traces', 'Change one thing', 'Keep it if the score rises'];
+harness(
+  'harness-loop',
+  760,
+  300,
+  'A frozen model inside an editable harness',
+  'Left: at run time the harness sends context to a frozen model, and the model answers with tool calls that the harness runs. The harness has five groups: context (prompt, tool docs, skills), state (memory, progress files), control (loop, limits, subagents), checks (guardrails, tests, sandbox) and extensions (tools, MCP, plugins). Right: the harness improves in a loop: run the agent on an eval set, read the traces, change one thing, and keep the change only if the score rises.',
+  [
+    text(195, 34, 'The agent at run time', { size: 14, weight: 700, color: C.main }),
+    box(95, 48, 200, 40, C.grey, C.soft),
+    text(195, 73, 'Frozen model', { size: 13.5, weight: 700 }),
+    arrow(160, 130, 160, 88, C.muted),
+    text(150, 114, 'context', { size: 12, color: C.muted, anchor: 'end' }),
+    arrow(230, 88, 230, 130, C.muted),
+    text(240, 114, 'tool calls', { size: 12, color: C.muted, anchor: 'start' }),
+    box(30, 130, 330, 154, C.main),
+    text(195, 152, 'Editable harness', { size: 13.5, weight: 700, color: C.main }),
+    ...harnessLayers.map((label, i) => text(50, 178 + i * 22, label, { size: 12.5, anchor: 'start' })),
+    `<line x1="390" y1="20" x2="390" y2="280" stroke="${C.border}" stroke-width="1.5"/>`,
+    text(575, 34, 'Improving the harness', { size: 14, weight: 700, color: C.green }),
+    ...improve.flatMap((label, i) => [
+      box(470, 48 + i * 48, 210, 32, i === 0 ? C.amber : C.green),
+      text(575, 69 + i * 48, label, { size: 12.5, weight: 600 }),
+      ...(i < improve.length - 1 ? [arrow(575, 80 + i * 48, 575, 96 + i * 48, C.muted)] : []),
+    ]),
+    `<path d="M680 256 H712 V112 H682" fill="none" stroke="${C.muted}" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ah-${C.muted.slice(1)})"/>`,
+  ],
+);

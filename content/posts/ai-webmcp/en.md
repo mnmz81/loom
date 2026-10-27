@@ -143,4 +143,4 @@ For users, the rule from the [security post](en/posts/ai-security/) holds: an ag
 
 WebMCP is early and adoption is small. A few `registerTool()` calls behind a feature check, or `toolname` and `tooldescription` on an existing form, cost little and change nothing for normal visitors. Don't build a product on it until it ships in more than one browser.
 
-This ends the agents series. The next series covers adapting a model itself: fine-tuning, distillation and running models locally.
+The next post closes the series with the [harness](en/posts/ai-agent-harness/): everything around the model that you can improve without touching the model.
