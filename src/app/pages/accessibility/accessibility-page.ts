@@ -41,7 +41,7 @@ const STATEMENT: Record<Lang, Statement> = {
     ],
     contactTitle: 'פנייה בנושא נגישות',
     contactBefore: 'מצאתם ליקוי, או צריכים תוכן בפורמט נגיש יותר? אפשר לפנות לרכז הנגישות, ',
-    contactAfter: ', במייל. נטפל בכל פנייה ונחזור אליכם בהקדם.',
+    contactAfter: ', במייל. נטפל בכל פנייה ונחזור אליכם תוך 14 יום.',
     updated: 'ההצהרה עודכנה לאחרונה ב-',
   },
   en: {
@@ -65,7 +65,7 @@ const STATEMENT: Record<Lang, Statement> = {
     ],
     contactTitle: 'Accessibility feedback',
     contactBefore: 'Found a barrier, or need content in a more accessible format? Contact the accessibility coordinator, ',
-    contactAfter: ', by email. Every report gets handled and answered as soon as possible.',
+    contactAfter: ', by email. Every report gets handled, with a reply within 14 days.',
     updated: 'This statement was last updated on ',
   },
 };

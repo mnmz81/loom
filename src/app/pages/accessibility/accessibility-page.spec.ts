@@ -24,12 +24,14 @@ describe('AccessibilityPage', () => {
     expect(el.querySelector('h1')?.textContent?.trim()).toBe('הצהרת נגישות');
     expect(el.querySelector('a[href^="mailto:"]')?.getAttribute('href')).toBe(`mailto:${SITE.accessibility.email}`);
     expect(el.querySelectorAll('h2').length).toBe(3);
+    expect(el.textContent).toContain('תוך 14 יום');
     expect(TestBed.inject(Title).getTitle()).toContain('הצהרת נגישות');
   });
 
   it('shows the English statement (en)', async () => {
     const el = await open('/en/accessibility');
     expect(el.querySelector('h1')?.textContent?.trim()).toBe('Accessibility statement');
+    expect(el.textContent).toContain('within 14 days');
     expect(el.querySelector('time')?.getAttribute('datetime')).toBe(SITE.accessibility.updated);
   });
 
