@@ -16,7 +16,7 @@ export const SITE = {
   defaultOgImage: '/og/default.png',
   repo: 'https://github.com/mnmz81/loom',
   /** Shown on the accessibility statement page; `updated` is the statement's last review (YYYY-MM-DD). */
-  accessibility: { email: 'moriszakay42@gmail.com', updated: '2026-10-22' },
+  accessibility: { email: 'moriszakay42@gmail.com', updated: '2026-10-29' },
 } as const;
 
 /**
