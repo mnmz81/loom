@@ -3,7 +3,7 @@ title: "pydantic: אימות נתונים עם type hints"
 summary: "מתארים את הנתונים פעם אחת כמחלקה עם type hints, ו-pydantic בודק וממיר בשבילכם: BaseModel, ‏ValidationError, אילוצים עם Field, מודלים מקוננים והמרה בחזרה ל-dict ול-JSON."
 date: 2026-10-19
 tags: [python]
-series: { key: python, order: 30 }
+series: { key: python, order: 35 }
 ---
 
 נתונים שמגיעים מחוץ לתוכנית, כמו בקשת JSON, קובץ הגדרות או טופס, לא אמינים. הגיל יכול להגיע כ-`"abc"`, והשם יכול להיות חסר. בדיקה ידנית של כל שדה עם משפטי `if` מתארכת מהר. ‏[pydantic](https://docs.pydantic.dev/latest/) מאפשרת לתאר את צורת הנתונים פעם אחת, עם [type hints](he/posts/python-functions/), ועושה את הבדיקה בשבילכם.

@@ -3,7 +3,7 @@ title: "אקראיות ב-Python: המודול random"
 summary: "מספרים אקראיים, בחירה וערבוב של פריטים עם המודול random: randint, random, choice, sample, shuffle ו-seed לתוצאות שחוזרות על עצמן. ולמה זה לא מתאים לסיסמאות."
 date: 2026-10-19
 tags: [python]
-series: { key: python, order: 24 }
+series: { key: python, order: 29 }
 ---
 
 משחקים, סימולציות, נתוני דוגמה ו"בחירת זוכה" צריכים כולם אקראיות. ל-Python יש בשביל זה את המודול `random`. טוענים אותו עם `import random` וקוראים לפונקציות שלו כ-`random.name()`. (הפוסט על [מודולים](he/posts/python-modules/) מסביר איך `import` עובד.)

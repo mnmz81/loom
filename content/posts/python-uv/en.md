@@ -4,7 +4,7 @@ summary: "What uv is and how to use it: the project workflow with uv init, uv ad
 date: 2026-10-11
 updated: 2026-10-19
 tags: [python]
-series: { key: python, order: 28 }
+series: { key: python, order: 33 }
 ---
 
 uv is a tool from Astral, written in Rust, that the docs describe as "an extremely fast Python package manager". It installs packages, creates virtual environments, and can even install Python versions.

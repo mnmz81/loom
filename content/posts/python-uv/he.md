@@ -4,7 +4,7 @@ summary: "מה זה uv ואיך משתמשים בו: זרימת עבודה של 
 date: 2026-10-11
 updated: 2026-10-19
 tags: [python]
-series: { key: python, order: 28 }
+series: { key: python, order: 33 }
 ---
 
 uv הוא כלי של Astral, שנכתב ב-Rust, ועושה את מה ש-pip עושה ויותר: "מנהל חבילות Python מהיר במיוחד", לפי התיעוד. הוא מתקין חבילות, יוצר סביבות וירטואליות ואפילו מתקין גרסאות של Python.

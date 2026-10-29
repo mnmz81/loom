@@ -3,7 +3,7 @@ title: "Randomisation in Python: the random module"
 summary: "Random numbers, picking and shuffling items with the random module: randint, random, choice, sample, shuffle, and seed for repeatable results. Plus why it's not for passwords."
 date: 2026-10-19
 tags: [python]
-series: { key: python, order: 24 }
+series: { key: python, order: 29 }
 ---
 
 Games, simulations, sample data and "pick a winner" all need randomness. Python ships with the `random` module for it. You load it with `import random` and call its functions as `random.name()`. (The [modules post](en/posts/python-modules/) explains how `import` works.)

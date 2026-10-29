@@ -4,7 +4,7 @@ summary: "What happens when Python hits an error at runtime: reading a traceback
 date: 2026-10-13
 updated: 2026-10-19
 tags: [python]
-series: { key: python, order: 23 }
+series: { key: python, order: 28 }
 ---
 
 `IndexError`, `KeyError`, `ValueError` and `TypeError` all stopped the program in earlier posts, and the [TypeError post](en/posts/python-type-errors-and-checking/) showed a first `try`/`except`. In the tutorial's words, errors detected during execution are called exceptions and "are not unconditionally fatal".

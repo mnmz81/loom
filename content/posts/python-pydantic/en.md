@@ -3,7 +3,7 @@ title: "pydantic: validating data with type hints"
 summary: "Describe your data once as a class with type hints and pydantic checks and converts it: BaseModel, ValidationError, Field constraints, nested models, and dicts and JSON in and out."
 date: 2026-10-19
 tags: [python]
-series: { key: python, order: 30 }
+series: { key: python, order: 35 }
 ---
 
 Data from outside your program, such as a JSON request, a config file or a form, is untrusted. The age may arrive as `"abc"`, the name may be missing. Checking each field by hand with `if` statements gets long fast. [pydantic](https://docs.pydantic.dev/latest/) lets you describe the shape of the data once, with [type hints](en/posts/python-functions/), and does the checking for you.

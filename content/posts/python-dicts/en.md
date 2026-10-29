@@ -3,7 +3,7 @@ title: "Dictionaries in Python"
 summary: "A dict stores values by key instead of by position. Creating one, reading safely with get, adding and removing, looping over keys and values, counting, nesting, and the keys you can use."
 date: 2026-10-13
 tags: [python]
-series: { key: python, order: 18 }
+series: { key: python, order: 20 }
 ---
 
 A [list](en/posts/python-lists/) finds a value by position: `scores[2]`. Often you want a name instead: the price of "apple", the phone number of "Dana", the setting called "theme". That's a dictionary, `dict` for short: "a set of key: value pairs, with the requirement that the keys are unique", as the tutorial puts it.
@@ -194,4 +194,4 @@ A list could change after being used as a key, so it's refused. Values have no s
 
 ## What's next
 
-Next in the series: functions, which give a name to a block of code so you can run it again with different values.
+Next in the series: the dictionary tools beyond the basics: comprehensions, `setdefault`, `defaultdict`, `Counter` and merging.

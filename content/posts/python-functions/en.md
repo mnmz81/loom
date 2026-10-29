@@ -3,7 +3,7 @@ title: "Functions in Python"
 summary: "def, parameters and return values, default and keyword arguments, the mutable default trap, docstrings and type hints, and passing a function as a value."
 date: 2026-10-13
 tags: [python]
-series: { key: python, order: 19 }
+series: { key: python, order: 23 }
 ---
 
 `print()`, `len()` and `sorted()` are functions someone else wrote. A function gives a name to a block of code: you write it once and run it as often as you need, with different values each time, so programs stay short and a bug gets fixed in one place.
@@ -223,4 +223,4 @@ For a function this small, a `lambda` is a one-line version without a name: `sor
 
 ## What's next
 
-Next in the series: code blocks and scope: why a variable created inside an `if` is still there after it, and which blocks do create a scope.
+Next in the series: positional and keyword arguments in depth: `*args`, `**kwargs`, and the `/` and `*` markers.

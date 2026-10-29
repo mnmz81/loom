@@ -4,7 +4,7 @@ summary: "מה קורה כש-Python נתקלת בשגיאה בזמן ריצה: �
 date: 2026-10-13
 updated: 2026-10-19
 tags: [python]
-series: { key: python, order: 23 }
+series: { key: python, order: 28 }
 ---
 
 ‏`IndexError`, ‏`KeyError`, ‏`ValueError` ו-`TypeError` עצרו את התוכנית בפוסטים הקודמים, ו[הפוסט על TypeError](he/posts/python-type-errors-and-checking/) הראה `try`/`except` ראשון. המדריך הרשמי מנסח את זה כך: "Errors detected during execution are called exceptions and are not unconditionally fatal".

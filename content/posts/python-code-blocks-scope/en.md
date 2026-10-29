@@ -3,7 +3,7 @@ title: "Code blocks and scope in Python"
 summary: "What a code block is in Python, why if, for, while and try don't create a new scope, which blocks do (functions, classes, comprehensions), and the bugs that come from mixing them up."
 date: 2026-10-13
 tags: [python]
-series: { key: python, order: 20 }
+series: { key: python, order: 25 }
 ---
 
 If you create a variable inside an `if` block, can you use it after the block? In many languages, no. In Python, yes, because a *block of code* is not a *scope*.

@@ -3,7 +3,7 @@ title: "pytest: testing your Python code"
 summary: "Write a test as a plain function with assert, run it with pytest, read a failure, check errors with pytest.raises, run one test with several inputs using parametrize, and share setup with fixtures."
 date: 2026-10-19
 tags: [python]
-series: { key: python, order: 29 }
+series: { key: python, order: 34 }
 ---
 
 A test is a small program that calls your code and checks the result. When you change the code later, running the tests tells you in seconds if something broke. `pytest` is the most popular tool for it: tests are plain functions, and the check is Python's own `assert`.

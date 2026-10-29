@@ -199,4 +199,4 @@ Read the `else` as "no break". Many Python programmers find it confusing, so use
 
 ## What's next
 
-Next in the series: dictionaries, which store values by name instead of by position, and which you'll loop over constantly.
+Next in the series: a closer look at `range()`, the object behind most `for` loops over numbers.

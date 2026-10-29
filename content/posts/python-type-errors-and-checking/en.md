@@ -3,7 +3,7 @@ title: "TypeError and type checking in Python"
 summary: "The common TypeError messages in Python and what they mean, checking types with type() and isinstance(), why type hints are not enforced, and when to check types versus catching the error."
 date: 2026-10-11
 tags: [python]
-series: { key: python, order: 22 }
+series: { key: python, order: 27 }
 ---
 
 A `TypeError` means you used a value in a way its type doesn't support. The docs describe it as "an operation or function is applied to an object of inappropriate type". It's one of the most common errors.

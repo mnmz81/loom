@@ -3,7 +3,7 @@ title: "Packages and __init__.py in Python"
 summary: "A package is a folder of modules. What __init__.py does, whether you still need it, how to use it to expose a clean import, relative imports, and __all__."
 date: 2026-10-19
 tags: [python]
-series: { key: python, order: 26 }
+series: { key: python, order: 31 }
 ---
 
 A [module](en/posts/python-modules/) is one file. When a project has many related modules, you put them in a folder. A folder of modules that you can import is a **package**.

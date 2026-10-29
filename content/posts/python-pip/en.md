@@ -3,7 +3,7 @@ title: "pip: installing packages in Python"
 summary: "How pip installs third-party packages from PyPI: install, pin versions, list, show, freeze into requirements.txt, uninstall, and why to use a virtual environment with python -m pip."
 date: 2026-10-11
 tags: [python]
-series: { key: python, order: 27 }
+series: { key: python, order: 32 }
 ---
 
 Python comes with a large standard library, but most real projects use third-party packages too: an HTTP client, a test framework, a data library. pip is the tool that installs them. It downloads packages from the Python Package Index (pypi.org) and puts them where your Python can import them.

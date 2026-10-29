@@ -3,7 +3,7 @@ title: "Modules in Python: import and your own files"
 summary: "A module is a .py file you load with import. The four forms of import, writing your own module, where Python looks for it, and what if __name__ == '__main__' means."
 date: 2026-10-19
 tags: [python]
-series: { key: python, order: 25 }
+series: { key: python, order: 30 }
 ---
 
 A program that grows past a few dozen lines is easier to read when it is split into files. In Python, each file is a **module**: a `.py` file whose names (functions, constants, classes) other files can load with `import`. The standard library is a large collection of ready-made modules, such as `math`, `random` and `datetime`.

@@ -3,7 +3,7 @@ title: "מילונים (dict) ב-Python"
 summary: "מילון שומר ערכים לפי מפתח במקום לפי מיקום. יצירה, קריאה בטוחה עם get, הוספה והסרה, לולאה על מפתחות וערכים, ספירה, מבנים מקוננים, ואילו ערכים יכולים להיות מפתח."
 date: 2026-10-13
 tags: [python]
-series: { key: python, order: 18 }
+series: { key: python, order: 20 }
 ---
 
 [רשימה](he/posts/python-lists/) מוצאת ערך לפי המיקום שלו: `scores[2]`. הרבה פעמים רוצים למצוא ערך לפי שם: המחיר של "apple", מספר הטלפון של "Dana", ההגדרה שנקראת "theme". בשביל זה יש מילון, ובקיצור `dict`. המדריך הרשמי ממליץ לחשוב על מילון כעל "a set of key: value pairs, with the requirement that the keys are unique".
@@ -194,4 +194,4 @@ TypeError: unhashable type: 'list'
 
 ## מה הלאה
 
-הצעד הבא בסדרה: פונקציות, שנותנות שם לבלוק קוד כדי שאפשר יהיה להריץ אותו שוב עם ערכים אחרים.
+הצעד הבא בסדרה: הכלים של מילונים מעבר לבסיס: comprehensions, ‏`setdefault`, ‏`defaultdict`, ‏`Counter` ומיזוג.
