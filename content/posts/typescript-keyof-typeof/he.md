@@ -3,7 +3,7 @@ title: "keyof, ‏typeof ו-indexed access types ב-TypeScript"
 summary: "keyof מחזיר את שמות השדות, typeof בעמדת טיפוס מחזיר את הטיפוס של משתנה, ו-T[\"prop\"] שולף טיפוס של שדה. ומה זה (typeof arr)[number] ואיך כותבים get(obj, key) בטוח."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 19 }
+series: { key: typescript, order: 20 }
 ---
 
 שלושה אופרטורים שבונים טיפוס מטיפוס אחר או מערך קיים, כך שאת אותו מידע כותבים פעם אחת.

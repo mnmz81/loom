@@ -3,7 +3,7 @@ title: "conditional types ב-TypeScript: ‏extends, ‏infer ופיזור על 
 summary: "‏T extends U ? X : Y בוחר טיפוס לפי תנאי. איך תנאי מתפזר על כל חלק ב-union ואיך עוצרים את זה, ‏infer שמחלץ טיפוס מתוך טיפוס, ואיך ReturnType ו-Awaited בנויים."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 21 }
+series: { key: typescript, order: 24 }
 ---
 
 ‏conditional type הוא אופרטור `? :` ברמת הטיפוסים: אם טיפוס אחד ניתן להשמה לשני, מקבלים טיפוס אחד, ואם לא, טיפוס אחר. רוב ה-[utility types](he/posts/typescript-utility-types/) בנויים כך, ו[המדריך הרשמי](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html) מראה עוד דוגמאות.

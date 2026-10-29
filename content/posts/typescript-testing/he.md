@@ -3,7 +3,7 @@ title: "בדיקות ל-TypeScript עם Vitest"
 summary: "מריצים בדיקות על קבצי .ts עם Vitest בלי שלב קומפילציה, רואים למה בדיקה עוברת גם כשהטיפוסים שגויים, וכותבים בדיקות לטיפוסים עצמם עם expectTypeOf ו-assertType."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 29 }
+series: { key: typescript, order: 35 }
 ---
 
 ‏[Vitest](https://vitest.dev/guide/) מריץ קבצי בדיקה ב-TypeScript ישירות, בלי לקמפל אותם קודם. כמו Node, הוא לא בודק טיפוסים בזמן הריצה. לשם כך יש לו מצב נפרד של בדיקות טיפוסים.

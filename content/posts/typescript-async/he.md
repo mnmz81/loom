@@ -3,7 +3,7 @@ title: "קוד אסינכרוני ב-TypeScript: ‏Promise, ‏async/await ו-f
 summary: "‏Promise<T> וטיפוס ההחזרה של פונקציית async, ‏await ו-Awaited, איך Promise.all מחזיר tuple עם טיפוסים, למה response.json() מחזיר any, ולמה err ב-catch הוא unknown."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 23 }
+series: { key: typescript, order: 26 }
 ---
 
 פונקציית `async` תמיד מחזירה Promise, ו-TypeScript עוקבת אחרי מה שיש בתוכו: `Promise<string>` הוא הבטחה למחרוזת. מכאן נגזרים הטיפוסים של `await`, של `Promise.all` ושל שגיאות.

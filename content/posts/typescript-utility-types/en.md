@@ -3,7 +3,7 @@ title: "Utility types in TypeScript: Partial, Pick, Omit, Record, ReturnType and
 summary: "TypeScript's built-in helper types with one example per group: Partial and Readonly, Pick and Omit, Record, ReturnType and Awaited, NonNullable and NoInfer."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 20 }
+series: { key: typescript, order: 21 }
 ---
 
 TypeScript ships with ready-made generic types that transform an existing type: make properties optional, remove a property, get a function's return type. The full list is on [Utility Types](https://www.typescriptlang.org/docs/handbook/utility-types.html). Here are the common ones, with one example per group.
@@ -167,4 +167,4 @@ According to the Utility Types page, `Omit` arrived in TypeScript 3.5, `Awaited`
 
 ## What's next
 
-Next: conditional types and `infer`.
+Next: where `Pick`, `Omit`, `ReturnType`, `Parameters` and `Record` earn their place, and where they quietly let bugs through.

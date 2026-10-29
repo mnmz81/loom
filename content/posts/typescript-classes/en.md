@@ -3,7 +3,7 @@ title: "Classes in TypeScript: readonly, private vs #private, abstract"
 summary: "Fields and strictPropertyInitialization, readonly, compile-time private vs JavaScript's #private, abstract and implements, and parameter properties, which need tsx."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 13 }
+series: { key: typescript, order: 14 }
 ---
 
 A class in TypeScript is a JavaScript class with types for its fields and methods. Most of the keywords added on top, like `readonly`, `private` and `abstract`, exist only in the type check and are erased before the code runs.

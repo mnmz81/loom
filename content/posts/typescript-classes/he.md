@@ -3,7 +3,7 @@ title: "מחלקות ב-TypeScript: ‏readonly, ‏private מול #private, ‏
 summary: "שדות ו-strictPropertyInitialization, ‏readonly, ‏private שקיים רק בבדיקה מול #private של JavaScript, ‏abstract ו-implements, ו-parameter properties שלא רצים ב-Node בלי tsx."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 13 }
+series: { key: typescript, order: 14 }
 ---
 
 מחלקה ב-TypeScript היא מחלקה של JavaScript עם טיפוסים לשדות ולמתודות. רוב מילות המפתח שנוספות עליה, כמו `readonly`, ‏`private` ו-`abstract`, קיימות רק בבדיקת הטיפוסים ונמחקות לפני הריצה.

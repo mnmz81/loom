@@ -3,7 +3,7 @@ title: "Modules in TypeScript: import, export and extensions"
 summary: "A file without import or export is a script with global names. Named and default exports, export type and re-exports, and when an import needs an extension: nodenext vs bundler."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 14 }
+series: { key: typescript, order: 15 }
 ---
 
 Every TypeScript file is either a module or a script. In a module, the names defined in the file belong only to it, and other files use them through `export` and `import`. In a script, they're global.

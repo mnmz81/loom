@@ -3,7 +3,7 @@ title: "Decorators in TypeScript: the standard version vs experimentalDecorators
 summary: "What a decorator is, a standard method and class decorator, why Node can't run them, and how experimentalDecorators, which new Angular projects still enable, differs."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 15 }
+series: { key: typescript, order: 16 }
 ---
 
 A decorator is a function that receives a class or a class member, and can return something to replace it. You write it with `@` before the declaration. If you've worked with Angular, you know them from every file: `@Component`, `@Injectable`.

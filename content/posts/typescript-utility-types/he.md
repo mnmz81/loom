@@ -3,7 +3,7 @@ title: "utility types ב-TypeScript: ‏Partial, ‏Pick, ‏Omit, ‏Record, �
 summary: "טיפוסי העזר המובנים של TypeScript בדוגמה אחת לכל קבוצה: Partial ו-Readonly, ‏Pick ו-Omit, ‏Record, ‏ReturnType ו-Awaited, ‏NonNullable ו-NoInfer."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 20 }
+series: { key: typescript, order: 21 }
 ---
 
 ‏TypeScript מגיעה עם טיפוסים גנריים מוכנים שמשנים טיפוס קיים: הופכים שדות לאופציונליים, מוחקים שדה, שולפים את סוג ההחזרה של פונקציה. הרשימה המלאה נמצאת ב-[Utility Types](https://www.typescriptlang.org/docs/handbook/utility-types.html). כאן הנפוצים, בדוגמה אחת לכל קבוצה.
@@ -167,4 +167,4 @@ blue
 
 ## מה הלאה
 
-בפוסט הבא: conditional types ו-`infer`.
+בפוסט הבא: איפה `Pick`, ‏`Omit`, ‏`ReturnType`, ‏`Parameters` ו-`Record` מצדיקים את עצמם, ואיפה הם מעבירים באגים בשקט.

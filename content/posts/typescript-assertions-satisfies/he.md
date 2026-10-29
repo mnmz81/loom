@@ -3,7 +3,7 @@ title: "as, ‏satisfies ו-type guards ב-TypeScript"
 summary: "as משתיק את הבודק ולא בודק כלום בזמן ריצה. satisfies בודק אובייקט בלי לאבד את הטיפוס המדויק שלו. ופונקציות value is T ו-asserts value is T שבודקות באמת."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 16 }
+series: { key: typescript, order: 17 }
 ---
 
 לפעמים אתם יודעים על ערך יותר ממה ש-TypeScript יודעת. יש שלוש דרכים להגיד לה את זה, וההבדל ביניהן הוא מי בודק שצדקתם: אף אחד, הקומפיילר, או קוד שרץ.

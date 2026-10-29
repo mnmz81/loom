@@ -98,4 +98,4 @@ Inside `case "circle"`, `shape` is only the circle, so `shape.radius` is allowed
 
 ## What's next
 
-Next: `null`, `undefined`, `?.`, `??` and `!`.
+Next: modelling state with discriminated unions, so that impossible states can't be written.

@@ -3,7 +3,7 @@ title: "enum ב-TypeScript, ובמה משתמשים במקומו"
 summary: "enum מספרי ומחרוזתי, ה-JavaScript ש-tsc מייצר מהם ו-reverse mapping. החלופות: union של literals ואובייקט as const, שרצים ב-Node בלי tsx."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 12 }
+series: { key: typescript, order: 13 }
 ---
 
 ‏`enum` נותן שמות לקבוצה של קבועים. בניגוד לרוב התחביר של TypeScript, הוא לא נמחק בקומפילציה אלא הופך לאובייקט JavaScript, ולכן Node לא מריץ אותו בלי tsx וב-`erasableSyntaxOnly` הוא שגיאה ([בפוסט על ההתקנה](he/posts/typescript-setup/)).

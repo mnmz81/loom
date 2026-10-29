@@ -3,7 +3,7 @@ title: "קובצי הצהרה .d.ts ב-TypeScript: ‏declaration, ‏@types ו-
 summary: "מה יש בקובץ .d.ts, איך declaration: true יוצר אותו, מאיפה מגיעים הטיפוסים של חבילות (@types), ‏declare למשתנה גלובלי, ‏declare module לחבילה בלי טיפוסים, ומה skipLibCheck מדלג עליו."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 25 }
+series: { key: typescript, order: 31 }
 ---
 
 קובץ `.d.ts` מכיל רק טיפוסים: אין בו קוד שרץ ואין בו ערכים. ‏TypeScript קוראת אותו כדי לדעת איך נראה קוד JavaScript שהמקור שלו לא לפניה. כך היא מכירה את `fetch` (מ-`lib.dom.d.ts`), את החבילות ב-`node_modules` ומשתנים גלובליים משלכם. ההסבר המלא נמצא ב[מדריך לקובצי הצהרה](https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html).

@@ -3,7 +3,7 @@ title: "monorepo ב-TypeScript: ‏project references ו-tsc --build"
 summary: "כמה חבילות בריפו אחד: tsconfig בסיס משותף עם extends, ‏composite ו-references, בנייה לפי סדר עם tsc -b, ו-paths בלי baseUrl, שהוצא משימוש ב-TypeScript 6.0."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 28 }
+series: { key: typescript, order: 34 }
 ---
 
 בריפו עם כמה חבילות, `tsconfig.json` אחד שבודק הכול נהיה איטי, וכל חבילה יכולה לייבא כל קובץ מכל חבילה אחרת. ‏[Project references](https://www.typescriptlang.org/docs/handbook/project-references.html) מחלקים את הריפו לפרויקטים נפרדים, ו-`tsc` בונה אותם לפי הסדר.

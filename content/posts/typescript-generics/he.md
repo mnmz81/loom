@@ -3,7 +3,7 @@ title: "generics ב-TypeScript: פונקציות גנריות, הסקה ו-const
 summary: "למה generics ולא any, איך TypeScript מסיקה את הטיפוס מהארגומנטים, constraints עם extends ו-keyof, ערכי ברירת מחדל לפרמטרי טיפוס, ומתי כותבים את הטיפוס במפורש."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 17 }
+series: { key: typescript, order: 18 }
 ---
 
 פונקציה שעובדת עם כל טיפוס צריכה דרך להגיד "מה שנכנס, זה מה שיוצא". ‏generic הוא פרמטר של טיפוס: ‏TypeScript ממלאת אותו בכל קריאה לפי הארגומנטים.

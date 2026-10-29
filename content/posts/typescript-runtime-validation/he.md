@@ -3,7 +3,7 @@ title: "בדיקת נתונים בזמן ריצה ב-TypeScript: ‏type guards 
 summary: "הטיפוסים נמחקים לפני הריצה, ולכן נתונים מבחוץ (JSON, ‏API, משתני סביבה, טפסים) צריך לבדוק. ‏type guard שכותבים ביד, ואז zod: סכמה אחת, טיפוס שנגזר ממנה ו-safeParse."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 24 }
+series: { key: typescript, order: 27 }
 ---
 
 ‏TypeScript בודקת את הקוד, לא את הנתונים. ‏`JSON.parse` ו-`response.json()` מחזירים `any`, ובזמן ריצה אין שום טיפוס שיעצור JSON שחסר בו שדה, כמו בדוגמה מ[הפוסט על async](he/posts/typescript-async/). כל מה שמגיע מבחוץ, תשובת API, קובץ הגדרות, משתנה סביבה או טופס, צריך בדיקה בקוד שרץ.
@@ -92,4 +92,4 @@ user.ts(11,7): error TS2741: Property 'role' is missing in type '{ id: number; e
 
 ## מה הלאה
 
-בפוסט הבא: קובצי הצהרה `.d.ts`.
+בפוסט הבא: type guards לעומק, לנתונים שלא בשליטתכם.

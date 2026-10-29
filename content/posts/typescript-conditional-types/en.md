@@ -3,7 +3,7 @@ title: "Conditional types in TypeScript: extends, infer and distribution over un
 summary: "T extends U ? X : Y picks a type by a condition. How it distributes over a union and how to stop that, infer to pull a type out of a type, and how ReturnType and Awaited are built."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 21 }
+series: { key: typescript, order: 24 }
 ---
 
 A conditional type is the `? :` operator at the type level: if one type is assignable to another, you get one type, otherwise another. Most of the [utility types](en/posts/typescript-utility-types/) are built this way, and [the official handbook](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html) has more examples.

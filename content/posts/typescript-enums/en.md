@@ -3,7 +3,7 @@ title: "Enums in TypeScript, and what to use instead"
 summary: "Numeric and string enums, the JavaScript tsc emits for them and reverse mapping. The alternatives: a union of literals and an as const object, which run in Node without tsx."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 12 }
+series: { key: typescript, order: 13 }
 ---
 
 An `enum` gives names to a set of constants. Unlike most TypeScript syntax, it isn't erased at compile time but becomes a JavaScript object, which is why Node doesn't run it without tsx and `erasableSyntaxOnly` reports it as an error ([in the setup post](en/posts/typescript-setup/)).

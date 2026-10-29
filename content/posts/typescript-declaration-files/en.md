@@ -3,7 +3,7 @@ title: ".d.ts declaration files in TypeScript: declaration, @types and declare m
 summary: "What's in a .d.ts file, how declaration: true emits it, where package types come from (@types), declare for a global, declare module for an untyped package, and what skipLibCheck skips."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 25 }
+series: { key: typescript, order: 31 }
 ---
 
 A `.d.ts` file holds only types: no code that runs and no values. TypeScript reads it to learn the shape of JavaScript whose source it doesn't have. That's how it knows `fetch` (from `lib.dom.d.ts`), the packages in `node_modules` and your own globals. The full explanation is in [the declaration files guide](https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html).

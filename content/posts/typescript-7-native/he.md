@@ -3,7 +3,7 @@ title: "TypeScript 7: הקומפיילר המהיר שנכתב ב-Go"
 summary: "מה השתנה ב-TypeScript 7.0: קומפיילר native שנכתב ב-Go, אותה פקודת tsc ובנייה מהירה בהרבה. מה צריך לנקות ב-6.0 לפני המעבר, ולמה כלים שתלויים ב-API, כמו Angular, נשארים ב-6.0."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 30 }
+series: { key: typescript, order: 36 }
 ---
 
 ‏[TypeScript 7.0](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/) יצאה ב-8 ביולי 2026. השפה לא השתנתה: הקומפיילר נכתב מחדש ב-Go, ורץ כקובץ native במקום JavaScript על Node.js. קוד שעובר את 6.0 עובר גם את 7.0, עם אותן שגיאות, בתנאי שה-tsconfig שלו נקי מאפשרויות ש-6.0 הוציאה משימוש.

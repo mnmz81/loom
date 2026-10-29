@@ -3,7 +3,7 @@ title: "How to read tsc error messages"
 summary: "What each part of a tsc error says: file, line and column, code, message and the indented explanation lines. Plus the common codes: TS2322, TS2345, TS2339, TS7006, TS18048, TS2554 and TS2769."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 27 }
+series: { key: typescript, order: 33 }
 ---
 
 Every `tsc` error has the same structure. If you know how to take it apart, you get to the cause faster, even when the message is long and full of types.

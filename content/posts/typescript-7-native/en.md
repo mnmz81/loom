@@ -3,7 +3,7 @@ title: "TypeScript 7: the fast compiler written in Go"
 summary: "What changed in TypeScript 7.0: a native compiler written in Go, the same tsc command and much faster builds. What to clean up in 6.0 first, and why tools that need the API, like Angular, stay on 6.0."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 30 }
+series: { key: typescript, order: 36 }
 ---
 
 [TypeScript 7.0](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/) came out on July 8, 2026. The language didn't change: the compiler was rewritten in Go, and runs as a native binary instead of JavaScript on Node.js. Code that passes 6.0 passes 7.0 too, with the same errors, as long as its tsconfig is free of options 6.0 deprecated.

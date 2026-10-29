@@ -3,7 +3,7 @@ title: "keyof, typeof and indexed access types in TypeScript"
 summary: "keyof gives the property names, typeof in a type position gives a variable's type, and T[\"prop\"] looks up a property's type. Plus what (typeof arr)[number] means and a type-safe get(obj, key)."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 19 }
+series: { key: typescript, order: 20 }
 ---
 
 Three operators that build a type from another type or from an existing value, so the same information is written once.

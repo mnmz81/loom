@@ -3,7 +3,7 @@ title: "Mapped types and template literal types in TypeScript"
 summary: "{ [K in keyof T]: ... } builds a new type from the keys of an existing one: readonly and ? modifiers, renaming keys with as, filtering with never, and names like onClick with template literal types."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 22 }
+series: { key: typescript, order: 25 }
 ---
 
 A mapped type walks over the keys of one type and builds a new type from them. That's how `Partial`, `Readonly`, `Required`, `Pick` and `Record` from [the utility types post](en/posts/typescript-utility-types/) are built, and how you write your own when none of them fits. The syntax is described in [the official handbook](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html).

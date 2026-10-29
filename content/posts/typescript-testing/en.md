@@ -3,7 +3,7 @@ title: "Testing TypeScript with Vitest"
 summary: "Run tests on .ts files with Vitest without a compile step, see why a test passes even when the types are wrong, and write tests for the types themselves with expectTypeOf and assertType."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 29 }
+series: { key: typescript, order: 35 }
 ---
 
 [Vitest](https://vitest.dev/guide/) runs TypeScript test files directly, without compiling them first. Like Node, it doesn't check types while running. For that it has a separate type-testing mode.

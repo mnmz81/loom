@@ -3,7 +3,7 @@ title: "A TypeScript monorepo: project references and tsc --build"
 summary: "Several packages in one repo: a shared base tsconfig with extends, composite and references, building in order with tsc -b, and paths without baseUrl, which TypeScript 6.0 deprecated."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 28 }
+series: { key: typescript, order: 34 }
 ---
 
 In a repo with several packages, one `tsconfig.json` that checks everything gets slow, and any package can import any file from any other package. [Project references](https://www.typescriptlang.org/docs/handbook/project-references.html) split the repo into separate projects, and `tsc` builds them in order.

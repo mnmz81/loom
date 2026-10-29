@@ -3,7 +3,7 @@ title: "Validating data at runtime in TypeScript: type guards and zod"
 summary: "Types are erased before the code runs, so data from outside (JSON, APIs, env vars, forms) must be checked. A hand-written type guard, then zod: one schema, a type derived from it, and safeParse."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 24 }
+series: { key: typescript, order: 27 }
 ---
 
 TypeScript checks the code, not the data. `JSON.parse` and `response.json()` return `any`, and at runtime no type stops JSON with a missing field, as the [async post](en/posts/typescript-async/) showed. Everything that comes from outside, an API response, a config file, an environment variable or a form, needs checking in code that runs.
@@ -92,4 +92,4 @@ In Python the same idea is called pydantic: a class with type hints that checks 
 
 ## What's next
 
-Next: `.d.ts` declaration files.
+Next: type guards in depth, for data you don't control.

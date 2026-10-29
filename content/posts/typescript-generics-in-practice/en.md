@@ -3,7 +3,7 @@ title: "Generics in practice: Promise<T>, ApiResult<T>, generic classes and Arra
 summary: "Where generics show up in real code: Promise<T> in async functions, an ApiResult<T> response type, a generic interface and class, and the generic signatures of map, find and reduce."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 18 }
+series: { key: typescript, order: 19 }
 ---
 
 The [previous post](en/posts/typescript-generics/) showed how to write a generic function. Most generics in everyday code, though, are types someone else wrote, or types that wrap another value.

@@ -3,7 +3,7 @@ title: "decorators ב-TypeScript: הגרסה הסטנדרטית מול experimen
 summary: "מה זה decorator, איך כותבים decorator סטנדרטי למתודה ולמחלקה, למה Node לא מריץ אותם בלי tsx, ומה ההבדל מ-experimentalDecorators שפרויקט Angular חדש עדיין מדליק."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 15 }
+series: { key: typescript, order: 16 }
 ---
 
 decorator הוא פונקציה שמקבלת מחלקה או איבר של מחלקה, ויכולה להחזיר משהו שיחליף אותו. כותבים אותו עם `@` לפני ההגדרה. מי שעבד עם Angular מכיר אותם מכל קובץ: ‏`@Component`, ‏`@Injectable`.

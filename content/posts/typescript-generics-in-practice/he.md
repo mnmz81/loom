@@ -3,7 +3,7 @@ title: "generics בפועל: Promise<T>, ‏ApiResult<T>, מחלקות גנרי�
 summary: "איפה generics מופיעים בקוד אמיתי: Promise<T> בפונקציות async, טיפוס תשובה ApiResult<T>, ממשק ומחלקה גנריים, והחתימות הגנריות של map, ‏find ו-reduce."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 18 }
+series: { key: typescript, order: 19 }
 ---
 
 ‏[הפוסט הקודם](he/posts/typescript-generics/) הראה איך כותבים פונקציה גנרית. רוב ה-generics בקוד יומיומי הם דווקא טיפוסים שאחרים כתבו, או טיפוסים שעוטפים ערך אחר.

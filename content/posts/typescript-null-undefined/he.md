@@ -3,7 +3,7 @@ title: "null ו-undefined ב-TypeScript: ‏strictNullChecks, ‏?., ‏?? ו-!"
 summary: "איך strictNullChecks מכריחה לטפל ב-null וב-undefined, מה ההבדל בין ?? ל-||, למה find ו-Map.get מחזירים undefined, ומתי הסימן ! מעביר את הקריסה לזמן ריצה."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 11 }
+series: { key: typescript, order: 12 }
 ---
 
 ב-JavaScript יש שני ערכים שאומרים "אין כאן כלום": ‏`null` ו-`undefined`. גישה לשדה של אחד מהם זורקת `TypeError` בזמן ריצה. ב-TypeScript הם טיפוסים נפרדים, ו-`tsc` מחייב לטפל בהם לפני השימוש.

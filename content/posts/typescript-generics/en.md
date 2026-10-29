@@ -3,7 +3,7 @@ title: "Generics in TypeScript: generic functions, inference and constraints"
 summary: "Why generics and not any, how TypeScript infers the type from the arguments, constraints with extends and keyof, default type parameters, and when to write the type explicitly."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 17 }
+series: { key: typescript, order: 18 }
 ---
 
 A function that works with any type needs a way to say "what goes in is what comes out". A generic is a type parameter: TypeScript fills it in on every call from the arguments.

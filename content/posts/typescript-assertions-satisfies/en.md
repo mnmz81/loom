@@ -3,7 +3,7 @@ title: "as, satisfies and type guards in TypeScript"
 summary: "as silences the checker and checks nothing at runtime. satisfies checks an object without losing its exact type. And value is T and asserts value is T functions that really check."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 16 }
+series: { key: typescript, order: 17 }
 ---
 
 Sometimes you know more about a value than TypeScript does. There are three ways to tell it, and the difference is who checks that you were right: nobody, the compiler, or code that runs.

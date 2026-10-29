@@ -3,7 +3,7 @@ title: "null and undefined in TypeScript: strictNullChecks, ?., ?? and !"
 summary: "How strictNullChecks makes you handle null and undefined, the difference between ?? and ||, why find and Map.get return undefined, and when ! moves the crash to runtime."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 11 }
+series: { key: typescript, order: 12 }
 ---
 
 JavaScript has two values that mean "nothing here": `null` and `undefined`. Reading a property of either one throws a `TypeError` at runtime. In TypeScript they are separate types, and `tsc` makes you handle them before use.

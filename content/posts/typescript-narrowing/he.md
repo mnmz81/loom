@@ -98,4 +98,4 @@ area.ts(14,13): error TS2322: Type '{ kind: "triangle"; base: number; height: nu
 
 ## מה הלאה
 
-בפוסט הבא: ‏`null`, ‏`undefined`, ‏`?.`, ‏`??` ו-`!`.
+בפוסט הבא: מידול state עם discriminated unions, כך שאי אפשר לכתוב מצבים בלתי אפשריים.

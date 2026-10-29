@@ -3,7 +3,7 @@ title: "mapped types ו-template literal types ב-TypeScript"
 summary: "‏{ [K in keyof T]: ... } בונה טיפוס חדש ממפתחות של טיפוס קיים: modifiers של readonly ו-?, שינוי שמות מפתחות עם as, סינון עם never, ושמות כמו onClick עם template literal types."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 22 }
+series: { key: typescript, order: 25 }
 ---
 
 ‏mapped type עובר על המפתחות של טיפוס אחד ובונה מהם טיפוס חדש. כך בנויים `Partial`, ‏`Readonly`, ‏`Required`, ‏`Pick` ו-`Record` מ[פוסט ה-utility types](he/posts/typescript-utility-types/), וכך כותבים גרסה משלכם כשאף אחד מהם לא מתאים. התחביר מתואר ב[מדריך הרשמי](https://www.typescriptlang.org/docs/handbook/2/mapped-types.html).

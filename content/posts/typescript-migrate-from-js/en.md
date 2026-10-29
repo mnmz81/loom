@@ -3,7 +3,7 @@ title: "Moving from JavaScript to TypeScript: allowJs, checkJs and JSDoc"
 summary: "How to move a JavaScript project to TypeScript one file at a time: allowJs, // @ts-check, JSDoc types, renaming to .ts, turning on strict gradually, and @ts-expect-error vs @ts-ignore."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 26 }
+series: { key: typescript, order: 32 }
 ---
 
 You don't have to rename every file to `.ts` in one day. TypeScript can check JavaScript files as they are, so you can move one file at a time while the project keeps running. [The official migration guide](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html) describes the same order.

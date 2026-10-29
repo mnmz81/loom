@@ -3,7 +3,7 @@ title: "Async code in TypeScript: Promise, async/await and fetch"
 summary: "Promise<T> and the return type of an async function, await and Awaited, how Promise.all returns a typed tuple, why response.json() returns any, and why err in catch is unknown."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 23 }
+series: { key: typescript, order: 26 }
 ---
 
 An `async` function always returns a Promise, and TypeScript tracks what's inside it: `Promise<string>` is a promise of a string. The types of `await`, `Promise.all` and errors all follow from that.

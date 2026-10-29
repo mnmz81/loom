@@ -3,7 +3,7 @@ title: "מעבר מ-JavaScript ל-TypeScript: ‏allowJs, ‏checkJs ו-JSDoc"
 summary: "איך מעבירים פרויקט JavaScript ל-TypeScript קובץ אחרי קובץ: allowJs, הערת ts-check, טיפוסים ב-JSDoc, שינוי שם ל-.ts, הדלקת strict בהדרגה, ו-@ts-expect-error מול @ts-ignore."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 26 }
+series: { key: typescript, order: 32 }
 ---
 
 לא צריך לשנות את כל הקבצים ל-`.ts` ביום אחד. ‏TypeScript יודעת לבדוק קבצי JavaScript כמו שהם, וכך אפשר להתקדם קובץ אחרי קובץ, כשהפרויקט ממשיך לרוץ כל הזמן. [המדריך הרשמי למעבר](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html) מתאר את אותו סדר.

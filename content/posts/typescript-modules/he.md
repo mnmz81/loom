@@ -3,7 +3,7 @@ title: "מודולים ב-TypeScript: ‏import, ‏export וסיומות"
 summary: "קובץ בלי import או export הוא סקריפט עם שמות גלובליים. ‏export רגיל ו-default, ‏export type ו-re-export, ומתי import צריך סיומת: nodenext מול bundler."
 date: 2026-10-20
 tags: [typescript]
-series: { key: typescript, order: 14 }
+series: { key: typescript, order: 15 }
 ---
 
 כל קובץ TypeScript הוא מודול או סקריפט. במודול, השמות שמוגדרים בקובץ שייכים רק לו, ומשתמשים בהם בקבצים אחרים דרך `export` ו-`import`. בסקריפט, הם גלובליים.
