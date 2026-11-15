@@ -88,11 +88,6 @@
   white-space: nowrap;
 }
 
-.entry-card__type {
-  color: var(--nb-color-text);
-  font-weight: 600;
-}
-
 .entry-card__tags {
   position: relative; // above the row-wide link so the tag stays clickable
 }

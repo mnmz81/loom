@@ -111,18 +111,6 @@
   }
 }
 
-.certificates__close {
-  min-inline-size: var(--nb-touch-target);
-  min-block-size: var(--nb-touch-target);
-  padding-inline: var(--nb-space-4);
-  border: 1px solid var(--nb-color-border);
-  border-radius: var(--nb-radius-full);
-  background: var(--nb-color-surface-2);
-  color: var(--nb-color-text);
-  font-weight: 600;
-  cursor: pointer;
-}
-
 .certificates__empty {
   margin: 0;
   color: var(--nb-color-muted);

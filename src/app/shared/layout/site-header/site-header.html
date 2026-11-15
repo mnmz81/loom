@@ -16,22 +16,7 @@
       [attr.aria-label]="locale.t('nav.menu')"
       (click)="toggleMenu()"
     >
-      <svg
-        viewBox="0 0 24 24"
-        width="22"
-        height="22"
-        aria-hidden="true"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-      >
-        @if (menuOpen()) {
-          <path d="M6 6l12 12M18 6L6 18" />
-        } @else {
-          <path d="M4 7h16M4 12h16M4 17h16" />
-        }
-      </svg>
+      <mui-icon [name]="menuOpen() ? 'x' : 'menu'" />
     </button>
 
     <nav id="nb-site-nav" class="site-header__nav" [attr.aria-label]="locale.t('nav.main')">

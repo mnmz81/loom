@@ -3,10 +3,10 @@
     <h1 class="home-hero__title">{{ locale.t('home.title') }}</h1>
     <p class="home-hero__lead">{{ locale.t('home.lead') }}</p>
     <p class="home-hero__actions">
-      <a class="home-hero__action home-hero__action--primary" [routerLink]="paths.seriesList(locale.lang())">{{
+      <a muiButton class="home-hero__action" [routerLink]="paths.seriesList(locale.lang())">{{
         locale.t('home.startSeries')
       }}</a>
-      <a class="home-hero__action" [routerLink]="paths.search(locale.lang())">{{ locale.t('home.search') }}</a>
+      <a muiButton variant="secondary" class="home-hero__action" [routerLink]="paths.search(locale.lang())">{{ locale.t('home.search') }}</a>
     </p>
   </header>
 

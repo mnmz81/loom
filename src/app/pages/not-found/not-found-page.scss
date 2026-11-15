@@ -14,22 +14,6 @@
   line-height: 1;
 }
 
-.not-found__home {
-  display: inline-flex;
-  align-items: center;
-  min-block-size: var(--nb-touch-target);
-  padding-inline: var(--nb-space-5);
-  border-radius: var(--nb-radius-full);
-  background: var(--nb-color-accent);
-  color: var(--nb-color-accent-contrast);
-  font-weight: 600;
-  text-decoration: none;
-
-  &:hover {
-    filter: brightness(1.1);
-  }
-}
-
 .not-found__other {
   margin-block-start: var(--nb-space-6);
 }

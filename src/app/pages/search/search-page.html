@@ -8,6 +8,8 @@
     <input
       #searchInput
       id="search-input"
+      muiInput
+      size="lg"
       class="search__input"
       type="search"
       autocomplete="off"
@@ -19,8 +21,8 @@
 
     <div class="search__filters">
       <div class="search__filter">
-        <label for="search-type">{{ text('search.type') }}</label>
-        <select id="search-type" [value]="type()" (change)="onType($event)">
+        <mui-label for="search-type">{{ text('search.type') }}</mui-label>
+        <select muiSelect id="search-type" [value]="type()" (change)="onType($event)">
           <option value="">{{ text('search.typeAll') }}</option>
           @for (option of typeOptions(); track option.value) {
             <option [value]="option.value" [selected]="type() === option.value">{{ option.label }}</option>
@@ -28,8 +30,8 @@
         </select>
       </div>
       <div class="search__filter">
-        <label for="search-tag">{{ text('search.tag') }}</label>
-        <select id="search-tag" [value]="tag()" (change)="onTag($event)">
+        <mui-label for="search-tag">{{ text('search.tag') }}</mui-label>
+        <select muiSelect id="search-tag" [value]="tag()" (change)="onTag($event)">
           <option value="">{{ text('search.tagAll') }}</option>
           @for (t of index().tags; track t.tag) {
             <option [value]="t.tag" [selected]="tag() === t.tag">{{ t.label }}</option>
@@ -77,7 +79,7 @@
         <li class="result">
           <p class="result__meta">
             @if (hit.type) {
-              <span class="result__type">{{ typeLabel(hit.type) }}</span>
+              <mui-badge class="result__type" size="sm">{{ typeLabel(hit.type) }}</mui-badge>
             }
           </p>
           <h2 class="result__title">

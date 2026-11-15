@@ -79,11 +79,6 @@
   flex: none;
 }
 
-// Arrows point "back"/"forward" along the reading direction.
-:host-context([dir='rtl']) .series-nav__arrow {
-  transform: scaleX(-1);
-}
-
 .series-nav__ref {
   // Stay on the UI's edge even when dir differs (fallback-language title).
   align-self: flex-start;

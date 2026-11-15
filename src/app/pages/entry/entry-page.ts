@@ -27,13 +27,16 @@ import { describeHtml } from '../seo-helpers';
 /** Posts at least this long (≈ 4 screens) get a back-to-top button. */
 const LONG_POST_MINUTES = 3;
 
+import { Fab } from '@mushilu-san/ui/mobile';
+import { Icon } from '@mushilu-san/ui/primitives';
+
 /**
  * `/:lang/posts/:slug` and `/:lang/notes/:slug`. `entry` comes from `entryResolver` (always in the route
  * language), `index` from `langIndexResolver` (tag labels).
  */
 @Component({
   selector: 'nb-entry-page',
-  imports: [ArticleBody, EntryMeta, RelatedList, SeriesNav, TagList, Toc],
+  imports: [ArticleBody, EntryMeta, Fab, Icon, RelatedList, SeriesNav, TagList, Toc],
   templateUrl: './entry-page.html',
   styleUrl: './entry-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -22,7 +22,7 @@
 
   <div class="entry-card__meta">
     @if (entry().type === 'note') {
-      <span class="entry-card__type">{{ typeLabel() }}</span>
+      <mui-badge class="entry-card__type" size="sm">{{ typeLabel() }}</mui-badge>
     }
     <time [attr.datetime]="entry().date">{{ date() }}</time>
     @if (foreignLang(); as lang) {

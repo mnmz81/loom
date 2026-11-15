@@ -11,17 +11,6 @@
 .search__input,
 .search__filter select {
   inline-size: 100%;
-  min-block-size: var(--nb-touch-target);
-  padding-inline: var(--nb-space-4);
-  border: 1px solid var(--nb-color-border);
-  border-radius: var(--nb-radius-sm);
-  background: var(--nb-color-surface);
-  color: var(--nb-color-text);
-  font: inherit;
-}
-
-.search__input {
-  font-size: 1.125rem;
 }
 
 .search__filters {
@@ -34,11 +23,6 @@
   display: grid;
   flex: 1 1 10rem;
   gap: var(--nb-space-1);
-
-  label {
-    color: var(--nb-color-muted);
-    font-size: 0.9375rem;
-  }
 }
 
 .search__status {
