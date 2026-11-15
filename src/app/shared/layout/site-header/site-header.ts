@@ -4,6 +4,7 @@ import {
   DOCUMENT,
   ElementRef,
   computed,
+  type Signal,
   inject,
   input,
   output,
@@ -11,7 +12,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, isActive } from '@angular/router';
 import { filter, map } from 'rxjs';
 import type { DictKey } from '../../../core/i18n/i18n.types';
 import { LocaleService } from '../../../core/i18n/locale.service';
@@ -21,14 +22,18 @@ import { SITE } from '../../../core/site.config';
 interface NavLink {
   key: DictKey;
   path: string;
-  exact: boolean;
+  /** Current page or section; a signal, so the OnPush header follows navigation. */
+  active: Signal<boolean>;
   /** aria-keyshortcuts value, when the link has a keyboard shortcut. */
   shortcut?: string;
 }
 
+import { Button } from '@mushilu-san/ui/primitives';
+import { NavLink as MuiNavLink } from '@mushilu-san/ui/navigation';
+
 @Component({
   selector: 'nb-site-header',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, Button, MuiNavLink],
   templateUrl: './site-header.html',
   styleUrl: './site-header.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -55,12 +60,23 @@ export class SiteHeader {
   protected readonly homePath = computed(() => PATHS.home(this.locale.lang()));
   protected readonly links = computed<NavLink[]>(() => {
     const lang = this.locale.lang();
+    const link = (key: DictKey, path: string, exact = false, shortcut?: string): NavLink => ({
+      key,
+      path,
+      shortcut,
+      active: isActive(path, this.router, {
+        paths: exact ? 'exact' : 'subset',
+        queryParams: 'ignored',
+        fragment: 'ignored',
+        matrixParams: 'ignored',
+      }),
+    });
     return [
-      { key: 'nav.home', path: PATHS.home(lang), exact: true },
-      { key: 'nav.posts', path: PATHS.posts(lang), exact: false },
-      { key: 'nav.series', path: PATHS.seriesList(lang), exact: false },
-      { key: 'nav.certificates', path: PATHS.certificates(lang), exact: false },
-      { key: 'nav.search', path: PATHS.search(lang), exact: false, shortcut: 'Control+K Meta+K' },
+      link('nav.home', PATHS.home(lang), true),
+      link('nav.posts', PATHS.posts(lang)),
+      link('nav.series', PATHS.seriesList(lang)),
+      link('nav.certificates', PATHS.certificates(lang)),
+      link('nav.search', PATHS.search(lang), false, 'Control+K Meta+K'),
     ];
   });
 
@@ -76,7 +92,7 @@ export class SiteHeader {
   );
 
   protected readonly menuOpen = signal(false);
-  private readonly menuButton = viewChild.required<ElementRef<HTMLButtonElement>>('menuButton');
+  private readonly menuButton = viewChild.required('menuButton', { read: ElementRef<HTMLButtonElement> });
 
   protected toggleMenu(): void {
     this.menuOpen.update((open) => !open);

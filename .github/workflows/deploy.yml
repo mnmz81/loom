@@ -26,7 +26,10 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
 
+      # @mushilu-san/ui is a private package of another owner: GITHUB_TOKEN cannot read it.
       - run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PACKAGES_READ_TOKEN }}
       - run: npm run test:scripts
       - run: npm test
 

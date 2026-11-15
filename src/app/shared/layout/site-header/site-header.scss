@@ -52,41 +52,12 @@
   list-style: none;
 }
 
-.site-header__links a,
-.site-header__lang {
-  display: inline-flex;
-  align-items: center;
-  min-block-size: var(--nb-touch-target);
-  padding-inline: var(--nb-space-3);
-  border-radius: var(--nb-radius-sm);
-  color: var(--nb-color-muted);
-  font-weight: 500;
-  text-decoration: none;
-  transition:
-    color var(--nb-duration-fast) var(--nb-ease-out),
-    background-color var(--nb-duration-fast) var(--nb-ease-out);
-
-  &:hover {
-    color: var(--nb-color-text);
-    background: var(--nb-color-surface-2);
-  }
-
-  &.is-active {
-    color: var(--nb-color-tag-text);
-    background: var(--nb-color-tag-bg);
-    font-weight: 600;
-  }
-}
-
 .site-header__actions {
   display: flex;
   align-items: center;
   gap: var(--nb-space-2);
 }
 
-.site-header__lang {
-  background: var(--nb-color-surface);
-}
 
 .site-header__icon-btn {
   display: inline-grid;

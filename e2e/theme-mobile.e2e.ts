@@ -101,6 +101,8 @@ test.describe('mobile width (375px)', () => {
       await posts.click();
       await expect(page).toHaveURL(new RegExp(`/${lang}/posts$`));
       await expect(menu).toHaveAttribute('aria-expanded', 'false');
+      // The menu is closed again, so the link is out of the accessibility tree: query the DOM.
+      await expect(page.locator('#nb-site-nav a[aria-current="page"]')).toHaveAttribute('href', new RegExp(`/${lang}/posts$`));
     });
   }
 

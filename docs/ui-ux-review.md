@@ -184,3 +184,23 @@ Spike first (half a day), on a branch:
 4. Run `npm run build` (prerender must succeed), `build:e2e` + `e2e` (axe), and compare bundle size before/after.
 
 Go if: prerender passes with no hydration errors, axe is clean in he/en and both themes, initial JS grows by less than ~30kB. Then migrate the rest of the "Good" rows, one component per commit. Gaps found on the way (link-rendering `badge`, `pagination` with real hrefs, a TOC component) are worth adding to the library rather than working around in the blog.
+
+### Spike result (2026-11-15, branch `spike/mushilu-ui`)
+
+Swapped: header menu/theme buttons and language link (`muiButton`), header nav links (`muiNavLink`), `nb-lang-badge` (`mui-badge`). Library `tokens.css` loaded globally, `--mui-color-*` mapped to `--nb-*` in `src/styles/_mui-map.scss`.
+
+| Criterion | Result |
+|---|---|
+| Prerender build | Pass, no budget warnings |
+| Unit tests | 241 pass |
+| e2e incl. axe, he/en, desktop/mobile | 192 pass |
+| Console / hydration errors | None |
+| Size on disk | JS 464 → 476 kB (+12), CSS 20 → 28 kB (+8, all of `tokens.css`) |
+
+Technical verdict: **go**. Open items before real adoption:
+
+1. **Registry.** Done. `@mushilu-san/ui` 2026.46.1 comes from GitHub Packages (`.npmrc`). The package is private and owned by another account, so the workflows' `GITHUB_TOKEN` cannot read it: CI, deploy and Dependabot use the `PACKAGES_READ_TOKEN` secret (a token with only `read:packages`). Locally `scripts/with-node.sh` takes the token from `gh`. With the published build: JS 472 kB, CSS 28 kB.
+2. **`muiNavLink` + `routerLinkActive`.** Fixed in the spike. `[active]="rla.isActive"` reads a plain property, so the OnPush header never re-rendered it. The header now builds one `isActive()` signal per link (`@angular/router`) and binds `[active]="link.active()"`; `routerLinkActive` is gone. The library needs no change. The mobile nav e2e test now asserts `aria-current="page"` after navigation.
+3. **Template refs.** `#ref` on an element with `muiButton` returns the component, not the element; queries need `{ read: ElementRef }`.
+4. **Name clash.** Library `NavLink` collides with the header's own `NavLink` type; import with an alias.
+5. **Mobile menu.** `mui-mobile-nav` has `mui-mobile-nav-item` children and reads as a bottom tab bar, not a hamburger menu. Not verified in a browser; the header keeps its own menu for now.

@@ -6,8 +6,11 @@
 
     <button
       #menuButton
+      muiButton
+      variant="ghost"
+      size="sm"
       type="button"
-      class="site-header__icon-btn site-header__menu-btn"
+      class="site-header__menu-btn"
       aria-controls="nb-site-nav"
       [attr.aria-expanded]="menuOpen()"
       [attr.aria-label]="locale.t('nav.menu')"
@@ -36,10 +39,9 @@
         @for (link of links(); track link.key) {
           <li>
             <a
+              muiNavLink
               [routerLink]="link.path"
-              routerLinkActive="is-active"
-              [routerLinkActiveOptions]="{ exact: link.exact }"
-              ariaCurrentWhenActive="page"
+              [active]="link.active()"
               [attr.aria-keyshortcuts]="link.shortcut ?? null"
               (click)="closeMenu()"
               >{{ locale.t(link.key) }}</a
@@ -51,6 +53,9 @@
 
     <div class="site-header__actions">
       <a
+        muiButton
+        variant="secondary"
+        size="sm"
         class="site-header__lang"
         [routerLink]="switchUrl()"
         [attr.hreflang]="otherLang()"
@@ -60,8 +65,11 @@
         >{{ otherLangName() }}</a
       >
       <button
+        muiButton
+        variant="ghost"
+        size="sm"
         type="button"
-        class="site-header__icon-btn site-header__theme-btn"
+        class="site-header__theme-btn"
         [attr.aria-label]="themeLabel()"
         [attr.title]="themeLabel()"
         (click)="themeToggle.emit()"

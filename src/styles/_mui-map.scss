@@ -1,0 +1,16 @@
+// Spike: point Mushilu-San-UI semantic tokens at the blog palette.
+// Both selectors are (0,2,0) so they beat the library's own dark-theme rules; the --nb-* values already switch by theme.
+:root[data-theme],
+:root:not([data-theme]) {
+  --mui-color-bg: var(--nb-color-bg);
+  --mui-color-surface: var(--nb-color-surface);
+  --mui-color-surface-raised: var(--nb-color-surface-2);
+  --mui-color-border: var(--nb-color-border);
+  --mui-color-text: var(--nb-color-text);
+  --mui-color-text-muted: var(--nb-color-muted);
+  --mui-color-primary: var(--nb-color-accent);
+  --mui-color-primary-hover: var(--nb-color-accent);
+  --mui-color-primary-active: var(--nb-color-accent);
+  --mui-color-primary-text: var(--nb-color-accent-contrast);
+  --mui-color-focus-ring: var(--nb-color-accent);
+}

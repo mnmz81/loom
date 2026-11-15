@@ -1,4 +1,10 @@
 version: 2
+registries:
+  # Needs a Dependabot secret of the same name (gh secret set PACKAGES_READ_TOKEN --app dependabot).
+  github-packages:
+    type: npm-registry
+    url: https://npm.pkg.github.com
+    token: ${{ secrets.PACKAGES_READ_TOKEN }}
 updates:
   - package-ecosystem: github-actions
     directory: /
@@ -6,5 +12,7 @@ updates:
       interval: weekly
   - package-ecosystem: npm
     directory: /
+    registries:
+      - github-packages
     schedule:
       interval: weekly
