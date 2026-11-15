@@ -57,8 +57,12 @@ title:
 description:            # optional, per language
   he: הערות מהדרך ללמוד ראסט.
   en: Notes from learning Rust.
+order: 3                # optional int ≥ 1, unique across series: position on the series list and home page
+track:                  # optional: series that form one learning track share the same track title
+  he: בינה מלאכותית
+  en: AI
 ```
-A series with no published posts is still listed (empty).
+A series with no published posts is still listed (empty). `series.json` is sorted by `order` (series without one come last), then key. Give consecutive `order` values to the series of one track: the site shows them as one tile with numbered steps, and drops a leading `<track>: ` from their titles inside it.
 
 ## `content/tags.yaml` (optional)
 ```yaml

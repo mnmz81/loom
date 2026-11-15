@@ -16,6 +16,8 @@ const PAGES: [string, string][] = [
   ['accessibility statement', 'accessibility'],
   ['posts list', 'posts'],
   ['certificates', 'certificates'],
+  ['posts list page 2', 'posts/page/2'],
+  ['series list', 'series'],
 ];
 
 for (const lang of LANGS) {
@@ -43,13 +45,25 @@ for (const lang of LANGS) {
 }
 
 // Untranslated entries are served in their own language (lang/dir overridden on cards).
-test('en posts list with a Hebrew-only entry: no serious a11y violations', async ({ page }) => {
-  await gotoReady(page, 'en/posts');
+test('en posts list page with a Hebrew-only entry: no serious a11y violations', async ({
+  page,
+}) => {
+  // The language switch on a Hebrew-only post lands on the en list page that shows it.
+  await gotoReady(page, 'he/posts/rust-ownership');
+  await page.getByRole('banner').getByRole('link', { name: 'English', exact: true }).click();
+  await page.getByRole('article').filter({ hasText: 'ראסט: בעלות (Ownership)' }).waitFor();
   await expectNoSeriousA11yViolations(page);
 });
 
 test('he Hebrew-only post page: no serious a11y violations', async ({ page }) => {
   const lang: Lang = 'he';
   await gotoReady(page, `${lang}/posts/rust-ownership`);
+  await expectNoSeriousA11yViolations(page);
+});
+
+test('mobile post with the TOC opened: no serious a11y violations', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await gotoReady(page, 'he/posts/git-zero-to-hero');
+  await page.locator('nb-toc summary').click();
   await expectNoSeriousA11yViolations(page);
 });

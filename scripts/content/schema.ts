@@ -51,6 +51,10 @@ export const seriesFile = z
   .object({
     title: z.object({ he: required, en: required }).strict(),
     description: z.object({ he: required.optional(), en: required.optional() }).strict().default({}),
+    // Position on the series list and home page (1 = first). Series without one come last, by key.
+    order: z.number().int().min(1).optional(),
+    // Series that form one learning track share the same track title (e.g. the five AI series).
+    track: z.object({ he: required, en: required }).strict().optional(),
   })
   .strict();
 

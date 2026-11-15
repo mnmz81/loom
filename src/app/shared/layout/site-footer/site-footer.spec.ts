@@ -51,4 +51,17 @@ describe('SiteFooter', () => {
     expect(icons.length).toBe(2);
     expect(icons.every((svg) => svg.getAttribute('aria-hidden') === 'true')).toBe(true);
   });
+
+  it('has an about line and links to the main sections (en)', async () => {
+    TestBed.inject(LocaleService).setLang('en');
+    const fixture = TestBed.createComponent(SiteFooter);
+    await fixture.whenStable();
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.querySelector('.site-footer__about')?.textContent).toContain('personal blog');
+    expect(el.querySelector('nav')?.getAttribute('aria-label')).toBe('Sections');
+    expect(
+      [...el.querySelectorAll('.site-footer__section')].map((a) => a.getAttribute('href')),
+    ).toEqual(['/en/posts', '/en/series', '/en/certificates', '/en/search']);
+    TestBed.inject(LocaleService).setLang('he');
+  });
 });

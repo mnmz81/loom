@@ -1,3 +1,64 @@
 @use '../page';
 
 @include page.base;
+
+.more-tags {
+  margin-block-start: var(--nb-space-2);
+
+  .chips {
+    margin-block-start: var(--nb-space-2);
+  }
+}
+
+.more-tags__toggle {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: var(--nb-touch-target);
+  color: var(--nb-color-accent);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pager {
+  margin-block-start: var(--nb-space-6);
+}
+
+.pager__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--nb-space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pager__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: var(--nb-touch-target);
+  min-block-size: var(--nb-touch-target);
+  padding-inline: var(--nb-space-2);
+  border-radius: var(--nb-radius-sm);
+  color: var(--nb-color-text);
+  font-variant-numeric: tabular-nums;
+  text-decoration: none;
+
+  &:hover {
+    background: var(--nb-color-surface-2);
+  }
+
+  &[aria-current='page'] {
+    background: var(--nb-color-accent);
+    color: var(--nb-color-accent-contrast);
+    font-weight: 700;
+  }
+}
+
+.pager__link--step {
+  padding-inline: var(--nb-space-3);
+  color: var(--nb-color-accent);
+  font-weight: 600;
+}

@@ -1,4 +1,4 @@
-<div class="container page">
+<div class="container page page-narrow">
   <header class="page__header">
     <h1 class="page__title">{{ locale.t('search.title') }}</h1>
   </header>
@@ -6,6 +6,7 @@
   <form class="search__form" role="search" (submit)="$event.preventDefault()">
     <label class="visually-hidden" for="search-input">{{ text('search.label') }}</label>
     <input
+      #searchInput
       id="search-input"
       class="search__input"
       type="search"
@@ -44,6 +45,30 @@
 
   @if (status() === 'idle') {
     <p class="search__hint">{{ hint() }}</p>
+
+    <!-- Starting points before the first query: popular tags and every series. -->
+    <section class="search__start" aria-labelledby="search-start">
+      <h2 id="search-start" class="search__start-title">{{ locale.t('search.startHere') }}</h2>
+      <h3 class="search__start-sub">{{ locale.t('search.popularTags') }}</h3>
+      <ul class="chips">
+        @for (t of topTags(); track t.tag) {
+          <li>
+            <a class="chip" [routerLink]="tagPath(t.tag)">{{ t.label }}</a>
+          </li>
+        }
+      </ul>
+      @if (seriesLinks().length) {
+        <h3 class="search__start-sub">{{ locale.t('series.title') }}</h3>
+        <ul class="search__series">
+          @for (s of seriesLinks(); track s.key) {
+            <li>
+              <a class="search__series-link" [routerLink]="s.path">{{ s.title }}</a>
+            </li>
+          }
+        </ul>
+      }
+      <p class="search__shortcut">{{ locale.t('search.shortcut') }}</p>
+    </section>
   }
 
   @if (hits().length) {

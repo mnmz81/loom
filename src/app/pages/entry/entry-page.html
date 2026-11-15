@@ -1,12 +1,21 @@
+<!-- Reading progress: a CSS scroll-driven bar under the sticky header (no JS; hidden where unsupported). -->
+<div class="entry__progress" aria-hidden="true"></div>
+
 <article class="container entry">
   <header class="entry__header">
-    <p class="entry__type">{{ typeLabel() }}</p>
+    <!-- Eyebrow: the one-line series bar for a series part (it says enough), else the entry type. -->
+    <div class="entry__eyebrow">
+      @if (entry().seriesNav; as seriesNav) {
+        <nb-series-nav [nav]="seriesNav" [compact]="true" />
+      } @else {
+        <span class="entry__type">{{ typeLabel() }}</span>
+      }
+    </div>
     <h1 class="entry__title" data-pagefind-meta="title">{{ entry().title }}</h1>
     @if (entry().summary; as summary) {
       <p class="entry__summary">{{ summary }}</p>
     }
     <nb-entry-meta [entry]="entry()" />
-    <nb-tag-list [tags]="entry().tags" [labels]="tagLabels()" />
     <!-- Pagefind filters/meta (search page filters by type and tag). -->
     <span hidden data-pagefind-filter="type[data-value]" [attr.data-value]="entry().type"></span>
     @for (tag of entry().tags; track tag) {
@@ -15,18 +24,38 @@
     <span hidden data-pagefind-meta="date[data-value]" [attr.data-value]="entry().date"></span>
   </header>
 
-  @if (entry().seriesNav; as seriesNav) {
-    <nb-series-nav class="entry__series" [nav]="seriesNav" />
-  }
-
   <div class="entry__layout">
     <aside class="entry__aside">
       <nb-toc [items]="entry().toc" />
     </aside>
     <div class="entry__main">
       <nb-article-body [html]="entry().html" />
+      <nb-tag-list class="entry__tags" [tags]="entry().tags" [labels]="tagLabels()" />
     </div>
   </div>
 
+  @if (entry().seriesNav; as seriesNav) {
+    <nb-series-nav class="entry__series" [nav]="seriesNav" />
+  }
+
   <nb-related-list class="entry__related" [items]="entry().related" />
 </article>
+
+@if (showBackToTop()) {
+  <button type="button" class="entry__top" (click)="backToTop()">
+    <svg
+      viewBox="0 0 24 24"
+      width="18"
+      height="18"
+      aria-hidden="true"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M12 19V5M6 11l6-6 6 6" />
+    </svg>
+    <span>{{ locale.t('entry.backToTop') }}</span>
+  </button>
+}

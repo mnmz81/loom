@@ -3,16 +3,19 @@ import {
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
+  ElementRef,
   PLATFORM_ID,
+  afterNextRender,
   computed,
   effect,
   inject,
   input,
   signal,
   untracked,
+  viewChild,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import type { EntryType, LangIndex } from '../../core/content.models';
+import type { EntryType, LangIndex, SeriesIndex } from '../../core/content.models';
 import { LocaleService } from '../../core/i18n/locale.service';
 import { PATHS } from '../../core/routes.const';
 import { SeoService } from '../../core/seo.service';
@@ -23,6 +26,7 @@ import { type SearchFilters, type SearchHit, SearchService, SearchUnavailableErr
 export type SearchStatus = 'idle' | 'loading' | 'ready' | 'unavailable' | 'error';
 
 const DEBOUNCE_MS = 200;
+const TOP_TAGS = 10;
 
 /** `/:lang/search` — Pagefind search with type and tag filters. Only searches in the browser. */
 @Component({
@@ -35,6 +39,8 @@ const DEBOUNCE_MS = 200;
 })
 export class SearchPage {
   readonly index = input.required<LangIndex>();
+  /** All series, for the starting points shown before the first query. */
+  readonly series = input<SeriesIndex>([]);
   /** Initial query from `?q=` (router input binding). */
   readonly q = input<string | undefined>(undefined);
 
@@ -49,6 +55,16 @@ export class SearchPage {
   protected readonly status = signal<SearchStatus>('idle');
   protected readonly hits = signal<SearchHit[]>([]);
   protected readonly total = signal(0);
+
+  protected readonly topTags = computed(() => this.index().tags.slice(0, TOP_TAGS));
+  protected readonly seriesLinks = computed(() => {
+    const lang = this.locale.lang();
+    return this.series().map((s) => ({ key: s.key, path: PATHS.series(lang, s.key), title: s.title[lang] }));
+  });
+  protected tagPath(tag: string): string {
+    return PATHS.tag(this.locale.lang(), tag);
+  }
+  private readonly searchInput = viewChild.required<ElementRef<HTMLInputElement>>('searchInput');
 
   protected readonly tagLabels = computed(() => Object.fromEntries(this.index().tags.map((t) => [t.tag, t.label])));
   protected readonly typeOptions = computed<{ value: EntryType; label: string }[]>(() => [
@@ -108,6 +124,9 @@ export class SearchPage {
         }
       });
     });
+
+    // The page exists to type into: focus the field once it is interactive (browser only).
+    afterNextRender(() => this.searchInput().nativeElement.focus());
 
     inject(DestroyRef).onDestroy(() => clearTimeout(this.timer));
   }

@@ -1,4 +1,4 @@
-<div class="container page">
+<div class="container page page-narrow">
   <header class="page__header">
     <h1 class="page__title">{{ locale.t('certificates.title') }}</h1>
   </header>
@@ -7,9 +7,14 @@
     <ul class="certificates">
       @for (card of cards(); track card.key) {
         <li class="certificates__item">
-          <a class="certificates__image" [href]="card.href">
+          <button
+            type="button"
+            class="certificates__image"
+            [attr.aria-label]="card.enlarge"
+            (click)="enlarge(card)"
+          >
             <img [src]="card.src" [alt]="card.alt" loading="lazy" decoding="async" />
-          </a>
+          </button>
           <div class="certificates__body">
             <h2 class="certificates__title" dir="auto">{{ card.title }}</h2>
             <p class="certificates__meta">
@@ -18,11 +23,16 @@
               <time [attr.datetime]="card.date">{{ card.dateText }}</time>
             </p>
             <nb-tag-list [tags]="card.tags" [labels]="tagLabels()" />
-            @if (card.url) {
-              <a class="certificates__verify" [href]="card.url" rel="noopener">{{
-                locale.t('certificates.verify')
+            <p class="certificates__links">
+              <a class="certificates__file" [href]="card.href">{{
+                locale.t('certificates.original')
               }}</a>
-            }
+              @if (card.url) {
+                <a class="certificates__verify" [href]="card.url" rel="noopener">{{
+                  locale.t('certificates.verify')
+                }}</a>
+              }
+            </p>
           </div>
         </li>
       }
@@ -31,3 +41,21 @@
     <p class="certificates__empty">{{ locale.t('certificates.empty') }}</p>
   }
 </div>
+
+<!-- Large view. Native modal <dialog>: focus trap, Escape and inert page come from the browser. -->
+<dialog
+  #dialog
+  class="certificates__dialog"
+  [attr.aria-label]="selected()?.title ?? null"
+  (click)="onDialogClick($event)"
+>
+  @if (selected(); as card) {
+    <img class="certificates__large" [src]="card.src" [alt]="card.alt" />
+    <p class="certificates__dialog-actions">
+      <a [href]="card.href">{{ locale.t('certificates.original') }}</a>
+      <button type="button" class="certificates__close" (click)="dialog.close()">
+        {{ locale.t('certificates.close') }}
+      </button>
+    </p>
+  }
+</dialog>

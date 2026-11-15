@@ -4,3 +4,4 @@ title:
 description:
   he: מדריכים שבונים פרויקט אחד צעד אחר צעד, בפוסטים קצרים. Git, GitHub, Docker, GitHub Actions, Kubernetes, AWS ו-Cloudflare, לפי הסדר שבו פוגשים אותם.
   en: Guides that build one project step by step, in short posts. Git, GitHub, Docker, GitHub Actions, Kubernetes, AWS and Cloudflare, in the order you meet them.
+order: 7

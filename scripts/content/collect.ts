@@ -144,6 +144,11 @@ function loadSeries(contentDir: string, errors: string[]): Map<string, SeriesFil
       errors.push(`${file}: ${message(error)}`);
     }
   }
+  const byOrder = new Map<number, string[]>();
+  for (const [key, { order }] of series) if (order !== undefined) byOrder.set(order, [...(byOrder.get(order) ?? []), key]);
+  for (const [order, keys] of byOrder) {
+    if (keys.length > 1) errors.push(`${dir}: order ${order} is used by more than one series: ${keys.join(', ')}`);
+  }
   return series;
 }
 
@@ -353,10 +358,20 @@ export async function buildContent({ contentDir, outDir, includeDrafts, now = ()
       }),
   );
 
-  const series: SeriesIndex = [...seriesFiles.keys()].sort(compare).map((key) => {
-    const { title, description } = seriesFiles.get(key)!;
-    return { key, title, description, slugs: seriesMembers.get(key)!.map((item) => item.slug) };
-  });
+  const orderOf = (key: string) => seriesFiles.get(key)!.order ?? Number.POSITIVE_INFINITY;
+  const series: SeriesIndex = [...seriesFiles.keys()]
+    .sort((a, b) => orderOf(a) - orderOf(b) || compare(a, b))
+    .map((key) => {
+      const { title, description, order, track } = seriesFiles.get(key)!;
+      return {
+        key,
+        title,
+        description,
+        ...(order !== undefined && { order }),
+        ...(track !== undefined && { track }),
+        slugs: seriesMembers.get(key)!.map((item) => item.slug),
+      };
+    });
 
   // Write: clean previous output first so removed entries/translations disappear.
   for (const lang of LANGS) {

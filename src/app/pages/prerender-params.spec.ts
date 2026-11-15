@@ -2,7 +2,7 @@ import type { LangIndex, SeriesIndex } from '../core/content.models';
 import enIndex from '../../testing/fixtures/content/en/index.json';
 import heIndex from '../../testing/fixtures/content/he/index.json';
 import series from '../../testing/fixtures/content/series.json';
-import { entryParams, entrySlugs, seriesParams, tagParams } from './prerender-params';
+import { entryParams, entrySlugs, listPageParams, seriesParams, tagParams } from './prerender-params';
 
 const he = heIndex as LangIndex;
 const en = enIndex as LangIndex;
@@ -39,5 +39,18 @@ describe('prerender params', () => {
       { lang: 'en', key: 'learning-rust' },
     ]);
     expect(seriesParams(['he'], [])).toEqual([]);
+  });
+
+  it('listPageParams lists pages 2…n per language (every index lists every entry once)', () => {
+    // 3 posts per index: size 2 → 2 pages, size 1 → 3 pages, size 20 → only page 1 (no params).
+    expect(listPageParams([he, en], 'post', 2)).toEqual([
+      { lang: 'he', page: '2' },
+      { lang: 'en', page: '2' },
+    ]);
+    expect(listPageParams([he], 'post', 1)).toEqual([
+      { lang: 'he', page: '2' },
+      { lang: 'he', page: '3' },
+    ]);
+    expect(listPageParams([he, en], 'post')).toEqual([]);
   });
 });

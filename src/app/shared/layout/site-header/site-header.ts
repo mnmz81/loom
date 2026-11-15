@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  DOCUMENT,
   ElementRef,
   computed,
   inject,
@@ -21,6 +22,8 @@ interface NavLink {
   key: DictKey;
   path: string;
   exact: boolean;
+  /** aria-keyshortcuts value, when the link has a keyboard shortcut. */
+  shortcut?: string;
 }
 
 @Component({
@@ -29,7 +32,7 @@ interface NavLink {
   templateUrl: './site-header.html',
   styleUrl: './site-header.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { '(document:keydown.escape)': 'onEscape()' },
+  host: { '(document:keydown.escape)': 'onEscape()', '(document:keydown)': 'onShortcut($event)' },
 })
 export class SiteHeader {
   readonly theme = input.required<'light' | 'dark'>();
@@ -37,6 +40,7 @@ export class SiteHeader {
 
   protected readonly locale = inject(LocaleService);
   private readonly router = inject(Router);
+  private readonly document = inject(DOCUMENT);
 
   /** router.url is not a signal: track it so the language switch follows navigation under OnPush. */
   private readonly url = toSignal(
@@ -56,7 +60,7 @@ export class SiteHeader {
       { key: 'nav.posts', path: PATHS.posts(lang), exact: false },
       { key: 'nav.series', path: PATHS.seriesList(lang), exact: false },
       { key: 'nav.certificates', path: PATHS.certificates(lang), exact: false },
-      { key: 'nav.search', path: PATHS.search(lang), exact: false },
+      { key: 'nav.search', path: PATHS.search(lang), exact: false, shortcut: 'Control+K Meta+K' },
     ];
   });
 
@@ -80,6 +84,17 @@ export class SiteHeader {
 
   protected closeMenu(): void {
     this.menuOpen.set(false);
+  }
+
+  /** Ctrl/⌘+K opens search from any page and focuses the field. No single-key shortcut: WCAG 2.1.4. */
+  protected onShortcut(event: KeyboardEvent): void {
+    if (event.defaultPrevented || event.altKey) return;
+    if (!(event.ctrlKey || event.metaKey) || event.key.toLowerCase() !== 'k') return;
+    event.preventDefault();
+    this.closeMenu();
+    void this.router
+      .navigateByUrl(PATHS.search(this.locale.lang()))
+      .then(() => this.document.getElementById('search-input')?.focus());
   }
 
   protected onEscape(): void {

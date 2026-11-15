@@ -4,8 +4,9 @@ import { type EntryType, type Lang, TYPE_SEGMENT } from './content.models';
 
 export const PATHS = {
   home: (lang: Lang) => `/${lang}`,
-  posts: (lang: Lang) => `/${lang}/posts`,
-  notes: (lang: Lang) => `/${lang}/notes`,
+  /** List page `page` (1-based); page 1 is the plain list URL. */
+  posts: (lang: Lang, page = 1) => (page > 1 ? `/${lang}/posts/page/${page}` : `/${lang}/posts`),
+  notes: (lang: Lang, page = 1) => (page > 1 ? `/${lang}/notes/page/${page}` : `/${lang}/notes`),
   entry: (lang: Lang, type: EntryType, slug: string) => `/${lang}/${TYPE_SEGMENT[type]}/${slug}`,
   seriesList: (lang: Lang) => `/${lang}/series`,
   series: (lang: Lang, key: string) => `/${lang}/series/${key}`,

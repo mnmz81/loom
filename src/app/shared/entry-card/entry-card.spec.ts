@@ -31,10 +31,10 @@ describe('EntryCard', () => {
   );
   afterEach(() => TestBed.inject(LocaleService).setLang('he'));
 
-  it('renders a Hebrew post: type, date, h2 title link, summary, tags (he)', async () => {
+  it('renders a Hebrew post row: date, h2 title link, summary, main tag; no type label for posts (he)', async () => {
     const entry = find(heIndex, 'rust-borrowing');
     const { el } = await render('he', entry);
-    expect(el.querySelector('.entry-card__type')?.textContent?.trim()).toBe('פוסט');
+    expect(el.querySelector('.entry-card__type')).toBeNull();
     const time = el.querySelector('time');
     expect(time?.getAttribute('datetime')).toBe('2026-10-05');
     expect(time?.textContent?.trim()).toBe(
@@ -47,6 +47,7 @@ describe('EntryCard', () => {
     expect(link?.textContent?.trim()).toBe(entry.title);
     expect(el.querySelector('.entry-card__summary')?.textContent?.trim()).toBe(entry.summary);
     expect(el.querySelector('nb-tag-list a')?.getAttribute('href')).toBe('/he/tags/rust');
+    expect(el.querySelectorAll('nb-tag-list a').length).toBe(1);
   });
 
   it('renders an English note without a summary (en)', async () => {

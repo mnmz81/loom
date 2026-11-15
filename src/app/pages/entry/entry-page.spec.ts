@@ -32,7 +32,7 @@ describe('EntryPage', () => {
     const { open } = await setup();
     const el = await open('/he/posts/rust-borrowing');
     expect(el.querySelector('h1')?.textContent?.trim()).toBe('ראסט: השאלה (Borrowing)');
-    expect(el.querySelector('.entry__type')?.textContent?.trim()).toBe('פוסט');
+    expect(el.querySelector('.entry__eyebrow .series-bar__part')?.textContent?.trim()).toBe('חלק 2 מתוך 2');
     expect(el.querySelector('nb-entry-meta time')?.getAttribute('datetime')).toBe('2026-10-05');
     expect(el.querySelector('nb-tag-list a')?.getAttribute('href')).toBe('/he/tags/rust');
     expect(el.querySelector('nb-tag-list a')?.textContent).toContain('ראסט');

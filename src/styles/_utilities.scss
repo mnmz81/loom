@@ -16,25 +16,23 @@
   border: 0;
 }
 
-// data-c (0-5, from colorIndex) picks one of the six tag colors for the element and everything inside it:
-// --nb-c is the vivid hue, --nb-c-bg a tint of it, --nb-c-fg a text color with AA contrast on that tint.
+// data-c (0-5, set by nb-series-tiles) gives a series its identity hue as --nb-c. Use it only for small
+// markers (a dot, a bar), never for text: color on this site means "which series", nothing else.
 @for $i from 0 through 5 {
   [data-c='#{$i}'] {
     --nb-c: var(--nb-tag-#{$i});
-    --nb-c-bg: var(--nb-tag-#{$i}-bg);
-    --nb-c-fg: var(--nb-tag-#{$i}-fg);
   }
 }
 
-// Tags: small tinted pills.
+// Filter pills (posts list tag filter). Neutral: one style for every tag.
 .chip {
   display: inline-flex;
   align-items: center;
-  min-block-size: 28px;
+  min-block-size: 2rem;
   padding: 0.125rem var(--nb-space-3);
   border-radius: var(--nb-radius-full);
-  background: var(--nb-c-bg, var(--nb-color-tag-bg));
-  color: var(--nb-c-fg, var(--nb-color-tag-text));
+  background: var(--nb-color-tag-bg);
+  color: var(--nb-color-tag-text);
   font-size: 0.875rem;
   font-weight: 500;
   text-decoration: none;
@@ -42,18 +40,18 @@
 
 a.chip {
   position: relative;
-  transition: filter var(--nb-duration-fast) var(--nb-ease-out);
+  transition: background-color var(--nb-duration-fast) var(--nb-ease-out);
 
   // Keeps the touch target at 44px without making the pill itself tall.
   &::after {
     content: '';
     position: absolute;
-    inset-block: -8px;
+    inset-block: -6px;
     inset-inline: 0;
   }
 
   &:hover {
-    filter: brightness(0.94);
+    background: var(--nb-color-border);
     text-decoration: underline;
   }
 }
@@ -61,4 +59,10 @@ a.chip {
 .chip--active {
   background: var(--nb-color-accent);
   color: var(--nb-color-accent-contrast);
+}
+
+// Centered single column shared by list, search and other narrow pages.
+.page-narrow {
+  max-inline-size: var(--nb-page-narrow);
+  margin-inline: auto;
 }

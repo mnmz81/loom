@@ -1,22 +1,29 @@
 <div class="container page">
-  <header class="page__header home-hero">
-    <h1 class="page__title">{{ title() }}</h1>
-    <p class="page__lead">{{ description() }}</p>
-    @if (topTags().length) {
-      <ul class="chips" [attr.aria-label]="locale.t('entry.tags')">
-        @for (tag of topTags(); track tag.tag) {
-          <li>
-            <a class="chip" [attr.data-c]="colorOf(tag.tag)" [routerLink]="paths.tag(locale.lang(), tag.tag)">{{ tag.label }}</a>
-          </li>
-        }
-      </ul>
-    }
+  <header class="home-hero">
+    <h1 class="home-hero__title">{{ locale.t('home.title') }}</h1>
+    <p class="home-hero__lead">{{ locale.t('home.lead') }}</p>
+    <p class="home-hero__actions">
+      <a class="home-hero__action home-hero__action--primary" [routerLink]="paths.seriesList(locale.lang())">{{
+        locale.t('home.startSeries')
+      }}</a>
+      <a class="home-hero__action" [routerLink]="paths.search(locale.lang())">{{ locale.t('home.search') }}</a>
+    </p>
   </header>
+
+  @if (series().length) {
+    <section class="page__section" aria-labelledby="home-series">
+      <div class="page__section-head">
+        <h2 id="home-series">{{ locale.t('series.title') }}</h2>
+        <a [routerLink]="paths.seriesList(locale.lang())">{{ locale.t('list.allSeries') }}</a>
+      </div>
+      <nb-series-tiles [series]="series()" [headingLevel]="3" />
+    </section>
+  }
 
   <section class="page__section" aria-labelledby="home-posts">
     <div class="page__section-head">
       <h2 id="home-posts">{{ locale.t('list.latestPosts') }}</h2>
-      <a [routerLink]="paths.posts(locale.lang())">{{ locale.t('list.all') }}</a>
+      <a [routerLink]="paths.posts(locale.lang())">{{ locale.t('list.allPosts') }}</a>
     </div>
     <nb-entry-list [entries]="posts()" [headingLevel]="3" [tagLabels]="tagLabels()" />
   </section>
@@ -25,31 +32,9 @@
     <section class="page__section" aria-labelledby="home-notes">
       <div class="page__section-head">
         <h2 id="home-notes">{{ locale.t('list.latestNotes') }}</h2>
-        <a [routerLink]="paths.notes(locale.lang())">{{ locale.t('list.all') }}</a>
+        <a [routerLink]="paths.notes(locale.lang())">{{ locale.t('list.allNotes') }}</a>
       </div>
       <nb-entry-list [entries]="notes()" [headingLevel]="3" [tagLabels]="tagLabels()" />
-    </section>
-  }
-
-  @if (seriesCards().length) {
-    <section class="page__section" aria-labelledby="home-series">
-      <div class="page__section-head">
-        <h2 id="home-series">{{ locale.t('series.title') }}</h2>
-        <a [routerLink]="paths.seriesList(locale.lang())">{{ locale.t('list.all') }}</a>
-      </div>
-      <ul class="series-teaser">
-        @for (card of seriesCards(); track card.key) {
-          <li class="series-teaser__item" [attr.data-c]="colorOf(card.key)">
-            <h3 class="series-teaser__title">
-              <a [routerLink]="paths.series(locale.lang(), card.key)">{{ card.title }}</a>
-            </h3>
-            @if (card.description) {
-              <p class="series-teaser__text">{{ card.description }}</p>
-            }
-            <p class="series-teaser__meta">{{ card.parts }}</p>
-          </li>
-        }
-      </ul>
     </section>
   }
 </div>

@@ -2,8 +2,13 @@
 // browser-added copy buttons are outside Angular's view encapsulation.
 .prose {
   max-inline-size: var(--nb-prose-max);
-  font-size: 1.125rem;
+  // Long-form reading size: 17px on phones, 18px from tablet up.
+  font-size: 1.0625rem;
   line-height: calc(var(--nb-line-height) + 0.1);
+
+  @media (min-width: 40rem) {
+    font-size: 1.125rem;
+  }
 
   > :first-child {
     margin-block-start: 0;
@@ -22,7 +27,7 @@
 
   h2 {
     margin-block-start: var(--nb-space-7);
-    font-size: clamp(1.5rem, 1.5vw + 1rem, 2rem);
+    font-size: clamp(1.375rem, 1vw + 1rem, 1.75rem);
   }
 
   h3 {
@@ -60,16 +65,53 @@
   }
 
   :not(pre) > code {
-    padding: 0.15em 0.4em;
+    padding: 0.1em 0.35em;
     border-radius: var(--nb-radius-sm);
     background: var(--nb-color-surface-2);
+    // A snippet that wraps keeps padding and rounded ends on both lines (one chip per line).
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
   }
 
+  // Code inside a link: the underline is the link treatment, so no chip on top of it.
+  a > code {
+    padding: 0;
+    background: none;
+    color: inherit;
+  }
+
+  // The top strip (holds the copy button, added after hydration) is part of the <pre> itself, so the
+  // button never sits on a code line and nothing shifts when it appears. The side shadows show only
+  // while there is more code to scroll to: the `local` covers hide them at either end.
   pre {
+    --nb-code-strip: 2.75rem;
+    --nb-code-shadow: rgb(0 0 0 / 0.14);
+
     overflow-x: auto;
-    padding: var(--nb-space-5);
+    padding: calc(var(--nb-code-strip) + var(--nb-space-3)) var(--nb-space-5) var(--nb-space-5);
+    border: 1px solid var(--nb-color-border);
     border-radius: var(--nb-radius-md);
-    background: var(--nb-color-surface-2);
+    background-color: var(--nb-color-surface-2);
+    background-image:
+      linear-gradient(var(--nb-color-border), var(--nb-color-border)),
+      linear-gradient(to right, var(--nb-code-bg, var(--nb-color-surface-2)) 40%, transparent),
+      linear-gradient(to left, var(--nb-code-bg, var(--nb-color-surface-2)) 40%, transparent),
+      linear-gradient(to right, var(--nb-code-shadow), transparent),
+      linear-gradient(to left, var(--nb-code-shadow), transparent);
+    background-position:
+      0 var(--nb-code-strip),
+      left bottom,
+      right bottom,
+      left bottom,
+      right bottom;
+    background-size:
+      100% 1px,
+      2.5rem calc(100% - var(--nb-code-strip) - 1px),
+      2.5rem calc(100% - var(--nb-code-strip) - 1px),
+      1rem calc(100% - var(--nb-code-strip) - 1px),
+      1rem calc(100% - var(--nb-code-strip) - 1px);
+    background-repeat: no-repeat;
+    background-attachment: scroll, local, local, scroll, scroll;
     font-size: 0.875rem;
     line-height: 1.65;
   }
@@ -100,29 +142,29 @@
 }
 
 // Code block wrapper + copy button, added in the browser by nb-article-body. The wrapper is dir="ltr" like
-// the code inside, so the button sits at the code's end edge and never covers the start of a line.
+// the code inside; the button sits in the <pre>'s top strip at the code's end edge.
 .nb-code {
   position: relative;
 
   > pre {
     margin-block-end: 0;
-    padding-inline-end: calc(var(--nb-touch-target) + var(--nb-space-6));
   }
 }
 
 .nb-code__copy {
   position: absolute;
-  inset-block-start: var(--nb-space-2);
-  inset-inline-end: var(--nb-space-2);
+  inset-block-start: 1px;
+  inset-inline-end: 1px;
   min-inline-size: var(--nb-touch-target);
   min-block-size: var(--nb-touch-target);
-  padding-inline: var(--nb-space-3);
+  padding-inline: var(--nb-space-4);
   border: 0;
-  border-radius: var(--nb-radius-sm);
-  background: var(--nb-color-surface);
+  border-start-end-radius: var(--nb-radius-md);
+  background: transparent;
   color: var(--nb-color-muted);
   font-family: var(--nb-font-sans);
   font-size: 0.8125rem;
+  font-weight: 600;
   cursor: pointer;
   transition: color var(--nb-duration-fast) var(--nb-ease-out);
 
@@ -130,5 +172,9 @@
   &:focus-visible,
   &.is-copied {
     color: var(--nb-color-accent);
+  }
+
+  &:focus-visible {
+    outline-offset: -3px;
   }
 }

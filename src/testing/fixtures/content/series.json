@@ -9,6 +9,7 @@
       "he": "הערות מהדרך ללמוד ראסט.",
       "en": "Notes from learning Rust."
     },
+    "order": 1,
     "slugs": [
       "rust-ownership",
       "rust-borrowing"

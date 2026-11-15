@@ -18,10 +18,10 @@ test.describe('language switch', () => {
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('ראסט: השאלה (Borrowing)');
   });
 
-  test('Hebrew-only post: switching to en lands on the English posts list with the "Hebrew only" badge', async ({ page }) => {
+  test('Hebrew-only post: switching to en lands on the English posts list page that shows it, with the "Hebrew only" badge', async ({ page }) => {
     await gotoReady(page, 'he/posts/rust-ownership');
     await langSwitch(page, 'he').click();
-    await expect(page).toHaveURL(/\/loom\/en\/posts$/);
+    await expect(page).toHaveURL(/\/loom\/en\/posts(\/page\/\d+)?$/);
     await expectLang(page, 'en');
 
     // The untranslated Hebrew post is still listed on the en list, flagged and rendered RTL.

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
+import { Router, provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import type { Lang } from '../../../core/content.models';
 import { LocaleService } from '../../../core/i18n/locale.service';
@@ -161,5 +161,19 @@ describe('SiteHeader', () => {
     await fixture.whenStable();
     expect(document.activeElement).toBe(firstLink);
     el.remove();
+  });
+
+  it('Ctrl+K opens search; a bare "/" does not', async () => {
+    const { fixture, el } = await render('en');
+    const router = TestBed.inject(Router);
+    expect(el.querySelector('a[href="/en/search"]')?.getAttribute('aria-keyshortcuts')).toBe('Control+K Meta+K');
+
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: '/' }));
+    await fixture.whenStable();
+    expect(router.url).toBe('/');
+
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', ctrlKey: true }));
+    await fixture.whenStable();
+    expect(router.url).toBe('/en/search');
   });
 });

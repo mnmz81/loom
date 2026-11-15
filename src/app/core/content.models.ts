@@ -82,10 +82,12 @@ export interface SeriesSummary {
   key: string;
   title: Record<Lang, string>;
   description: Partial<Record<Lang, string>>;
+  order?: number;          // explicit position (1 = first); unset → after every ordered series
+  track?: Record<Lang, string>; // title of the learning track this series belongs to (consecutive series share it)
   slugs: string[];         // post slugs in series order
 }
 
-/** public/content/series.json — sorted by key. */
+/** public/content/series.json — sorted by `order` (series without one last), then key. */
 export type SeriesIndex = SeriesSummary[];
 
 /** A course certificate, from content/certificates.yaml. Files are under public/certificates/. */

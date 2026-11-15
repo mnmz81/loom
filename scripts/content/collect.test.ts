@@ -297,6 +297,31 @@ describe('buildContent — series', () => {
     ]);
   });
 
+  it('sorts series.json by order (unordered last, by key) and passes order and track through', async () => {
+    const track = { he: 'מסלול', en: 'Track' };
+    const dirs = makeContent({
+      'series/zeta.yaml': YAML.stringify({ title: { he: 'ז', en: 'Z' }, order: 1, track }),
+      'series/beta.yaml': YAML.stringify({ title: { he: 'ב', en: 'B' }, order: 2, track }),
+      'series/alpha.yaml': series('א', 'A'),
+    });
+    await build(dirs);
+    const out = readJson<SeriesIndex>(join(dirs.outDir, 'series.json'));
+    expect(out.map((s) => [s.key, s.order, s.track?.en])).toEqual([
+      ['zeta', 1, 'Track'],
+      ['beta', 2, 'Track'],
+      ['alpha', undefined, undefined],
+    ]);
+    expect('order' in out[2]).toBe(false);
+  });
+
+  it('rejects two series with the same order', async () => {
+    const dirs = makeContent({
+      'series/a.yaml': YAML.stringify({ title: { he: 'א', en: 'A' }, order: 1 }),
+      'series/b.yaml': YAML.stringify({ title: { he: 'ב', en: 'B' }, order: 1 }),
+    });
+    await expect(build(dirs)).rejects.toThrow(/order 1 is used by more than one series: a, b/);
+  });
+
   it('builds seriesNav with localized title, position, total and fallback prev/next refs', async () => {
     const dirs = makeContent(files());
     await build(dirs);

@@ -1,4 +1,15 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, computed, effect, inject, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DOCUMENT,
+  DestroyRef,
+  afterNextRender,
+  computed,
+  effect,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { LANGS, type Entry, type LangIndex } from '../../core/content.models';
 import { LocaleService } from '../../core/i18n/locale.service';
 import { PATHS } from '../../core/routes.const';
@@ -10,7 +21,11 @@ import { RelatedList } from '../../shared/related-list/related-list';
 import { SeriesNav } from '../../shared/series-nav/series-nav';
 import { TagList } from '../../shared/tag-list/tag-list';
 import { Toc } from '../../shared/toc/toc';
+import { pageOf } from '../pagination';
 import { describeHtml } from '../seo-helpers';
+
+/** Posts at least this long (≈ 4 screens) get a back-to-top button. */
+const LONG_POST_MINUTES = 3;
 
 /**
  * `/:lang/posts/:slug` and `/:lang/notes/:slug`. `entry` comes from `entryResolver` (always in the route
@@ -30,6 +45,17 @@ export class EntryPage {
   protected readonly locale = inject(LocaleService);
   protected readonly typeLabel = computed(() => this.locale.t(`type.${this.entry().type}`));
   protected readonly tagLabels = computed(() => Object.fromEntries(this.index().tags.map((t) => [t.tag, t.label])));
+  private readonly scrolledFar = signal(false);
+  /** Long posts only, and only once the reader is more than a screen down. */
+  protected readonly showBackToTop = computed(() => this.entry().readingMinutes >= LONG_POST_MINUTES && this.scrolledFar());
+  private readonly document = inject(DOCUMENT);
+
+  protected backToTop(): void {
+    const view = this.document.defaultView;
+    view?.scrollTo({ top: 0 }); // honours `scroll-behavior` (smooth unless reduced motion)
+    // Move keyboard focus back to the top too, like the skip link does.
+    this.document.getElementById('main')?.focus({ preventScroll: true });
+  }
 
   constructor() {
     const seo = inject(SeoService);
@@ -42,13 +68,12 @@ export class EntryPage {
       const otherLang = locale.otherLang();
       const path = PATHS.entry(lang, entry.type, entry.slug);
 
-      // Language switch target: the translation when it exists, else the other language's list
-      // (where this entry shows as an "only in <lang>" card). There is no /<other>/ page for it.
+      // Language switch target: the translation when it exists, else the page of the other language's
+      // list that shows this entry as an "only in <lang>" row (both indexes list entries in the same order).
+      const position = this.index().entries.filter((e) => e.type === entry.type).findIndex((e) => e.slug === entry.slug);
       ownAlternate = entry.availableLangs.includes(otherLang)
         ? PATHS.entry(otherLang, entry.type, entry.slug)
-        : entry.type === 'post'
-          ? PATHS.posts(otherLang)
-          : PATHS.notes(otherLang);
+        : (entry.type === 'post' ? PATHS.posts : PATHS.notes)(otherLang, pageOf(position));
       locale.alternateUrl.set(ownAlternate);
 
       const alternates = Object.fromEntries(
@@ -79,6 +104,16 @@ export class EntryPage {
           author: { '@type': 'Person', name: SITE.author, url: SITE.url },
         },
       });
+    });
+
+    // Browser only: track scroll depth for the back-to-top button (passive, removed on destroy).
+    const destroyRef = inject(DestroyRef);
+    afterNextRender(() => {
+      const view = this.document.defaultView;
+      if (!view) return;
+      const onScroll = () => this.scrolledFar.set(view.scrollY > view.innerHeight * 1.5);
+      view.addEventListener('scroll', onScroll, { passive: true });
+      destroyRef.onDestroy(() => view.removeEventListener('scroll', onScroll));
     });
 
     // Reused routes do not re-run langGuard, so clear our switch target when leaving the page.

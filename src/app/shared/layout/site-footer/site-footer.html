@@ -1,4 +1,16 @@
 <footer class="site-footer">
+  <div class="container site-footer__top">
+    <p class="site-footer__about">{{ locale.t('footer.about') }}</p>
+    <nav [attr.aria-label]="locale.t('footer.sections')">
+      <ul class="site-footer__sections">
+        @for (section of sections(); track section.key) {
+          <li>
+            <a class="site-footer__section" [routerLink]="section.path">{{ locale.t(section.key) }}</a>
+          </li>
+        }
+      </ul>
+    </nav>
+  </div>
   <div class="container site-footer__inner">
     <p class="site-footer__copy">
       © {{ year }} <span lang="en">{{ author }}</span>

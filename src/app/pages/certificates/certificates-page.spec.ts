@@ -1,3 +1,4 @@
+import { ApplicationRef } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { Title } from '@angular/platform-browser';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
@@ -25,7 +26,8 @@ describe('CertificatesPage', () => {
     const img = el.querySelector('img');
     expect(img?.getAttribute('src')).toBe('certificates/rust-fundamentals.png');
     expect(img?.getAttribute('alt')).toBe('תעודה: Rust Fundamentals');
-    expect(el.querySelector('.certificates__image')?.getAttribute('href')).toBe('certificates/rust-fundamentals.pdf');
+    expect(el.querySelector('.certificates__file')?.getAttribute('href')).toBe('certificates/rust-fundamentals.pdf');
+    expect(el.querySelector('button.certificates__image')?.getAttribute('aria-label')).toBe('הגדלה: Rust Fundamentals');
     expect(el.querySelector('.certificates__meta')?.textContent).toContain('Udemy');
     expect(el.querySelector('time')?.getAttribute('datetime')).toBe('2026-09-01');
     expect(el.querySelector('.tag-list a')?.getAttribute('href')).toBe('/he/tags/rust');
@@ -41,7 +43,7 @@ describe('CertificatesPage', () => {
         ? [{ key: 'x', title: 'X', issuer: 'LinkedIn', date: '2026-01-01', image: '/certificates/x.png', tags: [] }]
         : fixtureContentLoader(path);
     const el = await open('/en/certificates', bare);
-    expect(el.querySelector('.certificates__image')?.getAttribute('href')).toBe('certificates/x.png');
+    expect(el.querySelector('.certificates__file')?.getAttribute('href')).toBe('certificates/x.png');
     expect(el.querySelector('img')?.getAttribute('alt')).toBe('Certificate: X');
     expect(el.querySelector('.certificates__verify')).toBeNull();
     expect(el.querySelector('.tag-list')).toBeNull();
@@ -52,5 +54,20 @@ describe('CertificatesPage', () => {
     const el = await open('/en/certificates', empty);
     expect(el.querySelector('.certificates__empty')?.textContent?.trim()).toBe('No certificates yet.');
     expect(el.querySelector('.certificates')).toBeNull();
+  });
+
+  it('clicking a picture opens the large view in a modal dialog; Close closes it (en)', async () => {
+    const el = await open('/en/certificates');
+    const dialog = el.querySelector('dialog')!;
+    // jsdom may lack the modal API: stub it with the same open/close effect.
+    dialog.showModal ??= function (this: HTMLDialogElement) { this.open = true; };
+    dialog.close ??= function (this: HTMLDialogElement) { this.open = false; };
+    el.querySelector<HTMLButtonElement>('button.certificates__image')!.click();
+    await TestBed.inject(ApplicationRef).whenStable();
+    expect(dialog.open).toBe(true);
+    expect(dialog.querySelector('img')?.getAttribute('src')).toBe('certificates/rust-fundamentals.png');
+    expect(dialog.querySelector('a')?.getAttribute('href')).toBe('certificates/rust-fundamentals.pdf');
+    dialog.querySelector<HTMLButtonElement>('.certificates__close')!.click();
+    expect(dialog.open).toBe(false);
   });
 });

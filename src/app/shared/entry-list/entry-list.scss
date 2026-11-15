@@ -2,18 +2,16 @@
   display: block;
 }
 
+// One row per entry, separated by hairlines (no card grid).
 .entry-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
-  gap: var(--nb-space-4);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.entry-list > li {
-  // Lets every card stretch to the tallest one in its row.
-  display: grid;
+.entry-list > li + li {
+  border-block-start: 1px solid var(--nb-color-border);
 }
 
 .entry-list__empty {
