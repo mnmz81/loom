@@ -199,7 +199,7 @@ Swapped: header menu/theme buttons and language link (`muiButton`), header nav l
 
 Technical verdict: **go**. Open items before real adoption:
 
-1. **Registry.** The spike installed a tarball of the library's local `dist/ui` (built 2026-10-11, older than the library source). Installing from GitHub Packages needs a token with `read:packages`, locally and in the deploy workflow.
+1. **Registry.** Done. `@mushilu-san/ui` 2026.46.1 comes from GitHub Packages (`.npmrc`). The package is private and owned by another account, so the workflows' `GITHUB_TOKEN` cannot read it: CI, deploy and Dependabot use the `PACKAGES_READ_TOKEN` secret (a token with only `read:packages`). Locally `scripts/with-node.sh` takes the token from `gh`. With the published build: JS 472 kB, CSS 28 kB.
 2. **`muiNavLink` + `routerLinkActive`.** Fixed in the spike. `[active]="rla.isActive"` reads a plain property, so the OnPush header never re-rendered it. The header now builds one `isActive()` signal per link (`@angular/router`) and binds `[active]="link.active()"`; `routerLinkActive` is gone. The library needs no change. The mobile nav e2e test now asserts `aria-current="page"` after navigation.
 3. **Template refs.** `#ref` on an element with `muiButton` returns the component, not the element; queries need `{ read: ElementRef }`.
 4. **Name clash.** Library `NavLink` collides with the header's own `NavLink` type; import with an alias.
