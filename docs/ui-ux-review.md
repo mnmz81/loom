@@ -205,7 +205,7 @@ Technical verdict: **go**. Open items before real adoption:
 4. **Name clash.** Library `NavLink` collides with the header's own `NavLink` type; import with an alias.
 5. **Mobile menu.** `mui-mobile-nav` has `mui-mobile-nav-item` children and reads as a bottom tab bar, not a hamburger menu. Not verified in a browser; the header keeps its own menu for now.
 
-### Migration status (2026-11-15, library 2026.46.2)
+### Migration status (2026-11-15, library 2026.46.3)
 
 Every general UI piece of the blog now comes from `@mushilu-san/ui`:
 
@@ -226,7 +226,7 @@ Every general UI piece of the blog now comes from `@mushilu-san/ui`:
 | All icons (menu, theme, RSS, GitHub, arrows) | `mui-icon` |
 | Colors and fonts | `--mui-*` tokens mapped onto `--nb-*` in `src/styles/_mui-map.scss` |
 
-The gaps found on the way (library issues #875 to #882) were fixed in 2026.46.2. Two small ones are open: #884 (dialog close button side without a heading) and #885 (no width, height or background hook on `mui-site-header`; the blog uses one `::ng-deep` rule for it).
+The gaps found on the way (library issues #875 to #882, then #884 and #885) are all fixed; the blog is on 2026.46.3 and has no `::ng-deep` rule left.
 
 Still blog code, on purpose: `nb-article-body`, `nb-entry-card` rows, `nb-series-tiles`, `nb-series-nav`, `nb-related-list`, `nb-entry-meta` and the reading progress bar. They are content layouts of this blog, not general UI. `mui-container`, `mui-stack` and `mui-typography` are not used: the blog's CSS classes do the same with no extra elements, and `mui-typography` renders `role="heading"` instead of native headings.
 

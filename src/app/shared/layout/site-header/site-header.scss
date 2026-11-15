@@ -6,11 +6,12 @@
   view-transition-name: site-header;
 }
 
-// The library header owns the layout; these set the blog's width, height and colour on it.
-:host ::ng-deep .mui-site-header {
-  min-block-size: var(--nb-header-height);
-  padding-inline: max(1.25rem, calc((100% - var(--nb-container-max)) / 2));
-  background: var(--nb-color-header);
+// The library header owns the layout; these line it up with the blog's content column.
+.site-header {
+  --mui-site-header-bg: var(--nb-color-header);
+  --mui-site-header-max-width: calc(var(--nb-container-max) + 2.5rem);
+  --mui-site-header-padding-inline: 1.25rem;
+  --mui-site-header-min-height: var(--nb-header-height);
 }
 
 .site-header__brand {
