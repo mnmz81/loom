@@ -33,24 +33,17 @@ describe('Toc', () => {
   );
   afterEach(() => TestBed.inject(LocaleService).setLang('he'));
 
-  it('is a nav labelled by its Hebrew title (he)', async () => {
+  it('is a nav named and titled in Hebrew (he)', async () => {
     const el = await render('he', items);
-    const nav = el.querySelector('nav');
-    const title = el.querySelector('.toc__title');
-    expect(title?.textContent?.trim()).toBe('בעמוד הזה');
-    expect(title?.id).toBeTruthy();
-    expect(nav?.getAttribute('aria-labelledby')).toBe(title?.id);
+    expect(el.querySelector('nav')?.getAttribute('aria-label')).toBe('בעמוד הזה');
+    const heading = el.querySelector('[role="heading"]');
+    expect(heading?.getAttribute('aria-level')).toBe('2');
+    expect(heading?.textContent?.trim()).toBe('בעמוד הזה');
   });
 
   it('is titled in English (en)', async () => {
     const el = await render('en', items);
-    expect(el.querySelector('.toc__title')?.textContent?.trim()).toBe('On this page');
-  });
-
-  it('gives every instance its own title id', async () => {
-    const a = await render('en', items);
-    const b = await render('en', items);
-    expect(a.querySelector('.toc__title')?.id).not.toBe(b.querySelector('.toc__title')?.id);
+    expect(el.querySelector('[role="heading"]')?.textContent?.trim()).toBe('On this page');
   });
 
   it('links each heading by fragment on the current page and indents h3 items', async () => {
@@ -77,8 +70,7 @@ describe('Toc', () => {
 
   it('starts closed (small screens) and opens on wide screens', async () => {
     const closed = await render('he', items);
-    expect(closed.querySelector('details')?.open).toBe(false);
-    expect(closed.querySelector('summary .toc__title')).not.toBeNull();
+    expect(closed.querySelector('button')?.getAttribute('aria-expanded')).toBe('false');
 
     const view = document.defaultView!;
     const original = view.matchMedia;
@@ -87,7 +79,7 @@ describe('Toc', () => {
     })) as typeof view.matchMedia;
     try {
       const open = await render('he', items);
-      expect(open.querySelector('details')?.open).toBe(true);
+      expect(open.querySelector('button')?.getAttribute('aria-expanded')).toBe('true');
     } finally {
       view.matchMedia = original;
     }

@@ -5,24 +5,8 @@
 .tag-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 0 var(--nb-space-3);
+  gap: var(--nb-space-2);
   margin: 0;
   padding: 0;
   list-style: none;
-}
-
-// Quiet text links (no colored pills); full 44px touch target.
-.tag-list__link {
-  display: inline-flex;
-  align-items: center;
-  min-block-size: var(--nb-touch-target);
-  color: var(--nb-color-muted);
-  font-size: 0.875rem;
-  font-weight: 500;
-  text-decoration: none;
-
-  &:hover {
-    color: var(--nb-color-accent);
-    text-decoration: underline;
-  }
 }

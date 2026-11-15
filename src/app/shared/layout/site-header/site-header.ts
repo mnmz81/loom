@@ -2,14 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   DOCUMENT,
-  ElementRef,
   computed,
   type Signal,
   inject,
   input,
   output,
   signal,
-  viewChild,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink, isActive } from '@angular/router';
@@ -29,15 +27,15 @@ interface NavLink {
 }
 
 import { Button, Icon } from '@mushilu-san/ui/primitives';
-import { NavLink as MuiNavLink } from '@mushilu-san/ui/navigation';
+import { NavLink as MuiNavLink, SiteHeader as MuiSiteHeader } from '@mushilu-san/ui/navigation';
 
 @Component({
   selector: 'nb-site-header',
-  imports: [RouterLink, Button, Icon, MuiNavLink],
+  imports: [RouterLink, Button, Icon, MuiNavLink, MuiSiteHeader],
   templateUrl: './site-header.html',
   styleUrl: './site-header.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { '(document:keydown.escape)': 'onEscape()', '(document:keydown)': 'onShortcut($event)' },
+  host: { '(document:keydown)': 'onShortcut($event)' },
 })
 export class SiteHeader {
   readonly theme = input.required<'light' | 'dark'>();
@@ -92,11 +90,6 @@ export class SiteHeader {
   );
 
   protected readonly menuOpen = signal(false);
-  private readonly menuButton = viewChild.required('menuButton', { read: ElementRef<HTMLButtonElement> });
-
-  protected toggleMenu(): void {
-    this.menuOpen.update((open) => !open);
-  }
 
   protected closeMenu(): void {
     this.menuOpen.set(false);
@@ -111,11 +104,5 @@ export class SiteHeader {
     void this.router
       .navigateByUrl(PATHS.search(this.locale.lang()))
       .then(() => this.document.getElementById('search-input')?.focus());
-  }
-
-  protected onEscape(): void {
-    if (!this.menuOpen()) return;
-    this.closeMenu();
-    this.menuButton().nativeElement.focus();
   }
 }

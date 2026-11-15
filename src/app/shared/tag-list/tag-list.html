@@ -2,8 +2,8 @@
   <ul class="tag-list" [attr.aria-label]="locale.t('entry.tags')">
     @for (tag of tags(); track tag) {
       <li>
-        <a class="tag-list__link" [routerLink]="path(tag)"
-          ><bdi><span aria-hidden="true">#</span>{{ label(tag) }}</bdi></a
+        <a muiChip leading="#" class="tag-list__link" [routerLink]="path(tag)"
+          ><bdi>{{ label(tag) }}</bdi></a
         >
       </li>
     }

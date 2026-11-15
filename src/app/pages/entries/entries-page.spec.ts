@@ -57,7 +57,7 @@ describe('EntriesPage', () => {
 
   it('shows no pager when every entry fits on one page', async () => {
     const el = await open('/he/posts');
-    expect(el.querySelector('nav.pager')).toBeNull();
-    expect(el.querySelector('details.more-tags')).toBeNull();
+    expect(el.querySelector('mui-pagination')).toBeNull();
+    expect(el.querySelector('.more-tags')).toBeNull();
   });
 });

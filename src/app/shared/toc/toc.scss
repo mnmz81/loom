@@ -2,49 +2,6 @@
   display: block;
 }
 
-.toc__summary {
-  display: flex;
-  align-items: center;
-  gap: var(--nb-space-2);
-  min-block-size: var(--nb-touch-target);
-  cursor: pointer;
-  list-style: none;
-
-  &::-webkit-details-marker {
-    display: none;
-  }
-
-  // Chevron (bottom + inline-end borders): points along the reading direction when closed, down when open.
-  &::before {
-    content: '';
-    inline-size: 0.5rem;
-    block-size: 0.5rem;
-    border-block-end: 2px solid currentColor;
-    border-inline-end: 2px solid currentColor;
-    transform: rotate(-45deg);
-    transition: transform var(--nb-duration-fast) var(--nb-ease-out);
-  }
-}
-
-.toc__details[open] > .toc__summary::before {
-  transform: rotate(45deg);
-}
-
-// In RTL the inline-end border is on the left, so the two angles swap.
-:host-context([dir='rtl']) .toc__summary::before {
-  transform: rotate(45deg);
-}
-
-:host-context([dir='rtl']) .toc__details[open] > .toc__summary::before {
-  transform: rotate(-45deg);
-}
-
-.toc__title {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 700;
-}
-
 // Small screens: a quiet bordered box so the closed TOC reads as one control.
 @media (max-width: 63.99rem) {
   .toc__details {

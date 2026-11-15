@@ -6,17 +6,11 @@
   view-transition-name: site-header;
 }
 
-.site-header {
-  border-block-end: 1px solid var(--nb-color-border);
-  background: var(--nb-color-header);
-}
-
-.site-header__inner {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: var(--nb-space-4);
+// The library header owns the layout; these set the blog's width, height and colour on it.
+:host ::ng-deep .mui-site-header {
   min-block-size: var(--nb-header-height);
+  padding-inline: max(1.25rem, calc((100% - var(--nb-container-max)) / 2));
+  background: var(--nb-color-header);
 }
 
 .site-header__brand {
@@ -40,12 +34,9 @@
   }
 }
 
-.site-header__nav {
-  margin-inline-start: auto;
-}
-
 .site-header__links {
   display: flex;
+  justify-content: flex-end;
   gap: var(--nb-space-1);
   margin: 0;
   padding: 0;
@@ -58,52 +49,10 @@
   gap: var(--nb-space-2);
 }
 
-
-.site-header__icon-btn {
-  display: inline-grid;
-  place-items: center;
-  inline-size: var(--nb-touch-target);
-  block-size: var(--nb-touch-target);
-  padding: 0;
-  border: 0;
-  border-radius: var(--nb-radius-sm);
-  background: var(--nb-color-surface);
-  color: var(--nb-color-text);
-  cursor: pointer;
-  transition: background-color var(--nb-duration-fast) var(--nb-ease-out);
-
-  &:hover {
-    background: var(--nb-color-surface-2);
-  }
-}
-
-.site-header__menu-btn {
-  display: none;
-}
-
-@media (max-width: 639.98px) {
-  .site-header__menu-btn {
-    display: inline-grid;
-    margin-inline-start: auto;
-  }
-
-  .site-header__nav {
-    position: absolute;
-    inset-block-start: 100%;
-    inset-inline: 0;
-    display: none;
-    margin: 0;
-    padding: var(--nb-space-3);
-    border-radius: 0 0 var(--nb-radius-md) var(--nb-radius-md);
-    background: var(--nb-color-surface);
-    box-shadow: var(--nb-shadow-md);
-  }
-
-  .site-header--open .site-header__nav {
-    display: block;
-  }
-
+// Below the library header's breakpoint the nav is a full-width row under the bar.
+@media (max-width: 47.99rem) {
   .site-header__links {
     flex-direction: column;
+    padding-block: var(--nb-space-2);
   }
 }

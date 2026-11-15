@@ -64,6 +64,6 @@ test('he Hebrew-only post page: no serious a11y violations', async ({ page }) =>
 test('mobile post with the TOC opened: no serious a11y violations', async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await gotoReady(page, 'he/posts/git-zero-to-hero');
-  await page.locator('nb-toc summary').click();
+  await page.locator('nb-toc button').click();
   await expectNoSeriousA11yViolations(page);
 });
