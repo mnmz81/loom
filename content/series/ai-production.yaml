@@ -4,3 +4,7 @@ title:
 description:
   he: סדרה 4 מתוך 5 בבינה מלאכותית. מה צריך כדי להעלות מערכת LLM לאוויר. Evals, observability, עלות, אבטחה, guardrails, מפת החלטות, ואפליקציה אחת שמחברת הכול.
   en: AI series 4 of 5. What it takes to ship an LLM system. Evals, observability, cost, security, guardrails, a decision map, and one app that puts it all together.
+order: 4
+track:
+  he: בינה מלאכותית
+  en: AI

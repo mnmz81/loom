@@ -113,3 +113,11 @@ test('search is reachable from the main navigation', async ({ page }) => {
   await expect(page).toHaveURL(/\/en\/search$/);
   await expect(page.getByRole('searchbox')).toBeVisible();
 });
+
+test('Ctrl+K from any page opens search with the field focused; empty search shows starting points', async ({ page }) => {
+  await gotoReady(page, 'en/posts');
+  await page.keyboard.press('Control+k');
+  await expect(page).toHaveURL(/\/en\/search$/);
+  await expect(page.getByRole('searchbox')).toBeFocused();
+  await expect(page.getByRole('heading', { name: t('en', 'search.startHere') })).toBeVisible();
+});

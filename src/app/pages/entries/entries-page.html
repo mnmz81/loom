@@ -1,16 +1,60 @@
-<div class="container page">
+<div class="container page page-narrow">
   <header class="page__header">
     <h1 class="page__title">{{ title() }}</h1>
-    @if (index().tags.length) {
+    @if (topTags().length) {
       <ul class="chips" [attr.aria-label]="locale.t('entry.tags')">
-        @for (tag of index().tags; track tag.tag) {
+        @for (tag of topTags(); track tag.tag) {
           <li>
-            <a class="chip" [attr.data-c]="colorOf(tag.tag)" [routerLink]="tagPath(tag.tag)">{{ tag.label }}</a>
+            <a class="chip" [routerLink]="tagPath(tag.tag)">{{ tag.label }}</a>
           </li>
         }
       </ul>
+      @if (moreTags().length) {
+        <details class="more-tags">
+          <summary class="more-tags__toggle">{{ locale.t('list.moreTags', { n: moreTags().length }) }}</summary>
+          <ul class="chips">
+            @for (tag of moreTags(); track tag.tag) {
+              <li>
+                <a class="chip" [routerLink]="tagPath(tag.tag)">{{ tag.label }}</a>
+              </li>
+            }
+          </ul>
+        </details>
+      }
     }
   </header>
 
-  <nb-entry-list [entries]="entries()" [tagLabels]="tagLabels()" />
+  <nb-entry-list [entries]="pageEntries()" [tagLabels]="tagLabels()" />
+
+  @if (pages().length > 1) {
+    <nav class="pager" [attr.aria-label]="locale.t('pager.label')">
+      <ul class="pager__list">
+        @if (page() > 1) {
+          <li>
+            <a class="pager__link pager__link--step" rel="prev" [routerLink]="pagePath(page() - 1)">{{
+              locale.t('pager.prev')
+            }}</a>
+          </li>
+        }
+        @for (n of pages(); track n) {
+          <li>
+            <a
+              class="pager__link"
+              [routerLink]="pagePath(n)"
+              [attr.aria-current]="n === page() ? 'page' : null"
+              [attr.aria-label]="locale.t('pager.page', { n })"
+              >{{ n }}</a
+            >
+          </li>
+        }
+        @if (page() < pages().length) {
+          <li>
+            <a class="pager__link pager__link--step" rel="next" [routerLink]="pagePath(page() + 1)">{{
+              locale.t('pager.next')
+            }}</a>
+          </li>
+        }
+      </ul>
+    </nav>
+  }
 </div>

@@ -1,5 +1,6 @@
 // Pure helpers behind app.routes.server.ts: which URLs get prerendered, from the pipeline output.
 import type { EntryType, Lang, LangIndex, SeriesIndex } from '../core/content.models';
+import { PAGE_SIZE, pageTotal } from './pagination';
 
 /**
  * Entry slugs of `type` that have their own text in `index.lang`. A fallback entry (only in the other
@@ -22,4 +23,12 @@ export function tagParams(indexes: readonly LangIndex[]): { lang: Lang; tag: str
 /** `{ lang, key }` for every series in every language (series pages exist in both languages). */
 export function seriesParams(langs: readonly Lang[], series: SeriesIndex): { lang: Lang; key: string }[] {
   return langs.flatMap((lang) => series.map(({ key }) => ({ lang, key })));
+}
+
+/** `{ lang, page }` for list pages 2…n of `type` (page 1 is the plain `/<lang>/posts` route). */
+export function listPageParams(indexes: readonly LangIndex[], type: EntryType, size = PAGE_SIZE): { lang: Lang; page: string }[] {
+  return indexes.flatMap((index) => {
+    const total = pageTotal(index.entries.filter((e) => e.type === type).length, size);
+    return Array.from({ length: total - 1 }, (_, i) => ({ lang: index.lang, page: String(i + 2) }));
+  });
 }

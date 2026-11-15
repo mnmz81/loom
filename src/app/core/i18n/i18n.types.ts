@@ -37,6 +37,31 @@ export interface Dict {
   'list.latestPosts': string;
   'list.latestNotes': string;
   'list.all': string;
+  'list.allPosts': string;         // section link on home, ends with a reading-direction arrow
+  'list.allNotes': string;
+  'list.allSeries': string;
+  'list.moreTags': string;         // {n} — <summary> of the collapsed tag filter
+  'pager.label': string;           // aria-label of the list pagination <nav>
+  'pager.prev': string;
+  'pager.next': string;
+  'pager.page': string;            // {n} — accessible name of a page number link
+  'pager.title': string;           // {title} {n} — document title of page n ≥ 2
+  'home.title': string;            // h1: what the blog is
+  'home.lead': string;             // who writes it and what is here
+  'home.startSeries': string;      // primary action → series list
+  'home.search': string;           // secondary action → search
+  'series.partsOne': string;
+  'series.partsOther': string;     // {n}
+  'series.trackCount': string;     // {n} — "5 series" on a track tile
+  'entry.backToTop': string;
+  'search.startHere': string;      // heading of the starting points shown before typing
+  'search.popularTags': string;
+  'search.shortcut': string;       // hint: press Ctrl/⌘+K anywhere to search
+  'certificates.enlarge': string;  // {title} — button that opens the large view
+  'certificates.close': string;
+  'certificates.original': string; // link to the original file in the large view
+  'footer.about': string;
+  'footer.sections': string;       // aria-label of the footer section links
   'tag.title': string;            // {tag}
   'search.title': string;
   'search.placeholder': string;

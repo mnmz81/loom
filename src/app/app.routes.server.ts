@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { RenderMode, ServerRoute } from '@angular/ssr';
 import { LANGS, type LangIndex, type SeriesIndex } from './core/content.models';
-import { entryParams, seriesParams, tagParams } from './pages/prerender-params';
+import { entryParams, listPageParams, seriesParams, tagParams } from './pages/prerender-params';
 
 // Prerender params come from the real pipeline output (`npm run content` writes public/content),
 // read relative to the project root like core/content-loader.server.ts.
@@ -13,6 +13,16 @@ function readJson<T>(...parts: string[]): T {
 const readIndexes = () => LANGS.map((lang) => readJson<LangIndex>(lang, 'index.json'));
 
 export const serverRoutes: ServerRoute[] = [
+  {
+    path: ':lang/posts/page/:page',
+    renderMode: RenderMode.Prerender,
+    getPrerenderParams: async () => listPageParams(readIndexes(), 'post'),
+  },
+  {
+    path: ':lang/notes/page/:page',
+    renderMode: RenderMode.Prerender,
+    getPrerenderParams: async () => listPageParams(readIndexes(), 'note'),
+  },
   {
     path: ':lang/posts/:slug',
     renderMode: RenderMode.Prerender,

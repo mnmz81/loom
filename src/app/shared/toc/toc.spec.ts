@@ -74,4 +74,22 @@ describe('Toc', () => {
     expect((await render('he', hePost.toc)).querySelector('nav')).toBeNull();
     expect((await render('en', [])).querySelector('nav')).toBeNull();
   });
+
+  it('starts closed (small screens) and opens on wide screens', async () => {
+    const closed = await render('he', items);
+    expect(closed.querySelector('details')?.open).toBe(false);
+    expect(closed.querySelector('summary .toc__title')).not.toBeNull();
+
+    const view = document.defaultView!;
+    const original = view.matchMedia;
+    view.matchMedia = ((query: string) => ({
+      matches: query === '(min-width: 64rem)',
+    })) as typeof view.matchMedia;
+    try {
+      const open = await render('he', items);
+      expect(open.querySelector('details')?.open).toBe(true);
+    } finally {
+      view.matchMedia = original;
+    }
+  });
 });

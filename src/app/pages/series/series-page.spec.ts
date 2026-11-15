@@ -25,7 +25,7 @@ describe('SeriesPage', () => {
     expect(el.querySelector('.page__lead')?.textContent?.trim()).toBe('הערות מהדרך ללמוד ראסט.');
     expect(el.querySelector('.series__count')?.textContent?.trim()).toBe('2 חלקים');
     expect([...el.querySelectorAll('.series__part-label')].map((l) => l.textContent?.trim())).toEqual(['חלק 1', 'חלק 2']);
-    expect([...el.querySelectorAll('nb-entry-card h2 a')].map((a) => a.getAttribute('href'))).toEqual([
+    expect([...el.querySelectorAll('a.series__part-link')].map((a) => a.getAttribute('href'))).toEqual([
       '/he/posts/rust-ownership',
       '/he/posts/rust-borrowing',
     ]);
@@ -35,7 +35,7 @@ describe('SeriesPage', () => {
   it('shows the untranslated part as a fallback card in /en', async () => {
     const el = await open('/en/series/learning-rust');
     expect(el.querySelector('h1')?.textContent?.trim()).toBe('Learning Rust');
-    const links = [...el.querySelectorAll('nb-entry-card h2 a')].map((a) => a.getAttribute('href'));
+    const links = [...el.querySelectorAll('a.series__part-link')].map((a) => a.getAttribute('href'));
     expect(links).toEqual(['/he/posts/rust-ownership', '/en/posts/rust-borrowing']);
     expect(el.textContent).toContain('Hebrew only');
   });

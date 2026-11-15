@@ -29,10 +29,20 @@ test.describe('tag pages', () => {
     await expect(page.getByRole('article').getByRole('heading', { level: 2 })).toHaveText(['Search zsh history with Ctrl+R']);
   });
 
-  test('tag chips on the posts list link to tag pages', async ({ page }) => {
+  test('the tag filter on the posts list links to tag pages; less used tags sit behind "more"', async ({ page }) => {
     await gotoReady(page, 'en/posts');
-    await page.getByRole('list', { name: t('en', 'entry.tags') }).first().getByRole('link', { name: 'Rust' }).click();
+    const rust = page.locator('header.page__header').getByRole('link', { name: 'Rust', exact: true });
+    await expect(rust).toBeHidden(); // Rust has 2 posts: not a top tag
+    await page.locator('header.page__header summary').click();
+    await rust.click();
     await expect(page).toHaveURL(/\/en\/tags\/rust$/);
+  });
+
+  test('a row tag on the posts list links to its tag page', async ({ page }) => {
+    await gotoReady(page, 'en/posts');
+    const row = page.getByRole('main').getByRole('article').first();
+    await row.getByRole('list', { name: t('en', 'entry.tags') }).getByRole('link').click();
+    await expect(page).toHaveURL(/\/en\/tags\/[a-z0-9-]+$/);
   });
 });
 

@@ -1,8 +1,8 @@
 import { CanMatchFn, Routes } from '@angular/router';
-import { DEFAULT_LANG, LANGS } from './core/content.models';
+import { DEFAULT_LANG, LANGS, TYPE_SEGMENT } from './core/content.models';
 import { certificatesResolver, entryResolver, langIndexResolver, seriesIndexResolver } from './core/content.resolvers';
 import { langGuard } from './core/i18n/lang.guard';
-import { seriesResolver, tagResolver } from './pages/page.resolvers';
+import { listPageResolver, seriesResolver, tagResolver } from './pages/page.resolvers';
 
 /** `:lang` only matches a supported language, so unknown first segments fall through to the 404 route. */
 export const langMatch: CanMatchFn = (_route, segments) =>
@@ -24,18 +24,15 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/home/home-page').then((m) => m.HomePage),
         resolve: { index: langIndexResolver, series: seriesIndexResolver },
       },
-      {
-        path: 'posts',
-        loadComponent: () => import('./pages/entries/entries-page').then((m) => m.EntriesPage),
-        data: { type: 'post' },
-        resolve: { index: langIndexResolver },
-      },
-      {
-        path: 'notes',
-        loadComponent: () => import('./pages/entries/entries-page').then((m) => m.EntriesPage),
-        data: { type: 'note' },
-        resolve: { index: langIndexResolver },
-      },
+      // List pages: page 1 at `posts`, pages 2…n at `posts/page/:page` (before `posts/:slug`).
+      ...(['post', 'note'] as const).flatMap((type) =>
+        [TYPE_SEGMENT[type], `${TYPE_SEGMENT[type]}/page/:page`].map((path) => ({
+          path,
+          loadComponent: () => import('./pages/entries/entries-page').then((m) => m.EntriesPage),
+          data: { type },
+          resolve: { index: langIndexResolver, page: listPageResolver(type) },
+        })),
+      ),
       {
         path: 'posts/:slug',
         loadComponent: () => import('./pages/entry/entry-page').then((m) => m.EntryPage),
@@ -70,7 +67,7 @@ export const routes: Routes = [
       {
         path: 'search',
         loadComponent: () => import('./pages/search/search-page').then((m) => m.SearchPage),
-        resolve: { index: langIndexResolver },
+        resolve: { index: langIndexResolver, series: seriesIndexResolver },
       },
       {
         path: 'accessibility',

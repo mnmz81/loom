@@ -14,6 +14,8 @@ import { dirOf } from '../lang-dir';
 })
 export class SeriesNav {
   readonly nav = input.required<SeriesNavModel>();
+  /** One inline line (series · part · arrows) for the top of a post, instead of the full prev/next nav. */
+  readonly compact = input(false);
 
   protected readonly locale = inject(LocaleService);
   protected readonly seriesPath = computed(() => PATHS.series(this.locale.lang(), this.nav().key));

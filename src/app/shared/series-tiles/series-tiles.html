@@ -1,0 +1,42 @@
+<ul class="series-cards">
+  @for (group of groups(); track group.tiles[0].key) {
+    @if (group.track; as track) {
+      <li class="series-cards__track">
+        <p class="series-cards__track-head">
+          <span
+            class="series-cards__track-title"
+            role="heading"
+            [attr.aria-level]="headingLevel()"
+            >{{ track }}</span
+          >
+          <span class="series-cards__meta">{{
+            locale.t('series.trackCount', { n: group.tiles.length })
+          }}</span>
+        </p>
+        <ol class="series-cards__steps">
+          @for (tile of group.tiles; track tile.key; let i = $index) {
+            <li class="series-cards__step">
+              <span class="series-cards__step-n" aria-hidden="true">{{ i + 1 }}</span>
+              <span class="series-cards__step-body">
+                <a class="series-cards__link" [routerLink]="tile.path">{{ tile.title }}</a>
+                <span class="series-cards__meta">{{ parts(tile.parts) }}</span>
+              </span>
+            </li>
+          }
+        </ol>
+      </li>
+    } @else {
+      @let tile = group.tiles[0];
+      <li class="series-cards__item">
+        <span class="series-cards__title" role="heading" [attr.aria-level]="headingLevel()">
+          <span class="series-cards__marker" [attr.data-c]="tile.color" aria-hidden="true"></span>
+          <a class="series-cards__link" [routerLink]="tile.path">{{ tile.title }}</a>
+        </span>
+        @if (tile.description) {
+          <p class="series-cards__text">{{ tile.description }}</p>
+        }
+        <p class="series-cards__meta">{{ parts(tile.parts) }}</p>
+      </li>
+    }
+  }
+</ul>

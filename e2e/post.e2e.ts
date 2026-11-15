@@ -80,7 +80,7 @@ test.describe('series pages', () => {
       await expect(page).toHaveURL(new RegExp(`/${lang}/series/learning-rust$`));
       await expect(page.getByRole('heading', { level: 1 })).toHaveText(SERIES_TITLE[lang]);
 
-      const parts = page.getByRole('main').getByRole('listitem').filter({ has: page.getByRole('article') });
+      const parts = page.getByRole('main').getByRole('listitem');
       await expect(parts).toHaveCount(2);
       // Part 1 exists only in Hebrew, so it appears (flagged) in both languages; part 2 is translated.
       await expect(parts.nth(0)).toContainText(lang === 'he' ? 'חלק 1' : 'Part 1');
@@ -89,4 +89,30 @@ test.describe('series pages', () => {
       await expect(parts.nth(1)).toContainText(lang === 'he' ? 'ראסט: השאלה (Borrowing)' : 'Rust: borrowing');
     });
   }
+});
+
+test.describe('reading page: the article starts on the first screen', () => {
+  for (const viewport of [
+    { width: 1280, height: 800 },
+    { width: 375, height: 812 },
+  ]) {
+    test(`first paragraph is above the fold at ${viewport.width}x${viewport.height}`, async ({ page }) => {
+      await page.setViewportSize(viewport);
+      await gotoReady(page, 'he/posts/python-dicts'); // a series post: eyebrow series bar + TOC
+      const top = await page.locator('.prose > p').first().evaluate((p) => p.getBoundingClientRect().top);
+      expect(top).toBeLessThan(viewport.height - 40);
+    });
+  }
+});
+
+test.describe('posts list paging', () => {
+  test('he: the first page links to page 2, which is a static page marked current', async ({ page }) => {
+    await gotoReady(page, 'he/posts');
+    const pager = page.getByRole('navigation', { name: t('he', 'pager.label') });
+    await expect(pager.getByRole('link', { name: t('he', 'pager.page', { n: 1 }), exact: true })).toHaveAttribute('aria-current', 'page');
+    await pager.getByRole('link', { name: t('he', 'pager.page', { n: 2 }), exact: true }).click();
+    await expect(page).toHaveURL(/\/loom\/he\/posts\/page\/2$/);
+    await expect(pager.getByRole('link', { name: t('he', 'pager.page', { n: 2 }), exact: true })).toHaveAttribute('aria-current', 'page');
+    expect((await page.request.get('he/posts/page/2')).status()).toBe(200);
+  });
 });

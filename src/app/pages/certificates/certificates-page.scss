@@ -4,7 +4,7 @@
 
 .certificates {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
   gap: var(--nb-space-4);
   margin: 0;
   padding: 0;
@@ -22,10 +22,17 @@
 
 .certificates__image {
   display: block;
+  inline-size: 100%;
   aspect-ratio: 4 / 3;
   padding: var(--nb-space-3);
-  background: var(--nb-color-surface);
+  border: 0;
   border-block-end: 1px solid var(--nb-color-border);
+  background: var(--nb-color-surface);
+  cursor: zoom-in;
+
+  &:focus-visible {
+    outline-offset: -4px;
+  }
 
   img {
     display: block;
@@ -57,10 +64,63 @@
   font-size: 0.9375rem;
 }
 
-.certificates__verify {
-  align-self: flex-start;
-  margin-block-start: auto;
+.certificates__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--nb-space-4);
+  margin: auto 0 0;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: var(--nb-touch-target);
+    font-weight: 600;
+  }
+}
+
+.certificates__dialog {
+  inline-size: min(100vw - 2rem, 64rem);
+  max-block-size: calc(100dvh - 2rem);
+  padding: var(--nb-space-4);
+  border: 1px solid var(--nb-color-border);
+  border-radius: var(--nb-radius-lg);
+  background: var(--nb-color-surface);
+  color: var(--nb-color-text);
+
+  &::backdrop {
+    background: rgb(0 0 0 / 0.6);
+  }
+}
+
+.certificates__large {
+  inline-size: 100%;
+  max-block-size: calc(100dvh - 9rem);
+  object-fit: contain;
+}
+
+.certificates__dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--nb-space-3);
+  margin: var(--nb-space-3) 0 0;
+
+  a {
+    font-weight: 600;
+  }
+}
+
+.certificates__close {
+  min-inline-size: var(--nb-touch-target);
+  min-block-size: var(--nb-touch-target);
+  padding-inline: var(--nb-space-4);
+  border: 1px solid var(--nb-color-border);
+  border-radius: var(--nb-radius-full);
+  background: var(--nb-color-surface-2);
+  color: var(--nb-color-text);
   font-weight: 600;
+  cursor: pointer;
 }
 
 .certificates__empty {

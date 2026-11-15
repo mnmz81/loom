@@ -1,79 +1,58 @@
 // Design tokens. Light on :root, dark via [data-theme='dark'] (set by the theme service / inline script),
 // with prefers-color-scheme as the fallback when no theme attribute is set.
-// The site's original colors: slate neutrals with an indigo accent, plus six cool tag colors (indigo to fuchsia). Text and accent pairs meet WCAG AA (4.5:1).
+// Warm neutral surfaces and ONE accent (links, active states, focus). The six --nb-tag-* hues are far apart
+// so series tell apart; they mark series identity only (small dots via data-c), never text or tags.
+// Text pairs meet WCAG AA.
 @mixin light {
-  --nb-color-bg: #fafafa;
-  --nb-color-header: #fafafa;
-  --nb-color-footer: #fafafa;
+  --nb-color-bg: #fbfaf8;
+  --nb-color-header: #fbfaf8;
+  --nb-color-footer: #f4f2ee;
   --nb-color-surface: #ffffff;
-  --nb-color-surface-2: #f1f5f9;
-  --nb-color-text: #0f172a;
-  --nb-color-muted: #475569;
-  --nb-color-border: #e2e8f0;
-  --nb-color-accent: #4f46e5;
+  --nb-color-surface-2: #f2f0ec;
+  --nb-color-text: #1c1b19;
+  --nb-color-muted: #5c5853;
+  --nb-color-border: #e4e1db;
+  --nb-color-accent: #0b6b63;
   --nb-color-accent-contrast: #ffffff;
-  --nb-color-tag-bg: #eef2ff;
-  --nb-color-tag-text: #3730a3;
+  --nb-color-tag-bg: #f2f0ec;
+  --nb-color-tag-text: #3d3a36;
   --nb-color-badge-bg: #fef3c7;
   --nb-color-badge-text: #92400e;
   --nb-shadow-sm: 0 1px 2px rgb(15 23 42 / 0.06);
   --nb-shadow-md: 0 12px 32px rgb(15 23 42 / 0.1);
-  --nb-tag-0: #4f46e5;
-  --nb-tag-0-bg: #e0e7ff;
-  --nb-tag-0-fg: #3730a3;
-  --nb-tag-1: #7c3aed;
-  --nb-tag-1-bg: #ede9fe;
-  --nb-tag-1-fg: #5b21b6;
-  --nb-tag-2: #2563eb;
-  --nb-tag-2-bg: #dbeafe;
-  --nb-tag-2-fg: #1e40af;
-  --nb-tag-3: #0284c7;
-  --nb-tag-3-bg: #e0f2fe;
-  --nb-tag-3-fg: #075985;
-  --nb-tag-4: #0891b2;
-  --nb-tag-4-bg: #cffafe;
-  --nb-tag-4-fg: #155e75;
-  --nb-tag-5: #c026d3;
-  --nb-tag-5-bg: #fae8ff;
-  --nb-tag-5-fg: #86198f;
+  --nb-tag-0: #2563eb;
+  --nb-tag-1: #d97706;
+  --nb-tag-2: #db2777;
+  --nb-tag-3: #059669;
+  --nb-tag-4: #7c3aed;
+  --nb-tag-5: #dc2626;
   color-scheme: light;
 }
 
 @mixin dark {
-  --nb-color-bg: #0b0f19;
-  --nb-color-header: #0b0f19;
-  --nb-color-footer: #0b0f19;
-  --nb-color-surface: #111827;
-  --nb-color-surface-2: #1f2937;
-  --nb-color-text: #e5e7eb;
-  --nb-color-muted: #9ca3af;
-  --nb-color-border: #1f2937;
-  --nb-color-accent: #818cf8;
-  --nb-color-accent-contrast: #0b0f19;
-  --nb-color-tag-bg: #1e1b4b;
-  --nb-color-tag-text: #c7d2fe;
+  // Three clear steps: page < surface (cards, header) < surface-2 (chips, code), and a border lighter than all.
+  --nb-color-bg: #0f1115;
+  --nb-color-header: #0f1115;
+  --nb-color-footer: #13161b;
+  --nb-color-surface: #171a20;
+  --nb-color-surface-2: #20242c;
+  --nb-color-text: #e8e6e3;
+  --nb-color-muted: #a7a39d;
+  --nb-color-border: #323843;
+  --nb-color-accent: #5cc4b8;
+  --nb-color-accent-contrast: #0f1115;
+  --nb-color-tag-bg: #20242c;
+  --nb-color-tag-text: #d6d3ce;
   --nb-color-badge-bg: #422006;
   --nb-color-badge-text: #fde68a;
   --nb-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
   --nb-shadow-md: 0 12px 32px rgb(0 0 0 / 0.5);
-  --nb-tag-0: #818cf8;
-  --nb-tag-0-bg: #1e1b4b;
-  --nb-tag-0-fg: #c7d2fe;
-  --nb-tag-1: #a78bfa;
-  --nb-tag-1-bg: #2e1065;
-  --nb-tag-1-fg: #ddd6fe;
-  --nb-tag-2: #60a5fa;
-  --nb-tag-2-bg: #172554;
-  --nb-tag-2-fg: #bfdbfe;
-  --nb-tag-3: #38bdf8;
-  --nb-tag-3-bg: #082f49;
-  --nb-tag-3-fg: #bae6fd;
-  --nb-tag-4: #22d3ee;
-  --nb-tag-4-bg: #083344;
-  --nb-tag-4-fg: #a5f3fc;
-  --nb-tag-5: #e879f9;
-  --nb-tag-5-bg: #4a044e;
-  --nb-tag-5-fg: #f5d0fe;
+  --nb-tag-0: #60a5fa;
+  --nb-tag-1: #fbbf24;
+  --nb-tag-2: #f472b6;
+  --nb-tag-3: #34d399;
+  --nb-tag-4: #a78bfa;
+  --nb-tag-5: #f87171;
   color-scheme: dark;
 }
 
@@ -99,6 +78,8 @@
   --nb-radius-full: 999px;
   --nb-container-max: 72rem;
   --nb-prose-max: 44rem;
+  // Every single-column page (lists, search, series, certificates) uses this width, centered.
+  --nb-page-narrow: 48rem;
   --nb-header-height: 4rem;
   --nb-touch-target: 44px;
   --nb-duration-fast: 150ms;

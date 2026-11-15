@@ -54,4 +54,10 @@ describe('EntriesPage', () => {
     expect(rust?.textContent?.trim()).toBe('ראסט');
     expect(el.querySelectorAll('.chips a').length).toBe(6);
   });
+
+  it('shows no pager when every entry fits on one page', async () => {
+    const el = await open('/he/posts');
+    expect(el.querySelector('nav.pager')).toBeNull();
+    expect(el.querySelector('details.more-tags')).toBeNull();
+  });
 });

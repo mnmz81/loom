@@ -89,4 +89,21 @@ describe('SeriesNav', () => {
     const arrows = [...el.querySelectorAll('svg')];
     expect(arrows.every((svg) => svg.getAttribute('aria-hidden') === 'true')).toBe(true);
   });
+
+  it('compact: one line with series link, part and labelled arrow links, no nav landmark (he)', async () => {
+    TestBed.inject(LocaleService).setLang('he');
+    const fixture = TestBed.createComponent(SeriesNav);
+    fixture.componentRef.setInput('nav', heNav);
+    fixture.componentRef.setInput('compact', true);
+    await fixture.whenStable();
+    const el = fixture.nativeElement as HTMLElement;
+    expect(el.querySelector('nav')).toBeNull();
+    expect(el.querySelector('.series-bar__title')?.getAttribute('href')).toBe(
+      '/he/series/learning-rust',
+    );
+    expect(el.querySelector('.series-bar__part')?.textContent?.trim()).toBe('חלק 2 מתוך 2');
+    const steps = [...el.querySelectorAll('.series-bar__step')];
+    expect(steps.map((a) => a.getAttribute('aria-label'))).toEqual([`הקודם: ${heNav.prev!.title}`]);
+    expect(steps[0].getAttribute('href')).toBe('/he/posts/rust-ownership');
+  });
 });

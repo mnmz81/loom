@@ -1,17 +1,15 @@
-import { ChangeDetectionStrategy, Component, computed, effect, inject, input } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ChangeDetectionStrategy, Component, effect, inject, input } from '@angular/core';
 import type { SeriesIndex } from '../../core/content.models';
 import { LocaleService } from '../../core/i18n/locale.service';
 import { PATHS } from '../../core/routes.const';
 import { SeoService } from '../../core/seo.service';
-import { colorIndex } from '../../shared/color-index';
-import { pageCount } from '../page-text';
+import { SeriesTiles } from '../../shared/series-tiles/series-tiles';
 import { allLangPaths } from '../seo-helpers';
 
-/** `/:lang/series` — all series. */
+/** `/:lang/series` — all series in their explicit order, tracks as one numbered tile. */
 @Component({
   selector: 'nb-series-list-page',
-  imports: [RouterLink],
+  imports: [SeriesTiles],
   templateUrl: './series-list-page.html',
   styleUrl: './series-list-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,17 +19,6 @@ export class SeriesListPage {
   readonly series = input.required<SeriesIndex>();
 
   protected readonly locale = inject(LocaleService);
-  protected readonly colorOf = colorIndex;
-  protected readonly cards = computed(() => {
-    const lang = this.locale.lang();
-    return this.series().map((s) => ({
-      key: s.key,
-      path: PATHS.series(lang, s.key),
-      title: s.title[lang],
-      description: s.description[lang] ?? '',
-      parts: pageCount(lang, s.slugs.length, 'series.partsOne', 'series.partsOther'),
-    }));
-  });
 
   constructor() {
     const seo = inject(SeoService);

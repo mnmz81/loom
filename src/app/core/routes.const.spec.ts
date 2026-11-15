@@ -5,6 +5,13 @@ describe('PATHS', () => {
     expect(PATHS.entry('he', 'post', 'rust-ownership')).toBe('/he/posts/rust-ownership');
     expect(PATHS.entry('en', 'note', 'git-undo')).toBe('/en/notes/git-undo');
   });
+
+  it('builds list page URLs; page 1 is the plain list', () => {
+    expect(PATHS.posts('he')).toBe('/he/posts');
+    expect(PATHS.posts('he', 1)).toBe('/he/posts');
+    expect(PATHS.posts('en', 3)).toBe('/en/posts/page/3');
+    expect(PATHS.notes('he', 2)).toBe('/he/notes/page/2');
+  });
 });
 
 describe('swapLang', () => {

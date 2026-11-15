@@ -16,11 +16,12 @@
   background: var(--nb-color-surface);
   color: var(--nb-color-text);
   font-weight: 600;
-  box-shadow: var(--nb-shadow-md);
   transform: translateY(calc(-100% - var(--nb-space-6)));
   transition: transform var(--nb-duration-fast) var(--nb-ease-out);
 
+  // Shadow only when shown: off-screen, its blur would peek in above the header.
   &:focus {
+    box-shadow: var(--nb-shadow-md);
     transform: none;
   }
 }

@@ -86,6 +86,13 @@ describe('app routes', () => {
     TestBed.resetTestingModule();
     expect((await open('/he/series/nope', NotFoundPage)).url).toBe('/404');
   });
+
+  it.each(['/he/posts/page/2', '/he/posts/page/1', '/en/notes/page/x'])(
+    'redirects a list page that does not exist (%s) to /404',
+    async (url) => {
+      expect((await open(url, NotFoundPage)).url).toBe('/404');
+    },
+  );
 });
 
 describe('langMatch', () => {

@@ -93,3 +93,41 @@
 .series-nav__item--next .series-nav__ref {
   align-self: flex-end;
 }
+
+.series-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 var(--nb-space-2);
+}
+
+.series-bar__title {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: var(--nb-touch-target);
+  color: var(--nb-color-accent);
+  font-weight: 600;
+}
+
+.series-bar__part {
+  color: var(--nb-color-muted);
+}
+
+.series-bar__steps {
+  display: inline-flex;
+}
+
+.series-bar__step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--nb-touch-target);
+  block-size: var(--nb-touch-target);
+  border-radius: var(--nb-radius-full);
+  color: var(--nb-color-muted);
+
+  &:hover {
+    background: var(--nb-color-surface-2);
+    color: var(--nb-color-accent);
+  }
+}

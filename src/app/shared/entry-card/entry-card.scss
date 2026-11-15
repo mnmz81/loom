@@ -2,78 +2,56 @@
   display: block;
 }
 
+// A compact row: title and one-line summary, then date and the main tag. The whole row is the link.
 .entry-card {
   position: relative;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  gap: var(--nb-space-2);
-  block-size: 100%;
-  padding: var(--nb-space-4) var(--nb-space-5) var(--nb-space-5);
-  border-radius: var(--nb-radius-lg);
-  border: 1px solid var(--nb-color-border);
-  background: var(--nb-color-surface);
-  box-shadow: var(--nb-shadow-sm);
-  transition:
-    transform var(--nb-duration-base) var(--nb-ease-out),
-    box-shadow var(--nb-duration-base) var(--nb-ease-out);
+  display: grid;
+  gap: 0 var(--nb-space-5);
+  padding: var(--nb-space-3) var(--nb-space-3);
+  border-radius: var(--nb-radius-md);
+  transition: background-color var(--nb-duration-fast) var(--nb-ease-out);
 
   &:hover {
-    transform: translateY(-2px);
-    border-color: var(--nb-c, var(--nb-color-accent));
-    box-shadow: var(--nb-shadow-md);
-  }
-
-  // A colored bar on top, taken from the entry's first tag.
-  &::before {
-    content: '';
-    position: absolute;
-    inset-block-start: 0;
-    inset-inline: 0;
-    block-size: 4px;
-    background: var(--nb-c, var(--nb-color-accent));
+    background: var(--nb-color-surface-2);
   }
 }
 
-.entry-card__meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--nb-space-1) var(--nb-space-2);
-  margin: 0;
-  color: var(--nb-color-muted);
-  font-size: 0.8125rem;
-}
+// Wide rows: text on the start side, date + tag on the end side.
+@media (min-width: 40rem) {
+  .entry-card {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+  }
 
-.entry-card__type {
-  color: var(--nb-c-fg, var(--nb-color-accent));
-  font-size: 0.8125rem;
-  font-weight: 700;
+  .entry-card__title,
+  .entry-card__summary {
+    grid-column: 1;
+  }
+
+  .entry-card__meta {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    justify-content: flex-end;
+  }
 }
 
 .entry-card__title {
   margin: 0;
-  font-size: 1.1875rem;
-  line-height: 1.3;
-}
-
-.entry-card--note .entry-card__title {
-  font-size: 1.0625rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.35;
 }
 
 .entry-card__link {
-  display: inline-block;
-  padding-block: var(--nb-space-1);
   color: var(--nb-color-text);
-  overflow-wrap: anywhere;
   text-decoration: none;
 
   &::after {
-    // The whole card is the click target.
+    // The whole row is the click target.
     content: '';
     position: absolute;
     inset: 0;
-    border-radius: var(--nb-radius-lg);
+    border-radius: var(--nb-radius-md);
   }
 
   &:hover {
@@ -81,23 +59,40 @@
   }
 
   &:focus-visible {
-    outline-offset: -3px;
+    outline: none;
   }
 
   &:focus-visible::after {
     outline: 2px solid var(--nb-color-accent);
+    outline-offset: 2px;
   }
 }
 
 .entry-card__summary {
-  flex: 1;
-  margin: 0;
+  overflow: hidden;
+  margin: var(--nb-space-1) 0 0;
   color: var(--nb-color-muted);
   font-size: 0.9375rem;
-  line-height: 1.55;
+  line-height: 1.5;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.entry-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 var(--nb-space-3);
+  color: var(--nb-color-muted);
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+.entry-card__type {
+  color: var(--nb-color-text);
+  font-weight: 600;
 }
 
 .entry-card__tags {
-  position: relative; // above the card-wide link so tag pills stay clickable
-  margin-block-start: var(--nb-space-2);
+  position: relative; // above the row-wide link so the tag stays clickable
 }

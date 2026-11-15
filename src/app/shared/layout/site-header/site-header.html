@@ -40,6 +40,7 @@
               routerLinkActive="is-active"
               [routerLinkActiveOptions]="{ exact: link.exact }"
               ariaCurrentWhenActive="page"
+              [attr.aria-keyshortcuts]="link.shortcut ?? null"
               (click)="closeMenu()"
               >{{ locale.t(link.key) }}</a
             >

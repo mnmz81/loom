@@ -4,3 +4,7 @@ title:
 description:
   he: סדרה 3 מתוך 5 בבינה מלאכותית. איך מודל פועל בעולם. Tools, MCP, סוכנים, דפוסי workflow, זיכרון ומערכות מרובות סוכנים.
   en: AI series 3 of 5. How a model acts in the world. Tools, MCP, agents, workflow patterns, memory and multi-agent systems.
+order: 3
+track:
+  he: בינה מלאכותית
+  en: AI

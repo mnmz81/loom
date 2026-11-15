@@ -2,7 +2,7 @@
   <ul class="tag-list" [attr.aria-label]="locale.t('entry.tags')">
     @for (tag of tags(); track tag) {
       <li>
-        <a class="chip" [attr.data-c]="color(tag)" [routerLink]="path(tag)"
+        <a class="tag-list__link" [routerLink]="path(tag)"
           ><bdi><span aria-hidden="true">#</span>{{ label(tag) }}</bdi></a
         >
       </li>

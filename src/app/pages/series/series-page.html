@@ -1,4 +1,4 @@
-<div class="container page">
+<div class="container page page-narrow">
   <header class="page__header">
     <h1 class="page__title">{{ title() }}</h1>
     @if (description()) {
@@ -11,8 +11,22 @@
     <ol class="series__parts">
       @for (part of parts(); track part.entry.slug) {
         <li class="series__part">
-          <span class="series__part-label">{{ part.label }}</span>
-          <nb-entry-card [entry]="part.entry" [headingLevel]="2" [tagLabels]="tagLabels()" />
+          <span class="series__part-n" aria-hidden="true">{{ part.n }}</span>
+          <span class="series__part-label visually-hidden">{{ part.label }}</span>
+          <a
+            class="series__part-link"
+            [routerLink]="part.path"
+            [attr.hreflang]="part.foreignLang"
+            [attr.lang]="part.foreignLang"
+            [attr.dir]="part.foreignDir"
+            >{{ part.entry.title }}</a
+          >
+          <span class="series__part-meta">
+            @if (part.foreignLang; as lang) {
+              <nb-lang-badge [lang]="lang" />
+            }
+            {{ part.reading }}
+          </span>
         </li>
       }
     </ol>

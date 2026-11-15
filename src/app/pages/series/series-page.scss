@@ -7,24 +7,70 @@
   color: var(--nb-color-muted);
 }
 
+// Numbered table of contents: one line per part, the number carries "part N".
 .series__parts {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
-  gap: var(--nb-space-4);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .series__part {
+  position: relative;
   display: grid;
-  gap: var(--nb-space-2);
+  grid-template-columns: 2.5rem minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 0 var(--nb-space-3);
+  padding: 0 var(--nb-space-3);
+  border-radius: var(--nb-radius-md);
+  transition: background-color var(--nb-duration-fast) var(--nb-ease-out);
+
+  & + & {
+    border-block-start: 1px solid var(--nb-color-border);
+  }
+
+  &:hover {
+    background: var(--nb-color-surface-2);
+  }
 }
 
-.series__part-label {
-  color: var(--nb-color-accent);
-  font-size: 0.875rem;
+.series__part-n {
+  color: var(--nb-color-muted);
+  font-size: 0.9375rem;
+  font-variant-numeric: tabular-nums;
   font-weight: 600;
+  text-align: end;
+}
+
+.series__part-link {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: var(--nb-touch-target);
+  padding-block: var(--nb-space-1);
+  color: var(--nb-color-text);
+  font-weight: 600;
+  line-height: 1.35;
+  text-decoration: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--nb-radius-md);
+  }
+
+  &:hover {
+    color: var(--nb-color-accent);
+  }
+}
+
+.series__part-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--nb-space-2);
+  color: var(--nb-color-muted);
+  font-size: 0.875rem;
+  white-space: nowrap;
 }
 
 .series__empty {

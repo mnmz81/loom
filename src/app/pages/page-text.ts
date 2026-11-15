@@ -5,8 +5,6 @@ import type { Lang } from '../core/content.models';
 const he = {
   'entries.one': 'רשומה אחת',
   'entries.other': '{n} רשומות',
-  'series.partsOne': 'חלק אחד',
-  'series.partsOther': '{n} חלקים',
   'series.partN': 'חלק {n}',
   'search.label': 'חיפוש באתר',
   'search.hint': 'הקלידו כדי לחפש בפוסטים ובהערות.',
@@ -25,8 +23,6 @@ export type PageTextKey = keyof typeof he;
 const en: Record<PageTextKey, string> = {
   'entries.one': '1 entry',
   'entries.other': '{n} entries',
-  'series.partsOne': '1 part',
-  'series.partsOther': '{n} parts',
   'series.partN': 'Part {n}',
   'search.label': 'Search the site',
   'search.hint': 'Type to search posts and notes.',

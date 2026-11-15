@@ -118,8 +118,15 @@ describe('seriesFile', () => {
     expect(() => seriesFile.parse({ title: { he: 'א', en: '' } })).toThrow();
   });
 
+  it('accepts an explicit order and a track title', () => {
+    const track = { he: 'בינה מלאכותית', en: 'AI' };
+    expect(seriesFile.parse({ title: { he: 'א', en: 'A' }, order: 3, track })).toMatchObject({ order: 3, track });
+  });
+
   it('rejects unknown keys and languages', () => {
-    expect(() => seriesFile.parse({ title: { he: 'א', en: 'A' }, order: 1 })).toThrow();
+    expect(() => seriesFile.parse({ title: { he: 'א', en: 'A' }, color: 'red' })).toThrow();
+    expect(() => seriesFile.parse({ title: { he: 'א', en: 'A' }, order: 0 })).toThrow();
+    expect(() => seriesFile.parse({ title: { he: 'א', en: 'A' }, track: { he: 'מ' } })).toThrow();
     expect(() => seriesFile.parse({ title: { he: 'א', en: 'A', fr: 'B' } })).toThrow();
     expect(() => seriesFile.parse({ title: { he: 'א', en: 'A' }, description: { fr: 'x' } })).toThrow();
   });
