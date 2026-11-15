@@ -33,7 +33,7 @@ test.describe('tag pages', () => {
     await gotoReady(page, 'en/posts');
     const rust = page.locator('header.page__header').getByRole('link', { name: 'Rust', exact: true });
     await expect(rust).toBeHidden(); // Rust has 2 posts: not a top tag
-    await page.locator('header.page__header summary').click();
+    await page.locator('header.page__header .more-tags button').click();
     await rust.click();
     await expect(page).toHaveURL(/\/en\/tags\/rust$/);
   });

@@ -3,9 +3,10 @@ import { RouterLink } from '@angular/router';
 import { LocaleService } from '../../core/i18n/locale.service';
 import { PATHS } from '../../core/routes.const';
 
+import { Chip } from '@mushilu-san/ui/primitives';
 @Component({
   selector: 'nb-tag-list',
-  imports: [RouterLink],
+  imports: [RouterLink, Chip],
   templateUrl: './tag-list.html',
   styleUrl: './tag-list.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

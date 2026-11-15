@@ -205,35 +205,31 @@ Technical verdict: **go**. Open items before real adoption:
 4. **Name clash.** Library `NavLink` collides with the header's own `NavLink` type; import with an alias.
 5. **Mobile menu.** `mui-mobile-nav` has `mui-mobile-nav-item` children and reads as a bottom tab bar, not a hamburger menu. Not verified in a browser; the header keeps its own menu for now.
 
-### Migration status (2026-11-15, library 2026.46.1)
+### Migration status (2026-11-15, library 2026.46.2)
 
-On the library now:
+Every general UI piece of the blog now comes from `@mushilu-san/ui`:
 
 | Blog piece | Library component |
 |---|---|
-| Header menu and theme buttons, language link | `muiButton` |
-| Header nav links, footer links | `muiNavLink` |
+| Site header with its mobile menu | `mui-site-header` |
+| Header and footer links | `muiNavLink` |
+| Language link, theme button, home hero actions, 404 home link | `muiButton` |
 | Language badge, entry type on a row, result type in search | `mui-badge` |
-| Home hero actions, 404 home link, certificate viewer close button | `muiButton` |
+| Tag chips, `nb-tag-list` | `muiChip` |
+| List pagination | `mui-pagination` in link mode (`hrefFor`) |
+| Certificate viewer | `mui-dialog` |
+| Empty certificates list | `mui-empty` |
+| Table of contents, "more tags" | `mui-accordion-item` |
+| Skip link | `muiSkipLink` |
 | Search field, type and tag filters, their labels | `muiInput`, `muiSelect`, `mui-label` |
-| Back to top | `mui-fab` (extended) with `mui-icon` |
-| Menu icon, series previous/next arrows | `mui-icon` (`mirror` for RTL) |
+| Back to top | `mui-fab` (extended) |
+| All icons (menu, theme, RSS, GitHub, arrows) | `mui-icon` |
 | Colors and fonts | `--mui-*` tokens mapped onto `--nb-*` in `src/styles/_mui-map.scss` |
 
-Still the blog's own, each waiting on a library issue in `mushilu-san/Mushilu-San-UI`:
+The gaps found on the way (library issues #875 to #882) were fixed in 2026.46.2. Two small ones are open: #884 (dialog close button side without a heading) and #885 (no width, height or background hook on `mui-site-header`; the blog uses one `::ng-deep` rule for it).
 
-| Blog piece | Why not moved | Issue |
-|---|---|---|
-| List pagination | `mui-pagination` has buttons only; a prerendered site needs links | #875 |
-| Certificate viewer dialog | Close button label is hardcoded English | #876 |
-| Empty state (and anything else from `data-display`) | The entry point bundles chart.js: +216 kB | #877 |
-| Table of contents, "more tags" | Accordion item cannot start open or take a heading element | #878 |
-| Tag chips, `nb-tag-list` | No compact link pill; button and nav link are 44px tall | #879 |
-| Skip link | No component | #880 |
-| Theme, RSS and GitHub icons | Names missing from `IconName` | #881 |
-| Header mobile menu | No collapsible header pattern | #882 |
+Still blog code, on purpose: `nb-article-body`, `nb-entry-card` rows, `nb-series-tiles`, `nb-series-nav`, `nb-related-list`, `nb-entry-meta` and the reading progress bar. They are content layouts of this blog, not general UI. `mui-container`, `mui-stack` and `mui-typography` are not used: the blog's CSS classes do the same with no extra elements, and `mui-typography` renders `role="heading"` instead of native headings.
 
-Not candidates: `nb-article-body`, `nb-entry-card` rows, `nb-series-tiles`, `nb-series-nav`, `nb-related-list`, `nb-entry-meta` and the reading progress bar. They are content layouts of this blog, not general UI. `mui-container`, `mui-stack` and `mui-typography` were left out on purpose: the blog's CSS classes do the same with no extra elements, and `mui-typography` renders `role="heading"` instead of native headings.
+Behaviour that changed with the library header: the menu collapses below 48rem (was 640px), opens in the page flow instead of over it, and Escape closes it only while focus is inside the header.
 
-Size after the migration: JS 472 → 496 kB, CSS 28 kB. 241 unit and 192 e2e tests pass.
-
+Size: JS loaded by pages 496 → 522 kB, CSS 28 kB. The build also emits a 206 kB chart.js chunk that no page requests (it loads only if `mui-chart` renders). 240 unit and 192 e2e tests pass.

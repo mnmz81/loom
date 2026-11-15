@@ -38,24 +38,22 @@
       }
     </ul>
   } @else {
-    <p class="certificates__empty">{{ locale.t('certificates.empty') }}</p>
+    <mui-empty class="certificates__empty" [description]="locale.t('certificates.empty')" />
   }
 </div>
 
-<!-- Large view. Native modal <dialog>: focus trap, Escape and inert page come from the browser. -->
-<dialog
-  #dialog
+<!-- Large view: a modal dialog (focus trap, Escape and inert page come from the native <dialog> inside). -->
+<mui-dialog
   class="certificates__dialog"
-  [attr.aria-label]="selected()?.title ?? null"
-  (click)="onDialogClick($event)"
+  size="lg"
+  [(open)]="dialogOpen"
+  [ariaLabel]="selected()?.title"
+  [closeLabel]="locale.t('certificates.close')"
 >
   @if (selected(); as card) {
     <img class="certificates__large" [src]="card.src" [alt]="card.alt" />
-    <p class="certificates__dialog-actions">
-      <a [href]="card.href">{{ locale.t('certificates.original') }}</a>
-      <button muiButton variant="secondary" type="button" class="certificates__close" (click)="dialog.close()">
-        {{ locale.t('certificates.close') }}
-      </button>
-    </p>
   }
-</dialog>
+  @if (selected(); as card) {
+    <a slot="footer" class="certificates__original" [href]="card.href">{{ locale.t('certificates.original') }}</a>
+  }
+</mui-dialog>

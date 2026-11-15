@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, effect, inject, input, numberAttribute } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import type { EntryType, LangIndex } from '../../core/content.models';
@@ -10,13 +11,17 @@ import { allLangPaths } from '../seo-helpers';
 
 const TOP_TAGS = 10;
 
+import { AccordionItem } from '@mushilu-san/ui/data-display';
+import { Pagination } from '@mushilu-san/ui/navigation';
+import { Chip } from '@mushilu-san/ui/primitives';
+
 /**
  * `/:lang/posts`, `/:lang/notes` and their `/page/:page` pages — one page of entries of one type
  * (route `data: { type }`, `page` from `listPageResolver`).
  */
 @Component({
   selector: 'nb-entries-page',
-  imports: [RouterLink, EntryList],
+  imports: [RouterLink, AccordionItem, Chip, EntryList, Pagination],
   templateUrl: './entries-page.html',
   styleUrl: './entries-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -32,7 +37,7 @@ export class EntriesPage {
   protected readonly title = computed(() => this.locale.t(this.type() === 'post' ? 'nav.posts' : 'nav.notes'));
   protected readonly entries = computed(() => this.index().entries.filter((e) => e.type === this.type()));
   protected readonly pageEntries = computed(() => pageItems(this.entries(), this.page()));
-  protected readonly pages = computed(() => Array.from({ length: pageTotal(this.entries().length) }, (_, i) => i + 1));
+  protected readonly pageCount = computed(() => pageTotal(this.entries().length));
   protected readonly tagLabels = computed(() => Object.fromEntries(this.index().tags.map((t) => [t.tag, t.label])));
   protected readonly topTags = computed(() => this.index().tags.slice(0, TOP_TAGS));
   protected readonly moreTags = computed(() => this.index().tags.slice(TOP_TAGS));
@@ -41,9 +46,12 @@ export class EntriesPage {
     return PATHS.tag(this.locale.lang(), tag);
   }
 
-  protected pagePath(page: number): string {
-    return (this.type() === 'post' ? PATHS.posts : PATHS.notes)(this.locale.lang(), page);
-  }
+  private readonly location = inject(Location);
+
+  /** Real hrefs for the pager, so they include `<base href>`. */
+  protected readonly pageHref = (page: number): string =>
+    this.location.prepareExternalUrl((this.type() === 'post' ? PATHS.posts : PATHS.notes)(this.locale.lang(), page));
+  protected readonly pageLabel = (n: number): string => this.locale.t('pager.page', { n });
 
   constructor() {
     const seo = inject(SeoService);

@@ -78,40 +78,12 @@
   }
 }
 
-.certificates__dialog {
-  inline-size: min(100vw - 2rem, 64rem);
-  max-block-size: calc(100dvh - 2rem);
-  padding: var(--nb-space-4);
-  border: 1px solid var(--nb-color-border);
-  border-radius: var(--nb-radius-lg);
-  background: var(--nb-color-surface);
-  color: var(--nb-color-text);
-
-  &::backdrop {
-    background: rgb(0 0 0 / 0.6);
-  }
-}
-
 .certificates__large {
   inline-size: 100%;
-  max-block-size: calc(100dvh - 9rem);
+  max-block-size: calc(100dvh - 14rem);
   object-fit: contain;
 }
 
-.certificates__dialog-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--nb-space-3);
-  margin: var(--nb-space-3) 0 0;
-
-  a {
-    font-weight: 600;
-  }
-}
-
-.certificates__empty {
-  margin: 0;
-  color: var(--nb-color-muted);
+.certificates__original {
+  font-weight: 600;
 }

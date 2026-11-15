@@ -29,12 +29,12 @@ const DEBOUNCE_MS = 200;
 const TOP_TAGS = 10;
 
 import { Input, Label, Select } from '@mushilu-san/ui/forms';
-import { Badge } from '@mushilu-san/ui/primitives';
+import { Badge, Chip } from '@mushilu-san/ui/primitives';
 
 /** `/:lang/search` — Pagefind search with type and tag filters. Only searches in the browser. */
 @Component({
   selector: 'nb-search-page',
-  imports: [RouterLink, Badge, Input, Label, Select],
+  imports: [RouterLink, Badge, Chip, Input, Label, Select],
   templateUrl: './search-page.html',
   styleUrl: './search-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

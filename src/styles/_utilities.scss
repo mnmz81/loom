@@ -24,43 +24,6 @@
   }
 }
 
-// Filter pills (posts list tag filter). Neutral: one style for every tag.
-.chip {
-  display: inline-flex;
-  align-items: center;
-  min-block-size: 2rem;
-  padding: 0.125rem var(--nb-space-3);
-  border-radius: var(--nb-radius-full);
-  background: var(--nb-color-tag-bg);
-  color: var(--nb-color-tag-text);
-  font-size: 0.875rem;
-  font-weight: 500;
-  text-decoration: none;
-}
-
-a.chip {
-  position: relative;
-  transition: background-color var(--nb-duration-fast) var(--nb-ease-out);
-
-  // Keeps the touch target at 44px without making the pill itself tall.
-  &::after {
-    content: '';
-    position: absolute;
-    inset-block: -6px;
-    inset-inline: 0;
-  }
-
-  &:hover {
-    background: var(--nb-color-border);
-    text-decoration: underline;
-  }
-}
-
-.chip--active {
-  background: var(--nb-color-accent);
-  color: var(--nb-color-accent-contrast);
-}
-
 // Centered single column shared by list, search and other narrow pages.
 .page-narrow {
   max-inline-size: var(--nb-page-narrow);

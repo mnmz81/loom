@@ -6,9 +6,10 @@ import { SITE, assetPath } from '../../../core/site.config';
 
 import { NavLink } from '@mushilu-san/ui/navigation';
 
+import { Icon } from '@mushilu-san/ui/primitives';
 @Component({
   selector: 'nb-site-footer',
-  imports: [RouterLink, NavLink],
+  imports: [RouterLink, Icon, NavLink],
   templateUrl: './site-footer.html',
   styleUrl: './site-footer.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

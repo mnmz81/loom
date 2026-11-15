@@ -1,10 +1,7 @@
 @if (items().length > 1) {
-  <nav class="toc" [attr.aria-labelledby]="titleId">
+  <nav class="toc" [attr.aria-label]="locale.t('entry.toc')">
     <!-- Closed on small screens (the article comes first); opened in the browser on wide screens. -->
-    <details #details class="toc__details">
-      <summary class="toc__summary">
-        <h2 class="toc__title" [id]="titleId">{{ locale.t('entry.toc') }}</h2>
-      </summary>
+    <mui-accordion-item class="toc__details" [heading]="locale.t('entry.toc')" [headingLevel]="2" [(open)]="open">
       <ol class="toc__list">
         @for (item of items(); track item.id) {
           <li [class.toc__item--sub]="item.depth === 3">
@@ -13,6 +10,6 @@
           </li>
         }
       </ol>
-    </details>
+    </mui-accordion-item>
   </nav>
 }

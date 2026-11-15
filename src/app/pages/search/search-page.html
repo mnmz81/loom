@@ -55,7 +55,7 @@
       <ul class="chips">
         @for (t of topTags(); track t.tag) {
           <li>
-            <a class="chip" [routerLink]="tagPath(t.tag)">{{ t.label }}</a>
+            <a muiChip [routerLink]="tagPath(t.tag)">{{ t.label }}</a>
           </li>
         }
       </ul>
