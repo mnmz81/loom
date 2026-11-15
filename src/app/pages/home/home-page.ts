@@ -26,9 +26,11 @@ export function latestPerSeries(entries: readonly EntryMeta[], max: number): Ent
 }
 
 /** `/:lang` — what the blog is and where to start: series (in order), latest posts, latest notes (hidden while there are none). */
+import { Button } from '@mushilu-san/ui/primitives';
+
 @Component({
   selector: 'nb-home-page',
-  imports: [RouterLink, EntryList, SeriesTiles],
+  imports: [RouterLink, Button, EntryList, SeriesTiles],
   templateUrl: './home-page.html',
   styleUrl: './home-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

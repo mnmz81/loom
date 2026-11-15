@@ -53,7 +53,7 @@
     <img class="certificates__large" [src]="card.src" [alt]="card.alt" />
     <p class="certificates__dialog-actions">
       <a [href]="card.href">{{ locale.t('certificates.original') }}</a>
-      <button type="button" class="certificates__close" (click)="dialog.close()">
+      <button muiButton variant="secondary" type="button" class="certificates__close" (click)="dialog.close()">
         {{ locale.t('certificates.close') }}
       </button>
     </p>

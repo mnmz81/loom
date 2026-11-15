@@ -28,12 +28,12 @@ interface NavLink {
   shortcut?: string;
 }
 
-import { Button } from '@mushilu-san/ui/primitives';
+import { Button, Icon } from '@mushilu-san/ui/primitives';
 import { NavLink as MuiNavLink } from '@mushilu-san/ui/navigation';
 
 @Component({
   selector: 'nb-site-header',
-  imports: [RouterLink, Button, MuiNavLink],
+  imports: [RouterLink, Button, Icon, MuiNavLink],
   templateUrl: './site-header.html',
   styleUrl: './site-header.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

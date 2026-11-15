@@ -14,9 +14,11 @@ const ROBOTS = 'name="robots"';
  * 404 for `/404`, unknown paths and unknown `/:lang/...` paths. GitHub Pages serves the prerendered `/404`
  * for any unknown URL, whatever language the visitor expected, so the other language is offered too.
  */
+import { Button } from '@mushilu-san/ui/primitives';
+
 @Component({
   selector: 'nb-not-found-page',
-  imports: [RouterLink],
+  imports: [RouterLink, Button],
   templateUrl: './not-found-page.html',
   styleUrl: './not-found-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -12,20 +12,7 @@
           [attr.aria-label]="locale.t('series.prev') + ': ' + prev.title"
           [attr.title]="prev.title"
         >
-          <svg
-            class="series-nav__arrow"
-            viewBox="0 0 24 24"
-            width="18"
-            height="18"
-            aria-hidden="true"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M15 6l-6 6 6 6" />
-          </svg>
+          <mui-icon class="series-nav__arrow" name="chevron-left" size="sm" mirror />
         </a>
       }
       @if (nav().next; as next) {
@@ -36,20 +23,7 @@
           [attr.aria-label]="locale.t('series.next') + ': ' + next.title"
           [attr.title]="next.title"
         >
-          <svg
-            class="series-nav__arrow"
-            viewBox="0 0 24 24"
-            width="18"
-            height="18"
-            aria-hidden="true"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M9 6l6 6-6 6" />
-          </svg>
+          <mui-icon class="series-nav__arrow" name="chevron-right" size="sm" mirror />
         </a>
       }
     </span>
@@ -72,20 +46,7 @@
               [attr.hreflang]="foreignLang(prev)"
             >
               <span class="series-nav__dir">
-                <svg
-                  class="series-nav__arrow"
-                  viewBox="0 0 24 24"
-                  width="16"
-                  height="16"
-                  aria-hidden="true"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M19 12H5M11 6l-6 6 6 6" />
-                </svg>
+                <mui-icon class="series-nav__arrow" name="arrow-left" size="xs" mirror />
                 {{ locale.t('series.prev') }}
               </span>
               <span
@@ -107,20 +68,7 @@
             >
               <span class="series-nav__dir">
                 {{ locale.t('series.next') }}
-                <svg
-                  class="series-nav__arrow"
-                  viewBox="0 0 24 24"
-                  width="16"
-                  height="16"
-                  aria-hidden="true"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
+                <mui-icon class="series-nav__arrow" name="arrow-right" size="xs" mirror />
               </span>
               <span
                 class="series-nav__ref"

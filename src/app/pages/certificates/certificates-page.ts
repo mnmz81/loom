@@ -15,10 +15,12 @@ interface CertificateCard extends Certificate {
   dateText: string;
 }
 
+import { Button } from '@mushilu-san/ui/primitives';
+
 /** `/:lang/certificates` — course certificates, newest first. */
 @Component({
   selector: 'nb-certificates-page',
-  imports: [TagList],
+  imports: [TagList, Button],
   templateUrl: './certificates-page.html',
   styleUrl: './certificates-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

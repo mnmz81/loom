@@ -8,9 +8,11 @@ import { LangBadge } from '../lang-badge/lang-badge';
 import { dirOf } from '../lang-dir';
 import { TagList } from '../tag-list/tag-list';
 
+import { Badge } from '@mushilu-san/ui/primitives';
+
 @Component({
   selector: 'nb-entry-card',
-  imports: [RouterLink, NgTemplateOutlet, LangBadge, TagList],
+  imports: [RouterLink, NgTemplateOutlet, Badge, LangBadge, TagList],
   templateUrl: './entry-card.html',
   styleUrl: './entry-card.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
