@@ -233,3 +233,22 @@ Still blog code, on purpose: `nb-article-body`, `nb-entry-card` rows, `nb-series
 Behaviour that changed with the library header: the menu collapses below 48rem (was 640px), opens in the page flow instead of over it, and Escape closes it only while focus is inside the header.
 
 Size: JS loaded by pages 496 → 522 kB, CSS 28 kB. The build also emits a 206 kB chart.js chunk that no page requests (it loads only if `mui-chart` renders). 240 unit and 192 e2e tests pass.
+
+## Second review (2026-11-16, live site after the library migration)
+
+Checked home, posts, post, series, search, certificates, accessibility and 404, at 1280px and 375px, light and dark. Fixed in one change:
+
+| Finding | Fix |
+|---|---|
+| Search field not focused on load, with a console `TypeError` (the template ref on `muiInput` returned the library component) | Query reads `ElementRef`; e2e asserts focus |
+| Back-to-top button covered the footer links | Hidden over the last 700px of the page |
+| Series bar arrows far apart and pale | 32px discs with a 44px hit area, 8px apart |
+| End of post left the TOC side empty | Series nav and related posts span the full width; related posts in columns |
+| Series descriptions cut mid-word | No line clamp |
+| Hero left 40% of the row empty on desktop | Totals (posts, series, notes) on the far side; a row under the actions on mobile |
+| Tag chips competed with post titles | Tags in `nb-tag-list` have no outline and muted text |
+| "More tags" was a full-width ruled row | As wide as its label, no rules |
+| Search silently showed 50 of N results | A line says how many are shown and how to narrow down |
+
+Not checked in this pass: English inner pages and tablet widths by eye, a screen reader pass, loading speed.
+

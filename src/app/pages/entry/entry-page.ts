@@ -49,8 +49,11 @@ export class EntryPage {
   protected readonly typeLabel = computed(() => this.locale.t(`type.${this.entry().type}`));
   protected readonly tagLabels = computed(() => Object.fromEntries(this.index().tags.map((t) => [t.tag, t.label])));
   private readonly scrolledFar = signal(false);
-  /** Long posts only, and only once the reader is more than a screen down. */
-  protected readonly showBackToTop = computed(() => this.entry().readingMinutes >= LONG_POST_MINUTES && this.scrolledFar());
+  private readonly atEnd = signal(false);
+  /** Long posts only, once the reader is more than a screen down, and not over the footer at the very end. */
+  protected readonly showBackToTop = computed(
+    () => this.entry().readingMinutes >= LONG_POST_MINUTES && this.scrolledFar() && !this.atEnd(),
+  );
   private readonly document = inject(DOCUMENT);
 
   protected backToTop(): void {
@@ -114,7 +117,12 @@ export class EntryPage {
     afterNextRender(() => {
       const view = this.document.defaultView;
       if (!view) return;
-      const onScroll = () => this.scrolledFar.set(view.scrollY > view.innerHeight * 1.5);
+      const page = this.document.documentElement;
+      const onScroll = () => {
+        this.scrolledFar.set(view.scrollY > view.innerHeight * 1.5);
+        // The button would cover the related posts and the footer links: hide it over the end matter.
+        this.atEnd.set(view.scrollY + view.innerHeight > page.scrollHeight - 700);
+      };
       view.addEventListener('scroll', onScroll, { passive: true });
       destroyRef.onDestroy(() => view.removeEventListener('scroll', onScroll));
     });

@@ -67,7 +67,8 @@ export class SearchPage {
   protected tagPath(tag: string): string {
     return PATHS.tag(this.locale.lang(), tag);
   }
-  private readonly searchInput = viewChild.required<ElementRef<HTMLInputElement>>('searchInput');
+  // `read`: on an element with `muiInput` the template ref is the library component, not the element.
+  private readonly searchInput = viewChild.required('searchInput', { read: ElementRef<HTMLInputElement> });
 
   protected readonly tagLabels = computed(() => Object.fromEntries(this.index().tags.map((t) => [t.tag, t.label])));
   protected readonly typeOptions = computed<{ value: EntryType; label: string }[]>(() => [

@@ -143,3 +143,8 @@
   font-size: 0.85rem;
   list-style: none;
 }
+
+.search__truncated {
+  margin-block-start: var(--nb-space-5);
+  color: var(--nb-color-muted);
+}

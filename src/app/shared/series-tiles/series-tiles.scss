@@ -66,16 +66,11 @@
 }
 
 .series-cards__text {
-  display: -webkit-box;
   flex: 1;
-  overflow: hidden;
   margin: 0;
   color: var(--nb-color-muted);
   font-size: 0.9375rem;
   line-height: 1.55;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
 }
 
 .series-cards__meta {

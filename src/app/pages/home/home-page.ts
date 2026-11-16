@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, effect, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import type { EntryMeta, LangIndex, SeriesIndex } from '../../core/content.models';
+import type { DictKey } from '../../core/i18n/i18n.types';
 import { LocaleService } from '../../core/i18n/locale.service';
 import { PATHS } from '../../core/routes.const';
 import { SeoService } from '../../core/seo.service';
@@ -46,6 +47,16 @@ export class HomePage {
   protected readonly posts = computed(() =>
     latestPerSeries(this.index().entries.filter((e) => e.type === 'post'), LATEST_POSTS),
   );
+  /** Totals shown in the hero; a kind with nothing in it is left out. */
+  protected readonly stats = computed(() => {
+    const count = (type: 'post' | 'note') => this.index().entries.filter((e) => e.type === type).length;
+    const all: { key: DictKey; count: number }[] = [
+      { key: 'nav.posts', count: count('post') },
+      { key: 'nav.series', count: this.series().length },
+      { key: 'nav.notes', count: count('note') },
+    ];
+    return all.filter((s) => s.count > 0);
+  });
   protected readonly notes = computed(() =>
     this.index().entries.filter((e) => e.type === 'note').slice(0, LATEST_NOTES),
   );

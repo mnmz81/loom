@@ -1,5 +1,6 @@
 <div class="container page">
   <header class="home-hero">
+    <div class="home-hero__text">
     <h1 class="home-hero__title">{{ locale.t('home.title') }}</h1>
     <p class="home-hero__lead">{{ locale.t('home.lead') }}</p>
     <p class="home-hero__actions">
@@ -8,6 +9,16 @@
       }}</a>
       <a muiButton variant="secondary" class="home-hero__action" [routerLink]="paths.search(locale.lang())">{{ locale.t('home.search') }}</a>
     </p>
+    </div>
+    <!-- What is here, in numbers: fills the far side of the hero on wide screens. -->
+    <dl class="home-hero__stats">
+      @for (stat of stats(); track stat.key) {
+        <div class="home-hero__stat">
+          <dt>{{ locale.t(stat.key) }}</dt>
+          <dd>{{ stat.count }}</dd>
+        </div>
+      }
+    </dl>
   </header>
 
   @if (series().length) {
