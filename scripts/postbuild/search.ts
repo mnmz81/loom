@@ -84,9 +84,9 @@ export async function buildSearchIndex(distDir: string): Promise<SearchIndexResu
     if (written.errors.length) throw new Error(`pagefind writeFiles failed: ${written.errors.join('; ')}`);
 
     const entryFile = join(distDir, 'pagefind', 'pagefind-entry.json');
-    const counts = existsSync(entryFile)
-      ? languageCounts(JSON.parse(readFileSync(entryFile, 'utf8')) as PagefindEntry)
-      : {};
+    // With nothing to index Pagefind can leave the entry file empty: that means no languages, not a crash.
+    const entry = existsSync(entryFile) ? readFileSync(entryFile, 'utf8').trim() : '';
+    const counts = entry ? languageCounts(JSON.parse(entry) as PagefindEntry) : {};
     const expectedLangs = expectedLanguages(scanHtml(distDir));
     return { pageCount: added.page_count, counts, expectedLangs, missingLangs: missingLanguages(expectedLangs, counts) };
   } finally {
