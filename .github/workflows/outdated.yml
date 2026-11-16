@@ -23,15 +23,11 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+      # @mushilu-san/ui is a private package of another owner: GITHUB_TOKEN cannot read it.
+      - uses: ./.github/actions/setup
         with:
-          node-version-file: .nvmrc
-          cache: npm
-
-      # npm outdated compares against what is installed. No install scripts: nothing is built here.
-      - run: npm ci --ignore-scripts
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.PACKAGES_READ_TOKEN }}
+          token: ${{ secrets.PACKAGES_READ_TOKEN }}
+          ignore-scripts: 'true'
 
       - run: ./scripts/outdated-issue.sh
         env:

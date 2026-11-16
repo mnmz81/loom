@@ -17,11 +17,11 @@ interface CertificateCard extends Certificate {
 
 import { Dialog } from '@mushilu-san/ui/feedback';
 
-import { Empty } from '@mushilu-san/ui/data-display';
+import { Card, Empty } from '@mushilu-san/ui/data-display';
 /** `/:lang/certificates` — course certificates, newest first. */
 @Component({
   selector: 'nb-certificates-page',
-  imports: [TagList, Dialog, Empty],
+  imports: [TagList, Dialog, Empty, Card],
   templateUrl: './certificates-page.html',
   styleUrl: './certificates-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

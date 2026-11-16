@@ -4,12 +4,13 @@ import { LocaleService } from '../../../core/i18n/locale.service';
 import { PATHS } from '../../../core/routes.const';
 import { SITE, assetPath } from '../../../core/site.config';
 
+import { Stack } from '@mushilu-san/ui/layout';
 import { NavLink } from '@mushilu-san/ui/navigation';
 
 import { Icon } from '@mushilu-san/ui/primitives';
 @Component({
   selector: 'nb-site-footer',
-  imports: [RouterLink, Icon, NavLink],
+  imports: [RouterLink, Icon, NavLink, Stack],
   templateUrl: './site-footer.html',
   styleUrl: './site-footer.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

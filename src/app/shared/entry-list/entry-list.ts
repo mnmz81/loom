@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import type { EntryMeta } from '../../core/content.models';
 import { LocaleService } from '../../core/i18n/locale.service';
+import { Empty } from '@mushilu-san/ui/data-display';
 import { EntryCard } from '../entry-card/entry-card';
 
 @Component({
   selector: 'nb-entry-list',
-  imports: [EntryCard],
+  imports: [EntryCard, Empty],
   templateUrl: './entry-list.html',
   styleUrl: './entry-list.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

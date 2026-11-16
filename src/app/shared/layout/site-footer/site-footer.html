@@ -11,7 +11,7 @@
       </ul>
     </nav>
   </div>
-  <div class="container site-footer__inner">
+  <mui-stack class="container site-footer__inner" direction="row" justify="between" align="center" [wrap]="true" [gap]="4">
     <p class="site-footer__copy">
       © {{ year }} <span lang="en">{{ author }}</span>
     </p>
@@ -32,5 +32,5 @@
         </a>
       </li>
     </ul>
-  </div>
+  </mui-stack>
 </footer>

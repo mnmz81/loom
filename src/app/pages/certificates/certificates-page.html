@@ -6,7 +6,8 @@
   @if (cards().length) {
     <ul class="certificates">
       @for (card of cards(); track card.key) {
-        <li class="certificates__item">
+        <li class="certificates__cell">
+          <mui-card class="certificates__item" variant="flat">
           <button
             type="button"
             class="certificates__image"
@@ -34,6 +35,7 @@
               }
             </p>
           </div>
+          </mui-card>
         </li>
       }
     </ul>

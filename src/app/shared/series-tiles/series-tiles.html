@@ -1,7 +1,8 @@
 <ul class="series-cards">
   @for (group of groups(); track group.tiles[0].key) {
     @if (group.track; as track) {
-      <li class="series-cards__track">
+      <li class="series-cards__cell series-cards__cell--track">
+        <mui-card class="series-cards__track" variant="flat">
         <p class="series-cards__track-head">
           <span
             class="series-cards__track-title"
@@ -24,10 +25,12 @@
             </li>
           }
         </ol>
+        </mui-card>
       </li>
     } @else {
       @let tile = group.tiles[0];
-      <li class="series-cards__item">
+      <li class="series-cards__cell">
+        <mui-card class="series-cards__item" variant="flat">
         <span class="series-cards__title" role="heading" [attr.aria-level]="headingLevel()">
           <span class="series-cards__marker" [attr.data-c]="tile.color" aria-hidden="true"></span>
           <a class="series-cards__link" [routerLink]="tile.path">{{ tile.title }}</a>
@@ -36,6 +39,7 @@
           <p class="series-cards__text">{{ tile.description }}</p>
         }
         <p class="series-cards__meta">{{ parts(tile.parts) }}</p>
+        </mui-card>
       </li>
     }
   }

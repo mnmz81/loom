@@ -36,50 +36,34 @@
     </p>
 
     @if (nav().prev || nav().next) {
-      <ul class="series-nav__links">
+      <mui-pager class="series-nav__pager" [label]="locale.t('series.title')">
         @if (nav().prev; as prev) {
-          <li class="series-nav__item series-nav__item--prev">
-            <a
-              class="series-nav__link"
-              rel="prev"
-              [routerLink]="path(prev)"
-              [attr.hreflang]="foreignLang(prev)"
-            >
-              <span class="series-nav__dir">
-                <mui-icon class="series-nav__arrow" name="arrow-left" size="xs" mirror />
-                {{ locale.t('series.prev') }}
-              </span>
-              <span
-                class="series-nav__ref"
-                [attr.lang]="foreignLang(prev)"
-                [attr.dir]="foreignDir(prev)"
-                >{{ prev.title }}</span
-              >
-            </a>
-          </li>
+          <a
+            muiPagerLink
+            direction="previous"
+            [directionLabel]="locale.t('series.prev')"
+            [routerLink]="path(prev)"
+            [attr.hreflang]="foreignLang(prev)"
+          >
+            <span class="series-nav__ref" [attr.lang]="foreignLang(prev)" [attr.dir]="foreignDir(prev)">{{
+              prev.title
+            }}</span>
+          </a>
         }
         @if (nav().next; as next) {
-          <li class="series-nav__item series-nav__item--next">
-            <a
-              class="series-nav__link"
-              rel="next"
-              [routerLink]="path(next)"
-              [attr.hreflang]="foreignLang(next)"
-            >
-              <span class="series-nav__dir">
-                {{ locale.t('series.next') }}
-                <mui-icon class="series-nav__arrow" name="arrow-right" size="xs" mirror />
-              </span>
-              <span
-                class="series-nav__ref"
-                [attr.lang]="foreignLang(next)"
-                [attr.dir]="foreignDir(next)"
-                >{{ next.title }}</span
-              >
-            </a>
-          </li>
+          <a
+            muiPagerLink
+            direction="next"
+            [directionLabel]="locale.t('series.next')"
+            [routerLink]="path(next)"
+            [attr.hreflang]="foreignLang(next)"
+          >
+            <span class="series-nav__ref" [attr.lang]="foreignLang(next)" [attr.dir]="foreignDir(next)">{{
+              next.title
+            }}</span>
+          </a>
         }
-      </ul>
+      </mui-pager>
     }
   </nav>
 }

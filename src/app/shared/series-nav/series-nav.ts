@@ -5,11 +5,12 @@ import { LocaleService } from '../../core/i18n/locale.service';
 import { PATHS } from '../../core/routes.const';
 import { dirOf } from '../lang-dir';
 
+import { Pager, PagerLink } from '@mushilu-san/ui/navigation';
 import { Icon } from '@mushilu-san/ui/primitives';
 
 @Component({
   selector: 'nb-series-nav',
-  imports: [RouterLink, Icon],
+  imports: [RouterLink, Icon, Pager, PagerLink],
   templateUrl: './series-nav.html',
   styleUrl: './series-nav.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

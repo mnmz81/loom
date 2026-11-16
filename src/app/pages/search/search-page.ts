@@ -28,13 +28,15 @@ export type SearchStatus = 'idle' | 'loading' | 'ready' | 'unavailable' | 'error
 const DEBOUNCE_MS = 200;
 const TOP_TAGS = 10;
 
+import { Empty } from '@mushilu-san/ui/data-display';
+import { Alert } from '@mushilu-san/ui/feedback';
 import { Input, Label, Select } from '@mushilu-san/ui/forms';
-import { Badge, Chip } from '@mushilu-san/ui/primitives';
+import { Badge, Chip, Spinner } from '@mushilu-san/ui/primitives';
 
 /** `/:lang/search` — Pagefind search with type and tag filters. Only searches in the browser. */
 @Component({
   selector: 'nb-search-page',
-  imports: [RouterLink, Badge, Chip, Input, Label, Select],
+  imports: [RouterLink, Badge, Chip, Spinner, Alert, Empty, Input, Label, Select],
   templateUrl: './search-page.html',
   styleUrl: './search-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

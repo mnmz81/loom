@@ -5,9 +5,9 @@
       @for (item of items(); track item.type + '/' + item.slug) {
         <li>
           <a class="related__link" [routerLink]="path(item)" [attr.hreflang]="foreignLang(item)">
-            <span class="related__type">{{
+            <mui-badge class="related__type" size="sm">{{
               locale.t(item.type === 'post' ? 'type.post' : 'type.note')
-            }}</span>
+            }}</mui-badge>
             <span
               class="related__ref"
               [attr.lang]="foreignLang(item)"
