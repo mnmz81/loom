@@ -57,6 +57,7 @@ export const en: Dict = {
   'entry.backToTop': 'Back to top',
   'search.startHere': 'Not sure what to search for? Start here',
   'search.popularTags': 'Popular tags',
+  'search.truncated': 'Showing the first {shown} of {total} results. Add a word, or filter by type or tag, to narrow it down.',
   'search.shortcut': 'Tip: press Ctrl+K (⌘K on Mac) on any page to search.',
   'certificates.enlarge': 'Enlarge: {title}',
   'certificates.close': 'Close',

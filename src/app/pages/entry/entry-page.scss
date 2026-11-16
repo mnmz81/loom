@@ -86,6 +86,14 @@
   margin-block-start: var(--nb-space-7);
 }
 
+// Wide screens: the end matter spans both columns instead of leaving the TOC side empty.
+@media (min-width: 64rem) {
+  .entry__series,
+  .entry__related {
+    max-inline-size: none;
+  }
+}
+
 .entry__progress {
   display: none;
 }

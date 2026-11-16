@@ -56,6 +56,7 @@ export interface Dict {
   'entry.backToTop': string;
   'search.startHere': string;      // heading of the starting points shown before typing
   'search.popularTags': string;
+  'search.truncated': string;      // more matches than shown: {shown}, {total}
   'search.shortcut': string;       // hint: press Ctrl/⌘+K anywhere to search
   'certificates.enlarge': string;  // {title} — button that opens the large view
   'certificates.close': string;

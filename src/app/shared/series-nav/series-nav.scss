@@ -110,16 +110,26 @@
 
 .series-bar__steps {
   display: inline-flex;
+  gap: var(--nb-space-2);
 }
 
+// A 32px disc that reads as a button; the pseudo-element keeps the 44px touch target.
 .series-bar__step {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  inline-size: var(--nb-touch-target);
-  block-size: var(--nb-touch-target);
+  inline-size: 2rem;
+  block-size: 2rem;
   border-radius: var(--nb-radius-full);
-  color: var(--nb-color-muted);
+  background: var(--nb-color-surface-2);
+  color: var(--nb-color-text);
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+  }
 
   &:hover {
     background: var(--nb-color-surface-2);

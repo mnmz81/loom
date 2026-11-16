@@ -5,8 +5,19 @@
 .tag-list {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--nb-space-2);
+  gap: 0 var(--nb-space-1);
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+// Tags sit next to titles and dates: no pill outline, muted text, so they do not compete with the title.
+.tag-list__link {
+  padding-inline: var(--nb-space-2);
+  border-color: transparent;
+  color: var(--nb-color-muted);
+
+  &:hover {
+    color: var(--nb-color-accent);
+  }
 }

@@ -106,5 +106,8 @@
         </li>
       }
     </ol>
+    @if (total() > hits().length) {
+      <p class="search__truncated">{{ locale.t('search.truncated', { shown: hits().length, total: total() }) }}</p>
+    }
   }
 </div>

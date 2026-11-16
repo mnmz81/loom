@@ -9,7 +9,8 @@
 
 .related__list {
   display: grid;
-  gap: var(--nb-space-1);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: var(--nb-space-2);
   margin: 0;
   padding: 0;
   list-style: none;

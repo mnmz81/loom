@@ -2,8 +2,12 @@
 
 @include page.base;
 
-.more-tags {
-  margin-block-start: var(--nb-space-2);
+// A secondary control: no rules across the page, only as wide as its label.
+mui-accordion-item.more-tags {
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  margin-block-start: var(--nb-space-1);
+  border-block: 0;
 
   .chips {
     margin-block-start: var(--nb-space-2);

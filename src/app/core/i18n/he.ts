@@ -57,6 +57,7 @@ export const he: Dict = {
   'entry.backToTop': 'חזרה לראש העמוד',
   'search.startHere': 'לא בטוחים מה לחפש? התחילו כאן',
   'search.popularTags': 'תגיות נפוצות',
+  'search.truncated': 'מוצגות {shown} התוצאות הראשונות מתוך {total}. הוסיפו מילה או סננו לפי סוג או תגית כדי לצמצם.',
   'search.shortcut': 'טיפ: מכל עמוד אפשר ללחוץ Ctrl+K (או ⌘K ב-Mac) כדי לחפש.',
   'certificates.enlarge': 'הגדלה: {title}',
   'certificates.close': 'סגירה',
