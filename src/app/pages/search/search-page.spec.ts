@@ -167,7 +167,7 @@ describe('SearchPage', () => {
     await type('x');
     await flush();
     expect(status(el)).toBe('Search failed. Please try again.');
-    expect(el.querySelector('.search__status--error')).not.toBeNull();
+    expect(el.querySelector('mui-alert.search__alert')).not.toBeNull();
     spy.mockResolvedValueOnce({ total: 1, hits: [HIT] });
     await type('xy');
     await flush();

@@ -41,9 +41,23 @@
     </div>
   </form>
 
-  <p class="search__status" role="status" aria-live="polite" [class.search__status--error]="status() === 'error'">
+  <p
+    class="search__status"
+    role="status"
+    aria-live="polite"
+    [class.visually-hidden]="status() === 'error' || status() === 'unavailable' || (status() === 'ready' && total() === 0)"
+  >
+    @if (status() === 'loading') {
+      <mui-spinner size="sm" label="" aria-hidden="true" />
+    }
     {{ liveMessage() }}
   </p>
+
+  @if (status() === 'error' || status() === 'unavailable') {
+    <mui-alert variant="danger" class="search__alert" aria-hidden="true">{{ liveMessage() }}</mui-alert>
+  } @else if (status() === 'ready' && total() === 0) {
+    <mui-empty class="search__empty" [title]="liveMessage()" aria-hidden="true" />
+  }
 
   @if (status() === 'idle') {
     <p class="search__hint">{{ hint() }}</p>

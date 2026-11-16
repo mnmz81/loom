@@ -4,11 +4,12 @@ import type { EntryRef, Lang } from '../../core/content.models';
 import { LocaleService } from '../../core/i18n/locale.service';
 import { PATHS } from '../../core/routes.const';
 import { dirOf } from '../lang-dir';
+import { Badge } from '@mushilu-san/ui/primitives';
 import { uniqueId } from '../unique-id';
 
 @Component({
   selector: 'nb-related-list',
-  imports: [RouterLink],
+  imports: [RouterLink, Badge],
   templateUrl: './related-list.html',
   styleUrl: './related-list.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

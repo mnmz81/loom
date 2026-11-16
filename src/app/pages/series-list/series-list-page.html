@@ -6,6 +6,6 @@
   @if (series().length) {
     <nb-series-tiles [series]="series()" [headingLevel]="2" />
   } @else {
-    <p class="series-cards__empty">{{ locale.t('series.empty') }}</p>
+    <mui-empty class="series-cards__empty" [title]="locale.t('series.empty')" />
   }
 </div>

@@ -11,12 +11,14 @@
   list-style: none;
 }
 
+.certificates__cell {
+  display: grid;
+}
+
 .certificates__item {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   border-radius: var(--nb-radius-lg);
-  border: 1px solid var(--nb-color-border);
   background: var(--nb-color-surface-2);
 }
 

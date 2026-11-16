@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, effect, inject, input } from '@angular/core';
+import { Empty } from '@mushilu-san/ui/data-display';
 import type { SeriesIndex } from '../../core/content.models';
 import { LocaleService } from '../../core/i18n/locale.service';
 import { PATHS } from '../../core/routes.const';
@@ -9,7 +10,7 @@ import { allLangPaths } from '../seo-helpers';
 /** `/:lang/series` — all series in their explicit order, tracks as one numbered tile. */
 @Component({
   selector: 'nb-series-list-page',
-  imports: [SeriesTiles],
+  imports: [SeriesTiles, Empty],
   templateUrl: './series-list-page.html',
   styleUrl: './series-list-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

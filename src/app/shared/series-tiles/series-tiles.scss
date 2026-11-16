@@ -12,6 +12,10 @@
   list-style: none;
 }
 
+.series-cards__cell {
+  display: grid;
+}
+
 .series-cards__item,
 .series-cards__track {
   position: relative;
@@ -19,9 +23,7 @@
   flex-direction: column;
   gap: var(--nb-space-2);
   padding: var(--nb-space-5);
-  border: 1px solid var(--nb-color-border);
   border-radius: var(--nb-radius-lg);
-  background: var(--nb-color-surface);
   transition: border-color var(--nb-duration-fast) var(--nb-ease-out);
 }
 
@@ -80,7 +82,7 @@
 }
 
 // A track spans the whole row; its series are numbered steps 1…n.
-.series-cards__track {
+.series-cards__cell--track {
   grid-column: 1 / -1;
 }
 

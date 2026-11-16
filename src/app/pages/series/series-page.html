@@ -31,6 +31,6 @@
       }
     </ol>
   } @else {
-    <p class="series__empty">{{ locale.t('list.empty') }}</p>
+    <mui-empty class="series__empty" [title]="locale.t('list.empty')" />
   }
 </div>

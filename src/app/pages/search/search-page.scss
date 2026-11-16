@@ -29,14 +29,10 @@
   min-block-size: 1.5em;
   margin-block: var(--nb-space-4);
   color: var(--nb-color-muted);
-
-  &--error {
-    color: #b91c1c;
-  }
 }
 
-:host-context([data-theme='dark']) .search__status--error {
-  color: #fca5a5;
+.search__alert {
+  margin-block-end: var(--nb-space-4);
 }
 
 .search__hint {

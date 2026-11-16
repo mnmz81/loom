@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, effect, inject, input } from '@angular/core';
+import { Empty } from '@mushilu-san/ui/data-display';
 import { RouterLink } from '@angular/router';
 import type { EntryMeta, Lang, LangIndex, SeriesSummary } from '../../core/content.models';
 import { LocaleService } from '../../core/i18n/locale.service';
@@ -12,7 +13,7 @@ import { allLangPaths } from '../seo-helpers';
 /** `/:lang/series/:key` — the parts of one series in order. `series` comes from `seriesResolver`. */
 @Component({
   selector: 'nb-series-page',
-  imports: [RouterLink, LangBadge],
+  imports: [RouterLink, LangBadge, Empty],
   templateUrl: './series-page.html',
   styleUrl: './series-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

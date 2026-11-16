@@ -1,0 +1,20 @@
+name: Setup Node and install
+description: Node from .nvmrc plus npm ci. @mushilu-san/ui is a private package, so the read token is required.
+inputs:
+  token:
+    description: Token with read:packages (secrets.PACKAGES_READ_TOKEN)
+    required: true
+  ignore-scripts:
+    description: Pass --ignore-scripts to npm ci
+    default: 'false'
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+      with:
+        node-version-file: .nvmrc
+        cache: npm
+    - shell: bash
+      run: npm ci ${{ inputs.ignore-scripts == 'true' && '--ignore-scripts' || '' }}
+      env:
+        NODE_AUTH_TOKEN: ${{ inputs.token }}

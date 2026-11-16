@@ -12,6 +12,7 @@ Always prefix commands with `./scripts/with-node.sh` (system Node is 20):
 ./scripts/with-node.sh npm run build         # content → OG → ng build → postbuild
 ./scripts/with-node.sh npm run build:e2e     # same, plus the sample entries in e2e/content (needed before npm run e2e)
 ./scripts/with-node.sh npm run e2e           # Playwright against dist/ (run build:e2e first)
+./scripts/with-node.sh node scripts/visual-diff.mjs <dir>  # UI refactors: 1st run saves baseline screenshots, later runs list pages whose pixels changed (needs serve-dist on :4321)
 ```
 
 `content/` holds only real blog posts. Test-only sample entries (a series, an English-only note, a Hebrew-only post) live in `e2e/content/` and are merged in by `build:e2e`; never publish them.

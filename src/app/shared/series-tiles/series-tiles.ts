@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { Card } from '@mushilu-san/ui/data-display';
 import { RouterLink } from '@angular/router';
 import type { Lang, SeriesIndex } from '../../core/content.models';
 import { LocaleService } from '../../core/i18n/locale.service';
@@ -54,7 +55,7 @@ export function seriesGroups(series: SeriesIndex, lang: Lang): SeriesGroup[] {
 /** Series entry points (home and series list): one tile per series, one wide numbered tile per track. */
 @Component({
   selector: 'nb-series-tiles',
-  imports: [RouterLink],
+  imports: [RouterLink, Card],
   templateUrl: './series-tiles.html',
   styleUrl: './series-tiles.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

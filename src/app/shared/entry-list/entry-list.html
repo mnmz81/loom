@@ -7,5 +7,5 @@
     }
   </ul>
 } @else {
-  <p class="entry-list__empty">{{ emptyText() ?? locale.t('list.empty') }}</p>
+  <mui-empty class="entry-list__empty" [title]="emptyText() ?? locale.t('list.empty')" />
 }

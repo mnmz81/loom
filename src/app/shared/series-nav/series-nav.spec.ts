@@ -82,9 +82,9 @@ describe('SeriesNav', () => {
     expect(next?.hasAttribute('hreflang')).toBe(false);
   });
 
-  it('omits the link list for a one-part series and hides arrows from screen readers', async () => {
+  it('omits the pager for a one-part series and hides arrows from screen readers', async () => {
     const lone = await render('en', { ...enNav, index: 1, total: 1, prev: null, next: null });
-    expect(lone.querySelector('ul')).toBeNull();
+    expect(lone.querySelector('mui-pager')).toBeNull();
     const el = await render('he', heNav);
     const arrows = [...el.querySelectorAll('svg')];
     expect(arrows.every((svg) => svg.getAttribute('aria-hidden') === 'true')).toBe(true);
